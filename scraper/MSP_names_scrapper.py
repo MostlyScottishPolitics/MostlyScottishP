@@ -1,8 +1,8 @@
 # Scrapper for the MSP name, surname, party and locality
 # Should be one time use only, code reflect that
 # @input : the html file, locally saved
-# @ouput : a csv file with teh following format
-#           name, surname, party, locality *new line*
+# @ouput : a csv file with the following format
+#           name; surname; party; locality; *new line*
 # @assume : the file is "correctly" formed
 
 # For regexp
@@ -29,8 +29,14 @@ def trim_html (string):
 for line in content:
     if 'msps/currentmsps' in line:
         line_counter = 8
-    # Name and surname line or party line
-    if (line_counter == 7 or line_counter == 3):
+    # Name and surname line
+    if line_counter == 7:
+        # Change the comma between name and surname to a ;
+        line_trimmed = trim_html(line).replace(",", ";")
+        csv_file.write(line_trimmed)
+        csv_file.write("; ")
+     # Party line
+    if line_counter == 3:
         line_trimmed = trim_html(line)
         csv_file.write(line_trimmed)
         csv_file.write("; ")
