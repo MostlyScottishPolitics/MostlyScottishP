@@ -1,0 +1,26 @@
+Official report retrieval
+
+
+Is there a way to find the url directly?
+1 october http://www.scottish.parliament.uk/parliamentarybusiness/28862.aspx?r=9536#.VDVD0LEra0J
+2 october http://www.scottish.parliament.uk/parliamentarybusiness/28862.aspx?r=9538#.VDVGNLEra0I
+7 october http://www.scottish.parliament.uk/parliamentarybusiness/28862.aspx?r=9566#.VDVI4bEra0I
+The interesting bit seems to be the r=xxxx, but given that there are other reports in-between meeting of parliament, seems unreliable.
+
+Just go to the official report page, and get the latest url from there? 
+http://www.scottish.parliament.uk/parliamentarybusiness/official-report.aspx
+Only last 3, but seems rather easy.
+
+
+
+
+Data retrieval in report
+
+
+Start of each big sections : div class="Debate"
+
+Start of important section : #ScotParlOR Decision Time
+Seems reliable.
+
+End of important section : 
+Next div class="Debate" or Meeting&nbsp;closed (first one that appears)

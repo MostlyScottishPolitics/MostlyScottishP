@@ -33,12 +33,12 @@ for line in content:
     if (line_counter == 7 or line_counter == 3):
         line_trimmed = trim_html(line)
         csv_file.write(line_trimmed)
-        csv_file.write(", ")
+        csv_file.write("; ")
     # Locality line
     if line_counter == 0:
         line_trimmed = trim_html(line)
         csv_file.write(line_trimmed)
-        csv_file.write(", \n")
+        csv_file.write("; \n")
     line_counter -= 1
 
 csv_file.close()
