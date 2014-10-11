@@ -1,12 +1,11 @@
-;;files to ignore
-settings.py
+.DS_Store
  
 ;;extensions to ignore
 *.log
 *.pot
 *.pyc
 *.sublime-workspace
-*.DS_Store
+
  
 ;;directories to ignore
 .idea/
