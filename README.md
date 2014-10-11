@@ -14,3 +14,10 @@ The project will provide experience in implementing visualisation algorithms fro
 within machine learning, as well as the graphical experience required in rendering
 the results. If desired, the project could be extended to incorporate textual
 analysis of the matters being voted on.
+--------------------------------------------------------------------------------
+
+Running locally:
+in the SPviz-app directory run:
+pyhton manage.py runserver
+then open a browser and enter the following URL:
+http://127.0.0.1:8000

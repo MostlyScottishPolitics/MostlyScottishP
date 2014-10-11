@@ -1,0 +1,12 @@
+;;files to ignore
+settings.py
+ 
+;;extensions to ignore
+*.log
+*.pot
+*.pyc
+*.sublime-workspace
+*.DS_Store
+ 
+;;directories to ignore
+.idea/
