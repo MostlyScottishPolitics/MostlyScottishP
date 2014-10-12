@@ -1,33 +1,12 @@
-
-
-/* ==========================================================================
-   mspviz custom styles
-   
-   colors:
-   #5C2E91 - scottish parliament lilac
-   #59B459 - contrast green
-   ========================================================================== */
-
-
-.navbar{
-	border:0;
-	border-bottom:6px solid #7846B5;
-}
-
-.navbar-brand{
-	color:#59B459;
-}
-
-
 h1, h2{
-	color: #5C2E91;
+	color: #336600;
 }
 
 
 @media (min-width: 768px) {
   .navbar-nav .active{
 	margin:0 0 -6px 0;
-	border-bottom:6px solid #59B459;
+	border-bottom:1px solid #59B459;
   }
 }
 
@@ -35,13 +14,6 @@ h1, h2{
 	float:right;
 }
 
-a {
-	color: #5C2E91;
-}
-
-a:hover {
-	color: #468C46;
-}
 
 .navbar-brand{
 	padding-left:70px;
@@ -52,13 +24,7 @@ a:hover {
 	margin:-7px 0 0 -55px;
 }
 
-hr {
-	border-color:#C9B5E2;
-}
 
-tr:hover {
-	background-color:#efefef;
-}
 
 td, th {
 	padding:2px 12px;

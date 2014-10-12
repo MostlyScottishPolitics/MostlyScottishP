@@ -17,7 +17,11 @@ analysis of the matters being voted on.
 --------------------------------------------------------------------------------
 
 Running locally:
+
 in the SPviz-app directory run:
-pyhton manage.py runserver
+
+* pyhton manage.py runserver
+
 then open a browser and enter the following URL:
-http://127.0.0.1:8000
+
+* http://127.0.0.1:8000

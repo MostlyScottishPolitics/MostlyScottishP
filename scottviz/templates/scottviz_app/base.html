@@ -6,6 +6,8 @@
     <!-- Bootstrap -->
     <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
     <link href="{% static 'css/bootstrap-theme.css' %}" rel="stylesheet">
+    <link href="{% static 'css/main.css' %}" rel="stylesheet">
+
     <script src="{% static 'js/vendor/modernizr-2.6.2-respond-1.1.0.min.js' %}"></script>
     <script src="{% static 'js/vendor/d3.min.js' %}"></script>
     <title>MSP visualization - {% block title %}Insert some text here!{% endblock %}</title>
@@ -24,8 +26,8 @@
           <a class="navbar-brand" href="{% url 'index' %}"><img src="{% static 'media/img/ScottCat.png' %}" width="50" title="MSP viz"/> mspviz</a>
         </div>
         <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            {% for navid, navelem in navigation_main.items %}
+          <ul class="nav navbar-nav pull-right">
+            {% for navid, navelem in navbar.items %}
               <li {% if activesite.id == navid %}  class="active" {% endif %}><a href="{% url navid %}">{{navelem.title}}</a></li>
             {% endfor %}
             <li class="dropdown">
@@ -41,15 +43,40 @@
       </div>
     </div>
 
-  <h1>
-    Welcome scott!
-  </h1>
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+      <div class="container">
+        <h2>{{activesite.title}}</h2>
+        <p>{{activesite.desc}}</p>
+      </div>
+    </div>
+    
+    
+    <div class="container">
+     
+      <!-- Example row of columns -->
+      {% block content %}
+      <div class="row">
+        {% for navid, navelem in navigation_main.items %}
+         {% if navid != 'index' %}
+          <div class="col-lg-4">
+            <h2>{{navelem.title}}</h2>
+            <p>{{navelem.desc}}</p>
+            <p><a class="btn btn-default" href="{% url navid %}">View details &raquo;</a></p>
+          </div>
+        {% endif %}
+        {% endfor %}
+      </div>
+    {% endblock %}
+      
+    
   <hr>  
   <footer>
       <div class="container">
           <p>&copy; Team C 2014</p>
       </div>
   </footer>
-
+  <script src="{% static 'js/vendor/jquery-1.11.0.min.js' %}"></script>
+  <script src="{% static 'js/vendor/bootstrap.js' %}"></script>
 </body>
 </html>
