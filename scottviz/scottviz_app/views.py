@@ -2,6 +2,7 @@ from django.http import HttpResponse
 from django.template import RequestContext
 from django.shortcuts import render_to_response
 from collections import OrderedDict
+import csv
 
 
 navbar=(
@@ -17,10 +18,10 @@ navbar=(
 				'desc': 'List of all Members of Scottish Parliament',
 	}),
 
-	('regions', {
-				'id': 'regions',
-				'title':'Regions', 
-				'desc': 'List of all regions and constituencies in Scotland',
+	('constituencies', {
+				'id': 'constituencies',
+				'title':'Constituencies', 
+				'desc': 'List of all constituencies in Scotland',
 	}),
 
 	('parties', {
@@ -36,8 +37,9 @@ navbar=(
 	})
 )
 
+
 navbar = OrderedDict(navbar)
-print navbar
+
 content={
 	'title': "MSP visualization tool",
 	'copyr': "Team C 2014",
@@ -56,6 +58,13 @@ def index(request):
 def msps(request):
 	context = RequestContext(request)
 	content['activesite'] = navbar['msps']
+	dict = {}
+	with open('../scraper/msps.csv', mode='r') as infile:
+	    reader = csv.reader(infile)
+	    for row in reader:
+	    	row = row[0].split(';')
+	    	dict[row[1]+ " " + row[0]] = (row[2], row[3]) 
+	print dict
 	return render_to_response('scottviz_app/msps.html', content, context)
 
 
@@ -75,15 +84,15 @@ def party(request,partyID):
 	return render_to_response('scottviz_app/party.html', content, context)
 
 
-def regions(request):
+def constituencies(request):
 	context = RequestContext(request)
-	content['activesite'] = navbar['regions']		
-	return render_to_response('scottviz_app/regions.html', content, context)
+	content['activesite'] = navbar['constituencies']		
+	return render_to_response('scottviz_app/constituencies.html', content, context)
 
 
-def region(request,regionID):
+def constituency(request,regionID):
 	context = RequestContext(request)
-	return render_to_response('scottviz_app/region.html', content, context)
+	return render_to_response('scottviz_app/constituency.html', content, context)
 
 def divisions(request):
 	context = RequestContext(request)

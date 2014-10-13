@@ -8,6 +8,6 @@ urlpatterns = patterns('',
 #	url(r'^party/(?P<partyID>\w+)/$',views.party,name = 'party'),
 #	url(r'^region/(?P<regionID>\w+)/$',views.region,name='region'),
 	url(r'^parties/',views.parties,name='parties'),
-	url(r'^regions/',views.regions,name='regions'),
+	url(r'^constituencies/',views.constituencies,name='constituencies'),
 	url(r'^divisions/',views.divisions,name='divisions'),
 )
