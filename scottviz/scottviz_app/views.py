@@ -63,8 +63,13 @@ def msps(request):
 	    reader = csv.reader(infile)
 	    for row in reader:
 	    	row = row[0].split(';')
-	    	dict[row[1]+ " " + row[0]] = (row[2], row[3]) 
+	    	dict[row[0]+ " " + row[1]] = (row[2], row[3])
 	print dict
+	sorted_dict = OrderedDict({})
+	for key in sorted(dict.keys()):
+		sorted_dict[key] = dict[key]
+	content['dict'] = sorted_dict
+	print sorted_dict
 	return render_to_response('scottviz_app/msps.html', content, context)
 
 

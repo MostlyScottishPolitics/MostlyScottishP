@@ -1,13 +1,14 @@
 {% extends "scottviz_app/base.html" %}
 
 {% block content %}
-lock content %}
 	{% if dict %}
 		<table style="width:100%;">
 			<tr> <th>Name</th> <th>Party</th> <th>Constituencies</th></tr>
-			{% for msp in dict %}
+			{% for msp,values in dict.items %}
 				<tr>
-					<td>{{msp.key}} </td>
+					<th>{{msp}} </th>
+					<th>{{values.0}}</th>
+					<th>{{values.1}}</th>
 				</tr>
 			{% endfor %}
 		</table>
