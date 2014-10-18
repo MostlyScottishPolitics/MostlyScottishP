@@ -1,0 +1,173 @@
+<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="600" measuredH="746" mockupW="555" mockupH="705">
+  <controls>
+    <control controlID="0" controlTypeID="com.balsamiq.mockups::RoundButton" x="51" y="133" w="37" h="39" measuredW="32" measuredH="32" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderColor>0</borderColor>
+        <color>9338051</color>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="1" controlTypeID="com.balsamiq.mockups::RoundButton" x="53" y="176" w="37" h="39" measuredW="32" measuredH="32" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderColor>0</borderColor>
+        <color>2848996</color>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="2" controlTypeID="com.balsamiq.mockups::Label" x="55" y="186" w="-1" h="-1" measuredW="36" measuredH="15" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>0</color>
+        <size>8</size>
+        <text>Sources</text>
+      </controlProperties>
+    </control>
+    <control controlID="3" controlTypeID="com.balsamiq.mockups::RoundButton" x="50" y="93" w="39" h="39" measuredW="32" measuredH="32" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderColor>0</borderColor>
+        <color>14706278</color>
+        <italic>false</italic>
+        <shape>circle</shape>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="4" controlTypeID="com.balsamiq.mockups::Label" x="58" y="145" w="-1" h="-1" measuredW="23" measuredH="15" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>16777215</color>
+        <size>8</size>
+        <text>Data</text>
+      </controlProperties>
+    </control>
+    <control controlID="5" controlTypeID="com.balsamiq.mockups::Icon" x="73" y="76" w="-1" h="-1" measuredW="16" measuredH="16" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <icon>RightTriangleIcon%7Cxsmall</icon>
+        <rotation>180</rotation>
+      </controlProperties>
+    </control>
+    <control controlID="6" controlTypeID="com.balsamiq.mockups::Label" x="55" y="77" w="-1" h="-1" measuredW="23" measuredH="15" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>8</size>
+        <text>Hide</text>
+      </controlProperties>
+    </control>
+    <control controlID="7" controlTypeID="com.balsamiq.mockups::Canvas" x="45" y="41" w="553" h="28" measuredW="100" measuredH="70" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>1</backgroundAlpha>
+        <borderColor>9338051</borderColor>
+        <borderStyle>square</borderStyle>
+        <color>9338051</color>
+      </controlProperties>
+    </control>
+    <control controlID="8" controlTypeID="com.balsamiq.mockups::Title" x="46" y="43" w="-1" h="-1" measuredW="144" measuredH="33" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>15658734</color>
+        <size>24</size>
+        <text>Little%20Brother</text>
+      </controlProperties>
+    </control>
+    <control controlID="9" controlTypeID="com.balsamiq.mockups::Title" x="439" y="50" w="-1" h="-1" measuredW="152" measuredH="18" zOrder="9" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>15658734</color>
+        <size>11</size>
+        <text>Scottish%20Parliament%2C%20visualized.%20</text>
+      </controlProperties>
+    </control>
+    <control controlID="10" controlTypeID="com.balsamiq.mockups::Canvas" x="91" y="76" w="498" h="533" measuredW="100" measuredH="70" zOrder="10" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>0</backgroundAlpha>
+        <borderColor>0</borderColor>
+        <borderStyle>square</borderStyle>
+        <color>14706278</color>
+      </controlProperties>
+    </control>
+    <control controlID="11" controlTypeID="com.balsamiq.mockups::Canvas" x="102" y="85" w="477" h="28" measuredW="100" measuredH="70" zOrder="11" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderColor>16777215</borderColor>
+        <borderStyle>square</borderStyle>
+        <color>15658734</color>
+      </controlProperties>
+    </control>
+    <control controlID="12" controlTypeID="com.balsamiq.mockups::Label" x="105" y="90" w="-1" h="-1" measuredW="57" measuredH="21" zOrder="12" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bold>true</bold>
+        <color>6770343</color>
+        <italic>true</italic>
+        <text>Divisions</text>
+        <underline>false</underline>
+      </controlProperties>
+    </control>
+    <control controlID="13" controlTypeID="com.balsamiq.mockups::Label" x="177" y="90" w="-1" h="-1" measuredW="39" measuredH="21" zOrder="13" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bold>true</bold>
+        <color>0</color>
+        <italic>true</italic>
+        <text>MSPs</text>
+      </controlProperties>
+    </control>
+    <control controlID="14" controlTypeID="com.balsamiq.mockups::Label" x="231" y="90" w="-1" h="-1" measuredW="53" measuredH="21" zOrder="14" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bold>true</bold>
+        <color>0</color>
+        <italic>true</italic>
+        <text>Policies</text>
+      </controlProperties>
+    </control>
+    <control controlID="15" controlTypeID="com.balsamiq.mockups::Label" x="299" y="90" w="-1" h="-1" measuredW="91" measuredH="21" zOrder="15" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bold>true</bold>
+        <color>0</color>
+        <italic>true</italic>
+        <text>Demographics</text>
+      </controlProperties>
+    </control>
+    <control controlID="16" controlTypeID="com.balsamiq.mockups::DataGrid" x="105" y="120" w="471" h="483" measuredW="465" measuredH="575" zOrder="16" locked="false" isInGroup="-1">
+      <controlProperties>
+        <alternateRowColor>15658734</alternateRowColor>
+        <borderStyle>none</borderStyle>
+        <hasHeader>false</hasHeader>
+        <hLines>false</hLines>
+        <selectedIndex>-1</selectedIndex>
+        <text>Date%5Cr%20%5E%2C%20Subject%20%5Ev%2C%20Rebels%20%5Ev%2C%20Tournout%20%5Ev%2C%20Majority%20%5Ev%0A26/10/14%2C%20UK%20Air%20Strikes%2C%2031%2C%20570%2C%20480%0A09/08/14%2C%20International%20Development%20%2C%208%2C%20174%2C%20160%0A08/08/14%2C%20International%20Development%2C%208%2C%20177%2C%2099%0A26/10/14%2C%20UK%20Air%20Strikes%2C%2031%2C%20570%2C%20480%0A09/08/14%2C%20International%20Development%20%2C%208%2C%20174%2C%20160%0A08/08/14%2C%20International%20Development%2C%208%2C%20177%2C%2099%0A26/10/14%2C%20UK%20Air%20Strikes%2C%2031%2C%20570%2C%20480%0A09/08/14%2C%20International%20Development%20%2C%208%2C%20174%2C%20160%0A08/08/14%2C%20International%20Development%2C%208%2C%20177%2C%2099%0A26/10/14%2C%20UK%20Air%20Strikes%2C%2031%2C%20570%2C%20480%0A09/08/14%2C%20International%20Development%20%2C%208%2C%20174%2C%20160%0A08/08/14%2C%20International%20Development%2C%208%2C%20177%2C%2099%0A26/10/14%2C%20UK%20Air%20Strikes%2C%2031%2C%20570%2C%20480%0A09/08/14%2C%20International%20Development%20%2C%208%2C%20174%2C%20160%0A08/08/14%2C%20International%20Development%2C%208%2C%20177%2C%2099%0A26/10/14%2C%20UK%20Air%20Strikes%2C%2031%2C%20570%2C%20480%0A09/08/14%2C%20International%20Development%20%2C%208%2C%20174%2C%20160%0A08/08/14%2C%20International%20Development%2C%208%2C%20177%2C%2099%0A%7B25L%2C%2065L%2C%2025%2C%2025%2C%200C%7D</text>
+        <vLines>false</vLines>
+      </controlProperties>
+    </control>
+    <control controlID="17" controlTypeID="com.balsamiq.mockups::HRule" x="48" y="65" w="552" h="-1" measuredW="100" measuredH="10" zOrder="17" locked="false" isInGroup="-1"/>
+    <control controlID="18" controlTypeID="com.balsamiq.mockups::Label" x="268" y="618" w="-1" h="-1" measuredW="137" measuredH="21" zOrder="18" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>6770343</color>
+        <text>FAQ%20%7C%20Facebook%20%7C%20Blog</text>
+      </controlProperties>
+    </control>
+    <control controlID="19" controlTypeID="com.balsamiq.mockups::VerticalScrollBar" x="575" y="76" w="-1" h="533" measuredW="16" measuredH="100" zOrder="19" locked="false" isInGroup="-1">
+      <controlProperties>
+        <value>0</value>
+      </controlProperties>
+    </control>
+    <control controlID="20" controlTypeID="com.balsamiq.mockups::IconLabel" x="55" y="220" w="-1" h="-1" measuredW="35" measuredH="39" zOrder="20" locked="false" isInGroup="-1">
+      <controlProperties>
+        <icon>FullScreenIcon%7Csmall</icon>
+        <size>8</size>
+        <text>Maximise</text>
+      </controlProperties>
+    </control>
+    <control controlID="21" controlTypeID="com.balsamiq.mockups::Label" x="51" y="105" w="-1" h="-1" measuredW="36" measuredH="15" zOrder="21" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>0</color>
+        <size>8</size>
+        <text>Graphics</text>
+      </controlProperties>
+    </control>
+    <control controlID="22" controlTypeID="com.balsamiq.mockups::HCurly" x="109" y="666" w="425" h="80" measuredW="200" measuredH="80" zOrder="22" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>20</size>
+        <text>Tabulated%20Data</text>
+      </controlProperties>
+    </control>
+    <control controlID="23" controlTypeID="com.balsamiq.mockups::Canvas" x="45" y="41" w="553" h="612" measuredW="100" measuredH="70" zOrder="23" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>0</backgroundAlpha>
+        <borderColor>0</borderColor>
+        <borderStyle>square</borderStyle>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>
