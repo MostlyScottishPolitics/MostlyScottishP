@@ -41,7 +41,7 @@ navbar=(
 navbar = OrderedDict(navbar)
 
 content={
-	'title': "MSP visualization tool",
+	'title': "Mostly Scottish Politics",
 	'copyr': "Team C 2014",
 	'contact_name': "Team C",
 	'contact_email': "1006414v@student.gla.ac.uk",
@@ -64,12 +64,12 @@ def msps(request):
 	    for row in reader:
 	    	row = row[0].split(';')
 	    	dict[row[0]+ " " + row[1]] = (row[2], row[3])
-	print dict
+	#print dict
 	sorted_dict = OrderedDict({})
 	for key in sorted(dict.keys()):
 		sorted_dict[key] = dict[key]
 	content['dict'] = sorted_dict
-	print sorted_dict
+	#print sorted_dict
 	return render_to_response('scottviz_app/msps.html', content, context)
 
 

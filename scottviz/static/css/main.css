@@ -1,15 +1,6 @@
-h1, h2{
-	color: #336600;
+.dropdown-menu > .active > a, .dropdown-menu > .active > a:hover, .dropdown-menu > .active > a:focus{
+	background-color: #5d3c70;
 }
-
-
-@media (min-width: 768px) {
-  .navbar-nav .active{
-	margin:0 0 -6px 0;
-	border-bottom:1px solid #59B459;
-  }
-}
-
 .contactinfo{
 	float:right;
 }
@@ -28,4 +19,8 @@ h1, h2{
 
 td, th {
 	padding:2px 12px;
+}
+
+tr.divider{
+	border-bottom: 
 }
