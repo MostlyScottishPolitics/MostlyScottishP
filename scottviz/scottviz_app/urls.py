@@ -10,4 +10,7 @@ urlpatterns = patterns('',
 	url(r'^parties/',views.parties,name='parties'),
 	url(r'^constituencies/',views.constituencies,name='constituencies'),
 	url(r'^divisions/',views.divisions,name='divisions'),
+	url(r'^aboutus/',views.aboutus,name='aboutus'),
+	url(r'^aboutsp/',views.aboutsp,name='aboutsp')
+
 )

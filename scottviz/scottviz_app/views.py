@@ -37,7 +37,22 @@ navbar=(
 	})
 )
 
+about = (
+    ('aboutus', {
+				'id':'aboutus',
+				'title':'About us', 
+				'desc': 'About this project',
+	}), 
 
+	('aboutsp', {
+				'id':'aboutsp',
+				'title':'About the Scottish Parliament', 
+				'desc': 'About the Scottish Parliament',
+	})
+
+	)
+
+about = OrderedDict(about)
 navbar = OrderedDict(navbar)
 
 content={
@@ -46,6 +61,7 @@ content={
 	'contact_name': "Team C",
 	'contact_email': "1006414v@student.gla.ac.uk",
 	'navbar': navbar,
+	'about': about,
 }
 
 
@@ -108,6 +124,17 @@ def divisions(request):
 def division(request,regionID):
 	context = RequestContext(request)
 	return render_to_response('scottviz_app/division.html', content, context)
+
+def aboutus(request):
+	context = RequestContext(request)
+	content['activesite'] = about['aboutus']		
+	return render_to_response('scottviz_app/aboutus.html', content, context)
+
+
+def aboutsp(request):
+	context = RequestContext(request)
+	content['activesite'] = about['aboutsp']		
+	return render_to_response('scottviz_app/aboutsp.html', content, context)
 
 
 
