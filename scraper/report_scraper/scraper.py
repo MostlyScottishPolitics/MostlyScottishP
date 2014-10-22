@@ -25,9 +25,6 @@ if len(sys.argv) != 2:
     print "usage : scraper <filename>"
     sys.exit(1)
 
-# Create the xml base structure
-root = ET.Element("root")
-
 # Variables declaration
 worthReading = False
 readForMSP = False
@@ -35,6 +32,7 @@ readAgainstMSP = False
 readAbstentionMSP = False
 recordData = False
 agreed = False
+rootCreated = False
 report_date = "01 January 2000"
 newLaw = law.Law()
 
@@ -116,6 +114,11 @@ for line in content:
                 # If it is the first, recordData is false, so no write
                 # Write xml nodes only if data is of interest
                 if recordData:
+                    # Create the root of the xml file now that we are sure we are going to write something
+                    if not rootCreated:
+                        # Create the xml base structure
+                        root = ET.Element("root")
+                        rootCreated
                     newLaw.data_to_xml_node(root)
                     # Set it back to false
                     recordData = False
@@ -190,9 +193,10 @@ def indent(elem, level=0):
     else:
         if level and (not elem.tail or not elem.tail.strip()):
             elem.tail = i
-
-indent(root)
-tree = ET.ElementTree(root)
-report_date = datetime.datetime.strptime(report_date, '%d %B %Y').strftime('%d_%m_%Y')
-file_name = "data_" + report_date + ".xml"
-tree.write(file_name, "utf-8")
+            
+if rootCreated:
+    indent(root)
+    tree = ET.ElementTree(root)
+    report_date = datetime.datetime.strptime(report_date, '%d %B %Y').strftime('%d_%m_%Y')
+    file_name = "data_" + report_date + ".xml"
+    tree.write(file_name, "utf-8")
