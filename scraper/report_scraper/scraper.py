@@ -12,9 +12,18 @@ import xml.etree.cElementTree as ET
 import re
 # For unicode
 import codecs
+# For date
+import datetime
+# For cli arguments
+import sys
 
 # Law class, contains the data for a law
 import law
+
+# Check the user-supplied arguments
+if len(sys.argv) != 2:
+    print "usage : scraper <filename>"
+    sys.exit(1)
 
 # Create the xml base structure
 root = ET.Element("root")
@@ -26,6 +35,7 @@ readAgainstMSP = False
 readAbstentionMSP = False
 recordData = False
 agreed = False
+report_date = "01 January 2000"
 newLaw = law.Law()
 
 
@@ -80,13 +90,16 @@ def trim_html (string):
 
 
 # Read the file into an array
-with codecs.open('report.html', 'r', 'utf-8') as file:
+with codecs.open(sys.argv[1], 'r', 'utf-8') as file:
     content = file.readlines()
 
 # Process the file
 for line in content:
     # Out of the interesting section
     if not worthReading:
+        # Get the date of the report
+        if ">Meeting of the Parliament" in line:
+            report_date = trim_html(line).replace("Meeting of the Parliament ", "")
         # First interesting line
         if "#ScotParlOR Decision Time" in line:
             worthReading = True
@@ -107,6 +120,9 @@ for line in content:
                     # Set it back to false
                     recordData = False
                 process_id_line(line)
+                # Add the date
+                # Got it at the beginning of the document
+                newLaw.law_date = report_date
             # Line before the list of MSPs for the law
             elif ">For<" in line:
                 readForMSP = True
@@ -177,4 +193,6 @@ def indent(elem, level=0):
 
 indent(root)
 tree = ET.ElementTree(root)
-tree.write("data.xml", "utf-8")
+report_date = datetime.datetime.strptime(report_date, '%d %B %Y').strftime('%d_%m_%Y')
+file_name = "data_" + report_date + ".xml"
+tree.write(file_name, "utf-8")

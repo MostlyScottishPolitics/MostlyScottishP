@@ -6,6 +6,7 @@ import re
 class Law(object):
     law_type = ""
     law_id = ""
+    law_date = ""
     law_presenter_name = ""
     law_presenter_surname = ""
     law_presenter_party = ""
@@ -51,6 +52,9 @@ class Law(object):
         id_node = ET.SubElement(law_node, "id")
         id_node.text = self.law_id
 
+        date_node = ET.SubElement(law_node, "date")
+        date_node.text = self.law_date
+
         surname_node = ET.SubElement(law_node, "surname")
         surname_node.text = self.law_presenter_surname
 
@@ -86,6 +90,7 @@ class Law(object):
         # Reinitialise data after creating the node for next data
         self.law_type = ""
         self.law_id = ""
+        self.law_date = ""
         self.law_presenter_name = ""
         self.law_presenter_surname = ""
         self.law_topic = ""
