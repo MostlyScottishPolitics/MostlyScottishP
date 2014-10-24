@@ -1,7 +1,7 @@
 import os
 import time
 import psycopg2
-
+from scottviz.wsgi import *
 def create_db():
     deadline = time.time() + 60
     while time.time() < deadline:
