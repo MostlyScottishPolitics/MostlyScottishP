@@ -23,6 +23,8 @@ def create_db():
                     cur = con.cursor()
                     try:
                         cur.execute('CREATE DATABASE %s' % db_name)
+                        cur.execute('GRANT ALL PRIVILEGES ON DATABASE '+ db_name +' TO ' + user)
+
                     except psycopg2.ProgrammingError as detail:
                         print detail
                     exit(0)
@@ -32,7 +34,6 @@ def create_db():
         except psycopg2.OperationalError:
             print "Could not connect to the database, retry in 10 seconds"
             time.sleep(10)
-
 
     print 'Something is wrong.'
     exit(1)
