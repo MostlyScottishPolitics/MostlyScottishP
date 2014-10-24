@@ -75,7 +75,7 @@ def msps(request):
 	context = RequestContext(request)
 	content['activesite'] = navbar['msps']
 	dict = {}
-	with open('../scraper/msps.csv', mode='r') as infile:
+	with open('../scraper/msp_scraper/msps.csv', mode='r') as infile:
 	    reader = csv.reader(infile)
 	    for row in reader:
 	    	row = row[0].split(';')
