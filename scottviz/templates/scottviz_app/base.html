@@ -14,40 +14,48 @@
 </head>
 
 <body>
-  <!--[if lt IE 7]><p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p><![endif]-->
-  <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
+<!--[if lt IE 7]><p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a
+        href="http://browsehappy.com/">upgrade your browser</a> or <a
+        href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your
+    experience.</p><![endif]-->
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="{% url 'index' %}"><img src="{% static 'media/img/ScottCat.png' %}" width="50" title="MSP viz"/> {{title}}</a>
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{% url 'index' %}"><img src="{% static 'media/img/ScottCat.png' %}" width="50"
+                                                                  title="MSP viz"/> {{title}}</a>
         </div>
         <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav pull-right">
-            <!--
-            {% for navid, navelem in navbar.items %}
-              <li {% if activesite.id == navid %}  class="active" {% endif %}><a href="{% url navid %}">{{navelem.title}}</a></li>
-            {% endfor %}
--->
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">About <b class="caret"></b></a>
-              <ul class="dropdown-menu">
-              {% for aboutid, aboutelem in about.items %}
-                <li {% if activesite.id == aboutid %}  class="active" {% endif %}><a href="{% url aboutid %}">{{aboutelem.title}}</a></li>
-              {% endfor %}
-              </ul>
+            <ul class="nav navbar-nav pull-right">
+                <!--
+                {% for navid, navelem in navbar.items %}
+                  <li {% if activesite.id == navid %}  class="active" {% endif %}><a href="{% url navid %}">{{navelem.title}}</a></li>
+                {% endfor %}
+    -->
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">About <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        {% for aboutid, aboutelem in about.items %}
+                        <li
+                        {% if activesite.id == aboutid %} class="active" {% endif %}><a href="{% url aboutid %}">{{aboutelem.title}}</a>
+                </li>
+                {% endfor %}
+            </ul>
             </li>
 
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Visualise <b class="caret"></b></a>
-              <ul class="dropdown-menu">
-              {% for navid, navelem in navbar.items %}
-              <li {% if activesite.id == navid %}  class="active" {% endif %}><a href="{% url navid %}">{{navelem.title}}</a></li>
-              {% endfor %}
-              </ul>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Visualise <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    {% for navid, navelem in navbar.items %}
+                    <li
+                    {% if activesite.id == navid %} class="active" {% endif %}><a href="{% url navid %}">{{navelem.title}}</a>
+            </li>
+            {% endfor %}
+            </ul>
             </li>
             <form role="search" class="navbar-form navbar-left">
                 <div class="form-group">
@@ -63,45 +71,49 @@
               <li><a href="mailto:{{contact_email}}">{{contact_email}}</a></li>
               </ul>
             </li> -->
-          </ul>
-        </div><!--/.navbar-collapse -->
-      </div>
+            </ul>
+        </div>
+        <!--/.navbar-collapse -->
     </div>
+</div>
 
-    <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="jumbotron">
-      <div class="container">
-        <h2>{{activesite.title}}</h2>
-        <p>{{activesite.desc}}</p>
-      </div>
-    </div>
-    
-    
+<!-- Main jumbotron for a primary marketing message or call to action -->
+<div class="jumbotron">
     <div class="container">
-     
-      <!-- Example row of columns -->
-      {% block content %}
-      <div class="row">
+        <h2>{{activesite.title}}</h2>
+
+        <p>{{activesite.desc}}</p>
+    </div>
+</div>
+
+
+<div class="container">
+
+    <!-- Example row of columns -->
+    {% block content %}
+    <div class="row">
         {% for navid, navelem in navigation_main.items %}
-         {% if navid != 'index' %}
-          <div class="col-lg-4">
+        {% if navid != 'index' %}
+        <div class="col-lg-4">
             <h2>{{navelem.title}}</h2>
+
             <p>{{navelem.desc}}</p>
+
             <p><a class="btn btn-default" href="{% url navid %}">View details &raquo;</a></p>
-          </div>
+        </div>
         {% endif %}
         {% endfor %}
-      </div>
+    </div>
     {% endblock %}
-      
-    
-  <hr>  
-  <footer>
-      <div class="container">
-          <p>&copy; {{copyr}}</p>
-      </div>
-  </footer>
-  <script src="{% static 'js/vendor/jquery-1.11.0.min.js' %}"></script>
-  <script src="{% static 'js/vendor/bootstrap.js' %}"></script>
+
+
+    <hr>
+    <footer>
+        <div class="container">
+            <p>&copy; {{copyr}}</p>
+        </div>
+    </footer>
+    <script src="{% static 'js/vendor/jquery-1.11.0.min.js' %}"></script>
+    <script src="{% static 'js/vendor/bootstrap.js' %}"></script>
 </body>
 </html>

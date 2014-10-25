@@ -1,0 +1,82 @@
+id,parent,name
+1,0,North East Scotland
+2,0,Mid Scotland and Fife
+3,2,Clackmannanshire and Dunblane
+4,0,South Scotland
+5,0,Lothian
+6,2,North East Fife
+7,5,Edinburgh Central
+8,5,Midlothian North and Musselburgh
+9,0,West Scotland
+10,9,Cunninghame South
+11,0,Glasgow
+12,9,Paisley
+13,1,Aberdeen South and North Kincardine
+14,0,Central Scotland
+15,2,Kirkcaldy
+16,11,Glasgow Southside
+17,0,Highlands and Islands
+18,17,"Skye, Lochaber and Badenoch"
+19,2,Perthshire North
+20,1,Aberdeen Central
+21,11,Glasgow Kelvin
+22,17,Na h-Eileanan an Iar
+23,1,Banffshire and Buchan Coast
+24,14,Coatbridge and Chryston
+25,17,Shetland Islands
+26,4,Ayr
+27,1,Dundee City East
+28,1,Aberdeenshire East
+29,9,Clydebank and Milngavie
+30,14,Airdrie and Shotts
+31,17,Argyll and Bute
+32,9,Strathkelvin and Bearsden
+33,2,Cowdenbeath
+34,9,Greenock and Inverclyde
+35,1,Aberdeenshire West
+36,14,"Hamilton, Larkhall and Stonehouse"
+37,14,Motherwell and Wishaw
+38,17,Orkney Islands
+39,11,Glasgow Shettleston
+40,1,Aberdeen Donside
+41,14,Falkirk West
+42,4,Dumfriesshire
+43,11,Glasgow Provan
+44,14,Uddingston and Bellshill
+45,9,Eastwood
+46,14,Falkirk East
+47,5,Edinburgh Eastern
+48,11,Glasgow Pollok
+49,2,Mid Fife and Glenrothes
+50,11,Rutherglen
+51,9,Renfrewshire North and West
+52,11,Glasgow Anniesland
+53,17,Moray
+54,4,"Ettrick, Roxburgh and Berwickshire"
+55,2,Dunfermline
+56,5,Edinburgh Pentlands
+57,14,Cumbernauld and Kilsyth
+58,5,Linlithgow
+59,9,Renfrewshire South
+60,4,"Midlothian South, Tweeddale and Lauderdale"
+61,5,Edinburgh Western
+62,9,Cunninghame North
+63,4,East Lothian
+64,4,"Carrick, Cumnock and Doon Valley"
+65,11,Glasgow Maryhill and Springburn
+66,14,East Kilbride
+67,1,Dundee City West
+68,17,Inverness and Nairn
+69,1,Angus North and Mearns
+70,1,Angus South
+71,5,Edinburgh Southern
+72,2,Stirling
+73,11,Glasgow Cathcart
+74,5,Almond Valley
+75,4,Galloway and West Dumfries
+76,2,Perthshire South and Kinross-shire
+77,4,Kilmarnock and Irvine Valley
+78,4,Clydesdale
+79,5,Edinburgh Northern and Leith
+80,9,Dumbarton
+81,17,"Caithness, Sutherland and Ross"

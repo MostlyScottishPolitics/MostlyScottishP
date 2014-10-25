@@ -1,26 +1,24 @@
-.dropdown-menu > .active > a, .dropdown-menu > .active > a:hover, .dropdown-menu > .active > a:focus{
-	background-color: #5d3c70;
-}
-.contactinfo{
-	float:right;
+.dropdown-menu > .active > a, .dropdown-menu > .active > a:hover, .dropdown-menu > .active > a:focus {
+    background-color: #5d3c70;
 }
 
-
-.navbar-brand{
-	padding-left:70px;
+.contactinfo {
+    float: right;
 }
 
-.navbar-brand img{
-	position:absolute;
-	margin:-7px 0 0 -55px;
+.navbar-brand {
+    padding-left: 70px;
 }
 
-
+.navbar-brand img {
+    position: absolute;
+    margin: -7px 0 0 -55px;
+}
 
 td, th {
-	padding:2px 12px;
+    padding: 2px 12px;
 }
 
-tr.divider{
-	border-bottom: 
+tr.divider {
+    border-bottom:
 }

@@ -5,15 +5,15 @@ from django.conf.urls import patterns, include, url
 # admin.autodiscover()
 
 urlpatterns = patterns('',
-    # Examples:
-    # url(r'^$', 'scottviz.views.home', name='home'),
-    # url(r'^scottviz/', include('scottviz.foo.urls')),
+                       # Examples:
+                       # url(r'^$', 'scottviz.views.home', name='home'),
+                       # url(r'^scottviz/', include('scottviz.foo.urls')),
 
-    # Uncomment the admin/doc line below to enable admin documentation:
-    url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
-    url(r'^msp/', include('scottviz_app.urls')), 
+                       # Uncomment the admin/doc line below to enable admin documentation:
+                       url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
+                       url(r'^msp/', include('scottviz_app.urls')),
 
 
-    # Uncomment the next line to enable the admin:
-    #url(r'^admin/', include(admin.site.urls)),
+                       # Uncomment the next line to enable the admin:
+                       # url(r'^admin/', include(admin.site.urls)),
 )
