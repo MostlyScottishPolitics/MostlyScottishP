@@ -14,9 +14,18 @@ import re
 import codecs
 # For date
 import datetime
+import time
 
 # Law class, contains the data for a law
 import law
+
+
+# For log messages
+def log(message):
+    with open("scraper.log", "a+") as log_file:
+        date = time.strftime("%Y-%m-%d %H:%M:%S : ")
+        message = date + message + '\n'
+        log_file.write(message)
 
 
 # Process the line with the type, id, name, proposer, topic
@@ -40,8 +49,14 @@ def process_id_line(line1, current_law):
             # The second ones are those for the original bill, which we don't need here
             if not name_read:
                 # Fifth word is surname, sixth name
-                current_law.law_presenter_surname = words[5]
-                current_law.law_presenter_name = words[6]
+                try:
+                    current_law.law_presenter_surname = words[5]
+                except Exception:
+                    log("Can't get the surname.")
+                try:
+                    current_law.law_presenter_name = words[6]
+                except Exception:
+                    log("Can't get the name.")
                 name_read = True
         # Piece of sentence with topic
         elif "on" in element:
@@ -172,7 +187,10 @@ def process_html(filename):
                 # Simpler to get the text after that though
                 elif "agreed to" in line and ("amended" in line or "Motion" in line or "Amendment in file"):
                     split_array = trim_html(line).split(" ")
-                    current_law.law_agreed = split_array[len(split_array) - 2]
+                    try:
+                        current_law.law_agreed = split_array[len(split_array) - 2]
+                    except Exception:
+                        log("Can't get the agreement on the law.")
                     if not "disagreed" in line and ("amended" in line or "Motion" in line):
                         agreed = True
                 # Text voted
@@ -187,12 +205,18 @@ def process_html(filename):
         current_law.data_to_xml_node(root)
 
     if not write:
+        log("Useless file, no data written.")
         return "no data written"
     else:
         indent(root)
         tree = ET.ElementTree(root)
         report_date = datetime.datetime.strptime(report_date, '%d %B %Y').strftime('%d_%m_%Y')
         file_name = "data_" + report_date + ".xml"
-        tree.write(file_name, "utf-8")
+        try:
+            tree.write(file_name, "utf-8")
+        except IOError, e:
+            log("Error when writing XML file.")
+        else:
+            log("XML file created, data written.")
         # Return date of document if success
         return report_date

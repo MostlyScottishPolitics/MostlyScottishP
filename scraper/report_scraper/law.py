@@ -2,6 +2,15 @@ __author__ = 'pierre'
 
 import xml.etree.cElementTree as ET
 import re
+import time
+
+
+# For log messages
+def log(message):
+    with open("scraper.log", "a+") as log_file:
+        date = time.strftime("%Y-%m-%d %H:%M:%S : ")
+        message = date + message + '\n'
+        log_file.write(message)
 
 class Law(object):
     law_type = ""
@@ -34,14 +43,26 @@ class Law(object):
     def add_to_msp_node(self, msp_node, msps):
         # Split for space, but not when they are between parentheses
         split_array = re.split(r"\s+(?=[^()]*(?:\(|$))", msps)
-        surname_node = ET.SubElement(msp_node, "surname")
-        surname_node.text = split_array[0]
-        name_node = ET.SubElement(msp_node, "name")
-        name_node.text = split_array[1]
-        party_node = ET.SubElement(msp_node, "party")
-        party_node.text = split_array[3].replace("(", "").replace(")", "")
-        constituency_node = ET.SubElement(msp_node, "constituency")
-        constituency_node.text = split_array[2].replace("(", "").replace(")", "")
+        try:
+            surname_node = ET.SubElement(msp_node, "surname")
+            surname_node.text = split_array[0]
+        except Exception:
+            log("Can't add surname to node.")
+        try:
+            name_node = ET.SubElement(msp_node, "name")
+            name_node.text = split_array[1]
+        except Exception:
+            log("Can't add name to node.")
+        try:
+            party_node = ET.SubElement(msp_node, "party")
+            party_node.text = split_array[3].replace("(", "").replace(")", "")
+        except Exception:
+            log("Can't add party to node.")
+        try:
+            constituency_node = ET.SubElement(msp_node, "constituency")
+            constituency_node.text = split_array[2].replace("(", "").replace(")", "")
+        except Exception:
+            log("Can't add sconstituency to node.")
 
     def data_to_xml_node(self, parent_node):
         law_node = ET.SubElement(parent_node, "law")

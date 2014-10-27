@@ -35,10 +35,12 @@ def import_processed_urls(url_file):
                 json_data = json.load(f)
             except ValueError, e:
                 dict_url = dict()
+                scraper.log("Can't load json.")
                 return dict_url
             else:
                 return json_data
     except IOError, e:
+        scraper.log("Can't open file.")
         dict_url = dict()
         return dict_url
 
@@ -49,6 +51,7 @@ def export_processed_urls(url_file, dict_url):
         try:
             json.dump(dict_url, f)
         except ValueError, e:
+            scraper.log("Can't dump json.")
             return -1
         else:
             return 0
@@ -62,13 +65,15 @@ def get_latest_id():
     for line in response:
         if base_url in line:
             # Keep only the url
-            id = re.match(r'^.*"(.*)".*$', line).group(1)
+            id_report = re.match(r'^.*"(.*)".*$', line).group(1)
             # Remove the base url to get only the id
-            id = id.strip("http://www.scottish.parliament.uk/parliamentarybusiness/28862.aspx?r=")
+            id_report = id_report.strip("http://www.scottish.parliament.uk/parliamentarybusiness/28862.aspx?r=")
             # Remove everything after #
             # There's some data like that sometimes
-            id, sep, tail = id.partition('#')
-            return id
+            id_report, sep, tail = id_report.partition('#')
+            return id_report
+    scraper.log("Latest report id not found.")
+    return 0
 
 
 # Download the html files
@@ -88,7 +93,7 @@ def get_html_files():
             except urllib2.HTTPError, e:
                 # Add it the list of already processed url
                 processed_urls[i] = base_url + "?r=" + str(i)
-                print "fail" + str(i)
+                scraper.log(str(i) + " is not a valid URL.")
                 continue
             else:
                 # Check if it's a parliamentary report, ie what we want
@@ -101,6 +106,7 @@ def get_html_files():
                 processed_urls[i] = base_url + "?r=" + str(i)
                 # If not a parliamentary report
                 if not write:
+                    scraper.log(str(i) + " is not a parliamentary report. No data written.")
                     continue
                 else:
                     # Write the file
@@ -109,6 +115,8 @@ def get_html_files():
                     with open(file_output, "w+") as f:
                         f.write(page)
                         write = False
+        else:
+            scraper.log(str(i) + " already scrapped.")
     # Store the new URLs
     export_processed_urls(f_processed_urls, processed_urls)
     return list_files
@@ -118,10 +126,9 @@ def get_html_files():
 def scrap_files(list_files):
     for f in list_files:
         if "no data written" not in scraper.process_html(f):
-            print "Success " + f
+            scraper.log("file " + f + " created.")
         else:
-            print "Failure " + f
+            scraper.log("Failed to create file " + f + ".")
 
 
 scrap_files(get_html_files())
-
