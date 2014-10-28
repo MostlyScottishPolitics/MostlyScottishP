@@ -1,0 +1,3336 @@
+<root>
+  <law>
+    <type>amendment</type>
+    <id>S4M-06766.2</id>
+    <date>30 May 2013</date>
+    <surname>amendment</surname>
+    <name>in</name>
+    <topic>transforming Scotland’s railways</topic>
+    <agreed>disagreed</agreed>
+    <for>
+      <msp>
+        <surname>Baillie</surname>
+        <name>Jackie</name>
+        <party>Lab</party>
+        <constituency>Dumbarton</constituency>
+      </msp>
+      <msp>
+        <surname>Baker</surname>
+        <name>Claire</name>
+        <party>Lab</party>
+        <constituency>Mid Scotland and Fife</constituency>
+      </msp>
+      <msp>
+        <surname>Baker</surname>
+        <name>Richard</name>
+        <party>Lab</party>
+        <constituency>North East Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>Baxter</surname>
+        <name>Jayne</name>
+        <party>Lab</party>
+        <constituency>Mid Scotland and Fife</constituency>
+      </msp>
+      <msp>
+        <surname>Beamish</surname>
+        <name>Claudia</name>
+        <party>Lab</party>
+        <constituency>South Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>Bibby</surname>
+        <name>Neil</name>
+        <party>Lab</party>
+        <constituency>West Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>Boyack</surname>
+        <name>Sarah</name>
+        <party>Lab</party>
+        <constituency>Lothian</constituency>
+      </msp>
+      <msp>
+        <surname>Chisholm</surname>
+        <name>Malcolm</name>
+        <party>Lab</party>
+        <constituency>Edinburgh Northern and Leith</constituency>
+      </msp>
+      <msp>
+        <surname>Dugdale</surname>
+        <name>Kezia</name>
+        <party>Lab</party>
+        <constituency>Lothian</constituency>
+      </msp>
+      <msp>
+        <surname>Fee</surname>
+        <name>Mary</name>
+        <party>Lab</party>
+        <constituency>West Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>Ferguson</surname>
+        <name>Patricia</name>
+        <party>Lab</party>
+        <constituency>Glasgow Maryhill and Springburn</constituency>
+      </msp>
+      <msp>
+        <surname>Findlay</surname>
+        <name>Neil</name>
+        <party>Lab</party>
+        <constituency>Lothian</constituency>
+      </msp>
+      <msp>
+        <surname>Grant</surname>
+        <name>Rhoda</name>
+        <party>Lab</party>
+        <constituency>Highlands and Islands</constituency>
+      </msp>
+      <msp>
+        <surname>Gray</surname>
+        <name>Iain</name>
+        <party>Lab</party>
+        <constituency>East Lothian</constituency>
+      </msp>
+      <msp>
+        <surname>Griffin</surname>
+        <name>Mark</name>
+        <party>Lab</party>
+        <constituency>Central Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>Harvie</surname>
+        <name>Patrick</name>
+        <party>Green</party>
+        <constituency>Glasgow</constituency>
+      </msp>
+      <msp>
+        <surname>Henry</surname>
+        <name>Hugh</name>
+        <party>Lab</party>
+        <constituency>Renfrewshire South</constituency>
+      </msp>
+      <msp>
+        <surname>Hume</surname>
+        <name>Jim</name>
+        <party>LD</party>
+        <constituency>South Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>Johnstone</surname>
+        <name>Alison</name>
+        <party>Green</party>
+        <constituency>Lothian</constituency>
+      </msp>
+      <msp>
+        <surname>Kelly</surname>
+        <name>James</name>
+        <party>Lab</party>
+        <constituency>Rutherglen</constituency>
+      </msp>
+      <msp>
+        <surname>Lamont</surname>
+        <name>Johann</name>
+        <party>Lab</party>
+        <constituency>Glasgow Pollok</constituency>
+      </msp>
+      <msp>
+        <surname>Macintosh</surname>
+        <name>Ken</name>
+        <party>Lab</party>
+        <constituency>Eastwood</constituency>
+      </msp>
+      <msp>
+        <surname>Malik</surname>
+        <name>Hanzala</name>
+        <party>Lab</party>
+        <constituency>Glasgow</constituency>
+      </msp>
+      <msp>
+        <surname>Marra</surname>
+        <name>Jenny</name>
+        <party>Lab</party>
+        <constituency>North East Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>Martin</surname>
+        <name>Paul</name>
+        <party>Lab</party>
+        <constituency>Glasgow Provan</constituency>
+      </msp>
+      <msp>
+        <surname>McArthur</surname>
+        <name>Liam</name>
+        <party>LD</party>
+        <constituency>Orkney Islands</constituency>
+      </msp>
+      <msp>
+        <surname>McCulloch</surname>
+        <name>Margaret</name>
+        <party>Lab</party>
+        <constituency>Central Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>McDougall</surname>
+        <name>Margaret</name>
+        <party>Lab</party>
+        <constituency>West Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>McInnes</surname>
+        <name>Alison</name>
+        <party>LD</party>
+        <constituency>North East Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>McMahon</surname>
+        <name>Michael</name>
+        <party>Lab</party>
+        <constituency>Uddingston and Bellshill</constituency>
+      </msp>
+      <msp>
+        <surname>McMahon</surname>
+        <name>Siobhan</name>
+        <party>Lab</party>
+        <constituency>Central Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>McTaggart</surname>
+        <name>Anne</name>
+        <party>Lab</party>
+        <constituency>Glasgow</constituency>
+      </msp>
+      <msp>
+        <surname>Murray</surname>
+        <name>Elaine</name>
+        <party>Lab</party>
+        <constituency>Dumfriesshire</constituency>
+      </msp>
+      <msp>
+        <surname>Pearson</surname>
+        <name>Graeme</name>
+        <party>Lab</party>
+        <constituency>South Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>Pentland</surname>
+        <name>John</name>
+        <party>Lab</party>
+        <constituency>Motherwell and Wishaw</constituency>
+      </msp>
+      <msp>
+        <surname>Rennie</surname>
+        <name>Willie</name>
+        <party>LD</party>
+        <constituency>Mid Scotland and Fife</constituency>
+      </msp>
+      <msp>
+        <surname>Scott</surname>
+        <name>Tavish</name>
+        <party>LD</party>
+        <constituency>Shetland Islands</constituency>
+      </msp>
+      <msp>
+        <surname>Smith</surname>
+        <name>Drew</name>
+        <party>Lab</party>
+        <constituency>Glasgow</constituency>
+      </msp>
+    </for>
+    <against>
+      <msp>
+        <surname>Adam</surname>
+        <name>George</name>
+        <party>SNP</party>
+        <constituency>Paisley</constituency>
+      </msp>
+      <msp>
+        <surname>Adamson</surname>
+        <name>Clare</name>
+        <party>SNP</party>
+        <constituency>Central Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>Allan</surname>
+        <name>Dr</name>
+        <party>Na h-Eileanan an Iar</party>
+        <constituency>Alasdair</constituency>
+      </msp>
+      <msp>
+        <surname>Allard</surname>
+        <name>Christian</name>
+        <party>SNP</party>
+        <constituency>North East Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>Beattie</surname>
+        <name>Colin</name>
+        <party>SNP</party>
+        <constituency>Midlothian North and Musselburgh</constituency>
+      </msp>
+      <msp>
+        <surname>Biagi</surname>
+        <name>Marco</name>
+        <party>SNP</party>
+        <constituency>Edinburgh Central</constituency>
+      </msp>
+      <msp>
+        <surname>Brodie</surname>
+        <name>Chic</name>
+        <party>SNP</party>
+        <constituency>South Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>Brown</surname>
+        <name>Gavin</name>
+        <party>Con</party>
+        <constituency>Lothian</constituency>
+      </msp>
+      <msp>
+        <surname>Brown</surname>
+        <name>Keith</name>
+        <party>SNP</party>
+        <constituency>Clackmannanshire and Dunblane</constituency>
+      </msp>
+      <msp>
+        <surname>Burgess</surname>
+        <name>Margaret</name>
+        <party>SNP</party>
+        <constituency>Cunninghame South</constituency>
+      </msp>
+      <msp>
+        <surname>Campbell</surname>
+        <name>Aileen</name>
+        <party>SNP</party>
+        <constituency>Clydesdale</constituency>
+      </msp>
+      <msp>
+        <surname>Carlaw</surname>
+        <name>Jackson</name>
+        <party>Con</party>
+        <constituency>West Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>Coffey</surname>
+        <name>Willie</name>
+        <party>SNP</party>
+        <constituency>Kilmarnock and Irvine Valley</constituency>
+      </msp>
+      <msp>
+        <surname>Crawford</surname>
+        <name>Bruce</name>
+        <party>SNP</party>
+        <constituency>Stirling</constituency>
+      </msp>
+      <msp>
+        <surname>Cunningham</surname>
+        <name>Roseanna</name>
+        <party>SNP</party>
+        <constituency>Perthshire South and Kinross-shire</constituency>
+      </msp>
+      <msp>
+        <surname>Davidson</surname>
+        <name>Ruth</name>
+        <party>Con</party>
+        <constituency>Glasgow</constituency>
+      </msp>
+      <msp>
+        <surname>Dey</surname>
+        <name>Graeme</name>
+        <party>SNP</party>
+        <constituency>Angus South</constituency>
+      </msp>
+      <msp>
+        <surname>Don</surname>
+        <name>Nigel</name>
+        <party>SNP</party>
+        <constituency>Angus North and Mearns</constituency>
+      </msp>
+      <msp>
+        <surname>Doris</surname>
+        <name>Bob</name>
+        <party>SNP</party>
+        <constituency>Glasgow</constituency>
+      </msp>
+      <msp>
+        <surname>Dornan</surname>
+        <name>James</name>
+        <party>SNP</party>
+        <constituency>Glasgow Cathcart</constituency>
+      </msp>
+      <msp>
+        <surname>Eadie</surname>
+        <name>Jim</name>
+        <party>SNP</party>
+        <constituency>Edinburgh Southern</constituency>
+      </msp>
+      <msp>
+        <surname>Ewing</surname>
+        <name>Annabelle</name>
+        <party>SNP</party>
+        <constituency>Mid Scotland and Fife</constituency>
+      </msp>
+      <msp>
+        <surname>Ewing</surname>
+        <name>Fergus</name>
+        <party>SNP</party>
+        <constituency>Inverness and Nairn</constituency>
+      </msp>
+      <msp>
+        <surname>FitzPatrick</surname>
+        <name>Joe</name>
+        <party>SNP</party>
+        <constituency>Dundee City West</constituency>
+      </msp>
+      <msp>
+        <surname>Fraser</surname>
+        <name>Murdo</name>
+        <party>Con</party>
+        <constituency>Mid Scotland and Fife</constituency>
+      </msp>
+      <msp>
+        <surname>Gibson</surname>
+        <name>Kenneth</name>
+        <party>SNP</party>
+        <constituency>Cunninghame North</constituency>
+      </msp>
+      <msp>
+        <surname>Gibson</surname>
+        <name>Rob</name>
+        <party>SNP</party>
+        <constituency>Caithness, Sutherland and Ross</constituency>
+      </msp>
+      <msp>
+        <surname>Grahame</surname>
+        <name>Christine</name>
+        <party>SNP</party>
+        <constituency>Midlothian South, Tweeddale and Lauderdale</constituency>
+      </msp>
+      <msp>
+        <surname>Hepburn</surname>
+        <name>Jamie</name>
+        <party>SNP</party>
+        <constituency>Cumbernauld and Kilsyth</constituency>
+      </msp>
+      <msp>
+        <surname>Johnstone</surname>
+        <name>Alex</name>
+        <party>Con</party>
+        <constituency>North East Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>Keir</surname>
+        <name>Colin</name>
+        <party>SNP</party>
+        <constituency>Edinburgh Western</constituency>
+      </msp>
+      <msp>
+        <surname>Kidd</surname>
+        <name>Bill</name>
+        <party>SNP</party>
+        <constituency>Glasgow Anniesland</constituency>
+      </msp>
+      <msp>
+        <surname>Lamont</surname>
+        <name>John</name>
+        <party>Con</party>
+        <constituency>Ettrick, Roxburgh and Berwickshire</constituency>
+      </msp>
+      <msp>
+        <surname>Lochhead</surname>
+        <name>Richard</name>
+        <party>SNP</party>
+        <constituency>Moray</constituency>
+      </msp>
+      <msp>
+        <surname>Lyle</surname>
+        <name>Richard</name>
+        <party>SNP</party>
+        <constituency>Central Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>MacAskill</surname>
+        <name>Kenny</name>
+        <party>SNP</party>
+        <constituency>Edinburgh Eastern</constituency>
+      </msp>
+      <msp>
+        <surname>MacDonald</surname>
+        <name>Angus</name>
+        <party>SNP</party>
+        <constituency>Falkirk East</constituency>
+      </msp>
+      <msp>
+        <surname>Mackay</surname>
+        <name>Derek</name>
+        <party>SNP</party>
+        <constituency>Renfrewshire North and West</constituency>
+      </msp>
+      <msp>
+        <surname>MacKenzie</surname>
+        <name>Mike</name>
+        <party>SNP</party>
+        <constituency>Highlands and Islands</constituency>
+      </msp>
+      <msp>
+        <surname>Mason</surname>
+        <name>John</name>
+        <party>SNP</party>
+        <constituency>Glasgow Shettleston</constituency>
+      </msp>
+      <msp>
+        <surname>Matheson</surname>
+        <name>Michael</name>
+        <party>SNP</party>
+        <constituency>Falkirk West</constituency>
+      </msp>
+      <msp>
+        <surname>Maxwell</surname>
+        <name>Stewart</name>
+        <party>SNP</party>
+        <constituency>West Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>McAlpine</surname>
+        <name>Joan</name>
+        <party>SNP</party>
+        <constituency>South Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>McGrigor</surname>
+        <name>Jamie</name>
+        <party>Con</party>
+        <constituency>Highlands and Islands</constituency>
+      </msp>
+      <msp>
+        <surname>McKelvie</surname>
+        <name>Christina</name>
+        <party>SNP</party>
+        <constituency>Hamilton, Larkhall and Stonehouse</constituency>
+      </msp>
+      <msp>
+        <surname>McLeod</surname>
+        <name>Aileen</name>
+        <party>SNP</party>
+        <constituency>South Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>McLeod</surname>
+        <name>Fiona</name>
+        <party>SNP</party>
+        <constituency>Strathkelvin and Bearsden</constituency>
+      </msp>
+      <msp>
+        <surname>McMillan</surname>
+        <name>Stuart</name>
+        <party>SNP</party>
+        <constituency>West Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>Milne</surname>
+        <name>Nanette</name>
+        <party>Con</party>
+        <constituency>North East Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>Mitchell</surname>
+        <name>Margaret</name>
+        <party>Con</party>
+        <constituency>Central Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>Neil</surname>
+        <name>Alex</name>
+        <party>SNP</party>
+        <constituency>Airdrie and Shotts</constituency>
+      </msp>
+      <msp>
+        <surname>Paterson</surname>
+        <name>Gil</name>
+        <party>SNP</party>
+        <constituency>Clydebank and Milngavie</constituency>
+      </msp>
+      <msp>
+        <surname>Robertson</surname>
+        <name>Dennis</name>
+        <party>SNP</party>
+        <constituency>Aberdeenshire West</constituency>
+      </msp>
+      <msp>
+        <surname>Robison</surname>
+        <name>Shona</name>
+        <party>SNP</party>
+        <constituency>Dundee City East</constituency>
+      </msp>
+      <msp>
+        <surname>Russell</surname>
+        <name>Michael</name>
+        <party>SNP</party>
+        <constituency>Argyll and Bute</constituency>
+      </msp>
+      <msp>
+        <surname>Salmond</surname>
+        <name>Alex</name>
+        <party>SNP</party>
+        <constituency>Aberdeenshire East</constituency>
+      </msp>
+      <msp>
+        <surname>Scanlon</surname>
+        <name>Mary</name>
+        <party>Con</party>
+        <constituency>Highlands and Islands</constituency>
+      </msp>
+      <msp>
+        <surname>Scott</surname>
+        <name>John</name>
+        <party>Con</party>
+        <constituency>Ayr</constituency>
+      </msp>
+      <msp>
+        <surname>Stevenson</surname>
+        <name>Stewart</name>
+        <party>SNP</party>
+        <constituency>Banffshire and Buchan Coast</constituency>
+      </msp>
+      <msp>
+        <surname>Stewart</surname>
+        <name>Kevin</name>
+        <party>SNP</party>
+        <constituency>Aberdeen Central</constituency>
+      </msp>
+      <msp>
+        <surname>Sturgeon</surname>
+        <name>Nicola</name>
+        <party>SNP</party>
+        <constituency>Glasgow Southside</constituency>
+      </msp>
+      <msp>
+        <surname>Swinney</surname>
+        <name>John</name>
+        <party>SNP</party>
+        <constituency>Perthshire North</constituency>
+      </msp>
+      <msp>
+        <surname>Thompson</surname>
+        <name>Dave</name>
+        <party>SNP</party>
+        <constituency>Skye, Lochaber and Badenoch</constituency>
+      </msp>
+      <msp>
+        <surname>Torrance</surname>
+        <name>David</name>
+        <party>SNP</party>
+        <constituency>Kirkcaldy</constituency>
+      </msp>
+      <msp>
+        <surname>Urquhart</surname>
+        <name>Jean</name>
+        <party>Ind</party>
+        <constituency>Highlands and Islands</constituency>
+      </msp>
+      <msp>
+        <surname>Wheelhouse</surname>
+        <name>Paul</name>
+        <party>SNP</party>
+        <constituency>South Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>White</surname>
+        <name>Sandra</name>
+        <party>SNP</party>
+        <constituency>Glasgow Kelvin</constituency>
+      </msp>
+      <msp>
+        <surname>Wilson</surname>
+        <name>John</name>
+        <party>SNP</party>
+        <constituency>Central Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>Yousaf</surname>
+        <name>Humza</name>
+        <party>SNP</party>
+        <constituency>Glasgow</constituency>
+      </msp>
+    </against>
+    <abstention>
+      <msp>
+        <surname>Finnie</surname>
+        <name>John</name>
+        <party>Ind</party>
+        <constituency>Highlands and Islands</constituency>
+      </msp>
+    </abstention>
+  </law>
+  <law>
+    <type>amendment</type>
+    <id>S4M-06766.1</id>
+    <date>30 May 2013</date>
+    <surname>Alex</surname>
+    <name>Johnstone</name>
+    <topic>transforming Scotland’s railways</topic>
+    <agreed>disagreed</agreed>
+    <for>
+      <msp>
+        <surname>Brown</surname>
+        <name>Gavin</name>
+        <party>Con</party>
+        <constituency>Lothian</constituency>
+      </msp>
+      <msp>
+        <surname>Carlaw</surname>
+        <name>Jackson</name>
+        <party>Con</party>
+        <constituency>West Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>Davidson</surname>
+        <name>Ruth</name>
+        <party>Con</party>
+        <constituency>Glasgow</constituency>
+      </msp>
+      <msp>
+        <surname>Fraser</surname>
+        <name>Murdo</name>
+        <party>Con</party>
+        <constituency>Mid Scotland and Fife</constituency>
+      </msp>
+      <msp>
+        <surname>Johnstone</surname>
+        <name>Alex</name>
+        <party>Con</party>
+        <constituency>North East Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>Lamont</surname>
+        <name>John</name>
+        <party>Con</party>
+        <constituency>Ettrick, Roxburgh and Berwickshire</constituency>
+      </msp>
+      <msp>
+        <surname>McGrigor</surname>
+        <name>Jamie</name>
+        <party>Con</party>
+        <constituency>Highlands and Islands</constituency>
+      </msp>
+      <msp>
+        <surname>Milne</surname>
+        <name>Nanette</name>
+        <party>Con</party>
+        <constituency>North East Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>Mitchell</surname>
+        <name>Margaret</name>
+        <party>Con</party>
+        <constituency>Central Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>Scanlon</surname>
+        <name>Mary</name>
+        <party>Con</party>
+        <constituency>Highlands and Islands</constituency>
+      </msp>
+      <msp>
+        <surname>Scott</surname>
+        <name>John</name>
+        <party>Con</party>
+        <constituency>Ayr</constituency>
+      </msp>
+    </for>
+    <against>
+      <msp>
+        <surname>Adam</surname>
+        <name>George</name>
+        <party>SNP</party>
+        <constituency>Paisley</constituency>
+      </msp>
+      <msp>
+        <surname>Adamson</surname>
+        <name>Clare</name>
+        <party>SNP</party>
+        <constituency>Central Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>Allan</surname>
+        <name>Dr</name>
+        <party>Na h-Eileanan an Iar</party>
+        <constituency>Alasdair</constituency>
+      </msp>
+      <msp>
+        <surname>Allard</surname>
+        <name>Christian</name>
+        <party>SNP</party>
+        <constituency>North East Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>Baillie</surname>
+        <name>Jackie</name>
+        <party>Lab</party>
+        <constituency>Dumbarton</constituency>
+      </msp>
+      <msp>
+        <surname>Baker</surname>
+        <name>Claire</name>
+        <party>Lab</party>
+        <constituency>Mid Scotland and Fife</constituency>
+      </msp>
+      <msp>
+        <surname>Baker</surname>
+        <name>Richard</name>
+        <party>Lab</party>
+        <constituency>North East Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>Baxter</surname>
+        <name>Jayne</name>
+        <party>Lab</party>
+        <constituency>Mid Scotland and Fife</constituency>
+      </msp>
+      <msp>
+        <surname>Beamish</surname>
+        <name>Claudia</name>
+        <party>Lab</party>
+        <constituency>South Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>Beattie</surname>
+        <name>Colin</name>
+        <party>SNP</party>
+        <constituency>Midlothian North and Musselburgh</constituency>
+      </msp>
+      <msp>
+        <surname>Biagi</surname>
+        <name>Marco</name>
+        <party>SNP</party>
+        <constituency>Edinburgh Central</constituency>
+      </msp>
+      <msp>
+        <surname>Bibby</surname>
+        <name>Neil</name>
+        <party>Lab</party>
+        <constituency>West Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>Boyack</surname>
+        <name>Sarah</name>
+        <party>Lab</party>
+        <constituency>Lothian</constituency>
+      </msp>
+      <msp>
+        <surname>Brodie</surname>
+        <name>Chic</name>
+        <party>SNP</party>
+        <constituency>South Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>Brown</surname>
+        <name>Keith</name>
+        <party>SNP</party>
+        <constituency>Clackmannanshire and Dunblane</constituency>
+      </msp>
+      <msp>
+        <surname>Burgess</surname>
+        <name>Margaret</name>
+        <party>SNP</party>
+        <constituency>Cunninghame South</constituency>
+      </msp>
+      <msp>
+        <surname>Campbell</surname>
+        <name>Aileen</name>
+        <party>SNP</party>
+        <constituency>Clydesdale</constituency>
+      </msp>
+      <msp>
+        <surname>Campbell</surname>
+        <name>Roderick</name>
+        <party>SNP</party>
+        <constituency>North East Fife</constituency>
+      </msp>
+      <msp>
+        <surname>Chisholm</surname>
+        <name>Malcolm</name>
+        <party>Lab</party>
+        <constituency>Edinburgh Northern and Leith</constituency>
+      </msp>
+      <msp>
+        <surname>Coffey</surname>
+        <name>Willie</name>
+        <party>SNP</party>
+        <constituency>Kilmarnock and Irvine Valley</constituency>
+      </msp>
+      <msp>
+        <surname>Crawford</surname>
+        <name>Bruce</name>
+        <party>SNP</party>
+        <constituency>Stirling</constituency>
+      </msp>
+      <msp>
+        <surname>Cunningham</surname>
+        <name>Roseanna</name>
+        <party>SNP</party>
+        <constituency>Perthshire South and Kinross-shire</constituency>
+      </msp>
+      <msp>
+        <surname>Dey</surname>
+        <name>Graeme</name>
+        <party>SNP</party>
+        <constituency>Angus South</constituency>
+      </msp>
+      <msp>
+        <surname>Don</surname>
+        <name>Nigel</name>
+        <party>SNP</party>
+        <constituency>Angus North and Mearns</constituency>
+      </msp>
+      <msp>
+        <surname>Doris</surname>
+        <name>Bob</name>
+        <party>SNP</party>
+        <constituency>Glasgow</constituency>
+      </msp>
+      <msp>
+        <surname>Dornan</surname>
+        <name>James</name>
+        <party>SNP</party>
+        <constituency>Glasgow Cathcart</constituency>
+      </msp>
+      <msp>
+        <surname>Dugdale</surname>
+        <name>Kezia</name>
+        <party>Lab</party>
+        <constituency>Lothian</constituency>
+      </msp>
+      <msp>
+        <surname>Eadie</surname>
+        <name>Jim</name>
+        <party>SNP</party>
+        <constituency>Edinburgh Southern</constituency>
+      </msp>
+      <msp>
+        <surname>Ewing</surname>
+        <name>Annabelle</name>
+        <party>SNP</party>
+        <constituency>Mid Scotland and Fife</constituency>
+      </msp>
+      <msp>
+        <surname>Ewing</surname>
+        <name>Fergus</name>
+        <party>SNP</party>
+        <constituency>Inverness and Nairn</constituency>
+      </msp>
+      <msp>
+        <surname>Fee</surname>
+        <name>Mary</name>
+        <party>Lab</party>
+        <constituency>West Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>Ferguson</surname>
+        <name>Patricia</name>
+        <party>Lab</party>
+        <constituency>Glasgow Maryhill and Springburn</constituency>
+      </msp>
+      <msp>
+        <surname>Findlay</surname>
+        <name>Neil</name>
+        <party>Lab</party>
+        <constituency>Lothian</constituency>
+      </msp>
+      <msp>
+        <surname>Finnie</surname>
+        <name>John</name>
+        <party>Ind</party>
+        <constituency>Highlands and Islands</constituency>
+      </msp>
+      <msp>
+        <surname>FitzPatrick</surname>
+        <name>Joe</name>
+        <party>SNP</party>
+        <constituency>Dundee City West</constituency>
+      </msp>
+      <msp>
+        <surname>Gibson</surname>
+        <name>Kenneth</name>
+        <party>SNP</party>
+        <constituency>Cunninghame North</constituency>
+      </msp>
+      <msp>
+        <surname>Gibson</surname>
+        <name>Rob</name>
+        <party>SNP</party>
+        <constituency>Caithness, Sutherland and Ross</constituency>
+      </msp>
+      <msp>
+        <surname>Grahame</surname>
+        <name>Christine</name>
+        <party>SNP</party>
+        <constituency>Midlothian South, Tweeddale and Lauderdale</constituency>
+      </msp>
+      <msp>
+        <surname>Grant</surname>
+        <name>Rhoda</name>
+        <party>Lab</party>
+        <constituency>Highlands and Islands</constituency>
+      </msp>
+      <msp>
+        <surname>Gray</surname>
+        <name>Iain</name>
+        <party>Lab</party>
+        <constituency>East Lothian</constituency>
+      </msp>
+      <msp>
+        <surname>Griffin</surname>
+        <name>Mark</name>
+        <party>Lab</party>
+        <constituency>Central Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>Harvie</surname>
+        <name>Patrick</name>
+        <party>Green</party>
+        <constituency>Glasgow</constituency>
+      </msp>
+      <msp>
+        <surname>Henry</surname>
+        <name>Hugh</name>
+        <party>Lab</party>
+        <constituency>Renfrewshire South</constituency>
+      </msp>
+      <msp>
+        <surname>Hepburn</surname>
+        <name>Jamie</name>
+        <party>SNP</party>
+        <constituency>Cumbernauld and Kilsyth</constituency>
+      </msp>
+      <msp>
+        <surname>Hume</surname>
+        <name>Jim</name>
+        <party>LD</party>
+        <constituency>South Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>Johnstone</surname>
+        <name>Alison</name>
+        <party>Green</party>
+        <constituency>Lothian</constituency>
+      </msp>
+      <msp>
+        <surname>Keir</surname>
+        <name>Colin</name>
+        <party>SNP</party>
+        <constituency>Edinburgh Western</constituency>
+      </msp>
+      <msp>
+        <surname>Kelly</surname>
+        <name>James</name>
+        <party>Lab</party>
+        <constituency>Rutherglen</constituency>
+      </msp>
+      <msp>
+        <surname>Kidd</surname>
+        <name>Bill</name>
+        <party>SNP</party>
+        <constituency>Glasgow Anniesland</constituency>
+      </msp>
+      <msp>
+        <surname>Lamont</surname>
+        <name>Johann</name>
+        <party>Lab</party>
+        <constituency>Glasgow Pollok</constituency>
+      </msp>
+      <msp>
+        <surname>Lochhead</surname>
+        <name>Richard</name>
+        <party>SNP</party>
+        <constituency>Moray</constituency>
+      </msp>
+      <msp>
+        <surname>Lyle</surname>
+        <name>Richard</name>
+        <party>SNP</party>
+        <constituency>Central Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>MacAskill</surname>
+        <name>Kenny</name>
+        <party>SNP</party>
+        <constituency>Edinburgh Eastern</constituency>
+      </msp>
+      <msp>
+        <surname>MacDonald</surname>
+        <name>Angus</name>
+        <party>SNP</party>
+        <constituency>Falkirk East</constituency>
+      </msp>
+      <msp>
+        <surname>Macintosh</surname>
+        <name>Ken</name>
+        <party>Lab</party>
+        <constituency>Eastwood</constituency>
+      </msp>
+      <msp>
+        <surname>Mackay</surname>
+        <name>Derek</name>
+        <party>SNP</party>
+        <constituency>Renfrewshire North and West</constituency>
+      </msp>
+      <msp>
+        <surname>MacKenzie</surname>
+        <name>Mike</name>
+        <party>SNP</party>
+        <constituency>Highlands and Islands</constituency>
+      </msp>
+      <msp>
+        <surname>Malik</surname>
+        <name>Hanzala</name>
+        <party>Lab</party>
+        <constituency>Glasgow</constituency>
+      </msp>
+      <msp>
+        <surname>Marra</surname>
+        <name>Jenny</name>
+        <party>Lab</party>
+        <constituency>North East Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>Martin</surname>
+        <name>Paul</name>
+        <party>Lab</party>
+        <constituency>Glasgow Provan</constituency>
+      </msp>
+      <msp>
+        <surname>Mason</surname>
+        <name>John</name>
+        <party>SNP</party>
+        <constituency>Glasgow Shettleston</constituency>
+      </msp>
+      <msp>
+        <surname>Matheson</surname>
+        <name>Michael</name>
+        <party>SNP</party>
+        <constituency>Falkirk West</constituency>
+      </msp>
+      <msp>
+        <surname>Maxwell</surname>
+        <name>Stewart</name>
+        <party>SNP</party>
+        <constituency>West Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>McAlpine</surname>
+        <name>Joan</name>
+        <party>SNP</party>
+        <constituency>South Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>McArthur</surname>
+        <name>Liam</name>
+        <party>LD</party>
+        <constituency>Orkney Islands</constituency>
+      </msp>
+      <msp>
+        <surname>McCulloch</surname>
+        <name>Margaret</name>
+        <party>Lab</party>
+        <constituency>Central Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>McDougall</surname>
+        <name>Margaret</name>
+        <party>Lab</party>
+        <constituency>West Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>McInnes</surname>
+        <name>Alison</name>
+        <party>LD</party>
+        <constituency>North East Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>McKelvie</surname>
+        <name>Christina</name>
+        <party>SNP</party>
+        <constituency>Hamilton, Larkhall and Stonehouse</constituency>
+      </msp>
+      <msp>
+        <surname>McLeod</surname>
+        <name>Aileen</name>
+        <party>SNP</party>
+        <constituency>South Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>McLeod</surname>
+        <name>Fiona</name>
+        <party>SNP</party>
+        <constituency>Strathkelvin and Bearsden</constituency>
+      </msp>
+      <msp>
+        <surname>McMahon</surname>
+        <name>Michael</name>
+        <party>Lab</party>
+        <constituency>Uddingston and Bellshill</constituency>
+      </msp>
+      <msp>
+        <surname>McMahon</surname>
+        <name>Siobhan</name>
+        <party>Lab</party>
+        <constituency>Central Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>McMillan</surname>
+        <name>Stuart</name>
+        <party>SNP</party>
+        <constituency>West Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>McTaggart</surname>
+        <name>Anne</name>
+        <party>Lab</party>
+        <constituency>Glasgow</constituency>
+      </msp>
+      <msp>
+        <surname>Murray</surname>
+        <name>Elaine</name>
+        <party>Lab</party>
+        <constituency>Dumfriesshire</constituency>
+      </msp>
+      <msp>
+        <surname>Neil</surname>
+        <name>Alex</name>
+        <party>SNP</party>
+        <constituency>Airdrie and Shotts</constituency>
+      </msp>
+      <msp>
+        <surname>Paterson</surname>
+        <name>Gil</name>
+        <party>SNP</party>
+        <constituency>Clydebank and Milngavie</constituency>
+      </msp>
+      <msp>
+        <surname>Pearson</surname>
+        <name>Graeme</name>
+        <party>Lab</party>
+        <constituency>South Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>Pentland</surname>
+        <name>John</name>
+        <party>Lab</party>
+        <constituency>Motherwell and Wishaw</constituency>
+      </msp>
+      <msp>
+        <surname>Rennie</surname>
+        <name>Willie</name>
+        <party>LD</party>
+        <constituency>Mid Scotland and Fife</constituency>
+      </msp>
+      <msp>
+        <surname>Robertson</surname>
+        <name>Dennis</name>
+        <party>SNP</party>
+        <constituency>Aberdeenshire West</constituency>
+      </msp>
+      <msp>
+        <surname>Robison</surname>
+        <name>Shona</name>
+        <party>SNP</party>
+        <constituency>Dundee City East</constituency>
+      </msp>
+      <msp>
+        <surname>Russell</surname>
+        <name>Michael</name>
+        <party>SNP</party>
+        <constituency>Argyll and Bute</constituency>
+      </msp>
+      <msp>
+        <surname>Salmond</surname>
+        <name>Alex</name>
+        <party>SNP</party>
+        <constituency>Aberdeenshire East</constituency>
+      </msp>
+      <msp>
+        <surname>Scott</surname>
+        <name>Tavish</name>
+        <party>LD</party>
+        <constituency>Shetland Islands</constituency>
+      </msp>
+      <msp>
+        <surname>Smith</surname>
+        <name>Drew</name>
+        <party>Lab</party>
+        <constituency>Glasgow</constituency>
+      </msp>
+      <msp>
+        <surname>Stevenson</surname>
+        <name>Stewart</name>
+        <party>SNP</party>
+        <constituency>Banffshire and Buchan Coast</constituency>
+      </msp>
+      <msp>
+        <surname>Stewart</surname>
+        <name>Kevin</name>
+        <party>SNP</party>
+        <constituency>Aberdeen Central</constituency>
+      </msp>
+      <msp>
+        <surname>Sturgeon</surname>
+        <name>Nicola</name>
+        <party>SNP</party>
+        <constituency>Glasgow Southside</constituency>
+      </msp>
+      <msp>
+        <surname>Swinney</surname>
+        <name>John</name>
+        <party>SNP</party>
+        <constituency>Perthshire North</constituency>
+      </msp>
+      <msp>
+        <surname>Thompson</surname>
+        <name>Dave</name>
+        <party>SNP</party>
+        <constituency>Skye, Lochaber and Badenoch</constituency>
+      </msp>
+      <msp>
+        <surname>Torrance</surname>
+        <name>David</name>
+        <party>SNP</party>
+        <constituency>Kirkcaldy</constituency>
+      </msp>
+      <msp>
+        <surname>Urquhart</surname>
+        <name>Jean</name>
+        <party>Ind</party>
+        <constituency>Highlands and Islands</constituency>
+      </msp>
+      <msp>
+        <surname>Wheelhouse</surname>
+        <name>Paul</name>
+        <party>SNP</party>
+        <constituency>South Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>White</surname>
+        <name>Sandra</name>
+        <party>SNP</party>
+        <constituency>Glasgow Kelvin</constituency>
+      </msp>
+      <msp>
+        <surname>Wilson</surname>
+        <name>John</name>
+        <party>SNP</party>
+        <constituency>Central Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>Yousaf</surname>
+        <name>Humza</name>
+        <party>SNP</party>
+        <constituency>Glasgow</constituency>
+      </msp>
+    </against>
+  </law>
+  <law>
+    <type>amendment</type>
+    <id>S4M-06766.3</id>
+    <date>30 May 2013</date>
+    <surname>Tavish</surname>
+    <name>Scott</name>
+    <topic>transforming Scotland’s railways</topic>
+    <agreed>disagreed</agreed>
+    <for>
+      <msp>
+        <surname>Baillie</surname>
+        <name>Jackie</name>
+        <party>Lab</party>
+        <constituency>Dumbarton</constituency>
+      </msp>
+      <msp>
+        <surname>Baker</surname>
+        <name>Claire</name>
+        <party>Lab</party>
+        <constituency>Mid Scotland and Fife</constituency>
+      </msp>
+      <msp>
+        <surname>Baker</surname>
+        <name>Richard</name>
+        <party>Lab</party>
+        <constituency>North East Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>Baxter</surname>
+        <name>Jayne</name>
+        <party>Lab</party>
+        <constituency>Mid Scotland and Fife</constituency>
+      </msp>
+      <msp>
+        <surname>Beamish</surname>
+        <name>Claudia</name>
+        <party>Lab</party>
+        <constituency>South Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>Bibby</surname>
+        <name>Neil</name>
+        <party>Lab</party>
+        <constituency>West Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>Boyack</surname>
+        <name>Sarah</name>
+        <party>Lab</party>
+        <constituency>Lothian</constituency>
+      </msp>
+      <msp>
+        <surname>Brown</surname>
+        <name>Gavin</name>
+        <party>Con</party>
+        <constituency>Lothian</constituency>
+      </msp>
+      <msp>
+        <surname>Carlaw</surname>
+        <name>Jackson</name>
+        <party>Con</party>
+        <constituency>West Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>Chisholm</surname>
+        <name>Malcolm</name>
+        <party>Lab</party>
+        <constituency>Edinburgh Northern and Leith</constituency>
+      </msp>
+      <msp>
+        <surname>Davidson</surname>
+        <name>Ruth</name>
+        <party>Con</party>
+        <constituency>Glasgow</constituency>
+      </msp>
+      <msp>
+        <surname>Dugdale</surname>
+        <name>Kezia</name>
+        <party>Lab</party>
+        <constituency>Lothian</constituency>
+      </msp>
+      <msp>
+        <surname>Fee</surname>
+        <name>Mary</name>
+        <party>Lab</party>
+        <constituency>West Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>Ferguson</surname>
+        <name>Patricia</name>
+        <party>Lab</party>
+        <constituency>Glasgow Maryhill and Springburn</constituency>
+      </msp>
+      <msp>
+        <surname>Findlay</surname>
+        <name>Neil</name>
+        <party>Lab</party>
+        <constituency>Lothian</constituency>
+      </msp>
+      <msp>
+        <surname>Fraser</surname>
+        <name>Murdo</name>
+        <party>Con</party>
+        <constituency>Mid Scotland and Fife</constituency>
+      </msp>
+      <msp>
+        <surname>Grant</surname>
+        <name>Rhoda</name>
+        <party>Lab</party>
+        <constituency>Highlands and Islands</constituency>
+      </msp>
+      <msp>
+        <surname>Gray</surname>
+        <name>Iain</name>
+        <party>Lab</party>
+        <constituency>East Lothian</constituency>
+      </msp>
+      <msp>
+        <surname>Griffin</surname>
+        <name>Mark</name>
+        <party>Lab</party>
+        <constituency>Central Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>Harvie</surname>
+        <name>Patrick</name>
+        <party>Green</party>
+        <constituency>Glasgow</constituency>
+      </msp>
+      <msp>
+        <surname>Henry</surname>
+        <name>Hugh</name>
+        <party>Lab</party>
+        <constituency>Renfrewshire South</constituency>
+      </msp>
+      <msp>
+        <surname>Hume</surname>
+        <name>Jim</name>
+        <party>LD</party>
+        <constituency>South Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>Johnstone</surname>
+        <name>Alex</name>
+        <party>Con</party>
+        <constituency>North East Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>Johnstone</surname>
+        <name>Alison</name>
+        <party>Green</party>
+        <constituency>Lothian</constituency>
+      </msp>
+      <msp>
+        <surname>Kelly</surname>
+        <name>James</name>
+        <party>Lab</party>
+        <constituency>Rutherglen</constituency>
+      </msp>
+      <msp>
+        <surname>Lamont</surname>
+        <name>Johann</name>
+        <party>Lab</party>
+        <constituency>Glasgow Pollok</constituency>
+      </msp>
+      <msp>
+        <surname>Lamont</surname>
+        <name>John</name>
+        <party>Con</party>
+        <constituency>Ettrick, Roxburgh and Berwickshire</constituency>
+      </msp>
+      <msp>
+        <surname>Macintosh</surname>
+        <name>Ken</name>
+        <party>Lab</party>
+        <constituency>Eastwood</constituency>
+      </msp>
+      <msp>
+        <surname>Malik</surname>
+        <name>Hanzala</name>
+        <party>Lab</party>
+        <constituency>Glasgow</constituency>
+      </msp>
+      <msp>
+        <surname>Marra</surname>
+        <name>Jenny</name>
+        <party>Lab</party>
+        <constituency>North East Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>Martin</surname>
+        <name>Paul</name>
+        <party>Lab</party>
+        <constituency>Glasgow Provan</constituency>
+      </msp>
+      <msp>
+        <surname>McArthur</surname>
+        <name>Liam</name>
+        <party>LD</party>
+        <constituency>Orkney Islands</constituency>
+      </msp>
+      <msp>
+        <surname>McCulloch</surname>
+        <name>Margaret</name>
+        <party>Lab</party>
+        <constituency>Central Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>McDougall</surname>
+        <name>Margaret</name>
+        <party>Lab</party>
+        <constituency>West Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>McGrigor</surname>
+        <name>Jamie</name>
+        <party>Con</party>
+        <constituency>Highlands and Islands</constituency>
+      </msp>
+      <msp>
+        <surname>McInnes</surname>
+        <name>Alison</name>
+        <party>LD</party>
+        <constituency>North East Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>McMahon</surname>
+        <name>Michael</name>
+        <party>Lab</party>
+        <constituency>Uddingston and Bellshill</constituency>
+      </msp>
+      <msp>
+        <surname>McMahon</surname>
+        <name>Siobhan</name>
+        <party>Lab</party>
+        <constituency>Central Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>McTaggart</surname>
+        <name>Anne</name>
+        <party>Lab</party>
+        <constituency>Glasgow</constituency>
+      </msp>
+      <msp>
+        <surname>Milne</surname>
+        <name>Nanette</name>
+        <party>Con</party>
+        <constituency>North East Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>Mitchell</surname>
+        <name>Margaret</name>
+        <party>Con</party>
+        <constituency>Central Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>Murray</surname>
+        <name>Elaine</name>
+        <party>Lab</party>
+        <constituency>Dumfriesshire</constituency>
+      </msp>
+      <msp>
+        <surname>Pearson</surname>
+        <name>Graeme</name>
+        <party>Lab</party>
+        <constituency>South Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>Pentland</surname>
+        <name>John</name>
+        <party>Lab</party>
+        <constituency>Motherwell and Wishaw</constituency>
+      </msp>
+      <msp>
+        <surname>Rennie</surname>
+        <name>Willie</name>
+        <party>LD</party>
+        <constituency>Mid Scotland and Fife</constituency>
+      </msp>
+      <msp>
+        <surname>Scanlon</surname>
+        <name>Mary</name>
+        <party>Con</party>
+        <constituency>Highlands and Islands</constituency>
+      </msp>
+      <msp>
+        <surname>Scott</surname>
+        <name>John</name>
+        <party>Con</party>
+        <constituency>Ayr</constituency>
+      </msp>
+      <msp>
+        <surname>Scott</surname>
+        <name>Tavish</name>
+        <party>LD</party>
+        <constituency>Shetland Islands</constituency>
+      </msp>
+      <msp>
+        <surname>Smith</surname>
+        <name>Drew</name>
+        <party>Lab</party>
+        <constituency>Glasgow</constituency>
+      </msp>
+    </for>
+    <against>
+      <msp>
+        <surname>Adam</surname>
+        <name>George</name>
+        <party>SNP</party>
+        <constituency>Paisley</constituency>
+      </msp>
+      <msp>
+        <surname>Adamson</surname>
+        <name>Clare</name>
+        <party>SNP</party>
+        <constituency>Central Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>Allan</surname>
+        <name>Dr</name>
+        <party>Na h-Eileanan an Iar</party>
+        <constituency>Alasdair</constituency>
+      </msp>
+      <msp>
+        <surname>Allard</surname>
+        <name>Christian</name>
+        <party>SNP</party>
+        <constituency>North East Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>Beattie</surname>
+        <name>Colin</name>
+        <party>SNP</party>
+        <constituency>Midlothian North and Musselburgh</constituency>
+      </msp>
+      <msp>
+        <surname>Biagi</surname>
+        <name>Marco</name>
+        <party>SNP</party>
+        <constituency>Edinburgh Central</constituency>
+      </msp>
+      <msp>
+        <surname>Brodie</surname>
+        <name>Chic</name>
+        <party>SNP</party>
+        <constituency>South Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>Brown</surname>
+        <name>Keith</name>
+        <party>SNP</party>
+        <constituency>Clackmannanshire and Dunblane</constituency>
+      </msp>
+      <msp>
+        <surname>Burgess</surname>
+        <name>Margaret</name>
+        <party>SNP</party>
+        <constituency>Cunninghame South</constituency>
+      </msp>
+      <msp>
+        <surname>Campbell</surname>
+        <name>Aileen</name>
+        <party>SNP</party>
+        <constituency>Clydesdale</constituency>
+      </msp>
+      <msp>
+        <surname>Campbell</surname>
+        <name>Roderick</name>
+        <party>SNP</party>
+        <constituency>North East Fife</constituency>
+      </msp>
+      <msp>
+        <surname>Coffey</surname>
+        <name>Willie</name>
+        <party>SNP</party>
+        <constituency>Kilmarnock and Irvine Valley</constituency>
+      </msp>
+      <msp>
+        <surname>Crawford</surname>
+        <name>Bruce</name>
+        <party>SNP</party>
+        <constituency>Stirling</constituency>
+      </msp>
+      <msp>
+        <surname>Cunningham</surname>
+        <name>Roseanna</name>
+        <party>SNP</party>
+        <constituency>Perthshire South and Kinross-shire</constituency>
+      </msp>
+      <msp>
+        <surname>Dey</surname>
+        <name>Graeme</name>
+        <party>SNP</party>
+        <constituency>Angus South</constituency>
+      </msp>
+      <msp>
+        <surname>Don</surname>
+        <name>Nigel</name>
+        <party>SNP</party>
+        <constituency>Angus North and Mearns</constituency>
+      </msp>
+      <msp>
+        <surname>Doris</surname>
+        <name>Bob</name>
+        <party>SNP</party>
+        <constituency>Glasgow</constituency>
+      </msp>
+      <msp>
+        <surname>Dornan</surname>
+        <name>James</name>
+        <party>SNP</party>
+        <constituency>Glasgow Cathcart</constituency>
+      </msp>
+      <msp>
+        <surname>Eadie</surname>
+        <name>Jim</name>
+        <party>SNP</party>
+        <constituency>Edinburgh Southern</constituency>
+      </msp>
+      <msp>
+        <surname>Ewing</surname>
+        <name>Annabelle</name>
+        <party>SNP</party>
+        <constituency>Mid Scotland and Fife</constituency>
+      </msp>
+      <msp>
+        <surname>Ewing</surname>
+        <name>Fergus</name>
+        <party>SNP</party>
+        <constituency>Inverness and Nairn</constituency>
+      </msp>
+      <msp>
+        <surname>Finnie</surname>
+        <name>John</name>
+        <party>Ind</party>
+        <constituency>Highlands and Islands</constituency>
+      </msp>
+      <msp>
+        <surname>FitzPatrick</surname>
+        <name>Joe</name>
+        <party>SNP</party>
+        <constituency>Dundee City West</constituency>
+      </msp>
+      <msp>
+        <surname>Gibson</surname>
+        <name>Kenneth</name>
+        <party>SNP</party>
+        <constituency>Cunninghame North</constituency>
+      </msp>
+      <msp>
+        <surname>Gibson</surname>
+        <name>Rob</name>
+        <party>SNP</party>
+        <constituency>Caithness, Sutherland and Ross</constituency>
+      </msp>
+      <msp>
+        <surname>Grahame</surname>
+        <name>Christine</name>
+        <party>SNP</party>
+        <constituency>Midlothian South, Tweeddale and Lauderdale</constituency>
+      </msp>
+      <msp>
+        <surname>Hepburn</surname>
+        <name>Jamie</name>
+        <party>SNP</party>
+        <constituency>Cumbernauld and Kilsyth</constituency>
+      </msp>
+      <msp>
+        <surname>Keir</surname>
+        <name>Colin</name>
+        <party>SNP</party>
+        <constituency>Edinburgh Western</constituency>
+      </msp>
+      <msp>
+        <surname>Kidd</surname>
+        <name>Bill</name>
+        <party>SNP</party>
+        <constituency>Glasgow Anniesland</constituency>
+      </msp>
+      <msp>
+        <surname>Lochhead</surname>
+        <name>Richard</name>
+        <party>SNP</party>
+        <constituency>Moray</constituency>
+      </msp>
+      <msp>
+        <surname>Lyle</surname>
+        <name>Richard</name>
+        <party>SNP</party>
+        <constituency>Central Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>MacAskill</surname>
+        <name>Kenny</name>
+        <party>SNP</party>
+        <constituency>Edinburgh Eastern</constituency>
+      </msp>
+      <msp>
+        <surname>MacDonald</surname>
+        <name>Angus</name>
+        <party>SNP</party>
+        <constituency>Falkirk East</constituency>
+      </msp>
+      <msp>
+        <surname>Mackay</surname>
+        <name>Derek</name>
+        <party>SNP</party>
+        <constituency>Renfrewshire North and West</constituency>
+      </msp>
+      <msp>
+        <surname>MacKenzie</surname>
+        <name>Mike</name>
+        <party>SNP</party>
+        <constituency>Highlands and Islands</constituency>
+      </msp>
+      <msp>
+        <surname>Mason</surname>
+        <name>John</name>
+        <party>SNP</party>
+        <constituency>Glasgow Shettleston</constituency>
+      </msp>
+      <msp>
+        <surname>Matheson</surname>
+        <name>Michael</name>
+        <party>SNP</party>
+        <constituency>Falkirk West</constituency>
+      </msp>
+      <msp>
+        <surname>Maxwell</surname>
+        <name>Stewart</name>
+        <party>SNP</party>
+        <constituency>West Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>McAlpine</surname>
+        <name>Joan</name>
+        <party>SNP</party>
+        <constituency>South Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>McKelvie</surname>
+        <name>Christina</name>
+        <party>SNP</party>
+        <constituency>Hamilton, Larkhall and Stonehouse</constituency>
+      </msp>
+      <msp>
+        <surname>McLeod</surname>
+        <name>Aileen</name>
+        <party>SNP</party>
+        <constituency>South Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>McLeod</surname>
+        <name>Fiona</name>
+        <party>SNP</party>
+        <constituency>Strathkelvin and Bearsden</constituency>
+      </msp>
+      <msp>
+        <surname>McMillan</surname>
+        <name>Stuart</name>
+        <party>SNP</party>
+        <constituency>West Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>Neil</surname>
+        <name>Alex</name>
+        <party>SNP</party>
+        <constituency>Airdrie and Shotts</constituency>
+      </msp>
+      <msp>
+        <surname>Paterson</surname>
+        <name>Gil</name>
+        <party>SNP</party>
+        <constituency>Clydebank and Milngavie</constituency>
+      </msp>
+      <msp>
+        <surname>Robertson</surname>
+        <name>Dennis</name>
+        <party>SNP</party>
+        <constituency>Aberdeenshire West</constituency>
+      </msp>
+      <msp>
+        <surname>Robison</surname>
+        <name>Shona</name>
+        <party>SNP</party>
+        <constituency>Dundee City East</constituency>
+      </msp>
+      <msp>
+        <surname>Russell</surname>
+        <name>Michael</name>
+        <party>SNP</party>
+        <constituency>Argyll and Bute</constituency>
+      </msp>
+      <msp>
+        <surname>Salmond</surname>
+        <name>Alex</name>
+        <party>SNP</party>
+        <constituency>Aberdeenshire East</constituency>
+      </msp>
+      <msp>
+        <surname>Stevenson</surname>
+        <name>Stewart</name>
+        <party>SNP</party>
+        <constituency>Banffshire and Buchan Coast</constituency>
+      </msp>
+      <msp>
+        <surname>Stewart</surname>
+        <name>Kevin</name>
+        <party>SNP</party>
+        <constituency>Aberdeen Central</constituency>
+      </msp>
+      <msp>
+        <surname>Sturgeon</surname>
+        <name>Nicola</name>
+        <party>SNP</party>
+        <constituency>Glasgow Southside</constituency>
+      </msp>
+      <msp>
+        <surname>Swinney</surname>
+        <name>John</name>
+        <party>SNP</party>
+        <constituency>Perthshire North</constituency>
+      </msp>
+      <msp>
+        <surname>Thompson</surname>
+        <name>Dave</name>
+        <party>SNP</party>
+        <constituency>Skye, Lochaber and Badenoch</constituency>
+      </msp>
+      <msp>
+        <surname>Torrance</surname>
+        <name>David</name>
+        <party>SNP</party>
+        <constituency>Kirkcaldy</constituency>
+      </msp>
+      <msp>
+        <surname>Urquhart</surname>
+        <name>Jean</name>
+        <party>Ind</party>
+        <constituency>Highlands and Islands</constituency>
+      </msp>
+      <msp>
+        <surname>Wheelhouse</surname>
+        <name>Paul</name>
+        <party>SNP</party>
+        <constituency>South Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>White</surname>
+        <name>Sandra</name>
+        <party>SNP</party>
+        <constituency>Glasgow Kelvin</constituency>
+      </msp>
+      <msp>
+        <surname>Wilson</surname>
+        <name>John</name>
+        <party>SNP</party>
+        <constituency>Central Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>Yousaf</surname>
+        <name>Humza</name>
+        <party>SNP</party>
+        <constituency>Glasgow</constituency>
+      </msp>
+    </against>
+  </law>
+  <law>
+    <type>amendment</type>
+    <id>S4M-06766.4</id>
+    <date>30 May 2013</date>
+    <surname>Patrick</surname>
+    <name>Harvie</name>
+    <topic>transforming Scotland’s railways</topic>
+    <agreed>disagreed</agreed>
+    <for>
+      <msp>
+        <surname>Finnie</surname>
+        <name>John</name>
+        <party>Ind</party>
+        <constituency>Highlands and Islands</constituency>
+      </msp>
+      <msp>
+        <surname>Harvie</surname>
+        <name>Patrick</name>
+        <party>Green</party>
+        <constituency>Glasgow</constituency>
+      </msp>
+      <msp>
+        <surname>Johnstone</surname>
+        <name>Alison</name>
+        <party>Green</party>
+        <constituency>Lothian</constituency>
+      </msp>
+      <msp>
+        <surname>Urquhart</surname>
+        <name>Jean</name>
+        <party>Ind</party>
+        <constituency>Highlands and Islands</constituency>
+      </msp>
+    </for>
+    <against>
+      <msp>
+        <surname>Adam</surname>
+        <name>George</name>
+        <party>SNP</party>
+        <constituency>Paisley</constituency>
+      </msp>
+      <msp>
+        <surname>Adamson</surname>
+        <name>Clare</name>
+        <party>SNP</party>
+        <constituency>Central Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>Allan</surname>
+        <name>Dr</name>
+        <party>Na h-Eileanan an Iar</party>
+        <constituency>Alasdair</constituency>
+      </msp>
+      <msp>
+        <surname>Allard</surname>
+        <name>Christian</name>
+        <party>SNP</party>
+        <constituency>North East Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>Baillie</surname>
+        <name>Jackie</name>
+        <party>Lab</party>
+        <constituency>Dumbarton</constituency>
+      </msp>
+      <msp>
+        <surname>Baker</surname>
+        <name>Claire</name>
+        <party>Lab</party>
+        <constituency>Mid Scotland and Fife</constituency>
+      </msp>
+      <msp>
+        <surname>Baker</surname>
+        <name>Richard</name>
+        <party>Lab</party>
+        <constituency>North East Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>Baxter</surname>
+        <name>Jayne</name>
+        <party>Lab</party>
+        <constituency>Mid Scotland and Fife</constituency>
+      </msp>
+      <msp>
+        <surname>Beamish</surname>
+        <name>Claudia</name>
+        <party>Lab</party>
+        <constituency>South Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>Beattie</surname>
+        <name>Colin</name>
+        <party>SNP</party>
+        <constituency>Midlothian North and Musselburgh</constituency>
+      </msp>
+      <msp>
+        <surname>Biagi</surname>
+        <name>Marco</name>
+        <party>SNP</party>
+        <constituency>Edinburgh Central</constituency>
+      </msp>
+      <msp>
+        <surname>Bibby</surname>
+        <name>Neil</name>
+        <party>Lab</party>
+        <constituency>West Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>Boyack</surname>
+        <name>Sarah</name>
+        <party>Lab</party>
+        <constituency>Lothian</constituency>
+      </msp>
+      <msp>
+        <surname>Brodie</surname>
+        <name>Chic</name>
+        <party>SNP</party>
+        <constituency>South Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>Brown</surname>
+        <name>Gavin</name>
+        <party>Con</party>
+        <constituency>Lothian</constituency>
+      </msp>
+      <msp>
+        <surname>Brown</surname>
+        <name>Keith</name>
+        <party>SNP</party>
+        <constituency>Clackmannanshire and Dunblane</constituency>
+      </msp>
+      <msp>
+        <surname>Burgess</surname>
+        <name>Margaret</name>
+        <party>SNP</party>
+        <constituency>Cunninghame South</constituency>
+      </msp>
+      <msp>
+        <surname>Campbell</surname>
+        <name>Aileen</name>
+        <party>SNP</party>
+        <constituency>Clydesdale</constituency>
+      </msp>
+      <msp>
+        <surname>Campbell</surname>
+        <name>Roderick</name>
+        <party>SNP</party>
+        <constituency>North East Fife</constituency>
+      </msp>
+      <msp>
+        <surname>Carlaw</surname>
+        <name>Jackson</name>
+        <party>Con</party>
+        <constituency>West Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>Chisholm</surname>
+        <name>Malcolm</name>
+        <party>Lab</party>
+        <constituency>Edinburgh Northern and Leith</constituency>
+      </msp>
+      <msp>
+        <surname>Coffey</surname>
+        <name>Willie</name>
+        <party>SNP</party>
+        <constituency>Kilmarnock and Irvine Valley</constituency>
+      </msp>
+      <msp>
+        <surname>Crawford</surname>
+        <name>Bruce</name>
+        <party>SNP</party>
+        <constituency>Stirling</constituency>
+      </msp>
+      <msp>
+        <surname>Cunningham</surname>
+        <name>Roseanna</name>
+        <party>SNP</party>
+        <constituency>Perthshire South and Kinross-shire</constituency>
+      </msp>
+      <msp>
+        <surname>Davidson</surname>
+        <name>Ruth</name>
+        <party>Con</party>
+        <constituency>Glasgow</constituency>
+      </msp>
+      <msp>
+        <surname>Dey</surname>
+        <name>Graeme</name>
+        <party>SNP</party>
+        <constituency>Angus South</constituency>
+      </msp>
+      <msp>
+        <surname>Don</surname>
+        <name>Nigel</name>
+        <party>SNP</party>
+        <constituency>Angus North and Mearns</constituency>
+      </msp>
+      <msp>
+        <surname>Doris</surname>
+        <name>Bob</name>
+        <party>SNP</party>
+        <constituency>Glasgow</constituency>
+      </msp>
+      <msp>
+        <surname>Dornan</surname>
+        <name>James</name>
+        <party>SNP</party>
+        <constituency>Glasgow Cathcart</constituency>
+      </msp>
+      <msp>
+        <surname>Dugdale</surname>
+        <name>Kezia</name>
+        <party>Lab</party>
+        <constituency>Lothian</constituency>
+      </msp>
+      <msp>
+        <surname>Eadie</surname>
+        <name>Jim</name>
+        <party>SNP</party>
+        <constituency>Edinburgh Southern</constituency>
+      </msp>
+      <msp>
+        <surname>Ewing</surname>
+        <name>Annabelle</name>
+        <party>SNP</party>
+        <constituency>Mid Scotland and Fife</constituency>
+      </msp>
+      <msp>
+        <surname>Ewing</surname>
+        <name>Fergus</name>
+        <party>SNP</party>
+        <constituency>Inverness and Nairn</constituency>
+      </msp>
+      <msp>
+        <surname>Fee</surname>
+        <name>Mary</name>
+        <party>Lab</party>
+        <constituency>West Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>Ferguson</surname>
+        <name>Patricia</name>
+        <party>Lab</party>
+        <constituency>Glasgow Maryhill and Springburn</constituency>
+      </msp>
+      <msp>
+        <surname>Findlay</surname>
+        <name>Neil</name>
+        <party>Lab</party>
+        <constituency>Lothian</constituency>
+      </msp>
+      <msp>
+        <surname>FitzPatrick</surname>
+        <name>Joe</name>
+        <party>SNP</party>
+        <constituency>Dundee City West</constituency>
+      </msp>
+      <msp>
+        <surname>Fraser</surname>
+        <name>Murdo</name>
+        <party>Con</party>
+        <constituency>Mid Scotland and Fife</constituency>
+      </msp>
+      <msp>
+        <surname>Gibson</surname>
+        <name>Kenneth</name>
+        <party>SNP</party>
+        <constituency>Cunninghame North</constituency>
+      </msp>
+      <msp>
+        <surname>Gibson</surname>
+        <name>Rob</name>
+        <party>SNP</party>
+        <constituency>Caithness, Sutherland and Ross</constituency>
+      </msp>
+      <msp>
+        <surname>Grahame</surname>
+        <name>Christine</name>
+        <party>SNP</party>
+        <constituency>Midlothian South, Tweeddale and Lauderdale</constituency>
+      </msp>
+      <msp>
+        <surname>Grant</surname>
+        <name>Rhoda</name>
+        <party>Lab</party>
+        <constituency>Highlands and Islands</constituency>
+      </msp>
+      <msp>
+        <surname>Gray</surname>
+        <name>Iain</name>
+        <party>Lab</party>
+        <constituency>East Lothian</constituency>
+      </msp>
+      <msp>
+        <surname>Griffin</surname>
+        <name>Mark</name>
+        <party>Lab</party>
+        <constituency>Central Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>Henry</surname>
+        <name>Hugh</name>
+        <party>Lab</party>
+        <constituency>Renfrewshire South</constituency>
+      </msp>
+      <msp>
+        <surname>Hepburn</surname>
+        <name>Jamie</name>
+        <party>SNP</party>
+        <constituency>Cumbernauld and Kilsyth</constituency>
+      </msp>
+      <msp>
+        <surname>Hume</surname>
+        <name>Jim</name>
+        <party>LD</party>
+        <constituency>South Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>Johnstone</surname>
+        <name>Alex</name>
+        <party>Con</party>
+        <constituency>North East Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>Keir</surname>
+        <name>Colin</name>
+        <party>SNP</party>
+        <constituency>Edinburgh Western</constituency>
+      </msp>
+      <msp>
+        <surname>Kelly</surname>
+        <name>James</name>
+        <party>Lab</party>
+        <constituency>Rutherglen</constituency>
+      </msp>
+      <msp>
+        <surname>Kidd</surname>
+        <name>Bill</name>
+        <party>SNP</party>
+        <constituency>Glasgow Anniesland</constituency>
+      </msp>
+      <msp>
+        <surname>Lamont</surname>
+        <name>Johann</name>
+        <party>Lab</party>
+        <constituency>Glasgow Pollok</constituency>
+      </msp>
+      <msp>
+        <surname>Lamont</surname>
+        <name>John</name>
+        <party>Con</party>
+        <constituency>Ettrick, Roxburgh and Berwickshire</constituency>
+      </msp>
+      <msp>
+        <surname>Lochhead</surname>
+        <name>Richard</name>
+        <party>SNP</party>
+        <constituency>Moray</constituency>
+      </msp>
+      <msp>
+        <surname>Lyle</surname>
+        <name>Richard</name>
+        <party>SNP</party>
+        <constituency>Central Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>MacAskill</surname>
+        <name>Kenny</name>
+        <party>SNP</party>
+        <constituency>Edinburgh Eastern</constituency>
+      </msp>
+      <msp>
+        <surname>MacDonald</surname>
+        <name>Angus</name>
+        <party>SNP</party>
+        <constituency>Falkirk East</constituency>
+      </msp>
+      <msp>
+        <surname>Macintosh</surname>
+        <name>Ken</name>
+        <party>Lab</party>
+        <constituency>Eastwood</constituency>
+      </msp>
+      <msp>
+        <surname>Mackay</surname>
+        <name>Derek</name>
+        <party>SNP</party>
+        <constituency>Renfrewshire North and West</constituency>
+      </msp>
+      <msp>
+        <surname>MacKenzie</surname>
+        <name>Mike</name>
+        <party>SNP</party>
+        <constituency>Highlands and Islands</constituency>
+      </msp>
+      <msp>
+        <surname>Malik</surname>
+        <name>Hanzala</name>
+        <party>Lab</party>
+        <constituency>Glasgow</constituency>
+      </msp>
+      <msp>
+        <surname>Marra</surname>
+        <name>Jenny</name>
+        <party>Lab</party>
+        <constituency>North East Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>Martin</surname>
+        <name>Paul</name>
+        <party>Lab</party>
+        <constituency>Glasgow Provan</constituency>
+      </msp>
+      <msp>
+        <surname>Mason</surname>
+        <name>John</name>
+        <party>SNP</party>
+        <constituency>Glasgow Shettleston</constituency>
+      </msp>
+      <msp>
+        <surname>Matheson</surname>
+        <name>Michael</name>
+        <party>SNP</party>
+        <constituency>Falkirk West</constituency>
+      </msp>
+      <msp>
+        <surname>Maxwell</surname>
+        <name>Stewart</name>
+        <party>SNP</party>
+        <constituency>West Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>McAlpine</surname>
+        <name>Joan</name>
+        <party>SNP</party>
+        <constituency>South Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>McArthur</surname>
+        <name>Liam</name>
+        <party>LD</party>
+        <constituency>Orkney Islands</constituency>
+      </msp>
+      <msp>
+        <surname>McCulloch</surname>
+        <name>Margaret</name>
+        <party>Lab</party>
+        <constituency>Central Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>McDougall</surname>
+        <name>Margaret</name>
+        <party>Lab</party>
+        <constituency>West Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>McGrigor</surname>
+        <name>Jamie</name>
+        <party>Con</party>
+        <constituency>Highlands and Islands</constituency>
+      </msp>
+      <msp>
+        <surname>McInnes</surname>
+        <name>Alison</name>
+        <party>LD</party>
+        <constituency>North East Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>McKelvie</surname>
+        <name>Christina</name>
+        <party>SNP</party>
+        <constituency>Hamilton, Larkhall and Stonehouse</constituency>
+      </msp>
+      <msp>
+        <surname>McLeod</surname>
+        <name>Aileen</name>
+        <party>SNP</party>
+        <constituency>South Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>McLeod</surname>
+        <name>Fiona</name>
+        <party>SNP</party>
+        <constituency>Strathkelvin and Bearsden</constituency>
+      </msp>
+      <msp>
+        <surname>McMahon</surname>
+        <name>Michael</name>
+        <party>Lab</party>
+        <constituency>Uddingston and Bellshill</constituency>
+      </msp>
+      <msp>
+        <surname>McMahon</surname>
+        <name>Siobhan</name>
+        <party>Lab</party>
+        <constituency>Central Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>McMillan</surname>
+        <name>Stuart</name>
+        <party>SNP</party>
+        <constituency>West Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>McTaggart</surname>
+        <name>Anne</name>
+        <party>Lab</party>
+        <constituency>Glasgow</constituency>
+      </msp>
+      <msp>
+        <surname>Milne</surname>
+        <name>Nanette</name>
+        <party>Con</party>
+        <constituency>North East Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>Mitchell</surname>
+        <name>Margaret</name>
+        <party>Con</party>
+        <constituency>Central Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>Murray</surname>
+        <name>Elaine</name>
+        <party>Lab</party>
+        <constituency>Dumfriesshire</constituency>
+      </msp>
+      <msp>
+        <surname>Neil</surname>
+        <name>Alex</name>
+        <party>SNP</party>
+        <constituency>Airdrie and Shotts</constituency>
+      </msp>
+      <msp>
+        <surname>Paterson</surname>
+        <name>Gil</name>
+        <party>SNP</party>
+        <constituency>Clydebank and Milngavie</constituency>
+      </msp>
+      <msp>
+        <surname>Pearson</surname>
+        <name>Graeme</name>
+        <party>Lab</party>
+        <constituency>South Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>Pentland</surname>
+        <name>John</name>
+        <party>Lab</party>
+        <constituency>Motherwell and Wishaw</constituency>
+      </msp>
+      <msp>
+        <surname>Rennie</surname>
+        <name>Willie</name>
+        <party>LD</party>
+        <constituency>Mid Scotland and Fife</constituency>
+      </msp>
+      <msp>
+        <surname>Robertson</surname>
+        <name>Dennis</name>
+        <party>SNP</party>
+        <constituency>Aberdeenshire West</constituency>
+      </msp>
+      <msp>
+        <surname>Robison</surname>
+        <name>Shona</name>
+        <party>SNP</party>
+        <constituency>Dundee City East</constituency>
+      </msp>
+      <msp>
+        <surname>Russell</surname>
+        <name>Michael</name>
+        <party>SNP</party>
+        <constituency>Argyll and Bute</constituency>
+      </msp>
+      <msp>
+        <surname>Salmond</surname>
+        <name>Alex</name>
+        <party>SNP</party>
+        <constituency>Aberdeenshire East</constituency>
+      </msp>
+      <msp>
+        <surname>Scanlon</surname>
+        <name>Mary</name>
+        <party>Con</party>
+        <constituency>Highlands and Islands</constituency>
+      </msp>
+      <msp>
+        <surname>Scott</surname>
+        <name>John</name>
+        <party>Con</party>
+        <constituency>Ayr</constituency>
+      </msp>
+      <msp>
+        <surname>Scott</surname>
+        <name>Tavish</name>
+        <party>LD</party>
+        <constituency>Shetland Islands</constituency>
+      </msp>
+      <msp>
+        <surname>Smith</surname>
+        <name>Drew</name>
+        <party>Lab</party>
+        <constituency>Glasgow</constituency>
+      </msp>
+      <msp>
+        <surname>Stevenson</surname>
+        <name>Stewart</name>
+        <party>SNP</party>
+        <constituency>Banffshire and Buchan Coast</constituency>
+      </msp>
+      <msp>
+        <surname>Stewart</surname>
+        <name>Kevin</name>
+        <party>SNP</party>
+        <constituency>Aberdeen Central</constituency>
+      </msp>
+      <msp>
+        <surname>Sturgeon</surname>
+        <name>Nicola</name>
+        <party>SNP</party>
+        <constituency>Glasgow Southside</constituency>
+      </msp>
+      <msp>
+        <surname>Swinney</surname>
+        <name>John</name>
+        <party>SNP</party>
+        <constituency>Perthshire North</constituency>
+      </msp>
+      <msp>
+        <surname>Thompson</surname>
+        <name>Dave</name>
+        <party>SNP</party>
+        <constituency>Skye, Lochaber and Badenoch</constituency>
+      </msp>
+      <msp>
+        <surname>Torrance</surname>
+        <name>David</name>
+        <party>SNP</party>
+        <constituency>Kirkcaldy</constituency>
+      </msp>
+      <msp>
+        <surname>Wheelhouse</surname>
+        <name>Paul</name>
+        <party>SNP</party>
+        <constituency>South Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>White</surname>
+        <name>Sandra</name>
+        <party>SNP</party>
+        <constituency>Glasgow Kelvin</constituency>
+      </msp>
+      <msp>
+        <surname>Wilson</surname>
+        <name>John</name>
+        <party>SNP</party>
+        <constituency>Central Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>Yousaf</surname>
+        <name>Humza</name>
+        <party>SNP</party>
+        <constituency>Glasgow</constituency>
+      </msp>
+    </against>
+  </law>
+  <law>
+    <type>motion</type>
+    <id>S4M-06766</id>
+    <date>30 May 2013</date>
+    <surname>Keith</surname>
+    <name>Brown</name>
+    <topic>transforming Scotland’s railways</topic>
+    <text>That the Parliament notes record passenger numbers of 83.3 million on Scotland’s railways, high levels of passenger satisfaction and improved performance; recognises the benefits of a collaborative approach by the Scottish Government and industry in achieving value for money for passengers and the taxpayer; commends the Scottish Government’s action to make fares fairer by reducing anomalies; welcomes the measures to reduce pressures on hard-pressed household budgets while still investing to enhance services, improve stations and build new stations; acknowledges the measured approach taken by the Scottish Government to refranchising and welcomes franchise specifications that will better meet the needs of the people of Scotland, and acknowledges that, although further improvements will always be necessary, significant investment has been made by the Scottish Government in rail to support communities, improve connectivity, reduce car use and encourage sustainable economic growth.</text>
+    <agreed>agreed</agreed>
+    <for>
+      <msp>
+        <surname>Adam</surname>
+        <name>George</name>
+        <party>SNP</party>
+        <constituency>Paisley</constituency>
+      </msp>
+      <msp>
+        <surname>Adamson</surname>
+        <name>Clare</name>
+        <party>SNP</party>
+        <constituency>Central Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>Allan</surname>
+        <name>Dr</name>
+        <party>Na h-Eileanan an Iar</party>
+        <constituency>Alasdair</constituency>
+      </msp>
+      <msp>
+        <surname>Allard</surname>
+        <name>Christian</name>
+        <party>SNP</party>
+        <constituency>North East Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>Beattie</surname>
+        <name>Colin</name>
+        <party>SNP</party>
+        <constituency>Midlothian North and Musselburgh</constituency>
+      </msp>
+      <msp>
+        <surname>Biagi</surname>
+        <name>Marco</name>
+        <party>SNP</party>
+        <constituency>Edinburgh Central</constituency>
+      </msp>
+      <msp>
+        <surname>Brodie</surname>
+        <name>Chic</name>
+        <party>SNP</party>
+        <constituency>South Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>Brown</surname>
+        <name>Keith</name>
+        <party>SNP</party>
+        <constituency>Clackmannanshire and Dunblane</constituency>
+      </msp>
+      <msp>
+        <surname>Burgess</surname>
+        <name>Margaret</name>
+        <party>SNP</party>
+        <constituency>Cunninghame South</constituency>
+      </msp>
+      <msp>
+        <surname>Campbell</surname>
+        <name>Aileen</name>
+        <party>SNP</party>
+        <constituency>Clydesdale</constituency>
+      </msp>
+      <msp>
+        <surname>Campbell</surname>
+        <name>Roderick</name>
+        <party>SNP</party>
+        <constituency>North East Fife</constituency>
+      </msp>
+      <msp>
+        <surname>Coffey</surname>
+        <name>Willie</name>
+        <party>SNP</party>
+        <constituency>Kilmarnock and Irvine Valley</constituency>
+      </msp>
+      <msp>
+        <surname>Crawford</surname>
+        <name>Bruce</name>
+        <party>SNP</party>
+        <constituency>Stirling</constituency>
+      </msp>
+      <msp>
+        <surname>Cunningham</surname>
+        <name>Roseanna</name>
+        <party>SNP</party>
+        <constituency>Perthshire South and Kinross-shire</constituency>
+      </msp>
+      <msp>
+        <surname>Dey</surname>
+        <name>Graeme</name>
+        <party>SNP</party>
+        <constituency>Angus South</constituency>
+      </msp>
+      <msp>
+        <surname>Don</surname>
+        <name>Nigel</name>
+        <party>SNP</party>
+        <constituency>Angus North and Mearns</constituency>
+      </msp>
+      <msp>
+        <surname>Doris</surname>
+        <name>Bob</name>
+        <party>SNP</party>
+        <constituency>Glasgow</constituency>
+      </msp>
+      <msp>
+        <surname>Dornan</surname>
+        <name>James</name>
+        <party>SNP</party>
+        <constituency>Glasgow Cathcart</constituency>
+      </msp>
+      <msp>
+        <surname>Eadie</surname>
+        <name>Jim</name>
+        <party>SNP</party>
+        <constituency>Edinburgh Southern</constituency>
+      </msp>
+      <msp>
+        <surname>Ewing</surname>
+        <name>Annabelle</name>
+        <party>SNP</party>
+        <constituency>Mid Scotland and Fife</constituency>
+      </msp>
+      <msp>
+        <surname>Ewing</surname>
+        <name>Fergus</name>
+        <party>SNP</party>
+        <constituency>Inverness and Nairn</constituency>
+      </msp>
+      <msp>
+        <surname>FitzPatrick</surname>
+        <name>Joe</name>
+        <party>SNP</party>
+        <constituency>Dundee City West</constituency>
+      </msp>
+      <msp>
+        <surname>Gibson</surname>
+        <name>Kenneth</name>
+        <party>SNP</party>
+        <constituency>Cunninghame North</constituency>
+      </msp>
+      <msp>
+        <surname>Gibson</surname>
+        <name>Rob</name>
+        <party>SNP</party>
+        <constituency>Caithness, Sutherland and Ross</constituency>
+      </msp>
+      <msp>
+        <surname>Grahame</surname>
+        <name>Christine</name>
+        <party>SNP</party>
+        <constituency>Midlothian South, Tweeddale and Lauderdale</constituency>
+      </msp>
+      <msp>
+        <surname>Hepburn</surname>
+        <name>Jamie</name>
+        <party>SNP</party>
+        <constituency>Cumbernauld and Kilsyth</constituency>
+      </msp>
+      <msp>
+        <surname>Keir</surname>
+        <name>Colin</name>
+        <party>SNP</party>
+        <constituency>Edinburgh Western</constituency>
+      </msp>
+      <msp>
+        <surname>Kidd</surname>
+        <name>Bill</name>
+        <party>SNP</party>
+        <constituency>Glasgow Anniesland</constituency>
+      </msp>
+      <msp>
+        <surname>Lochhead</surname>
+        <name>Richard</name>
+        <party>SNP</party>
+        <constituency>Moray</constituency>
+      </msp>
+      <msp>
+        <surname>Lyle</surname>
+        <name>Richard</name>
+        <party>SNP</party>
+        <constituency>Central Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>MacAskill</surname>
+        <name>Kenny</name>
+        <party>SNP</party>
+        <constituency>Edinburgh Eastern</constituency>
+      </msp>
+      <msp>
+        <surname>MacDonald</surname>
+        <name>Angus</name>
+        <party>SNP</party>
+        <constituency>Falkirk East</constituency>
+      </msp>
+      <msp>
+        <surname>Mackay</surname>
+        <name>Derek</name>
+        <party>SNP</party>
+        <constituency>Renfrewshire North and West</constituency>
+      </msp>
+      <msp>
+        <surname>MacKenzie</surname>
+        <name>Mike</name>
+        <party>SNP</party>
+        <constituency>Highlands and Islands</constituency>
+      </msp>
+      <msp>
+        <surname>Mason</surname>
+        <name>John</name>
+        <party>SNP</party>
+        <constituency>Glasgow Shettleston</constituency>
+      </msp>
+      <msp>
+        <surname>Matheson</surname>
+        <name>Michael</name>
+        <party>SNP</party>
+        <constituency>Falkirk West</constituency>
+      </msp>
+      <msp>
+        <surname>Maxwell</surname>
+        <name>Stewart</name>
+        <party>SNP</party>
+        <constituency>West Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>McAlpine</surname>
+        <name>Joan</name>
+        <party>SNP</party>
+        <constituency>South Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>McKelvie</surname>
+        <name>Christina</name>
+        <party>SNP</party>
+        <constituency>Hamilton, Larkhall and Stonehouse</constituency>
+      </msp>
+      <msp>
+        <surname>McLeod</surname>
+        <name>Aileen</name>
+        <party>SNP</party>
+        <constituency>South Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>McLeod</surname>
+        <name>Fiona</name>
+        <party>SNP</party>
+        <constituency>Strathkelvin and Bearsden</constituency>
+      </msp>
+      <msp>
+        <surname>McMillan</surname>
+        <name>Stuart</name>
+        <party>SNP</party>
+        <constituency>West Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>Neil</surname>
+        <name>Alex</name>
+        <party>SNP</party>
+        <constituency>Airdrie and Shotts</constituency>
+      </msp>
+      <msp>
+        <surname>Paterson</surname>
+        <name>Gil</name>
+        <party>SNP</party>
+        <constituency>Clydebank and Milngavie</constituency>
+      </msp>
+      <msp>
+        <surname>Robertson</surname>
+        <name>Dennis</name>
+        <party>SNP</party>
+        <constituency>Aberdeenshire West</constituency>
+      </msp>
+      <msp>
+        <surname>Robison</surname>
+        <name>Shona</name>
+        <party>SNP</party>
+        <constituency>Dundee City East</constituency>
+      </msp>
+      <msp>
+        <surname>Russell</surname>
+        <name>Michael</name>
+        <party>SNP</party>
+        <constituency>Argyll and Bute</constituency>
+      </msp>
+      <msp>
+        <surname>Salmond</surname>
+        <name>Alex</name>
+        <party>SNP</party>
+        <constituency>Aberdeenshire East</constituency>
+      </msp>
+      <msp>
+        <surname>Stevenson</surname>
+        <name>Stewart</name>
+        <party>SNP</party>
+        <constituency>Banffshire and Buchan Coast</constituency>
+      </msp>
+      <msp>
+        <surname>Stewart</surname>
+        <name>Kevin</name>
+        <party>SNP</party>
+        <constituency>Aberdeen Central</constituency>
+      </msp>
+      <msp>
+        <surname>Sturgeon</surname>
+        <name>Nicola</name>
+        <party>SNP</party>
+        <constituency>Glasgow Southside</constituency>
+      </msp>
+      <msp>
+        <surname>Swinney</surname>
+        <name>John</name>
+        <party>SNP</party>
+        <constituency>Perthshire North</constituency>
+      </msp>
+      <msp>
+        <surname>Thompson</surname>
+        <name>Dave</name>
+        <party>SNP</party>
+        <constituency>Skye, Lochaber and Badenoch</constituency>
+      </msp>
+      <msp>
+        <surname>Torrance</surname>
+        <name>David</name>
+        <party>SNP</party>
+        <constituency>Kirkcaldy</constituency>
+      </msp>
+      <msp>
+        <surname>Urquhart</surname>
+        <name>Jean</name>
+        <party>Ind</party>
+        <constituency>Highlands and Islands</constituency>
+      </msp>
+      <msp>
+        <surname>Wheelhouse</surname>
+        <name>Paul</name>
+        <party>SNP</party>
+        <constituency>South Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>White</surname>
+        <name>Sandra</name>
+        <party>SNP</party>
+        <constituency>Glasgow Kelvin</constituency>
+      </msp>
+      <msp>
+        <surname>Wilson</surname>
+        <name>John</name>
+        <party>SNP</party>
+        <constituency>Central Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>Yousaf</surname>
+        <name>Humza</name>
+        <party>SNP</party>
+        <constituency>Glasgow</constituency>
+      </msp>
+    </for>
+    <against>
+      <msp>
+        <surname>Baillie</surname>
+        <name>Jackie</name>
+        <party>Lab</party>
+        <constituency>Dumbarton</constituency>
+      </msp>
+      <msp>
+        <surname>Baker</surname>
+        <name>Claire</name>
+        <party>Lab</party>
+        <constituency>Mid Scotland and Fife</constituency>
+      </msp>
+      <msp>
+        <surname>Baker</surname>
+        <name>Richard</name>
+        <party>Lab</party>
+        <constituency>North East Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>Baxter</surname>
+        <name>Jayne</name>
+        <party>Lab</party>
+        <constituency>Mid Scotland and Fife</constituency>
+      </msp>
+      <msp>
+        <surname>Beamish</surname>
+        <name>Claudia</name>
+        <party>Lab</party>
+        <constituency>South Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>Bibby</surname>
+        <name>Neil</name>
+        <party>Lab</party>
+        <constituency>West Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>Boyack</surname>
+        <name>Sarah</name>
+        <party>Lab</party>
+        <constituency>Lothian</constituency>
+      </msp>
+      <msp>
+        <surname>Brown</surname>
+        <name>Gavin</name>
+        <party>Con</party>
+        <constituency>Lothian</constituency>
+      </msp>
+      <msp>
+        <surname>Carlaw</surname>
+        <name>Jackson</name>
+        <party>Con</party>
+        <constituency>West Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>Chisholm</surname>
+        <name>Malcolm</name>
+        <party>Lab</party>
+        <constituency>Edinburgh Northern and Leith</constituency>
+      </msp>
+      <msp>
+        <surname>Davidson</surname>
+        <name>Ruth</name>
+        <party>Con</party>
+        <constituency>Glasgow</constituency>
+      </msp>
+      <msp>
+        <surname>Dugdale</surname>
+        <name>Kezia</name>
+        <party>Lab</party>
+        <constituency>Lothian</constituency>
+      </msp>
+      <msp>
+        <surname>Fee</surname>
+        <name>Mary</name>
+        <party>Lab</party>
+        <constituency>West Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>Ferguson</surname>
+        <name>Patricia</name>
+        <party>Lab</party>
+        <constituency>Glasgow Maryhill and Springburn</constituency>
+      </msp>
+      <msp>
+        <surname>Findlay</surname>
+        <name>Neil</name>
+        <party>Lab</party>
+        <constituency>Lothian</constituency>
+      </msp>
+      <msp>
+        <surname>Fraser</surname>
+        <name>Murdo</name>
+        <party>Con</party>
+        <constituency>Mid Scotland and Fife</constituency>
+      </msp>
+      <msp>
+        <surname>Grant</surname>
+        <name>Rhoda</name>
+        <party>Lab</party>
+        <constituency>Highlands and Islands</constituency>
+      </msp>
+      <msp>
+        <surname>Gray</surname>
+        <name>Iain</name>
+        <party>Lab</party>
+        <constituency>East Lothian</constituency>
+      </msp>
+      <msp>
+        <surname>Griffin</surname>
+        <name>Mark</name>
+        <party>Lab</party>
+        <constituency>Central Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>Harvie</surname>
+        <name>Patrick</name>
+        <party>Green</party>
+        <constituency>Glasgow</constituency>
+      </msp>
+      <msp>
+        <surname>Henry</surname>
+        <name>Hugh</name>
+        <party>Lab</party>
+        <constituency>Renfrewshire South</constituency>
+      </msp>
+      <msp>
+        <surname>Hume</surname>
+        <name>Jim</name>
+        <party>LD</party>
+        <constituency>South Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>Johnstone</surname>
+        <name>Alex</name>
+        <party>Con</party>
+        <constituency>North East Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>Johnstone</surname>
+        <name>Alison</name>
+        <party>Green</party>
+        <constituency>Lothian</constituency>
+      </msp>
+      <msp>
+        <surname>Kelly</surname>
+        <name>James</name>
+        <party>Lab</party>
+        <constituency>Rutherglen</constituency>
+      </msp>
+      <msp>
+        <surname>Lamont</surname>
+        <name>Johann</name>
+        <party>Lab</party>
+        <constituency>Glasgow Pollok</constituency>
+      </msp>
+      <msp>
+        <surname>Lamont</surname>
+        <name>John</name>
+        <party>Con</party>
+        <constituency>Ettrick, Roxburgh and Berwickshire</constituency>
+      </msp>
+      <msp>
+        <surname>Macintosh</surname>
+        <name>Ken</name>
+        <party>Lab</party>
+        <constituency>Eastwood</constituency>
+      </msp>
+      <msp>
+        <surname>Malik</surname>
+        <name>Hanzala</name>
+        <party>Lab</party>
+        <constituency>Glasgow</constituency>
+      </msp>
+      <msp>
+        <surname>Marra</surname>
+        <name>Jenny</name>
+        <party>Lab</party>
+        <constituency>North East Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>Martin</surname>
+        <name>Paul</name>
+        <party>Lab</party>
+        <constituency>Glasgow Provan</constituency>
+      </msp>
+      <msp>
+        <surname>McArthur</surname>
+        <name>Liam</name>
+        <party>LD</party>
+        <constituency>Orkney Islands</constituency>
+      </msp>
+      <msp>
+        <surname>McCulloch</surname>
+        <name>Margaret</name>
+        <party>Lab</party>
+        <constituency>Central Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>McDougall</surname>
+        <name>Margaret</name>
+        <party>Lab</party>
+        <constituency>West Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>McGrigor</surname>
+        <name>Jamie</name>
+        <party>Con</party>
+        <constituency>Highlands and Islands</constituency>
+      </msp>
+      <msp>
+        <surname>McInnes</surname>
+        <name>Alison</name>
+        <party>LD</party>
+        <constituency>North East Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>McMahon</surname>
+        <name>Michael</name>
+        <party>Lab</party>
+        <constituency>Uddingston and Bellshill</constituency>
+      </msp>
+      <msp>
+        <surname>McMahon</surname>
+        <name>Siobhan</name>
+        <party>Lab</party>
+        <constituency>Central Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>McTaggart</surname>
+        <name>Anne</name>
+        <party>Lab</party>
+        <constituency>Glasgow</constituency>
+      </msp>
+      <msp>
+        <surname>Milne</surname>
+        <name>Nanette</name>
+        <party>Con</party>
+        <constituency>North East Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>Mitchell</surname>
+        <name>Margaret</name>
+        <party>Con</party>
+        <constituency>Central Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>Murray</surname>
+        <name>Elaine</name>
+        <party>Lab</party>
+        <constituency>Dumfriesshire</constituency>
+      </msp>
+      <msp>
+        <surname>Pearson</surname>
+        <name>Graeme</name>
+        <party>Lab</party>
+        <constituency>South Scotland</constituency>
+      </msp>
+      <msp>
+        <surname>Pentland</surname>
+        <name>John</name>
+        <party>Lab</party>
+        <constituency>Motherwell and Wishaw</constituency>
+      </msp>
+      <msp>
+        <surname>Rennie</surname>
+        <name>Willie</name>
+        <party>LD</party>
+        <constituency>Mid Scotland and Fife</constituency>
+      </msp>
+      <msp>
+        <surname>Scanlon</surname>
+        <name>Mary</name>
+        <party>Con</party>
+        <constituency>Highlands and Islands</constituency>
+      </msp>
+      <msp>
+        <surname>Scott</surname>
+        <name>John</name>
+        <party>Con</party>
+        <constituency>Ayr</constituency>
+      </msp>
+      <msp>
+        <surname>Scott</surname>
+        <name>Tavish</name>
+        <party>LD</party>
+        <constituency>Shetland Islands</constituency>
+      </msp>
+      <msp>
+        <surname>Smith</surname>
+        <name>Drew</name>
+        <party>Lab</party>
+        <constituency>Glasgow</constituency>
+      </msp>
+    </against>
+    <abstention>
+      <msp>
+        <surname>Finnie</surname>
+        <name>John</name>
+        <party>Ind</party>
+        <constituency>Highlands and Islands</constituency>
+      </msp>
+    </abstention>
+  </law>
+</root>

@@ -83,7 +83,8 @@ def get_html_files():
     dict_files = dict()
     # Load the already processed URLs
     processed_urls = import_processed_urls(f_processed_urls)
-    for i in range(5000, int(get_latest_id()) + 1):
+    # id of first report for the current parliament session is roughly 5300
+    for i in range(5300, int(get_latest_id()) + 1):
         if str(i) not in processed_urls:
             url = base_url + "?r=" + str(i)
             # Test the page
