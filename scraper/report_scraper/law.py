@@ -47,22 +47,26 @@ class Law(object):
             surname_node = ET.SubElement(msp_node, "surname")
             surname_node.text = split_array[0]
         except Exception:
-            log("Can't add surname to node.")
+            # log("Can't add surname to node.")
+            return
         try:
             name_node = ET.SubElement(msp_node, "name")
             name_node.text = split_array[1]
         except Exception:
-            log("Can't add name to node.")
+            #log("Can't add name to node.")
+            return
         try:
             party_node = ET.SubElement(msp_node, "party")
             party_node.text = split_array[3].replace("(", "").replace(")", "")
         except Exception:
-            log("Can't add party to node.")
+            #log("Can't add party to node.")
+            return
         try:
             constituency_node = ET.SubElement(msp_node, "constituency")
             constituency_node.text = split_array[2].replace("(", "").replace(")", "")
         except Exception:
-            log("Can't add sconstituency to node.")
+            #log("Can't add constituency to node.")
+            return
 
     def data_to_xml_node(self, parent_node):
         law_node = ET.SubElement(parent_node, "law")

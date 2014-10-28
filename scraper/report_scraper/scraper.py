@@ -40,9 +40,15 @@ def process_id_line(line1, current_law):
         # Piece of sentence with the type and id
         if "that" in element:
             # Second word is type
-            current_law.law_type = words[2]
+            try:
+                current_law.law_type = words[2]
+            except Exception:
+                log("Can't get the type.")
             # Third word is id
-            current_law.law_id = words[3]
+            try:
+                current_law.law_id = words[3]
+            except Exception:
+                log("Can't get the id.")
         # Piece of sentence with surname and name
         elif "in the name of" in element:
             # If the law is an amendment, we only need the first surname/name
@@ -65,14 +71,46 @@ def process_id_line(line1, current_law):
 
 
 # Process the lines which contains lists of msps
-def process_msps_line(line2, node, current_law):
-    line2 = trim_html(line2)
+def process_msps_line(line, node, current_law):
+    line = trim_html(line)
     if "for" in node:
-        current_law.law_for.append(line2.replace(",", "", 1))
+        current_law.law_for.append(line.replace(",", "", 1))
     elif "against" in node:
-        current_law.law_against.append(line2.replace(",", "", 1))
+        current_law.law_against.append(line.replace(",", "", 1))
     elif "abstention" in node:
-        current_law.law_abstention.append(line2.replace(",", "", 1))
+        current_law.law_abstention.append(line.replace(",", "", 1))
+
+
+# Process the lines which contains lists of msps
+# Version for the old format
+def process_old_msp(line, current_law):
+    # Remove the debut of the string, depends on for?against/...
+    # Could be cleaner
+    line = line.strip("<div class='content'>There will be a division.<br /><br />")
+    split = line.split("<br />")
+    level = 0
+    for element in split:
+        if "For" in element:
+            level = 1
+        if "Against" in element:
+            level = 2
+        if "Abstention" in element:
+            level = 3
+        # For
+        if level == 1:
+            # Element with a msp
+            if "(" in element:
+                current_law.law_for.append(element.replace(",", "", 1))
+        # Against
+        if level == 2:
+            # Element with a msp
+            if "(" in element:
+                current_law.law_against.append(element.replace(",", "", 1))
+        # Abstention
+        if level == 3:
+            # Element with a msp
+            if "(" in element:
+                current_law.law_abstention.append(element.replace(",", "", 1))
 
 
 # Return a string without spaces or html tags
@@ -101,9 +139,9 @@ def indent(elem, level=0):
             elem.tail = i
 
 
-def process_html(filename):
+def process_html(filename, id_file):
 
-     # Variables declaration
+    # Variables declaration
     worth_reading = False
     read_for_msp = False
     read_against_msp = False
@@ -112,6 +150,7 @@ def process_html(filename):
     agreed = False
     write = False
     report_date = "01 January 2000"
+    old_format = False
     # Create a new law instance
     current_law = law.Law()
     # Create the xml base structure
@@ -133,7 +172,7 @@ def process_html(filename):
                 worth_reading = True
         else:
             # End of interesting section
-            if 'div class="Debate"' in line:
+            if 'div class="Debate"' in line and "result of the division" not in line:
                 worth_reading = False
             elif 'Meeting&nbsp;closed' in line:
                 worth_reading = False
@@ -153,8 +192,19 @@ def process_html(filename):
                     # Add the date
                     # Got it at the beginning of the document
                     current_law.law_date = report_date
+
                 # Line before the list of MSPs for the law
-                elif ">For<" in line:
+                # For the old version of reports (id < 9522)
+                # Contains for, against and abstention in the same line, thus only need to be detected once
+                elif ">For<br />" in line:
+                    # There is a vote, data is of interest
+                    record_data = True
+                    process_old_msp(line, current_law)
+                    old_format = True
+
+                # Line before the list of MSPs for the law
+                # For the new version of reports (id > 9521)
+                elif ">For</span>" in line:
                     read_for_msp = True
                     # There is a vote, data is of interest
                     record_data = True
@@ -182,16 +232,18 @@ def process_html(filename):
                     # Last line of the for list
                     if "</span>" in line:
                         read_abstention_msp = False
+
                 # Result of the vote
                 # Since we have the full details of the vote, we could calculate it
                 # Simpler to get the text after that though
-                elif "agreed to" in line and ("amended" in line or "Motion" in line or "Amendment in file"):
+                # For new format
+                elif "agreed to" in line and ("amended" in line or "Motion" in line or "Amendment" in line) and not old_format:
                     split_array = trim_html(line).split(" ")
                     try:
                         current_law.law_agreed = split_array[len(split_array) - 2]
                     except Exception:
                         log("Can't get the agreement on the law.")
-                    if not "disagreed" in line and ("amended" in line or "Motion" in line):
+                    if not "disagreed" in line and ("amended" in line or "Motion" in line or "Amendment" in line):
                         agreed = True
                 # Text voted
                 # Value of the text is the next line
@@ -199,24 +251,46 @@ def process_html(filename):
                     current_law.law_text = trim_html(line)
                     agreed = False
 
+                # Result of the vote
+                # For old format
+                elif "The result of the division is" in line and old_format:
+                    # Find agreement or not
+                    if "disagreed" in line:
+                        current_law.law_agreed = "disagreed"
+                    else:
+                        current_law.law_agreed = "agreed"
+                    # Find the text if there is one
+                    split = line.split("<br /><br />")
+                    # It is the element after the agreed text
+                    # If there is no text, it's a </div>
+                    i = 0
+                    for element in split:
+                        try:
+                            if "agreed" in element and "</div>" not in split[i + 1]:
+                                current_law.law_text = split[i + 1]
+                            i += 1
+                        except Exception:
+                            log("Can't get the text of the law.")
+
+
     # Write xml nodes only if data is of interest
     # Flush last value
     if record_data:
         current_law.data_to_xml_node(root)
 
     if not write:
-        log("Useless file, no data written.")
+        log("No file created because there is no vote data in scraped file " + str(id_file) + ", no data written.")
         return "no data written"
     else:
         indent(root)
         tree = ET.ElementTree(root)
-        report_date = datetime.datetime.strptime(report_date, '%d %B %Y').strftime('%d_%m_%Y')
+        report_date = datetime.datetime.strptime(report_date, '%d %B %Y').strftime('%Y_%m_%d')
         file_name = "data_" + report_date + ".xml"
         try:
             tree.write(file_name, "utf-8")
         except IOError, e:
-            log("Error when writing XML file.")
+            log("Error when writing XML file" + str(id_file) + ".")
         else:
-            log("XML file created, data written.")
+            log("XML file created " + str(id_file) + ", data written.")
         # Return date of document if success
         return report_date
