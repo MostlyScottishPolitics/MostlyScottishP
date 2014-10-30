@@ -5,7 +5,7 @@
 *.pot
 *.pyc
 *.sublime-workspace
-
+*.db
  
 ;;directories to ignore
 .idea/

@@ -1,5 +1,6 @@
 # Django settings for scottviz project.
 import os
+import django
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -17,19 +18,22 @@ SETTINGS_DIR = os.path.dirname(__file__)
 PROJECT_PATH = os.path.abspath(os.path.join(SETTINGS_DIR, os.pardir))
 TEMPLATE_PATH = os.path.join(PROJECT_PATH, 'templates')
 STATIC_PATH = os.path.join(PROJECT_PATH, 'static')
-DATABASE_PATH = os.path.join(PROJECT_PATH, 'scottparliament')
+DATABASE_PATH = os.path.join(PROJECT_PATH, 'flowerpower')
 MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'scottparliament',  # Or path to database file if using sqlite3.
+        'NAME': 'flowerpower',  # Or path to database file if using sqlite3.
         # The following settings are not used with sqlite3:
         'USER': 'scott',
         'PASSWORD': '',
         'HOST': '127.0.0.1',  # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
         'PORT': '5432',  # Set to empty string for default.
+        'OPTIONS': {
+        'autocommit': True,
+        }
     }
 }
 
@@ -128,7 +132,7 @@ TEMPLATE_DIRS = (
     # Don't forget to use absolute paths, not relative paths.
 )
 
-INSTALLED_APPS = (
+INSTALLED_APPS = [
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -140,7 +144,10 @@ INSTALLED_APPS = (
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
-)
+]
+
+if django.VERSION < (1, 7):
+    INSTALLED_APPS.append('south')
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
 

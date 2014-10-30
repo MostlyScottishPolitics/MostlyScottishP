@@ -1,7 +1,60 @@
 import os
+
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "scottviz.settings")
 
 from scottviz_app.models import *
+
+
+def add_msps(fname, lname, party, mspid, fid, c):
+    return \
+        MSP.objects.get_or_create(firstname=fname, lastname=lname, id=mspid, foreignid=fid, party=party,
+                                  constituency=c)[0]
+
+
+def add_party(name):
+    return Party.objects.get_or_create(name=name)[0]
+
+
+def get_constituency(id):
+    return Constituency.objects.get_or_create(id=id)[0]
+
+
+def add_constituency(id, parent, name):
+    return Constituency.objects.get_or_create(id=id, parent=parent, name=name)[0]
+
+
+def get_msp(id):
+    return MSP.objects.get_or_create(id=id)[0]
+
+
+def get_division(id):
+    return Division.objects.get_or_create(id=id)[0]
+
+
+def add_vote(id, msp, division, v):
+    return Vote.objects.get_or_create(id=id, msp=msp, division=division, vote=v)[0]
+
+
+def add_division(divisionid, text, inputresult):
+    res = 0
+    if (inputresult == 'Carried'):
+        res = models.Division.CARRIED
+    elif (inputresult == 'Defeated'):
+        res = models.Division.DEFEATED
+    d = models.Division.objects.get_or_create(identifier=divisionid, teasertext=text, result=res)[0]
+    return d
+
+
+def add_vote(inputmsp, inputdiv, inputvote):
+    res = 0
+    if (inputvote == 'Yes'):
+        res = models.Vote.YES
+    elif (inputvote == 'No'):
+        res = models.Vote.NO
+    elif (inputvote == 'Abstain'):
+        res = models.Vote.ABSTAIN
+    v = models.Vote.objects.get_or_create(msp=inputmsp, division=inputdiv, vote=res)[0]
+    return v
 
 
 def populate_party():
@@ -9,8 +62,7 @@ def populate_party():
         next(f)
         for line in f:
             line = line.split(',')
-            p = add_party(line[1])
-            p.save()
+            add_party(line[1])
 
 
 def populate_constituency():
@@ -18,38 +70,66 @@ def populate_constituency():
         next(f)
         for line in f:
             line = line.split(',')
-            c = add_constituency(line[0], line[1], line[2])
+            id = int(float(line[0]))
+            parent = int(float(line[1]))
+            name = line[2].strip(" \"\'\r\n")
+
+            if parent == 0:
+                add_constituency(id, None, name)
+            else:
+                add_constituency(id, get_constituency(parent), name)
+
 
 def populate_msps():
-    i = 0
-    with open('../scraper/msp_scraper/msps.csv') as f:
+    with open('static/test_data/msps.csv') as f:
+        next(f)
         for line in f:
-            line = line.split(';')
-            print line
-            p = add_party(line[2])
-            id = i+1
-            fname = line[1]
-            lname = line[0]
-            c = add_constituency(line[3])
-            msp = add_msps(fname, lname, p, id, c)
-            msp.save()
+            line = line.split(',')
+            p = add_party(int(float(line[3])))
+            id = int(float(line[0]))
+            fid = int(float(line[1]))
+            fname = line[4]
+            lname = line[5]
+            constituency_id = int(float(line[2]))
 
-def
-
-def add_msps(fname, lname, party, mspid, c):
-    return MSP.objects.get_or_create(firstname=fname, lastname=lname, foreignid=mspid, party=party)[0]
+            c = get_constituency(constituency_id)
+            add_msps(fname, lname, p, id, fid, c)
 
 
-def add_party(name):
-    return Party.objects.get_or_create(name=name)[0]
+def populate_divisions():
+    with open('static/test_data/msps.csv') as f:
+        next(f)
+        for line in f:
+            line = line.split(',')
+            id = int(float(line[0]))
+            parent = int(float(line[1]))
+            date = line[2]
+            text = line[4]
+            result = line[5]
+            votes = line[6]
 
 
-def add_constituency(name):
-    return Constituency.objects.get_or_create(name=name)[0]
+# id, parent, identifier, date, keywords, text, result, votes
 
 
-def add_constituency(id, parent, name):
-    return Constituency.objects.get_or_create(id=id, parent=parent, name=name)[0]
+def populate_votes():
+    with open('static/test_data/msps.csv') as f:
+        next(f)
+        for line in f:
+            line = line.split(',')
+            id = int(float(line[0]))
+            msp = get_msp(int(float(line[1])))
+            division = get_division(int(float(line[2])))
+            if line[3] == '0':
+                v = "Yes"
+            elif line[3] == '1':
+                v = "No"
+            elif line[3] == '2':
+                v = "Abstain"
+            else:
+                v = "Absent"
+            vote = add_vote(id, msp, division, v)
+
 
 if __name__ == '__main__':
     populate_constituency()

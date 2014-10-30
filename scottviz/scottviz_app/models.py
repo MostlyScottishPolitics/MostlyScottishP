@@ -26,7 +26,7 @@ class MSP(models.Model):
     # spsession = models.ManyToManyField(SPsession)
 
     foreignid = models.PositiveIntegerField(max_length=8, unique=True)
-    constituency = models.ForeignKey(Constituency, unique=True)
+    constituency = models.ForeignKey(Constituency)
     party = models.ForeignKey(Party)
     firstname = models.CharField(max_length=128)
     lastname = models.CharField(max_length=128)
@@ -34,7 +34,7 @@ class MSP(models.Model):
     img = models.CharField(max_length=256)
 
     def __unicode__(self):
-        return self.name
+        return u'%s %s' % (self.firstname, self.lastname)
 
 
 class SPsession(models.Model):
@@ -55,11 +55,12 @@ class Division(models.Model):
 
     # votes = models.ForeignKey(Vote,unique=True)
     # msp = models.ForeignKey(MSP, unique=True)
+    #agreement = models.BooleanField()
 
+    parent = models.ForeignKey('self', default=0)
     date = models.DateField()
     number = models.IntegerField()
     link = models.URLField(max_length=128)
-    #agreement = models.BooleanField()
     question = models.TextField()
     motionid = models.CharField(max_length=12)
     motiontext = models.TextField()
