@@ -13,7 +13,7 @@ class Constituency(models.Model):
     # Type = models.BooleanField()
     parent = models.ForeignKey('self', default=0, null=True)
     name = models.CharField(max_length=128, unique=True)
-   # regionname = models.CharField(max_length=128)
+    # regionname = models.CharField(max_length=128)
 
     def __unicode__(self):
         return self.name
@@ -48,14 +48,18 @@ class SPsession(models.Model):
 
 
 class Division(models.Model):
+    CARRIED = 1
+    DEFEATED = 2
+
     RESULTS = (
-        ('C', 'Carried'),
-        ('D', 'Defeated'),
+        (CARRIED, 'Carried'),
+        (DEFEATED, 'Defeated')
     )
 
     # votes = models.ForeignKey(Vote,unique=True)
     # msp = models.ForeignKey(MSP, unique=True)
-    #agreement = models.BooleanField()
+    # agreement = models.BooleanField()
+
 
     parent = models.ForeignKey('self', default=0)
     date = models.DateField()
@@ -73,11 +77,15 @@ class Division(models.Model):
 
 
 class Vote(models.Model):
+    YES = 1
+    NO = 2
+    ABSTAIN = 3
+    ABSENT = 4
     VOTES = (
-        ('Y', 'Yes'),
-        ('N', 'No'),
-        ('A', 'Abstain'),
-        ('M', 'Missing'),
+        (YES, 'Yes'),
+        (NO, 'No'),
+        (ABSTAIN, 'Abstain'),
+        (ABSENT, 'Absent')
     )
 
     msp = models.ForeignKey(MSP, unique=True)

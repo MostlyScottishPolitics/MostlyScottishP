@@ -1,4 +1,6 @@
 import os
+import datetime
+from dateutil import parser
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "scottviz.settings")
 
@@ -31,30 +33,32 @@ def get_division(id):
     return Division.objects.get_or_create(id=id)[0]
 
 
-def add_vote(id, msp, division, v):
-    return Vote.objects.get_or_create(id=id, msp=msp, division=division, vote=v)[0]
+def add_division(id, parent, date, text, result, votes):
+    res = ''
+    if result == '1':
+        res = models.Division.RESULTS.CARRIED
+    elif result == '2':
+        pass
+    else:
+        pass
+    if parent != 0:
+        return Division.objects.get_or_create(motionid=id, parent=get_division(parent), date=date, motiontext=text, result=res,
+                                                     votes=votes)[0]
+    else:
+        return Division.objects.get_or_create(motionid=id, parent=None, date=date, motiontext=text, result=res,
+                                                     votes=votes)[0]
 
 
-def add_division(divisionid, text, inputresult):
-    res = 0
-    if (inputresult == 'Carried'):
-        res = models.Division.CARRIED
-    elif (inputresult == 'Defeated'):
-        res = models.Division.DEFEATED
-    d = models.Division.objects.get_or_create(identifier=divisionid, teasertext=text, result=res)[0]
-    return d
-
-
-def add_vote(inputmsp, inputdiv, inputvote):
-    res = 0
-    if (inputvote == 'Yes'):
+def add_vote(msp, div, vote):
+    if vote == '0':
         res = models.Vote.YES
-    elif (inputvote == 'No'):
+    elif vote == '1':
         res = models.Vote.NO
-    elif (inputvote == 'Abstain'):
+    elif vote == '2':
         res = models.Vote.ABSTAIN
-    v = models.Vote.objects.get_or_create(msp=inputmsp, division=inputdiv, vote=res)[0]
-    return v
+    else:
+        res = models.Vote.ABSENT
+    return models.Vote.objects.get_or_create(msp=msp, division=div, vote=res)[0]
 
 
 def populate_party():
@@ -97,26 +101,29 @@ def populate_msps():
 
 
 def populate_divisions():
-    with open('static/test_data/msps.csv') as f:
+    with open('static/test_data/divisions.csv') as f:
         next(f)
         for line in f:
             line = line.split(',')
             id = int(float(line[0]))
             parent = int(float(line[1]))
-            date = line[2]
-            text = line[4]
-            result = line[5]
-            votes = line[6]
+            identifier = line[2]
+            date = datetime.datetime.strptime(line[3], "%Y-%m-%d %H:%M:%S.%f")
+            text = line[5]
+            result = line[6]
+            votes = line[7].strip("\r\n")
+            add_division(id, parent, date, text, result, votes)
 
 
 # id, parent, identifier, date, keywords, text, result, votes
 
 
 def populate_votes():
-    with open('static/test_data/msps.csv') as f:
+    with open('static/test_data/votes.csv') as f:
         next(f)
         for line in f:
             line = line.split(',')
+            print line
             id = int(float(line[0]))
             msp = get_msp(int(float(line[1])))
             division = get_division(int(float(line[2])))
@@ -128,10 +135,12 @@ def populate_votes():
                 v = "Abstain"
             else:
                 v = "Absent"
-            vote = add_vote(id, msp, division, v)
+            add_vote(id, msp, division, v)
 
 
 if __name__ == '__main__':
     populate_constituency()
     populate_party()
     populate_msps()
+    populate_divisions()
+    populate_votes()

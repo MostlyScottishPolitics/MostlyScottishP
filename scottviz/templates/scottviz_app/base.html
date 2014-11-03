@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap -->
     <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
-    <link href="{% static 'css/bootstrap-theme.css' %}" rel="stylesheet">
     <link href="{% static 'css/main.css' %}" rel="stylesheet">
 
     <script src="{% static 'js/vendor/modernizr-2.6.2-respond-1.1.0.min.js' %}"></script>
@@ -57,12 +56,18 @@
             {% endfor %}
             </ul>
             </li>
-            <form role="search" class="navbar-form navbar-left">
+            <form role="search" class="navbar-form navbar-left" method="GET" action="{% url 'search_results' %}">
+               <input type="text" name="q" />
+               <input type="submit" />
+            </form>
+
+            <!--
+                     <form role="search" class="navbar-form navbar-left">
                 <div class="form-group">
                     <input type="text" placeholder="Search MSPs" class="form-control">
                 </div>
             </form>
-            <!--
+
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contact <b class="caret"></b></a>
               <ul class="dropdown-menu">

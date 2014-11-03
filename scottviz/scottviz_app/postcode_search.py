@@ -46,7 +46,7 @@ def get_constituencies(postcode):
 
 def get_msps(postcode):
     regions = get_constituencies(postcode)
-    if regions['ERROR'] is not None:
+    if regions.has_key('ERROR'):
         return regions
 
     print regions
@@ -56,6 +56,6 @@ def get_msps(postcode):
         const = Constituency.objects.filter(name=regions[item][0])
         for c in const:
             msps[regions[item][0]] = MSP.objects.filter(constituency=c.id)
-    return msps, regions
+    return msps
 
 

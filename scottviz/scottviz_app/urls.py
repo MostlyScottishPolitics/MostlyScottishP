@@ -13,6 +13,7 @@ urlpatterns = patterns('',
                        url(r'^constituencies/', views.constituencies, name='constituencies'),
                        url(r'^divisions/', views.divisions, name='divisions'),
                        url(r'^aboutus/', views.aboutus, name='aboutus'),
-                       url(r'^aboutsp/', views.aboutsp, name='aboutsp')
+                       url(r'^aboutsp/', views.aboutsp, name='aboutsp'),
+                       url(r'^search_results/', views.search_results, name='search_results'),
 
 )

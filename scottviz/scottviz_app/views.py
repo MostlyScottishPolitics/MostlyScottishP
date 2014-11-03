@@ -1,8 +1,10 @@
 from collections import OrderedDict
 import csv
+import json
 
 from django.template import RequestContext
 from django.shortcuts import render_to_response
+from scottviz_app import postcode_search
 
 
 navbar = (
@@ -76,12 +78,10 @@ def msps(request):
         for row in reader:
             row = row[0].split(';')
             dict[row[0] + " " + row[1]] = (row[2], row[3])
-            # print dict
     sorted_dict = OrderedDict({})
     for key in sorted(dict.keys()):
         sorted_dict[key] = dict[key]
     content['dict'] = sorted_dict
-    # print sorted_dict
     return render_to_response('scottviz_app/msps.html', content, context)
 
 
@@ -135,4 +135,13 @@ def aboutsp(request):
     return render_to_response('scottviz_app/aboutsp.html', content, context)
 
 
+def search_results(request):
+    context = RequestContext(request)
+    query = request.GET.get('q')
+    if query:
+        results = postcode_search.get_msps(query)
+        content['dict'] = results
+    else:
+        return render_to_response('scottviz_app/base.html', content, context)
+    return render_to_response('scottviz_app/search_results.html', content, context)
 
