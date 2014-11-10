@@ -3,17 +3,23 @@
 {% block content %}
 
 <div class="container">
-    You are represented by:
-    {% for region, msps in dict.items %}
-            <tr>
-                <th>{{region}}</th>
-            </tr>
-            <tr>
-                {% for msp in msps %}
-                    <td>{{msp}}</td>
+
+    {% if 'ERROR' in dict %}
+     <h3>{{dict.values.0}}</h3>
+
+    {% else %}
+        You are represented by:
+        {% for region, msps in dict.items %}
+                <div id={{region}}>
+                   <h3> {{region}}</h3>
+                    {% for msp in msps %}
+                       <li> <p>{{msp}}</p>
+                       </li>
+                    {% endfor %}
+
+                </div>
                 {% endfor %}
-            </tr>
-            {% endfor %}
+    {% endif %}
 
 </div>
 {% endblock %}

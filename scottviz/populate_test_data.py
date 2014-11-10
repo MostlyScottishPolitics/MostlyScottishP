@@ -33,7 +33,7 @@ def get_division(id):
     return Division.objects.get_or_create(id=id)[0]
 
 
-def add_division(id, parent, date, text, result, votes):
+def add_division(id, parent, date, text, result):
     res = ''
     if result == '1':
         res = models.Division.RESULTS.CARRIED
@@ -42,11 +42,9 @@ def add_division(id, parent, date, text, result, votes):
     else:
         pass
     if parent != 0:
-        return Division.objects.get_or_create(motionid=id, parent=get_division(parent), date=date, motiontext=text, result=res,
-                                                     votes=votes)[0]
+        return Division.objects.get_or_create(motionid=id, parent=get_division(parent), date=date, motiontext=text, result=res)[0]
     else:
-        return Division.objects.get_or_create(motionid=id, parent=None, date=date, motiontext=text, result=res,
-                                                     votes=votes)[0]
+        return Division.objects.get_or_create(motionid=id, parent=None, date=date, motiontext=text, result=res)[0]
 
 
 def add_vote(msp, div, vote):
@@ -58,7 +56,7 @@ def add_vote(msp, div, vote):
         res = models.Vote.ABSTAIN
     else:
         res = models.Vote.ABSENT
-    return models.Vote.objects.get_or_create(msp=msp, division=div, vote=res)[0]
+    return Vote.objects.get_or_create(msp=msp, division=div, vote=res)[0]
 
 
 def populate_party():
@@ -95,7 +93,6 @@ def populate_msps():
             fname = line[4]
             lname = line[5]
             constituency_id = int(float(line[2]))
-
             c = get_constituency(constituency_id)
             add_msps(fname, lname, p, id, fid, c)
 
@@ -111,11 +108,7 @@ def populate_divisions():
             date = datetime.datetime.strptime(line[3], "%Y-%m-%d %H:%M:%S.%f")
             text = line[5]
             result = line[6]
-            votes = line[7].strip("\r\n")
-            add_division(id, parent, date, text, result, votes)
-
-
-# id, parent, identifier, date, keywords, text, result, votes
+            add_division(id, parent, date, text, result)
 
 
 def populate_votes():
@@ -142,5 +135,5 @@ if __name__ == '__main__':
     populate_constituency()
     populate_party()
     populate_msps()
-    populate_divisions()
-    populate_votes()
+   # populate_votes()
+   # populate_divisions()
