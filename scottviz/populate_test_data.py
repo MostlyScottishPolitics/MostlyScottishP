@@ -1,6 +1,5 @@
 import os
 import datetime
-from dateutil import parser
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "scottviz.settings")
 
@@ -131,7 +130,16 @@ def populate_votes():
             add_vote(id, msp, division, v)
 
 
+def delete_data():
+    Constituency.objects.all().delete()
+    MSP.objects.all().delete()
+    Vote.objects.all().delete()
+    Division.objects.all().delete()
+    Party.objects.all().delete()
+    SPsession.objects.all().delete()
+
 if __name__ == '__main__':
+    delete_data()
     populate_constituency()
     populate_party()
     populate_msps()

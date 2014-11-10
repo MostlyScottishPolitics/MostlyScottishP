@@ -1,11 +1,15 @@
 .DS_Store
- 
+
+ scottviz/settings.py
+
 ;;extensions to ignore
 *.log
 *.pot
 *.pyc
 *.sublime-workspace
 *.db
+*.exe
+*.tar.gz
  
 ;;directories to ignore
 .idea/
