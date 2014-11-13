@@ -5,7 +5,7 @@ import json
 from django.template import RequestContext
 from django.shortcuts import render_to_response
 from scottviz_app import postcode_search
-from scottviz_app.models import (MSP, Constituency)
+from scottviz_app.models import (MSP, Constituency, Party)
 
 navbar = (
     ('index', {
@@ -99,6 +99,7 @@ def msp(request, mspID):
 def parties(request):
     context = RequestContext(request)
     content['activesite'] = navbar['parties']
+    content['dict'] = {'parties': Party.objects.all()}
     return render_to_response('scottviz_app/parties.html', content, context)
 
 
