@@ -22,6 +22,12 @@ navbar = (
         'desc': 'List of all constituencies in Scotland',
     }),
 
+    ("regions", {
+        'id': 'regions',
+        'title': 'Regions',
+        'desc': 'List of all regions in Scotland',
+    }),
+
     ('parties', {
         'id': 'parties',
         'title': 'Parties',
@@ -45,7 +51,7 @@ about = (
     ('aboutsp', {
         'id': 'aboutsp',
         'title': 'About the Scottish Parliament',
-        'desc': 'About the Scottish Parliament',
+        'desc': 'About the MSPs and their votes',
     })
 
 )
@@ -106,6 +112,10 @@ def constituencies(request):
     content['activesite'] = navbar['constituencies']
     return render_to_response('scottviz_app/constituencies.html', content, context)
 
+def regions(request):
+    context = RequestContext(request)
+    content['activesite'] = navbar['regions']
+    return render_to_response('scottviz_app/regions.html', content, context)
 
 def constituency(request, regionID):
     context = RequestContext(request)
