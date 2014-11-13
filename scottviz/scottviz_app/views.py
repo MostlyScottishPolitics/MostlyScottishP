@@ -5,7 +5,7 @@ import json
 from django.template import RequestContext
 from django.shortcuts import render_to_response
 from scottviz_app import postcode_search
-from scottviz_app.models import MSP
+from scottviz_app.models import (MSP, Constituency)
 
 navbar = (
     ('index', {
@@ -110,11 +110,13 @@ def party(request, partyID):
 def constituencies(request):
     context = RequestContext(request)
     content['activesite'] = navbar['constituencies']
+    content['dict'] = {'constituencies': Constituency.objects.exclude(parent=None).order_by('name')}
     return render_to_response('scottviz_app/constituencies.html', content, context)
 
 def regions(request):
     context = RequestContext(request)
     content['activesite'] = navbar['regions']
+    content['dict'] = {'regions': Constituency.objects.filter(parent=None).order_by('name')}
     return render_to_response('scottviz_app/regions.html', content, context)
 
 def constituency(request, regionID):
