@@ -5,7 +5,7 @@ import json
 from django.template import RequestContext
 from django.shortcuts import render_to_response
 from scottviz_app import postcode_search
-
+from scottviz_app.models import MSP
 
 navbar = (
     ('index', {
@@ -78,16 +78,16 @@ def index(request):
 def msps(request):
     context = RequestContext(request)
     content['activesite'] = navbar['msps']
-    dict = {}
-    with open('../scraper/msp_scraper/msps.csv', mode='r') as infile:
-        reader = csv.reader(infile)
-        for row in reader:
-            row = row[0].split(';')
-            dict[row[0] + " " + row[1]] = (row[2], row[3])
-    sorted_dict = OrderedDict({})
-    for key in sorted(dict.keys()):
-        sorted_dict[key] = dict[key]
-    content['dict'] = sorted_dict
+#    dict = {}
+#    with open('../scraper/msp_scraper/msps.csv', mode='r') as infile:
+#        reader = csv.reader(infile)
+#        for row in reader:
+#            row = row[0].split(';')
+#            dict[row[0] + " " + row[1]] = (row[2], row[3])
+#    sorted_dict = OrderedDict({})
+#    for key in sorted(dict.keys()):
+#        sorted_dict[key] = dict[key]
+    content['dict'] = {'msps': MSP.objects.all()}
     return render_to_response('scottviz_app/msps.html', content, context)
 
 

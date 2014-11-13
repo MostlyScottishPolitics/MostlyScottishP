@@ -14,11 +14,11 @@
             </thead>
 
             <tbody>
-            {% for msp,values in dict.items %}
+            {% for msp in dict.msps %}
             <tr>
                 <th>{{msp}}</th>
-                <th>{{values.0}}</th>
-                <th>{{values.1}}</th>
+                <th>{{msp.party}}</th>
+                <th>{{msp.constituency}}</th>
             </tr>
             {% endfor %}
             </tbody>
