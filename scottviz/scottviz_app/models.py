@@ -9,22 +9,15 @@ class Party(models.Model):
 
 
 class Constituency(models.Model):
-    # msps = models.ManyToManyField(MSP)
-    # Type = models.BooleanField()
     parent = models.ForeignKey('self', default=0, null=True)
     name = models.CharField(max_length=128, unique=True)
-    # regionname = models.CharField(max_length=128)
 
     def __unicode__(self):
         return self.name
 
 
 class MSP(models.Model):
-    # constituency = models.ManyToManyField(Constituency)
-    # votes = models.ForeignKey(Vote,unique=True)
-    # divisions = models.ForeignKey(Division, unique=True)
     # spsession = models.ManyToManyField(SPsession)
-
     foreignid = models.PositiveIntegerField(max_length=8, unique=True)
     constituency = models.ForeignKey(Constituency)
     party = models.ForeignKey(Party)
@@ -56,12 +49,7 @@ class Division(models.Model):
         (DEFEATED, 'Defeated')
     )
 
-    # votes = models.ForeignKey(Vote,unique=True)
-    # msp = models.ForeignKey(MSP, unique=True)
-    # agreement = models.BooleanField()
-
-
-    parent = models.ForeignKey('self', default=0)
+    parent = models.ForeignKey('self', default=0,  null=True)
     date = models.DateField()
     number = models.IntegerField()
     link = models.URLField(max_length=128)
