@@ -99,7 +99,8 @@ def msp(request, mspID):
 def parties(request):
     context = RequestContext(request)
     content['activesite'] = navbar['parties']
-    content['dict'] = {'parties': Party.objects.all()}
+    content['dict'] = {'parties': Party.objects.order_by('name')}
+#    content['dict'] = {'msps': MSP.objects.all()}
     return render_to_response('scottviz_app/parties.html', content, context)
 
 
