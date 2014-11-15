@@ -47,6 +47,19 @@ def populate_msps():
             m = MSP(firstname=row[1], lastname=row[0], constituency=c, party=p, foreignid=i)
             m.save()
 
+def populate_msps():
+    with open('../scraper/msp_scraper/msps.csv', mode='r') as infile:
+        reader = csv.reader(infile)
+        i = 0
+        for row in reader:
+            i += 1
+            row = row[0].split(';')
+            p = Party.objects.get_or_create(name=row[2].strip())[0]
+            p.save()
+            c = Constituency.objects.get(name=row[3].strip())
+            m = MSP(firstname=row[1], lastname=row[0], constituency=c, party=p, foreignid=i)
+            m.save()
+
 
 def read_data():
     """
