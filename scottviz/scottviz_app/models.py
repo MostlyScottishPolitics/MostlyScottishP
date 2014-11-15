@@ -50,14 +50,14 @@ class Division(models.Model):
     )
 
     parent = models.ForeignKey('self', default=0,  null=True)
-    date = models.DateField()
-    number = models.IntegerField()
-    link = models.URLField(max_length=128)
-    question = models.TextField()
+    date = models.DateField(null=True)
+    number = models.IntegerField(null=True)
+    link = models.URLField(max_length=128, null=True)
+    question = models.TextField(null=True)
     motionid = models.CharField(max_length=12)
     motiontext = models.TextField()
-    topic = models.CharField(max_length=30)
-    votes = models.ManyToManyField(MSP, through='Vote')
+    topic = models.CharField(max_length=30, null=True)
+    votes = models.ManyToManyField(MSP, through='Vote', null=True)
     result = models.CharField(max_length=1, choices=RESULTS)
 
     def __unicode__(self):
@@ -76,9 +76,9 @@ class Vote(models.Model):
         (ABSENT, 'Absent')
     )
 
-    msp = models.ForeignKey(MSP, unique=True)
-    divisions = models.ForeignKey(Division, unique=True)
-    vote = models.CharField(max_length=1, choices=VOTES)
+    msp = models.ForeignKey(MSP)
+    division = models.ForeignKey(Division)
+    vote = models.CharField(max_length=1, choices=VOTES, null=True)
 
     def __unicode__(self):
         return self.name

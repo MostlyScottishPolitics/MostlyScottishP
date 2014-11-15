@@ -9,17 +9,28 @@
 
     {% else %}
         You are represented by:
+
+
+        <div class="col-xs-3 col-xs-height col-top">
+            <div class="item"><div class="content">
+                <br><br><br><br><br><br><br></div></div></div>
+        <div class="col-xs-2 col-xs-height col-middle"><div class="item"><div class="content"></div></div></div>
+        <div class="col-xs-1 col-xs-height col-bottom"><div class="item"><div class="content"></div></div></div>
+    </div>
+
+<div class="container container-xs-height">
+        <div class="row row-xs-height">
         {% for region, msps in dict.items %}
                 <div id={{region}}>
                    <h3> {{region}}</h3>
                     {% for msp in msps %}
-                       <li> <p>{{msp}}</p>
-                       </li>
+                       <h5> <p>{{msp}}</p></h5>
                     {% endfor %}
 
                 </div>
                 {% endfor %}
     {% endif %}
 
+</div>
 </div>
 {% endblock %}
