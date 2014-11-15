@@ -37,7 +37,7 @@ class SPsession(models.Model):
     enddate = models.DateField()
 
     def __unicode__(self):
-        return self.name
+        return self.session
 
 
 class Division(models.Model):
@@ -61,7 +61,7 @@ class Division(models.Model):
     result = models.CharField(max_length=1, choices=RESULTS)
 
     def __unicode__(self):
-        return self.name
+        return self.motionid
 
 
 class Vote(models.Model):
@@ -81,4 +81,4 @@ class Vote(models.Model):
     vote = models.CharField(max_length=1, choices=VOTES, null=True)
 
     def __unicode__(self):
-        return self.name
+        return self.vote
