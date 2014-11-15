@@ -108,16 +108,8 @@ def populate_divisions():
 
 if __name__ == '__main__':
     delete_data()
-    print "__done__delete"
     populate_party()
-    print "__done__party"
-
     populate_constituency()
-    print "__done__reg"
-
     populate_msps()
-    print "__done__msp"
     populate_divisions()
-    print "__done__div"
     populate_votes()
-    print "__done!__"

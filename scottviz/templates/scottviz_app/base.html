@@ -39,7 +39,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">About <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         {% for aboutid, aboutelem in about.items %}
-                        <li
+                        <li>
                         {% if activesite.id == aboutid %} class="active" {% endif %}><a href="{% url aboutid %}">{{aboutelem.title}}</a>
                 </li>
                 {% endfor %}
@@ -50,7 +50,7 @@
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Visualise <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     {% for navid, navelem in navbar.items %}
-                    <li
+                    <li>
                     {% if activesite.id == navid %} class="active" {% endif %}><a href="{% url navid %}">{{navelem.title}}</a>
             </li>
             {% endfor %}
