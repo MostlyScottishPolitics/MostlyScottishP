@@ -54,7 +54,7 @@ class Division(models.Model):
     number = models.IntegerField(null=True)
     link = models.URLField(max_length=128, null=True)
     question = models.TextField(null=True)
-    motionid = models.CharField(max_length=12)
+    motionid = models.CharField(max_length=20)
     motiontext = models.TextField()
     topic = models.CharField(max_length=30, null=True)
     votes = models.ManyToManyField(MSP, through='Vote', null=True)
