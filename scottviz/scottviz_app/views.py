@@ -85,7 +85,7 @@ def home(request):
 def msps(request):
     context = RequestContext(request)
     content['activesite'] = navbar['msps']
-    content['dict'] = {'msps': MSP.objects.all()}
+    content['msps'] = MSP.objects.order_by('lastname','firstname')
     return render_to_response('scottviz_app/msps.html', content, context)
 
 
@@ -110,13 +110,16 @@ def party(request, partyID):
 def constituencies(request):
     context = RequestContext(request)
     content['activesite'] = navbar['constituencies']
-    content['dict'] = {'constituencies': Constituency.objects.exclude(parent=None).order_by('name')}
+    content['constituencies'] = Constituency.objects.exclude(parent=None).order_by('name')
+    content['msps'] = MSP.objects.all()
     return render_to_response('scottviz_app/constituencies.html', content, context)
 
 def regions(request):
     context = RequestContext(request)
     content['activesite'] = navbar['regions']
-    content['dict'] = {'regions': Constituency.objects.filter(parent=None).order_by('name')}
+    content['regions'] = Constituency.objects.filter(parent=None).order_by('name')
+    content['constituencies'] = Constituency.objects.exclude(parent=None).order_by('name')
+    content['msps'] = MSP.objects.order_by('lastname','firstname')
     return render_to_response('scottviz_app/regions.html', content, context)
 
 def constituency(request, regionID):
