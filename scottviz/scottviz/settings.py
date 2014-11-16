@@ -18,18 +18,17 @@ SETTINGS_DIR = os.path.dirname(__file__)
 PROJECT_PATH = os.path.abspath(os.path.join(SETTINGS_DIR, os.pardir))
 TEMPLATE_PATH = os.path.join(PROJECT_PATH, 'templates')
 STATIC_PATH = os.path.join(PROJECT_PATH, 'static')
-DATABASE_PATH = os.path.join(PROJECT_PATH, 'm_14_1006414v')
 MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'm_14_pgtproja',  # Or path to database file if using sqlite3.
+        'NAME': 'flowerpower',  # Or path to database file if using sqlite3.
         # The following settings are not used with sqlite3:
-        'USER': 'm_14_pgtproja',
-        'PASSWORD': 'pgtproja',
-        'HOST': 'yacata.dcs.gla.ac.uk',  # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+        'USER': 'scott',
+        'PASSWORD': '',
+        'HOST': '127.0.0.1',  # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
         'PORT': '5432',  # Set to empty string for default.
         'OPTIONS': {
         'autocommit': True,

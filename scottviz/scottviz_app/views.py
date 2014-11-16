@@ -7,12 +7,14 @@ from django.shortcuts import render_to_response
 from scottviz_app import postcode_search
 from scottviz_app.models import (MSP, Constituency, Party)
 
-navbar = (
-    ('index', {
-        'id': 'index',
+homeinfo = {
+        'id': 'home',
         'title': 'Home',
         'desc': "Front page",
-    }),
+    }
+
+
+navbar = (
 
     ('msps', {'id': 'msps', 'title': 'MSPs', 'desc': 'List of all Members of Scottish Parliament'}),
 
@@ -39,6 +41,11 @@ navbar = (
         'title': 'Divisions',
         'desc': 'List of all votes in the Parliament'
     })
+)
+
+navbarviz = (
+
+
 )
 
 about = (
@@ -69,16 +76,16 @@ content = {
 }
 
 
-def index(request):
+def home(request):
     context = RequestContext(request)
-    content['activesite'] = navbar['index']
+    content['activesite'] = homeinfo
     return render_to_response('scottviz_app/base.html', content, context)
 
 
 def msps(request):
     context = RequestContext(request)
     content['activesite'] = navbar['msps']
-    content['dict'] = {'msps': MSP.objects.all()}
+    content['msps'] = MSP.objects.order_by('lastname','firstname')
     return render_to_response('scottviz_app/msps.html', content, context)
 
 
@@ -91,7 +98,7 @@ def parties(request):
     context = RequestContext(request)
     content['activesite'] = navbar['parties']
     content['parties'] = Party.objects.order_by('name')
-    content['msps'] = MSP.objects.all()
+    content['msps'] = MSP.objects.order_by('lastname','firstname')
     return render_to_response('scottviz_app/parties.html', content, context)
 
 
@@ -103,13 +110,16 @@ def party(request, partyID):
 def constituencies(request):
     context = RequestContext(request)
     content['activesite'] = navbar['constituencies']
-    content['dict'] = {'constituencies': Constituency.objects.exclude(parent=None).order_by('name')}
+    content['constituencies'] = Constituency.objects.exclude(parent=None).order_by('name')
+    content['msps'] = MSP.objects.all()
     return render_to_response('scottviz_app/constituencies.html', content, context)
 
 def regions(request):
     context = RequestContext(request)
     content['activesite'] = navbar['regions']
-    content['dict'] = {'regions': Constituency.objects.filter(parent=None).order_by('name')}
+    content['regions'] = Constituency.objects.filter(parent=None).order_by('name')
+    content['constituencies'] = Constituency.objects.exclude(parent=None).order_by('name')
+    content['msps'] = MSP.objects.order_by('lastname','firstname')
     return render_to_response('scottviz_app/regions.html', content, context)
 
 def constituency(request, regionID):
