@@ -91,7 +91,7 @@ def parties(request):
     context = RequestContext(request)
     content['activesite'] = navbar['parties']
     content['parties'] = Party.objects.order_by('name')
-    content['msps'] = MSP.objects.all()
+    content['msps'] = MSP.objects.order_by('lastname','firstname')
     return render_to_response('scottviz_app/parties.html', content, context)
 
 
