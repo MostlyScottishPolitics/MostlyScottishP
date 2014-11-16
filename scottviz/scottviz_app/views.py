@@ -7,12 +7,14 @@ from django.shortcuts import render_to_response
 from scottviz_app import postcode_search
 from scottviz_app.models import (MSP, Constituency, Party)
 
-navbar = (
-    ('index', {
-        'id': 'index',
+homeinfo = {
+        'id': 'home',
         'title': 'Home',
         'desc': "Front page",
-    }),
+    }
+
+
+navbar = (
 
     ('msps', {'id': 'msps', 'title': 'MSPs', 'desc': 'List of all Members of Scottish Parliament'}),
 
@@ -39,6 +41,11 @@ navbar = (
         'title': 'Divisions',
         'desc': 'List of all votes in the Parliament'
     })
+)
+
+navbarviz = (
+
+
 )
 
 about = (
@@ -69,9 +76,9 @@ content = {
 }
 
 
-def index(request):
+def home(request):
     context = RequestContext(request)
-    content['activesite'] = navbar['index']
+    content['activesite'] = homeinfo
     return render_to_response('scottviz_app/base.html', content, context)
 
 

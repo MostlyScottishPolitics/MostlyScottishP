@@ -2,7 +2,7 @@ import csv
 import os
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "scottviz.settings")
 import xml.etree.ElementTree as ET
-
+from xml.dom import minidom
 from scottviz_app.models import *
 
 
@@ -47,18 +47,13 @@ def populate_msps():
             m = MSP(firstname=row[1], lastname=row[0], constituency=c, party=p, foreignid=i)
             m.save()
 
-def populate_msps():
-    with open('../scraper/msp_scraper/msps.csv', mode='r') as infile:
-        reader = csv.reader(infile)
-        i = 0
-        for row in reader:
-            i += 1
-            row = row[0].split(';')
-            p = Party.objects.get_or_create(name=row[2].strip())[0]
-            p.save()
-            c = Constituency.objects.get(name=row[3].strip())
-            m = MSP(firstname=row[1], lastname=row[0], constituency=c, party=p, foreignid=i)
-            m.save()
+
+def populate_votes(files):
+    for file in files:
+        doc = minidom.parse(file)
+        date = doc.getElementsByTagName("date")[0]
+        print date
+
 
 
 def read_data():
@@ -72,10 +67,15 @@ def read_data():
       print child.tag, child.attrib
 
 
-
+# Might be useful to change such that we get the files only for a specific interval, based on begin-end dates
+# this change can be of use for different sessions of parliament or simply for updating?
+# For now, I can check for dates for this session while parsing the sml files. But it would be much more efficient to do it here
+def get_files(d):
+        return [os.path.join(d, f) for f in os.listdir(d) if os.path.isfile(os.path.join(d,f))]
 
 if __name__ == '__main__':
     delete_data()
     populate_constituency()
     populate_msps()
+    populate_votes(get_files('../scraper/report_scraper/data/'))
     read_data()
