@@ -46,7 +46,6 @@ def selectMSP():
 
 #Fills in values of 2D null matrix, with each entry being a vote (X=divisions, Y=MSPs)
 def selectVotes():
-    #Assumes divisions table will also use foreignid in the same way as MSP
    result = cr.execute("SELECT msp.foreignid, div.id, vote.vote FROM scottviz_app_msp AS msp, scottviz_app_division AS div, scottviz_app_vote AS vote WHERE msp.id = vote.msp_id AND div.id= vote.division_id")
    vote = cr.fetchall()
    count=-1
