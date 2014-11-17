@@ -43,6 +43,17 @@ navbar = (
 
 navbarviz = (
 
+    ('map', {
+        'id': 'map',
+        'title': 'Map',
+        'desc': 'map visualisation',
+    }),
+
+    ('scatter', {
+        'id': 'scatter',
+        'title': 'Scatter',
+        'desc': 'Scatter plot',
+    })
 
 )
 
@@ -63,12 +74,14 @@ about = (
 
 about = OrderedDict(about)
 navbar = OrderedDict(navbar)
+navbarviz = OrderedDict(navbarviz)
 
 content = {
     'title': "Mostly Scottish Politics",
     'copyr': "Team C 2014",
     'contact_name': "Team C",
     'contact_email': "1006414v@student.gla.ac.uk",
+    'navbarviz': navbarviz,
     'navbar': navbar,
     'about': about,
 }
@@ -78,6 +91,16 @@ def home(request):
     context = RequestContext(request)
     content['activesite'] = homeinfo
     return render_to_response('scottviz_app/base.html', content, context)
+
+def map(request):
+    context = RequestContext(request)
+    content['activesite'] = navbarviz['map']
+    return render_to_response('scottviz_app/map.html', content, context)
+
+def scatter(request):
+    context = RequestContext(request)
+    content['activesite'] = navbarviz['scatter']
+    return render_to_response('scottviz_app/scatter.html', content, context)
 
 
 def msps(request):

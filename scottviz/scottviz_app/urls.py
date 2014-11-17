@@ -15,6 +15,8 @@ urlpatterns = patterns('',
                        url(r'^divisions/', views.divisions, name='divisions'),
                        url(r'^aboutus/', views.aboutus, name='aboutus'),
                        url(r'^aboutsp/', views.aboutsp, name='aboutsp'),
+                       url(r'^map/', views.map, name='map'),
+                       url(r'^scatter/', views.scatter, name='scatter'),
                        url(r'^search_results/', views.search_results, name='search_results'),
 
 )
