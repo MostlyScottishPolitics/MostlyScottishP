@@ -3,30 +3,32 @@
 {% block content %}
 {% if msps %}
 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-  {% for msp in msps %}
-  <div class="panel panel-default">
-    <div class="panel-heading" role="tab" id="heading{{msp.id}}">
-      <h4 class="panel-title">
-        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse{{msp.id}}" aria-expanded="false" aria-controls="collapse{{msp.id}}">
-          {{msp}}
-        </a>
-      </h4>
+    {% for msp in msps %}
+    <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="heading{{msp.id}}">
+            <h4 class="panel-title">
+                <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse{{msp.id}}"
+                   aria-expanded="false" aria-controls="collapse{{msp.id}}">
+                    {{msp}}
+                </a>
+            </h4>
+        </div>
+        <div id="collapse{{msp.id}}" class="panel-collapse collapse" role="tabpanel"
+             aria-labelledby="heading{{msp.id}}">
+            <div class="panel-body">
+                {% if msp.constituency.parent_id = None %}
+                Regional MSP for: &MediumSpace;
+                {% else %}
+                Constituency MSP for: &ThinSpace;
+                {% endif%}
+                {{msp.constituency}}<br>
+                {{msp.party}}<br>
+                <hr>
+                and rebelions?
+            </div>
+        </div>
     </div>
-    <div id="collapse{{msp.id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading{{msp.id}}">
-      <div class="panel-body">
-        {% if msp.constituency.parent_id = None  %}
-          Regional MSP for: &MediumSpace;
-          {% else %}
-          Constituency MSP for: &ThinSpace;
-        {% endif%}
-             {{msp.constituency}}<br>
-             {{msp.party}}<br>
-            <hr>
-             and rebelions?
-      </div>
-    </div>
-  </div>
-{% endfor %}
+    {% endfor %}
 </div>
 {% endif %}
 {% endblock %}

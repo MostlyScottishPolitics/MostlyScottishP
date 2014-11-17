@@ -4,6 +4,7 @@ import datetime
 
 from scottviz.settings import STATIC_PATH
 
+
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "scottviz.settings")
 from scottviz_app.models import *
 
@@ -90,7 +91,7 @@ def populate_divisions():
         identifier = row[2].strip()
         text = row[5]
         result = row[len(row) - 2]
-        if len(identifier)>12:
+        if len(identifier) > 12:
             identifier = 'missing'
         if row[len(row) - 2] == '1':
             result = Division.DEFEATED

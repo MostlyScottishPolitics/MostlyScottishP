@@ -416,13 +416,13 @@ if (!jQuery) {
             $next.addClass(direction)
             $active
                 .one($.support.transition.end, function () {
-                         $next.removeClass([type, direction].join(' ')).addClass('active')
-                         $active.removeClass(['active', direction].join(' '))
-                         that.sliding = false
-                         setTimeout(function () {
-                             that.$element.trigger('slid')
-                         }, 0)
-                     })
+                    $next.removeClass([type, direction].join(' ')).addClass('active')
+                    $active.removeClass(['active', direction].join(' '))
+                    that.sliding = false
+                    setTimeout(function () {
+                        that.$element.trigger('slid')
+                    }, 0)
+                })
                 .emulateTransitionEnd(600)
         } else {
             this.$element.trigger(e)
@@ -830,8 +830,8 @@ if (!jQuery) {
     $(document)
         .on('click.bs.dropdown.data-api', clearMenus)
         .on('click.bs.dropdown.data-api', '.dropdown form', function (e) {
-                e.stopPropagation()
-            })
+            e.stopPropagation()
+        })
         .on('click.bs.dropdown.data-api', toggle, Dropdown.prototype.toggle)
         .on('keydown.bs.dropdown.data-api', toggle + ', [role=menu]', Dropdown.prototype.keydown)
 
@@ -918,8 +918,8 @@ if (!jQuery) {
             transition ?
                 that.$element.find('.modal-dialog') // wait for modal to slide in
                     .one($.support.transition.end, function () {
-                             that.$element.focus().trigger(e)
-                         })
+                        that.$element.focus().trigger(e)
+                    })
                     .emulateTransitionEnd(300) :
                 that.$element.focus().trigger(e)
         })
@@ -956,10 +956,10 @@ if (!jQuery) {
         $(document)
             .off('focusin.bs.modal') // guard against infinite focus loop
             .on('focusin.bs.modal', $.proxy(function (e) {
-                    if (this.$element[0] !== e.target && !this.$element.has(e.target).length) {
-                        this.$element.focus()
-                    }
-                }, this))
+                if (this.$element[0] !== e.target && !this.$element.has(e.target).length) {
+                    this.$element.focus()
+                }
+            }, this))
     }
 
     Modal.prototype.escape = function () {
@@ -1073,17 +1073,17 @@ if (!jQuery) {
         $target
             .modal(option, this)
             .one('hide', function () {
-                     $this.is(':visible') && $this.focus()
-                 })
+                $this.is(':visible') && $this.focus()
+            })
     })
 
     $(document)
         .on('show.bs.modal', '.modal', function () {
-                $(document.body).addClass('modal-open')
-            })
+            $(document.body).addClass('modal-open')
+        })
         .on('hidden.bs.modal', '.modal', function () {
-                $(document.body).removeClass('modal-open')
-            })
+            $(document.body).removeClass('modal-open')
+        })
 
 }(window.jQuery);
 
@@ -1640,23 +1640,23 @@ if (!jQuery) {
         var $targets = this.$body
             .find(this.selector)
             .map(function () {
-                     var $el = $(this)
-                     var href = $el.data('target') || $el.attr('href')
-                     var $href = /^#\w/.test(href) && $(href)
+                var $el = $(this)
+                var href = $el.data('target') || $el.attr('href')
+                var $href = /^#\w/.test(href) && $(href)
 
-                     return ($href
-                         && $href.length
-                         && [
-                             [ $href[offsetMethod]().top + (!$.isWindow(self.$scrollElement.get(0)) && self.$scrollElement.scrollTop()), href ]
-                         ]) || null
-                 })
+                return ($href
+                    && $href.length
+                    && [
+                        [ $href[offsetMethod]().top + (!$.isWindow(self.$scrollElement.get(0)) && self.$scrollElement.scrollTop()), href ]
+                    ]) || null
+            })
             .sort(function (a, b) {
-                      return a[0] - b[0]
-                  })
+                return a[0] - b[0]
+            })
             .each(function () {
-                      self.offsets.push(this[0])
-                      self.targets.push(this[1])
-                  })
+                self.offsets.push(this[0])
+                self.targets.push(this[1])
+            })
     }
 
     ScrollSpy.prototype.process = function () {
@@ -1801,8 +1801,8 @@ if (!jQuery) {
         this.activate($this.parent('li'), $ul)
         this.activate($target, $target.parent(), function () {
             $this.trigger({
-                              type: 'shown.bs.tab', relatedTarget: previous
-                          })
+                type: 'shown.bs.tab', relatedTarget: previous
+            })
         })
     }
 

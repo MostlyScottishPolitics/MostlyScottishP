@@ -3,63 +3,70 @@
 {% block content %}
 {% if regions %}
 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-  {% for region in regions %}
-  <div class="panel panel-default">
-    <div class="panel-heading" role="tab" id="heading{{region.id}}">
-      <h4 class="panel-title">
-        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse{{region.id}}" aria-expanded="false" aria-controls="collapse{{region.id}}">
-          {{region}}
-        </a>
-      </h4>
-    </div>
-    <div id="collapse{{region.id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading{{region.id}}">
-      <div class="panel-body">
+    {% for region in regions %}
+    <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="heading{{region.id}}">
+            <h4 class="panel-title">
+                <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse{{region.id}}"
+                   aria-expanded="false" aria-controls="collapse{{region.id}}">
+                    {{region}}
+                </a>
+            </h4>
+        </div>
+        <div id="collapse{{region.id}}" class="panel-collapse collapse" role="tabpanel"
+             aria-labelledby="heading{{region.id}}">
+            <div class="panel-body">
 
-     <div class="container container-xs-height">
-        <div class="row row-xs-height">
+                <div class="container container-xs-height">
+                    <div class="row row-xs-height">
 
-            {% if msps %}
-          <div class="col-xs-3 col-xs-height col-top">
-            <div class="item"><div class="content">
-                            <h4> MSPs </h4>
-                    {% for msp in msps %}
-                        {% if msp.constituency.id == region.id  %}
-                        <div class="item">
-                            <div class="content">
-                                <h5> <p>{{msp}}</p></h5>
-                            </div></div>
+                        {% if msps %}
+                        <div class="col-xs-3 col-xs-height col-top">
+                            <div class="item">
+                                <div class="content">
+                                    <h4> MSPs </h4>
+                                    {% for msp in msps %}
+                                    {% if msp.constituency.id == region.id %}
+                                    <div class="item">
+                                        <div class="content">
+                                            <h5><p>{{msp}}</p></h5>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
                         {% endif %}
-                    {% endfor %}
-                </div>
-            </div>
-          </div>
-            {% endif %}
 
-            {% if constituencies %}
-        <div class="col-xs-3 col-xs-height col-top">
-            <div class="item"><div class="content">
-                            <h4> Geographical Constituencies </h4>
-                    {% for constituency in constituencies %}
-                        {% if constituency.parent.id == region.id  %}
-                        <div class="item">
-                            <div class="content">
-                                <h5> <p>{{constituency}}</p></h5>
-                            </div></div>
+                        {% if constituencies %}
+                        <div class="col-xs-3 col-xs-height col-top">
+                            <div class="item">
+                                <div class="content">
+                                    <h4> Geographical
+                                    Constituencies </h4>
+                                    {% for constituency in constituencies %}
+                                    {% if constituency.parent.id == region.id %}
+                                    <div class="item">
+                                        <div class="content">
+                                            <h5><p>{{constituency}}</p></h5>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
                         {% endif %}
-                    {% endfor %}
+
+
+                    </div>
                 </div>
+
             </div>
-          </div>
-            {% endif %}
-
-
+        </div>
     </div>
-      </div>
-
-    </div>
-  </div>
-  </div>
-{% endfor %}
+    {% endfor %}
 </div>
 {% endif %}
 {% endblock %}

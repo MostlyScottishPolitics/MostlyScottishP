@@ -1,6 +1,8 @@
 # Django settings for scottviz project.
 import os
+
 import django
+
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -31,7 +33,7 @@ DATABASES = {
         'HOST': '127.0.0.1',  # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
         'PORT': '5432',  # Set to empty string for default.
         'OPTIONS': {
-        'autocommit': True,
+            'autocommit': True,
         }
     }
 }
@@ -96,7 +98,7 @@ STATICFILES_DIRS = (
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+    # 'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
 # Make this unique, and don't share it with anybody.
@@ -106,7 +108,7 @@ SECRET_KEY = '07%m9hgkv5)fj&ql7@#4&tq1^ck(z1oz0%71#5@lx6jp1^nca^'
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
-    #     'django.template.loaders.eggs.Loader',
+    # 'django.template.loaders.eggs.Loader',
 )
 
 MIDDLEWARE_CLASSES = (

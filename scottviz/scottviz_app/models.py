@@ -49,7 +49,7 @@ class Division(models.Model):
         (DEFEATED, 'Defeated')
     )
 
-    parent = models.ForeignKey('self', default=0,  null=True)
+    parent = models.ForeignKey('self', default=0, null=True)
     date = models.DateField(null=True)
     number = models.IntegerField(null=True)
     link = models.URLField(max_length=128, null=True)

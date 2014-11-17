@@ -1,8 +1,10 @@
 import json
+import re
+
 import requests
 
-import re
 from models import Constituency, MSP
+
 
 __author__ = 'laura'
 

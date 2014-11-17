@@ -1,4 +1,5 @@
 import time
+
 import psycopg2
 
 from scottviz.wsgi import *
@@ -39,6 +40,7 @@ def create_db():
 
     print 'Something went wrong.'
     exit(1)
+
 
 if __name__ == '__main__':
     create_db()

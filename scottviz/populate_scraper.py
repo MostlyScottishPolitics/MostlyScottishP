@@ -1,7 +1,8 @@
 import csv
 import os
+
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "scottviz.settings")
-import xml.etree.ElementTree as ET
+from dateutil import parser
 from xml.dom import minidom
 from scottviz_app.models import *
 
@@ -52,103 +53,111 @@ def populate_votes(files):
     # naive skip files before 06 May 2011, using a switch: currentsession
     # change encouraged
     currentsession = False
-    for file in files:
-        doc = minidom.parse(file)
-        #TO DO: change date format to YYYY-MM-DD in order to fit in the database
+    for f in files:
+        doc = minidom.parse(f)
         date = doc.getElementsByTagName("date")[0].firstChild.data
-        if (date == '09 June 2011'):
+        dt = parser.parse(date).date()
+
+        if date == '09 June 2011':
             currentsession = True
-        if (currentsession):
+
+        if currentsession:
             laws = doc.getElementsByTagName("law")
+
             for law in laws:
                 motionid = law.getElementsByTagName("id")[0].firstChild.data
                 yup = law.getElementsByTagName("agreed")[0].firstChild
-                if (yup):
-                    if (yup.data == "agreed"):
-                        d = Division(parent = None, motionid = motionid, result = 1)
+
+                if yup:
+                    if yup.data == "agreed":
+                        d = Division(parent=None, motionid=motionid, result=1, date=dt)
                         d.save()
                     else:
-                        d = Division(parent = None, motionid = motionid, result = 2)
+                        d = Division(parent=None, motionid=motionid, result=2, date=dt)
                         d.save()
                 else:
-                    #TO DO: see if agreeed or disagreed from votes
-                    d = Division(parent = None, motionid = motionid)
+                    # TO DO: see if agreeed or disagreed from votes
+                    d = Division(parent=None, motionid=motionid, date=dt)
                     d.save()
-                if (len(law.getElementsByTagName("for"))):
+
+                if len(law.getElementsByTagName("for")):
                     forMSPs = law.getElementsByTagName("for")[0].getElementsByTagName("msp")
                     for msp in forMSPs:
                         firstname = msp.getElementsByTagName("name")[0].firstChild
                         lastname = msp.getElementsByTagName("surname")[0].firstChild
-                        if (firstname and lastname):
+                        if firstname and lastname:
                             firstname = str(firstname.data)
                             lastname = str(lastname.data)
-                            d = Division.objects.get(motionid = motionid)
-                            if ((lastname != 'Allan') and (lastname != 'Simpson') and (lastname != 'Mackenzie') and (lastname != 'Copy') and (lastname != 'GIBson')):
-                                msp = MSP.objects.get(lastname = lastname, firstname = firstname)
-                                v = Vote(msp = msp, division = d, vote = 1)
+                            d = Division.objects.get(motionid=motionid)
+                            if lastname not in ['Allan', 'Simpson', 'Mackenzie', 'Copy', 'GIBson']:
+                                msp = MSP.objects.get(lastname=lastname, firstname=firstname)
+                                v = Vote(msp=msp, division=d, vote=Vote.YES)
                                 v.save()
-                if (len(law.getElementsByTagName("against"))):
+
+                if len(law.getElementsByTagName("against")):
                     againstMSPs = law.getElementsByTagName("against")[0].getElementsByTagName("msp")
                     for msp in againstMSPs:
                         firstname = msp.getElementsByTagName("name")[0].firstChild
                         lastname = msp.getElementsByTagName("surname")[0].firstChild
-                        if (firstname and lastname):
+                        if firstname and lastname:
                             firstname = str(firstname.data)
                             lastname = str(lastname.data)
-                            d = Division.objects.get(motionid = motionid)
-                            if ((lastname != 'Allan') and (lastname != 'Simpson') and (lastname != 'Mackenzie') and (lastname != 'Copy')and (lastname != 'GIBson')):
-                                msp = MSP.objects.get(lastname = lastname, firstname = firstname)
-                                v = Vote(msp = msp, division = d, vote = 2)
+                            d = Division.objects.get(motionid=motionid)
+                            if lastname not in ['Allan', 'Simpson', 'Mackenzie', 'Copy', 'GIBson']:
+                                msp = MSP.objects.get(lastname=lastname, firstname=firstname)
+                                v = Vote(msp=msp, division=d, vote=Vote.NO)
                                 v.save()
-                if (len(law.getElementsByTagName("abstain"))):
+
+                if len(law.getElementsByTagName("abstain")):
                     abstainMSPs = law.getElementsByTagName("abstain")[0].getElementsByTagName("msp")
                     for msp in abstainMSPs:
                         firstname = msp.getElementsByTagName("name")[0].firstChild
                         lastname = msp.getElementsByTagName("surname")[0].firstChild
-                        if (firstname and lastname):
+                        if firstname and lastname:
                             firstname = str(firstname.data)
                             lastname = str(lastname.data)
-                            d = Division.objects.get(motionid = motionid)
-                            if ((lastname != 'Allan') and (lastname != 'Simpson') and (lastname != 'Mackenzie') and (lastname != 'Copy')and (lastname != 'GIBson')):
-                                msp = MSP.objects.get(lastname = lastname, firstname = firstname)
-                                v = Vote(msp = msp, division = d, vote = 3)
+                            d = Division.objects.get(motionid=motionid)
+                            if lastname not in ['Allan', 'Simpson', 'Mackenzie', 'Copy', 'GIBson']:
+                                msp = MSP.objects.get(lastname=lastname, firstname=firstname)
+                                v = Vote(msp=msp, division=d, vote=Vote.ABSTAIN)
                                 v.save()
 
 
-def read_data():
-    """
-
-    :rtype : object
-    """
-    tree = ET.parse('../scraper/report_scraper/data_30_09_2014.xml')
-    root = tree.getroot()
-    for child in root:
-      print child.tag, child.attrib
-
 def add_other_msps():
-    m = MSP(firstname='Brian', lastname='Adam', constituency=Constituency.objects.get(name = 'Aberdeen Donside'), party=Party.objects.get(name = 'Scottish National Party'), foreignid=129)
+    m = MSP(firstname='Brian', lastname='Adam', constituency=Constituency.objects.get(name='Aberdeen Donside'),
+            party=Party.objects.get(name='Scottish National Party'), foreignid=129)
     m.save()
-    m = MSP(firstname='Helen', lastname='Eadie', constituency=Constituency.objects.get(name = 'Cowdenbeath'), party=Party.objects.get(name = 'Scottish Labour'), foreignid=130)
+    m = MSP(firstname='Helen', lastname='Eadie', constituency=Constituency.objects.get(name='Cowdenbeath'),
+            party=Party.objects.get(name='Scottish Labour'), foreignid=130)
     m.save()
-    m = MSP(firstname='Margo', lastname='MacDonald', constituency=Constituency.objects.get(name = 'Lothian'), party=Party.objects.get(name = 'Independent'), foreignid=131)
+    m = MSP(firstname='Margo', lastname='MacDonald', constituency=Constituency.objects.get(name='Lothian'),
+            party=Party.objects.get(name='Independent'), foreignid=131)
     m.save()
-    m = MSP(firstname='David', lastname='McLetchie', constituency=Constituency.objects.get(name = 'Lothian'), party=Party.objects.get(name = 'Scottish Conservative and Unionist Party'), foreignid=132)
+    m = MSP(firstname='David', lastname='McLetchie', constituency=Constituency.objects.get(name='Lothian'),
+            party=Party.objects.get(name='Scottish Conservative and Unionist Party'), foreignid=132)
     m.save()
-    m = MSP(firstname='John', lastname='Park', constituency=Constituency.objects.get(name = 'Mid Scotland and Fife'), party=Party.objects.get(name = 'Scottish Labour'), foreignid=133)
+    m = MSP(firstname='John', lastname='Park', constituency=Constituency.objects.get(name='Mid Scotland and Fife'),
+            party=Party.objects.get(name='Scottish Labour'), foreignid=133)
     m.save()
-    m = MSP(firstname='Bill', lastname='Walker', constituency=Constituency.objects.get(name = 'Dunfermline'), party=Party.objects.get(name = 'Independent'), foreignid=134)
+    m = MSP(firstname='Bill', lastname='Walker', constituency=Constituency.objects.get(name='Dunfermline'),
+            party=Party.objects.get(name='Independent'), foreignid=134)
     m.save()
+
 
 # Might be useful to change such that we get the files only for a specific interval, based on begin-end dates
 # this change can be of use for different sessions of parliament or simply for updating?
 # For now, I can check for dates for this session while parsing the sml files. But it would be much more efficient to do it here
 def get_files(d):
-        return [os.path.join(d, f) for f in os.listdir(d) if os.path.isfile(os.path.join(d,f))]
+    return [os.path.join(d, f) for f in os.listdir(d) if os.path.isfile(os.path.join(d, f))]
+
 
 if __name__ == '__main__':
     delete_data()
     populate_constituency()
+    print "_const_"
     populate_msps()
+    print "_msps_"
     add_other_msps()
+    print "_other_"
     populate_votes(get_files('../scraper/report_scraper/data/'))
-    read_data()
+    print "_weeee_"

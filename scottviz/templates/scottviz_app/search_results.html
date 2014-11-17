@@ -5,32 +5,40 @@
 <div class="container">
 
     {% if 'ERROR' in dict %}
-     <h3>{{dict.values.0}}</h3>
+    <h3>{{dict.values.0}}</h3>
 
     {% else %}
-        You are represented by:
+    You are represented by:
 
     <div class="container container-xs-height">
         <div class="row row-xs-height">
 
-        {% for region, msps in dict.items %}
-          <div class="col-xs-3 col-xs-height col-top">
-            <div class="item"><div class="content">
-                            <h4> {{region}}</h4>
-                    {% for msp in msps %}
+            {% for region, msps in dict.items %}
+            <div class="col-xs-3 col-xs-height col-top">
+                <div class="item">
+                    <div class="content">
+                        <h4> {
+                            {
+                                region
+                            }
+                        }</h4>
+                        {% for msp in msps %}
                         <div class="item">
                             <div class="content">
-                                <h5> <p>{{msp}}</p></h5>
-                            </div></div>
+                                <h5><p>{{msp}}</p></h5>
+                            </div>
+                        </div>
 
-                    {% endfor %}
-                </div></div></div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
 
-                {% endfor %}
+            {% endfor %}
+        </div>
+
+        {% endif %}
+
     </div>
-
-    {% endif %}
-
-</div>
 </div>
 {% endblock %}
