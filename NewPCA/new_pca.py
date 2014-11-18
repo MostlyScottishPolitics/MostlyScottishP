@@ -15,7 +15,7 @@ print ''
 
 #Connect to DB
 #------Replace with your DB details accordingly--------
-cn = pq.connect('dbname=m_14_1006414v user=m_14_1006414v password=1006414v')
+cn = pq.connect('dbname=m_14_pgtproja user=m_14_pgtproja password=pgtproja host=yacata.dcs.gla.ac.uk')
 cr = cn.cursor()
 print "0) Database Connected."
 
@@ -33,15 +33,18 @@ maxDivision_int = map(int, maxDivision)[0] + 1
 data = {}
 matrix = numpy.zeros((int(maxMSP_int),int(maxDivision_int)))
 
-#Not in use at the moment, self explanatory
+#Gets MSP Firs and Second Names
 def selectMSP():
-    cr.execute('SELECT id FROM scottviz_app_msp;')
+    result = cr.execute('SELECT firstname, lastname FROM scottviz_app_msp;')
+    msp = cr.fetchall()
     count = -1
     mspList=[]
-    for row in cr:
+    for rows in msp:
         count += 1
-        mspList.append(cr.fetchone()[count])
-    print "MSP List: " + mspList
+        msp_entry = map(str, msp[count])[0]
+        msp_entry = msp_entry + ' ' + map(str, msp[count])[1]
+        mspList.append(msp_entry)
+    #print "MSP List: " + mspList
     return mspList
 
 #Fills in values of 2D null matrix, with each entry being a vote (X=divisions, Y=MSPs)
@@ -89,6 +92,7 @@ numpy.savetxt("OutputMatrix.csv", output, fmt="%s", delimiter=",")
 print "3) PCA Data saved to file."
 
 #Append name of party (as a string) to each row of output text
+mspList = selectMSP()
 partyList = selectParty()
 count = -1
 path = os.path.dirname(os.path.abspath(__file__)) + '\OutputMatrix.csv'
@@ -97,11 +101,11 @@ for line in fileinput.input('OutputMatrix.csv', inplace=1):
     count += 1
     #If first line of csv add header, else append party name
     if firstLine == 0:
-        print 'X, Y, Party'
+        print 'X,Y,Party,MSP Name'
         firstLine = 1;
     else:
         try:
-            print '{0}{1}'.format(line.rstrip('\n'), (',' + partyList[count]))
+            print '{0}{1}'.format(line.rstrip('\n'), (',' + partyList[count] + ',' + mspList[count]))
         except:
            pass
 
