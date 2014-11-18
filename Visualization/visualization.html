@@ -166,7 +166,7 @@
 
 			};
 				
-			d3.csv("OM.csv", function(error, d) {
+			d3.csv("OutputMatrix.csv", function(error, d) {
   				dataset = d.map(function(d) { return [ +d["X"], +d["Y"], d["Party"], d["MSP Name"]]; 
   				});
   				generateVisualization();});
