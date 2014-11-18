@@ -34,11 +34,14 @@
 			var border = 1;
 			var bordercolor = "black";
 			var dataset = [];
-			var colors = [["Scottish Conservative and Unionist","#60A237"],
+			var colors = [["Scottish Conservative and Unionist Party","#5ABFF4"],
 			["Scottish Labour","#846DD4"],
 			["Scottish Liberal Democrats","#FA6485"],
-			["Scottish National","#F6DC60"],
-			["Scottish Green","#31C48E"]];
+			["Scottish National Party","#F6DC60"],
+			["Scottish Green Party","#31C48E"],
+			["Independent","#986561"],
+			["No Party Affiliation", "#475070"]]
+			;
 		
 			//Create SVG element
 			var svg = d3.select("body")
@@ -100,16 +103,20 @@
 			   })
 			   .attr("r", 8)
 			   .style("fill", function(d){
-			   	if(d[2] == 1)
-			   		return "#60A237";
-			   	if(d[2] == 2)
+			   	if(d[2] == "Scottish Conservative and Unionist Party")
+			   		return "#5ABFF4";
+			   	if(d[2] == "Scottish Labour")
 			   		return "#846DD4";
-			   	if(d[2] == 3)
+			   	if(d[2] == "Scottish Liberal Democrats")
 			   		return "#FA6485";
-			   	if(d[2] == 4)
+			   	if(d[2] == "Scottish National Party")
 			   		return "#F6DC60";
-			   	if(d[2] == 5)
-					return "#31C48E";			   
+			   	if(d[2] == "Scottish Green Party")
+					return "#31C48E";
+				if(d[2] == "Independent")
+					return "#986561";
+				if(d[2] == "No Party Affiliation")
+					return "#475070";			   
 			   })
 			   .style("opacity", .5)
 			   .on("mouseover", function(d) {
@@ -159,8 +166,8 @@
 
 			};
 				
-			d3.csv("OuputMatrix2.csv", function(error, d) {
-  				dataset = d.map(function(d) { return [ +d["x"], +d["y"], +d["p"], d["n"]]; 
+			d3.csv("OM.csv", function(error, d) {
+  				dataset = d.map(function(d) { return [ +d["X"], +d["Y"], d["Party"], d["MSP Name"]]; 
   				});
   				generateVisualization();});
 		</script>
