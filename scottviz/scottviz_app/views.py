@@ -28,16 +28,28 @@ navbar = (
         'desc': 'List of all regions in Scotland',
     }),
 
-    ('parties', {
-        'id': 'parties',
-        'title': 'Parties',
-        'desc': 'List of all parties and their members'
-    }),
+    #('parties', {
+    #    'id': 'parties',
+    #    'title': 'Parties',
+    #    'desc': 'List of all parties and their members'
+    #}),
 
     ('divisions', {
         'id': 'divisions',
         'title': 'Divisions',
         'desc': 'List of all votes in the Parliament'
+    }),
+
+    ('map', {
+        'id': 'map',
+        'title': 'Map',
+        'desc': 'map visualisation',
+    }),
+
+    ('scatter', {
+        'id': 'scatter',
+        'title': 'Scatter',
+        'desc': 'Scatter plot',
     })
 )
 
@@ -92,10 +104,12 @@ def home(request):
     content['activesite'] = homeinfo
     return render_to_response('scottviz_app/base.html', content, context)
 
+
 def map(request):
     context = RequestContext(request)
     content['activesite'] = navbarviz['map']
     return render_to_response('scottviz_app/map.html', content, context)
+
 
 def scatter(request):
     context = RequestContext(request)
@@ -114,7 +128,7 @@ def msp(request, mspID):
     context = RequestContext(request)
     return render_to_response('scottviz_app/msp.html', content, context)
 
-
+"""
 def parties(request):
     context = RequestContext(request)
     content['activesite'] = navbar['parties']
@@ -128,7 +142,7 @@ def party(request, partyID):
     return render_to_response('scottviz_app/party.html', content, context)
 
 
-"""
+
 def constituencies(request):
     context = RequestContext(request)
     content['activesite'] = navbar['constituencies']

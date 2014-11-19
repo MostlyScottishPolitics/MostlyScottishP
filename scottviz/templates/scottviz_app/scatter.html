@@ -1,9 +1,11 @@
 {% extends "scottviz_app/base.html" %}
 
-
 {% block content %}
+<div class="plot" id = "plot"> </div>
 {% load staticfiles %}
+<link href="{% static 'css/scatter.css' %}" rel="stylesheet">
 
 <script src="{% static 'js/visualisation/scatter.js' %}"></script>
+
 {% endblock %}
 

@@ -1,0 +1,19 @@
+.axis path,
+		    .axis line {
+		        fill: none;
+		        stroke: black;
+		        shape-rendering: crispEdges;
+		}
+		.text{
+		font-size: 12px;
+		}
+		svg{
+			stroke: black;
+		}
+		.tooltip {
+            position: absolute;
+            font: 12px;
+            font-weight: bold;
+            border-radius: 5px;
+
+        }

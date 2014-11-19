@@ -1,19 +1,17 @@
-import mdp
-import numpy
-import matplotlib.pyplot as plt
-import pylab
-import fileinput
-import os.path
-import psycopg2 as pq
 import fileinput
 import os
-import csv
 
-print '' 
+import numpy
+import psycopg2 as pq
+
+import mdp
+
+
+print ''
 print "-----Program Started-----"
-print '' 
+print ''
 
-#Connect to DB
+# Connect to DB
 #------Replace with your DB details accordingly--------
 cn = pq.connect('dbname=m_14_pgtproja user=m_14_pgtproja password=pgtproja host=yacata.dcs.gla.ac.uk')
 cr = cn.cursor()
@@ -26,19 +24,19 @@ maxMSP = cr.fetchone()
 
 #Convert tuples to list of ints, extract the first (and only value)
 maxMSP_int = map(int, maxMSP)[0] + 1
-maxDivision_int = map(int, maxDivision)[0] + 1 
+maxDivision_int = map(int, maxDivision)[0] + 1
 
 #print "max MSP:" + str(maxMSP_int)
 #print "max Division:" + str(maxDivision_int)
 data = {}
-matrix = numpy.zeros((int(maxMSP_int),int(maxDivision_int)))
+matrix = numpy.zeros((int(maxMSP_int), int(maxDivision_int)))
 
 #Gets MSP Firs and Second Names
 def selectMSP():
     result = cr.execute('SELECT firstname, lastname FROM scottviz_app_msp;')
     msp = cr.fetchall()
     count = -1
-    mspList=[]
+    mspList = []
     for rows in msp:
         count += 1
         msp_entry = map(str, msp[count])[0]
@@ -47,41 +45,45 @@ def selectMSP():
     #print "MSP List: " + mspList
     return mspList
 
+
 #Fills in values of 2D null matrix, with each entry being a vote (X=divisions, Y=MSPs)
 def selectVotes():
-   result = cr.execute("SELECT msp.foreignid, div.id, vote.vote FROM scottviz_app_msp AS msp, scottviz_app_division AS div, scottviz_app_vote AS vote WHERE msp.id = vote.msp_id AND div.id= vote.division_id")
-   vote = cr.fetchall()
-   count=-1
-   for rows in vote:
-       count += 1
-       msp_entry = map(int, vote[count])[0]
-       division_entry = map(int, vote[count])[1]
-       vote_entry = map(int, vote[count])[2]
-       try:
-          matrix[msp_entry][division_entry] = vote_entry
-       except: 
-           print "ERROR!!"
-           print "MSP Entry: " + msp_entry
-           print "Division Entry: " + division_entry
-   print "1) Data has been retrieved from database."
-   return matrix
+    result = cr.execute(
+        "SELECT msp.foreignid, div.id, vote.vote FROM scottviz_app_msp AS msp, scottviz_app_division AS div, scottviz_app_vote AS vote WHERE msp.id = vote.msp_id AND div.id= vote.division_id")
+    vote = cr.fetchall()
+    count = -1
+    for rows in vote:
+        count += 1
+        msp_entry = map(int, vote[count])[0]
+        division_entry = map(int, vote[count])[1]
+        vote_entry = map(int, vote[count])[2]
+        try:
+            matrix[msp_entry][division_entry] = vote_entry
+        except:
+            print "ERROR!!"
+            print "MSP Entry: " + msp_entry
+            print "Division Entry: " + division_entry
+    print "1) Data has been retrieved from database."
+    return matrix
+
 
 #Gets each MSP's Party's name
 def selectParty():
-    result = cr.execute("SELECT party.name FROM scottviz_app_party AS party, scottviz_app_msp AS msp WHERE msp.party_id = party.id")
+    result = cr.execute(
+        "SELECT party.name FROM scottviz_app_party AS party, scottviz_app_msp AS msp WHERE msp.party_id = party.id")
     party = cr.fetchall()
     count = -1
-    partyList=[]
+    partyList = []
     for rows in party:
         count += 1
         party_entry = map(str, party[count])[0]
         partyList.append(party_entry)
     return partyList
 
+
 matrix = selectVotes()
 numpy.savetxt("InputMatrix.csv", matrix, fmt="%s", delimiter=",")
 print '2) Input Data stored in matrix, and printed to InputMatrix.csv.'
-
 
 imdp = mdp.nodes.PCANode(output_dim=2)
 output = imdp(matrix)
@@ -107,6 +109,6 @@ for line in fileinput.input('OutputMatrix.csv', inplace=1):
         try:
             print '{0}{1}'.format(line.rstrip('\n'), (',' + partyList[count] + ',' + mspList[count]))
         except:
-           pass
+            pass
 
 print "4) Parties appended to CSV."

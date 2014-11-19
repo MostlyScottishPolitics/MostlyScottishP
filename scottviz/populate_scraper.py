@@ -160,4 +160,4 @@ if __name__ == '__main__':
     add_other_msps()
     print "_other_"
     populate_votes(get_files('../scraper/report_scraper/data/'))
-    print "_weeee_"
+    print "_done_"
