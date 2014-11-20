@@ -4,7 +4,7 @@ from django.template import RequestContext
 from django.shortcuts import render_to_response
 
 from scottviz_app import postcode_search
-from scottviz_app.models import (MSP, Constituency, Party)
+from models import *
 
 homeinfo = {
     'id': 'home',
@@ -169,6 +169,7 @@ def constituency(request, regionID):
 def divisions(request):
     context = RequestContext(request)
     content['activesite'] = navbar['divisions']
+    content['divisions'] = Division.objects.order_by('-date')
     return render_to_response('scottviz_app/divisions.html', content, context)
 
 

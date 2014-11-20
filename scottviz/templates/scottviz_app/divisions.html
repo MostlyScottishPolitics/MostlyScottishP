@@ -1,5 +1,43 @@
 {% extends "scottviz_app/base.html" %}
 
 {% block content %}
+{% if divisions %}
+<div class="container">
+    <div class="table-responsive">
+        <table class="table table-striped table-hover">
+             <caption>A 'division' is parliamentary terminology for a 'vote'. Here you can see divisions in the Scottish parliament. </caption>
+            <thead>
+            <tr>
+                <th>Division</th>
+                <th>Date</th>
+                <th>Topic</th>
+                <th>Result</th>
+                <th>Turnout</th>
+                <th>Rebels</th>
+            </tr>
+            </thead>
 
+            <tbody>
+            {% for division in divisions %}
+            <tr>
+                <th>{{division.motionid}}</th>
+                <th>{{division.date}}</th>
+                <th>{{division.topic}}</th>
+                {% if division.result == "1" %}
+                <th>Carried</th>
+                {% else %}
+                <th>Defeated</th>
+                {% endif %}
+
+                <th></th>
+                <th></th>
+            </tr>
+
+
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endif %}
 {% endblock %}
