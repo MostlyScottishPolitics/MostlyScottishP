@@ -2,4 +2,41 @@
 
 {% block content %}
 
-{% endblock %}
+{% if party %}
+
+<div class="container container-xs-height">
+    <div class="row row-xs-height">
+        <div class="col-xs-3 col-xs-height col-top">
+            <div class="item">
+                <div class="content">
+                    <h4> {{party.name}} </h4>
+
+                    <div class="item">
+                        <div class="content">
+                            <h5><p></p></h5>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        {% if partymsps %}
+        <div class="col-xs-3 col-xs-height col-top">
+            <div class="item">
+                <div class="content">
+                    <h4> MSPs </h4>
+                    {% for msp in partymsps %}
+
+                    <div class="item">
+                        <div class="content">
+                            <h5><p><a href="/msp/msp/{{msp.foreignid}}">{{msp.firstname}} {{msp.lastname}}</a></p></h5>
+                        </div>
+                    </div>
+
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% endif %}
+        {% endblock %}

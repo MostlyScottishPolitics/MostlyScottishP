@@ -1,5 +1,9 @@
 {% extends "scottviz_app/base.html" %}
 
 {% block content %}
-
+	{% if msp %}
+		<img src="{{ msp.img }}">
+		{{msp.firstname}} {{msp.lastname}}, <a href="/msp/party/{{msp.party.id}}">{{msp.party.name}}</a>, <a href="/msp/constituency/{{msp.constituency.id}}">{{msp.constituency.name}}</a>
+	{% endif %}
+	<a href="/msp/msps">Back to all msps</a>
 {% endblock %}

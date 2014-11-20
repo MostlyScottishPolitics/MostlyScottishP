@@ -18,9 +18,9 @@ navbar = (
 
     # ("constituencies", {
     # 'id': 'constituencies',
-    #      'title': 'Constituencies',
-    #      'desc': 'List of all constituencies in Scotland',
-    #  }),
+    # 'title': 'Constituencies',
+    # 'desc': 'List of all constituencies in Scotland',
+    # }),
 
     ("regions", {
         'id': 'regions',
@@ -126,7 +126,11 @@ def msps(request):
 
 def msp(request, mspID):
     context = RequestContext(request)
+    this_msp = MSP.objects.get(foreignid=mspID)
+    content['msp'] = this_msp
+    content['msp'].votecount = Vote.objects.filter(msp=this_msp).count()
     return render_to_response('scottviz_app/msp.html', content, context)
+
 
 """
 def parties(request):
@@ -135,12 +139,6 @@ def parties(request):
     content['parties'] = Party.objects.order_by('name')
     content['msps'] = MSP.objects.order_by('lastname', 'firstname')
     return render_to_response('scottviz_app/parties.html', content, context)
-
-
-def party(request, partyID):
-    context = RequestContext(request)
-    return render_to_response('scottviz_app/party.html', content, context)
-
 
 
 def constituencies(request):
@@ -152,6 +150,15 @@ def constituencies(request):
 """
 
 
+def party(request, partyID):
+    context = RequestContext(request)
+    this_party = Party.objects.get(id=partyID)
+    party_msps = MSP.objects.filter(party=this_party).order_by('lastname')
+    content['party'] = this_party
+    content['partymsps'] = party_msps
+    return render_to_response('scottviz_app/party.html', content, context)
+
+
 def regions(request):
     context = RequestContext(request)
     content['activesite'] = navbar['regions']
@@ -161,8 +168,12 @@ def regions(request):
     return render_to_response('scottviz_app/regions.html', content, context)
 
 
-def constituency(request, regionID):
+def constituency(request, constituencyID):
     context = RequestContext(request)
+    this_constituency = Constituency.objects.get(id=constituencyID)
+    constituency_msps = MSP.objects.filter(constituency=this_constituency).order_by('party')
+    content['constituency'] = this_constituency
+    content['constituency_msps'] = constituency_msps
     return render_to_response('scottviz_app/constituency.html', content, context)
 
 
@@ -173,8 +184,12 @@ def divisions(request):
     return render_to_response('scottviz_app/divisions.html', content, context)
 
 
-def division(request, regionID):
+def division(request, divisionID):
     context = RequestContext(request)
+    this_division = Division.objects.get(motionid=divisionID)
+    division_msps = MSP.objects.filter(division=this_division).order_by('motionid')
+    content['division'] = this_division
+    content['division_msps'] = division_msps
     return render_to_response('scottviz_app/division.html', content, context)
 
 
