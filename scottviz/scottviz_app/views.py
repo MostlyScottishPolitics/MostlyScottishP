@@ -28,7 +28,7 @@ navbar = (
         'desc': 'List of all regions in Scotland',
     }),
 
-    #('parties', {
+    # ('parties', {
     #    'id': 'parties',
     #    'title': 'Parties',
     #    'desc': 'List of all parties and their members'
@@ -127,6 +127,11 @@ def msps(request):
 def msp(request, mspID):
     context = RequestContext(request)
     this_msp = MSP.objects.get(foreignid=mspID)
+    content['activesite'] ={
+    'id': this_msp.foreignid,
+    'title': this_msp.firstname + " " + this_msp.lastname,
+    'desc': "Voting record for "+ this_msp.firstname + " " + this_msp.lastname,
+    }
     content['msp'] = this_msp
     content['msp'].votecount = Vote.objects.filter(msp=this_msp).count()
     return render_to_response('scottviz_app/msp.html', content, context)
@@ -153,6 +158,11 @@ def constituencies(request):
 def party(request, partyID):
     context = RequestContext(request)
     this_party = Party.objects.get(id=partyID)
+    content['activesite'] ={
+    'id': this_party.id,
+    'title': this_party.name,
+    'desc': "Members for the " + this_party.name,
+    }
     party_msps = MSP.objects.filter(party=this_party).order_by('lastname')
     content['party'] = this_party
     content['partymsps'] = party_msps
@@ -162,7 +172,9 @@ def party(request, partyID):
 def regions(request):
     context = RequestContext(request)
     content['activesite'] = navbar['regions']
-    content['regions'] = Constituency.objects.filter(parent=None).order_by('name')
+    const = Constituency.objects.filter(parent=None).order_by('name')
+    content['regions'] = const[1:]
+    content['region'] = const[0]
     content['constituencies'] = Constituency.objects.exclude(parent=None).order_by('name')
     content['msps'] = MSP.objects.order_by('lastname', 'firstname')
     return render_to_response('scottviz_app/regions.html', content, context)
@@ -171,6 +183,11 @@ def regions(request):
 def constituency(request, constituencyID):
     context = RequestContext(request)
     this_constituency = Constituency.objects.get(id=constituencyID)
+    content['activesite'] ={
+    'id': this_constituency.id,
+    'title': this_constituency.name,
+    'desc': "Representatives for " + this_constituency.name,
+    }
     constituency_msps = MSP.objects.filter(constituency=this_constituency).order_by('party')
     content['constituency'] = this_constituency
     content['constituency_msps'] = constituency_msps
@@ -186,7 +203,12 @@ def divisions(request):
 
 def division(request, divisionID):
     context = RequestContext(request)
-    this_division = Division.objects.get(motionid=divisionID)
+    this_division = Division.objects.get(id=divisionID)
+    content['activesite'] ={
+    'id': this_division.motionid,
+    'title': this_division.motionid,
+    'desc': "More info on division " + this_division.motionid,
+    }
     division_msps = MSP.objects.filter(division=this_division).order_by('motionid')
     content['division'] = this_division
     content['division_msps'] = division_msps

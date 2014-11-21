@@ -20,7 +20,7 @@
             <tbody>
             {% for division in divisions %}
             <tr>
-                <th><a href="/msp/division/{{division.motionid}}">{{division.motionid}}</a></th>
+                <th><a href="/msp/division/{{division.id}}">{{division.motionid}}</a></th>
                 <th>{{division.date}}</th>
                 <th>{{division.topic}}</th>
                 {% if division.result == "1" %}

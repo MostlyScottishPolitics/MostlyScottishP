@@ -1,5 +1,32 @@
 {% extends "scottviz_app/base.html" %}
 
 {% block content %}
+<a class="btn btn-default back" href="/msp/regions"><i class="glyphicon glyphicon-circle-arrow-left"></i>All
+    Constituencies</a>
 
+<div class="panel panel-default">
+    <div class="panel-heading"></div>
+    <div class="panel-body">
+        {% if constituency.parent == None %}
+
+        <p>Region: {{ constituency.name }}</p>
+        {% else %}
+        <p> Region: {{ constituency.parent }}</p>
+        {% endif %}
+    </div>
+
+
+</div>
+
+<ul class="list-group">
+    {% for msp in constituency_msps %}
+    <li class="list-group-item"><i class="glyphicon glyphicon-user"></i> <a href="/msp/msp/{{msp.foreignid}}">{{msp.firstname}}
+        {{msp.lastname}}</a> &emsp; &emsp; <a href="/msp/party/{{msp.party.id}}">{{msp.party}}</a>
+    </li>
+
+    {% endfor %}
+</ul>
+
+<a class="btn btn-default back" href="/msp/regions"><i class="glyphicon glyphicon-circle-arrow-left"></i>All
+    Constituencies</a>
 {% endblock %}

@@ -4,39 +4,43 @@
 
 {% if party %}
 
-<div class="container container-xs-height">
-    <div class="row row-xs-height">
-        <div class="col-xs-3 col-xs-height col-top">
-            <div class="item">
-                <div class="content">
-                    <h4> {{party.name}} </h4>
 
-                    <div class="item">
-                        <div class="content">
-                            <h5><p></p></h5>
-                        </div>
-                    </div>
+{% if partymsps %}
+<div class="panel panel-default">
+    <div class="panel-heading">Party members</div>
+    <div class="table-responsive">
+        <table class="table table-striped table-hover">
+            <thead>
+            <tr>
+                <th>MSP</th>
+                <th>From</th>
+                <th>To</th>
+                <th>Constituency</th>
+            </tr>
+            </thead>
 
-                </div>
-            </div>
-        </div>
-        {% if partymsps %}
-        <div class="col-xs-3 col-xs-height col-top">
-            <div class="item">
-                <div class="content">
-                    <h4> MSPs </h4>
-                    {% for msp in partymsps %}
+            <tbody>
 
-                    <div class="item">
-                        <div class="content">
-                            <h5><p><a href="/msp/msp/{{msp.foreignid}}">{{msp.firstname}} {{msp.lastname}}</a></p></h5>
-                        </div>
-                    </div>
+    {% for msp in partymsps %}
 
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
-        {% endif %}
-        {% endif %}
-        {% endblock %}
+            <tr>
+
+                <th>
+                    <i class="glyphicon glyphicon-user"></i> <a href="/msp/msp/{{msp.foreignid}}">{{msp.firstname}}
+                    {{msp.lastname}}</a>
+                </th>
+                <th>2011</th>
+
+                <th>2014</th>
+                <th><a href="/msp/constituency/{{msp.constituency.id}}">{{msp.constituency}}</a></th>
+            </tr>
+    {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endif %}
+{% endif %}
+{% endblock %}

@@ -1,9 +1,44 @@
 {% extends "scottviz_app/base.html" %}
 
 {% block content %}
-	{% if msp %}
-		<img src="{{ msp.img }}">
-		{{msp.firstname}} {{msp.lastname}}, <a href="/msp/party/{{msp.party.id}}">{{msp.party.name}}</a>, <a href="/msp/constituency/{{msp.constituency.id}}">{{msp.constituency.name}}</a>
-	{% endif %}
-	<a href="/msp/msps">Back to all msps</a>
+<a class="btn btn-default back" href="/msp/msps"><i class="glyphicon glyphicon-circle-arrow-left"></i>All MSPs</a>
+{% if msp %}
+
+<div class="panel panel-default">
+    <div class="panel-heading"></div>
+    <div class="panel-body">
+        <img src="{{ msp.img }}">
+
+        <p>Currently member of: <a href="/msp/party/{{msp.party.id}}">{{msp.party.name}}</a></p>
+        <p>Previously member of: </p>
+
+        <p>Represents: <a href="/msp/constituency/{{msp.constituency.id}}">{{msp.constituency.name}}</a></p></div>
+</div>
+
+<div class="container">
+    <div class="table-responsive">
+        <table class="table table-striped table-hover">
+            <thead>
+            <tr>
+                <th>From</th>
+                <th>To</th>
+                <th>Rebellions</th>
+                <th>Attendance</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endif %}
+<a class="btn btn-default back" href="/msp/msps"><i class="glyphicon glyphicon-circle-arrow-left"></i>All MSPs</a>
 {% endblock %}
