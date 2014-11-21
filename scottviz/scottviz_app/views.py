@@ -2,15 +2,10 @@ from collections import OrderedDict
 
 from django.template import RequestContext
 from django.shortcuts import render_to_response
-
+import csv
+from django.http import HttpResponse
 from scottviz_app import postcode_search
 from models import *
-
-homeinfo = {
-    'id': 'home',
-    'title': 'Home',
-    'desc': "Front page",
-}
 
 navbar = (
 
@@ -101,7 +96,11 @@ content = {
 
 def home(request):
     context = RequestContext(request)
-    content['activesite'] = homeinfo
+    content['activesite'] = {
+    'id': 'home',
+    'title': 'Welcome to Mostly Scottish Politics(MSP)',
+    'desc': "Browse motions, regions, MSPs, see how they vote, and don't forget to have a go at out interactive visualisations and map ",
+}
     return render_to_response('scottviz_app/base.html', content, context)
 
 
@@ -237,3 +236,21 @@ def search_results(request):
         return render_to_response('scottviz_app/base.html', content, context)
     return render_to_response('scottviz_app/search_results.html', content, context)
 
+
+def export_csv(request, thing):
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="'+thing+'".csv"'
+
+    if thing == "divisions":
+        divs = Division.objects.order_by('-date')
+        writer = csv.writer(response)
+        writer.writerow(["Motion id", "Parent", "Date", "Proposed by", "Topic", "Description", "Result", "Link"])
+        for div in divs:
+            writer.writerow([div.motionid, div.parent, div.date, None, div.topic, div.motiontext, div.result, div.link])
+    elif thing =="msps":
+        msps = MSP.objects.order_by('lastname')
+        writer = csv.writer(response)
+        writer.writerow(["Name", "Party", "Constituency"])
+        for msp in msps:
+            writer.writerow([msp.__unicode__(), msp.party, msp.constituency])
+    return response
