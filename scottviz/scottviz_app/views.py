@@ -1,11 +1,13 @@
 from collections import OrderedDict
+import csv
 
 from django.template import RequestContext
 from django.shortcuts import render_to_response
-import csv
 from django.http import HttpResponse
+
 from scottviz_app import postcode_search
 from models import *
+
 
 navbar = (
 
@@ -24,8 +26,8 @@ navbar = (
     }),
 
     # ('parties', {
-    #    'id': 'parties',
-    #    'title': 'Parties',
+    # 'id': 'parties',
+    # 'title': 'Parties',
     #    'desc': 'List of all parties and their members'
     #}),
 
@@ -97,10 +99,10 @@ content = {
 def home(request):
     context = RequestContext(request)
     content['activesite'] = {
-    'id': 'home',
-    'title': 'Welcome to Mostly Scottish Politics(MSP)',
-    'desc': "Browse motions, regions, MSPs, see how they vote, and don't forget to have a go at out interactive visualisations and map ",
-}
+        'id': 'home',
+        'title': 'Welcome to Mostly Scottish Politics(MSP)',
+        'desc': "Browse motions, regions, MSPs, see how they vote, and don't forget to have a go at out interactive visualisations and map ",
+    }
     return render_to_response('scottviz_app/base.html', content, context)
 
 
@@ -126,10 +128,10 @@ def msps(request):
 def msp(request, mspID):
     context = RequestContext(request)
     this_msp = MSP.objects.get(foreignid=mspID)
-    content['activesite'] ={
-    'id': this_msp.foreignid,
-    'title': this_msp.firstname + " " + this_msp.lastname,
-    'desc': "Voting record for "+ this_msp.firstname + " " + this_msp.lastname,
+    content['activesite'] = {
+        'id': this_msp.foreignid,
+        'title': this_msp.firstname + " " + this_msp.lastname,
+        'desc': "Voting record for " + this_msp.firstname + " " + this_msp.lastname,
     }
     content['msp'] = this_msp
     content['msp'].votecount = Vote.objects.filter(msp=this_msp).count()
@@ -157,10 +159,10 @@ def constituencies(request):
 def party(request, partyID):
     context = RequestContext(request)
     this_party = Party.objects.get(id=partyID)
-    content['activesite'] ={
-    'id': this_party.id,
-    'title': this_party.name,
-    'desc': "Members for the " + this_party.name,
+    content['activesite'] = {
+        'id': this_party.id,
+        'title': this_party.name,
+        'desc': "Members for the " + this_party.name,
     }
     party_msps = MSP.objects.filter(party=this_party).order_by('lastname')
     content['party'] = this_party
@@ -182,10 +184,10 @@ def regions(request):
 def constituency(request, constituencyID):
     context = RequestContext(request)
     this_constituency = Constituency.objects.get(id=constituencyID)
-    content['activesite'] ={
-    'id': this_constituency.id,
-    'title': this_constituency.name,
-    'desc': "Representatives for " + this_constituency.name,
+    content['activesite'] = {
+        'id': this_constituency.id,
+        'title': this_constituency.name,
+        'desc': "Representatives for " + this_constituency.name,
     }
     constituency_msps = MSP.objects.filter(constituency=this_constituency).order_by('party')
     content['constituency'] = this_constituency
@@ -203,10 +205,10 @@ def divisions(request):
 def division(request, divisionID):
     context = RequestContext(request)
     this_division = Division.objects.get(id=divisionID)
-    content['activesite'] ={
-    'id': this_division.motionid,
-    'title': this_division.motionid,
-    'desc': "More info on division " + this_division.motionid,
+    content['activesite'] = {
+        'id': this_division.motionid,
+        'title': this_division.motionid,
+        'desc': "More info on division " + this_division.motionid,
     }
     division_msps = MSP.objects.filter(division=this_division).order_by('motionid')
     content['division'] = this_division
@@ -229,6 +231,11 @@ def aboutsp(request):
 def search_results(request):
     context = RequestContext(request)
     query = request.GET.get('q')
+    content['activesite'] = {
+        'id': 'search',
+        'title': '',
+        'desc': 'Results for: ' + query,
+    }
     if query:
         results = postcode_search.get_msps(query)
         content['dict'] = results
@@ -239,7 +246,7 @@ def search_results(request):
 
 def export_csv(request, thing):
     response = HttpResponse(content_type='text/csv')
-    response['Content-Disposition'] = 'attachment; filename="'+thing+'".csv"'
+    response['Content-Disposition'] = 'attachment; filename="' + thing + '".csv"'
 
     if thing == "divisions":
         divs = Division.objects.order_by('-date')
@@ -247,7 +254,7 @@ def export_csv(request, thing):
         writer.writerow(["Motion id", "Parent", "Date", "Proposed by", "Topic", "Description", "Result", "Link"])
         for div in divs:
             writer.writerow([div.motionid, div.parent, div.date, None, div.topic, div.motiontext, div.result, div.link])
-    elif thing =="msps":
+    elif thing == "msps":
         msps = MSP.objects.order_by('lastname')
         writer = csv.writer(response)
         writer.writerow(["Name", "Party", "Constituency"])
