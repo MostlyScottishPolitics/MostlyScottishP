@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+body{
+    background:#fafafa;
+}
+
+svg{
+    background:#fff;
+}
+
+svg .council_area{
+    fill:#A6B6E3;
+}
+
+/*svg .central {
+	fill: #41FF55;
+}
+
+svg .dg{
+	fill: #C37AFF;
+}
+
+svg .fife{
+	fill: #196BFF;
+}
+
+svg .strathclyde{
+	fill: #FFF23B;
+}
+
+svg .highland{
+	fill: #FF003B;
+}
+
+svg .lothian{
+	fill: #FF7900;
+}
+
+svg .grampian{
+	fill: #89C9F2;
+}
+
+svg .tayside{
+	fill: #03EBD1;
+}*/
+</style>
+<body>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="http://d3js.org/topojson.v1.min.js"></script>
+<script>
+
+var gssCode1 = "S12000005";
+var mapjson1 = gssCode1 + "_topo.json";
+
+var gssCode2 = "S12000006";
+var mapjson2 = gssCode2 + "_topo.json";
+
+var gssCode3 = "S12000008";
+var mapjson3 = gssCode3 + "_topo.json";
+
+var gssCode4 = "S12000010";
+var mapjson4 = gssCode4 + "_topo.json";
+
+var gssCode5 = "S12000011";
+var mapjson5 = gssCode5 + "_topo.json";
+
+var gssCode6 = "S12000013";
+var mapjson6 = gssCode6 + "_topo.json";
+
+var gssCode7 = "S12000014";
+var mapjson7 = gssCode7 + "_topo.json";
+
+var gssCode8 = "S12000015";
+var mapjson8 = gssCode8 + "_topo.json";
+
+var gssCode9 = "S12000017";
+var mapjson9 = gssCode9 + "_topo.json";
+
+var gssCode10 = "S12000018";
+var mapjson10 = gssCode10 + "_topo.json";
+
+var gssCode11 = "S12000019";
+var mapjson11 = gssCode11 + "_topo.json";
+
+var gssCode12 = "S12000020";
+var mapjson12 = gssCode12 + "_topo.json";
+
+var gssCode13 = "S12000021";
+var mapjson13 = gssCode13 + "_topo.json";
+
+var gssCode14 = "S12000023";
+var mapjson14 = gssCode14 + "_topo.json";
+
+var gssCode15 = "S12000024";
+var mapjson15 = gssCode15 + "_topo.json";
+
+var gssCode16 = "S12000026";
+var mapjson16 = gssCode16 + "_topo.json";
+
+var gssCode17 = "S12000027";
+var mapjson17 = gssCode17 + "_topo.json";
+
+var gssCode18 = "S12000028";
+var mapjson18 = gssCode18 + "_topo.json";
+
+var gssCode19 = "S12000029";
+var mapjson19 = gssCode19 + "_topo.json";
+
+var gssCode20 = "S12000030";
+var mapjson20 = gssCode20 + "_topo.json";
+
+var gssCode21 = "S12000033";
+var mapjson21 = gssCode21 + "_topo.json";
+
+var gssCode22 = "S12000034";
+var mapjson22 = gssCode22 + "_topo.json";
+
+var gssCode23 = "S12000035";
+var mapjson23 = gssCode23 + "_topo.json";
+
+var gssCode24 = "S12000036";
+var mapjson24 = gssCode24 + "_topo.json";
+
+var gssCode25 = "S12000038";
+var mapjson25 = gssCode25 + "_topo.json";
+
+var gssCode26 = "S12000039";
+var mapjson26 = gssCode26 + "_topo.json";
+
+var gssCode27 = "S12000040";
+var mapjson27 = gssCode27 + "_topo.json";
+
+var gssCode28 = "S12000041";
+var mapjson28 = gssCode28 + "_topo.json";
+
+var gssCode29 = "S12000042";
+var mapjson29 = gssCode29 + "_topo.json";
+
+var gssCode30 = "S12000044";
+var mapjson30 = gssCode30 + "_topo.json";
+
+var gssCode31 = "S12000045";
+var mapjson31 = gssCode31 + "_topo.json";
+
+var gssCode32 = "S12000046";
+var mapjson32 = gssCode32 + "_topo.json";
+
+var width = 960,
+    height = 1160;
+
+var projection = d3.geo.albers()
+    .center([0, 55.4])
+    .rotate([4.4, 0])
+    .parallels([50, 60])
+    .scale(10000)
+    .translate([width / 2, height / 2]);
+
+var path = d3.geo.path()
+    .projection(projection);
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+d3.json(mapjson1, function(error, councilArea) {
+
+   var mesh = topojson.mesh(councilArea, councilArea.objects[gssCode1 + "_geo"], function(a, b) {return a==b;});
+	svg.append("path")
+        .datum(mesh)
+        .attr("class", "council_area central")
+        .attr("id", "Clackmannanshire")
+        .attr("d", path);
+        
+});
+
+d3.json(mapjson2, function(error, councilArea) {
+
+   var mesh = topojson.mesh(councilArea, councilArea.objects[gssCode2 + "_geo"], function(a, b) {return a==b;});
+	svg.append("path")
+        .datum(mesh)
+        .attr("class", "council_area dg")
+        .attr("id", "Dumfries and Galloway")
+        .attr("d", path);
+        
+});
+
+d3.json(mapjson3, function(error, councilArea) {
+
+   var mesh = topojson.mesh(councilArea, councilArea.objects[gssCode3 + "_geo"], function(a, b) {return a==b;});
+	svg.append("path")
+        .datum(mesh)
+        .attr("class", "council_area strathclyde")
+        .attr("id", "East Ayrshire")
+        .attr("d", path);
+        
+});
+
+d3.json(mapjson4, function(error, councilArea) {
+
+   var mesh = topojson.mesh(councilArea, councilArea.objects[gssCode4 + "_geo"], function(a, b) {return a==b;});
+	svg.append("path")
+        .datum(mesh)
+        .attr("class", "council_area lothian")
+        .attr("id", "East Lothian")
+        .attr("d", path);
+        
+});
+
+d3.json(mapjson5, function(error, councilArea) {
+
+   var mesh = topojson.mesh(councilArea, councilArea.objects[gssCode5 + "_geo"], function(a, b) {return a==b;});
+	svg.append("path")
+        .datum(mesh)
+        .attr("class", "council_area strathclyde")
+        .attr("id", "East Renfrewshire")
+        .attr("d", path);
+        
+});
+
+d3.json(mapjson6, function(error, councilArea) {
+
+   var mesh = topojson.mesh(councilArea, councilArea.objects[gssCode6 + "_geo"], function(a, b) {return a==b;});
+	svg.append("path")
+        .datum(mesh)
+        .attr("class", "council_area highland")
+        .attr("id", "Western Isles")
+        .attr("d", path);
+        
+});
+
+d3.json(mapjson7, function(error, councilArea) {
+
+   var mesh = topojson.mesh(councilArea, councilArea.objects[gssCode7 + "_geo"], function(a, b) {return a==b;});
+	svg.append("path")
+        .datum(mesh)
+        .attr("class", "council_area central")
+        .attr("id", "Falkirk")
+        .attr("d", path);
+        
+});
+
+d3.json(mapjson8, function(error, councilArea) {
+
+   var mesh = topojson.mesh(councilArea, councilArea.objects[gssCode8 + "_geo"], function(a, b) {return a==b;});
+	svg.append("path")
+        .datum(mesh)
+        .attr("class", "council_area fife")
+        .attr("id", "Fife")
+        .attr("d", path);
+        
+});
+
+d3.json(mapjson9, function(error, councilArea) {
+
+   var mesh = topojson.mesh(councilArea, councilArea.objects[gssCode9 + "_geo"], function(a, b) {return a==b;});
+	svg.append("path")
+        .datum(mesh)
+        .attr("class", "council_area highland")
+        .attr("id", "Highland")
+        .attr("d", path);
+        
+});
+
+d3.json(mapjson10, function(error, councilArea) {
+
+   var mesh = topojson.mesh(councilArea, councilArea.objects[gssCode10 + "_geo"], function(a, b) {return a==b;});
+	svg.append("path")
+        .datum(mesh)
+        .attr("class", "council_area strathclyde")
+        .attr("id", "Inverclyde")
+        .attr("d", path);
+        
+});
+
+d3.json(mapjson11, function(error, councilArea) {
+
+   var mesh = topojson.mesh(councilArea, councilArea.objects[gssCode11 + "_geo"], function(a, b) {return a==b;});
+	svg.append("path")
+        .datum(mesh)
+        .attr("class", "council_area lothian")
+        .attr("id", "Midlothian")
+        .attr("d", path);
+        
+});
+
+d3.json(mapjson12, function(error, councilArea) {
+
+   var mesh = topojson.mesh(councilArea, councilArea.objects[gssCode12 + "_geo"], function(a, b) {return a==b;});
+	svg.append("path")
+        .datum(mesh)
+        .attr("class", "council_area grampian")
+        .attr("id", "Moray")
+        .attr("d", path);
+        
+});
+
+d3.json(mapjson13, function(error, councilArea) {
+
+   var mesh = topojson.mesh(councilArea, councilArea.objects[gssCode13 + "_geo"], function(a, b) {return a==b;});
+	svg.append("path")
+        .datum(mesh)
+        .attr("class", "council_area strathclyde")
+        .attr("id", "North Ayrshire")
+        .attr("d", path);
+        
+});
+
+d3.json(mapjson14, function(error, councilArea) {
+
+   var mesh = topojson.mesh(councilArea, councilArea.objects[gssCode14 + "_geo"], function(a, b) {return a==b;});
+	svg.append("path")
+        .datum(mesh)
+        .attr("class", "council_area highland")
+        .attr("id", "Orkney Islands")
+        .attr("d", path);
+        
+});
+
+d3.json(mapjson15, function(error, councilArea) {
+
+   var mesh = topojson.mesh(councilArea, councilArea.objects[gssCode15 + "_geo"], function(a, b) {return a==b;});
+	svg.append("path")
+        .datum(mesh)
+        .attr("class", "council_area tayside")
+        .attr("id", "Perth and Kinross")
+        .attr("d", path);
+        
+});
+
+d3.json(mapjson16, function(error, councilArea) {
+
+   var mesh = topojson.mesh(councilArea, councilArea.objects[gssCode16 + "_geo"], function(a, b) {return a==b;});
+	svg.append("path")
+        .datum(mesh)
+        .attr("class", "council_area lothian")
+        .attr("id", "Scottish Borders")
+        .attr("d", path);
+        
+});
+
+d3.json(mapjson17, function(error, councilArea) {
+
+   var mesh = topojson.mesh(councilArea, councilArea.objects[gssCode17 + "_geo"], function(a, b) {return a==b;});
+	svg.append("path")
+        .datum(mesh)
+        .attr("class", "council_area highland")
+        .attr("id", "Shetland Islands")
+        .attr("d", path);
+        
+});
+
+d3.json(mapjson18, function(error, councilArea) {
+
+   var mesh = topojson.mesh(councilArea, councilArea.objects[gssCode18 + "_geo"], function(a, b) {return a==b;});
+	svg.append("path")
+        .datum(mesh)
+        .attr("class", "council_area strathclyde")
+        .attr("id", "South Ayrshire")
+        .attr("d", path);
+        
+});
+
+d3.json(mapjson19, function(error, councilArea) {
+
+   var mesh = topojson.mesh(councilArea, councilArea.objects[gssCode19 + "_geo"], function(a, b) {return a==b;});
+	svg.append("path")
+        .datum(mesh)
+        .attr("class", "council_area strathclyde")
+        .attr("id", "South Lanarkshire")
+        .attr("d", path);
+        
+});
+
+d3.json(mapjson20, function(error, councilArea) {
+
+   var mesh = topojson.mesh(councilArea, councilArea.objects[gssCode20 + "_geo"], function(a, b) {return a==b;});
+	svg.append("path")
+        .datum(mesh)
+        .attr("class", "council_area central")
+        .attr("id", "Stirling")
+        .attr("d", path);
+        
+});
+
+d3.json(mapjson21, function(error, councilArea) {
+
+   var mesh = topojson.mesh(councilArea, councilArea.objects[gssCode21 + "_geo"], function(a, b) {return a==b;});
+	svg.append("path")
+        .datum(mesh)
+        .attr("class", "council_area grampian")
+        .attr("id","Aberdeen")
+        .attr("d", path);
+        
+});
+
+d3.json(mapjson22, function(error, councilArea) {
+
+   var mesh = topojson.mesh(councilArea, councilArea.objects[gssCode22 + "_geo"], function(a, b) {return a==b;});
+	svg.append("path")
+        .datum(mesh)
+        .attr("class", "council_area grampian")
+        .attr("id", "Aberdeenshire")
+        .attr("d", path);
+        
+});
+
+d3.json(mapjson23, function(error, councilArea) {
+
+   var mesh = topojson.mesh(councilArea, councilArea.objects[gssCode23 + "_geo"], function(a, b) {return a==b;});
+	svg.append("path")
+        .datum(mesh)
+        .attr("class", "council_area strathclyde")
+        .attr("id", "Argyll and Bute")
+        .attr("d", path);
+        
+});
+
+d3.json(mapjson24, function(error, councilArea) {
+
+   var mesh = topojson.mesh(councilArea, councilArea.objects[gssCode24 + "_geo"], function(a, b) {return a==b;});
+	svg.append("path")
+        .datum(mesh)
+        .attr("class", "council_area lothian")
+        .attr("id", "Edinburgh")
+        .attr("d", path);
+        
+});
+
+d3.json(mapjson25, function(error, councilArea) {
+
+   var mesh = topojson.mesh(councilArea, councilArea.objects[gssCode25 + "_geo"], function(a, b) {return a==b;});
+	svg.append("path")
+        .datum(mesh)
+        .attr("class", "council_area strathclyde")
+        .attr("id", "Renfrewshire")
+        .attr("d", path);
+        
+});
+
+d3.json(mapjson26, function(error, councilArea) {
+
+   var mesh = topojson.mesh(councilArea, councilArea.objects[gssCode26 + "_geo"], function(a, b) {return a==b;});
+	svg.append("path")
+        .datum(mesh)
+        .attr("class", "council_area strathclyde")
+        .attr("id", "West Dunbartonshire")
+        .attr("d", path);
+        
+});
+
+d3.json(mapjson27, function(error, councilArea) {
+
+   var mesh = topojson.mesh(councilArea, councilArea.objects[gssCode27 + "_geo"], function(a, b) {return a==b;});
+	svg.append("path")
+        .datum(mesh)
+        .attr("class", "council_area lothian")
+        .attr("id", "West Lothian")
+        .attr("d", path);
+        
+});
+
+d3.json(mapjson28, function(error, councilArea) {
+
+   var mesh = topojson.mesh(councilArea, councilArea.objects[gssCode28 + "_geo"], function(a, b) {return a==b;});
+	svg.append("path")
+        .datum(mesh)
+        .attr("class", "council_area tayside")
+        .attr("id", "Angus")
+        .attr("d", path);
+        
+});
+
+d3.json(mapjson29, function(error, councilArea) {
+
+   var mesh = topojson.mesh(councilArea, councilArea.objects[gssCode29 + "_geo"], function(a, b) {return a==b;});
+	svg.append("path")
+        .datum(mesh)
+        .attr("class", "council_area tayside")
+        .attr("id", "Dundee")
+        .attr("d", path);
+        
+});
+
+d3.json(mapjson30, function(error, councilArea) {
+
+   var mesh = topojson.mesh(councilArea, councilArea.objects[gssCode30 + "_geo"], function(a, b) {return a==b;});
+	svg.append("path")
+        .datum(mesh)
+        .attr("class", "council_area strathclyde")
+        .attr("id", "North Lanarkshire")
+        .attr("d", path);
+        
+});
+
+d3.json(mapjson31, function(error, councilArea) {
+
+   var mesh = topojson.mesh(councilArea, councilArea.objects[gssCode31 + "_geo"], function(a, b) {return a==b;});
+	svg.append("path")
+        .datum(mesh)
+        .attr("class", "council_area strathclyde")
+        .attr("id", "East Dunbartonshire")
+        .attr("d", path);
+        
+});
+
+d3.json(mapjson32, function(error, councilArea) {
+
+   var mesh = topojson.mesh(councilArea, councilArea.objects[gssCode32 + "_geo"], function(a, b) {return a==b;});
+	svg.append("path")
+        .datum(mesh)
+        .attr("class", "council_area strathclyde")
+        .attr("id", "Glasgow")
+        .attr("d", path);
+        
+});
+</script>
+</body>
