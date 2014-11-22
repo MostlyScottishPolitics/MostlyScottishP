@@ -5,7 +5,7 @@
 <a class="btn btn-default back" href="/msp/export_csv/divisions"><i class="glyphicon glyphicon-download"></i> Export to Csv</a>
 <div class="container">
     <div class="table-responsive">
-        <table class="table table-striped table-hover sortable">
+        <table class="table table-hover sortable">
              <caption>A 'division' is parliamentary terminology for a 'vote'. Here you can see divisions in the Scottish parliament. </caption>
             <thead>
             <tr>
@@ -20,20 +20,25 @@
 
             <tbody>
             {% for division in divisions %}
-            <tr>
-                <th><a href="/msp/division/{{division.id}}">{{division.motionid}}</a></th>
-                <th>{{division.date}}</th>
-                <th>{{division.topic}}</th>
-                {% if division.result == "1" %}
-                <th>Carried</th>
+                {% if division.result == '1' %}
+                <tr class="bg-success">
+                    <th><a href="/msp/division/{{division.id}}">{{division.motionid}}</a></th>
+                    <th>{{division.date}}</th>
+                    <th>{{division.topic}}</th>
+                    <th>Carried</th>
+                    <th></th>
+                    <th></th>
+                </tr>
                 {% else %}
-                <th>Defeated</th>
+                <tr>
+                    <th><a href="/msp/division/{{division.id}}">{{division.motionid}}</a></th>
+                    <th>{{division.date}}</th>
+                    <th>{{division.topic}}</th>
+                    <th>Defeated</th>
+                    <th></th>
+                    <th></th>
+                </tr>
                 {% endif %}
-
-                <th></th>
-                <th></th>
-            </tr>
-
 
             {% endfor %}
             </tbody>
