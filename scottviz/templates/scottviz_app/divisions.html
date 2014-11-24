@@ -27,7 +27,11 @@
                     <th>{{division.topic}}</th>
                     <th>Carried</th>
                     <th>{{division.turnout}}% </th>
-                    <th>{{division.rebels}} </th>
+                    {% if division.rebels %}
+                        <th><a href="/msp/rebels/{{division.id}}">{{division.rebels}}</a> </th>
+                    {% else %}
+                        <th>{{division.rebels}}</th>
+                    {% endif %}
                 </tr>
                 {% else %}
                 <tr>
@@ -36,7 +40,11 @@
                     <th>{{division.topic}}</th>
                     <th>Defeated</th>
                     <th>{{division.turnout}}% </th>
-                    <th>{{division.rebels}}</th>
+                    {% if division.rebels %}
+                        <th><a href="/msp/rebels/{{division.id}}">{{division.rebels}}</a> </th>
+                    {% else %}
+                        <th>{{division.rebels}}</th>
+                    {% endif %}
                 </tr>
                 {% endif %}
 
