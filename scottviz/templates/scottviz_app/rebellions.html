@@ -1,8 +1,9 @@
 {% extends "scottviz_app/base.html" %}
 
 {% block content %}
-{% if rebellions %}
+<a class="btn btn-default back" href="/msp/msps"><i class="glyphicon glyphicon-circle-arrow-left"></i>All MSPs</a>
 <a class="btn btn-default back" href="/msp/export_csv/rebellions"><i class="glyphicon glyphicon-download"></i> Export to Csv</a>
+{% if rebellions %}
 <div class="container">
     <div class="table-responsive">
         <table class="table table-hover sortable">
@@ -24,26 +25,26 @@
             <tbody>
             {% for rebellion in rebellions %}
 
-
+                {% if rebellion.division.result == '1' %}
                     <tr class="bg-success">
-                        <th><a href="/msp/division/{{division.id}}">{{rebelion.division}}</a></th>
-                        <th>{{rebelion.division.date}}</th>
+                        <th><a href="/msp/division/{{rebellion.division.id}}">{{rebellion.division}}</a></th>
+                        <th>{{rebellion.division.date}}</th>
                         <th>{{rebellion.division.topic}}</th>
                         <th>Carried</th>
                         <th>{{rebellion.division.turnout}}% </th>
-                        <th>{{rebellion.division.rebels}}% </th>
-                        <th></th>
+                        <th>{{rebellion.division.rebels}} </th>
+                        <th>{{rebellion.party_vote}}</th>
                         <th>{{rebellion.vote}}</th>
                     </tr>
                     {% else %}
                     <tr>
-                        <th><a href="/msp/division/{{division.id}}">{{rebelion.division}}</a></th>
-                        <th>{{rebelion.division.date}}</th>
+                        <th><a href="/msp/division/{{rebellion.division.id}}">{{rebellion.division}}</a></th>
+                        <th>{{rebellion.division.date}}</th>
                         <th>{{rebellion.division.topic}}</th>
                         <th>Defeated</th>
                         <th>{{rebellion.division.turnout}}% </th>
-                        <th>{{rebellion.division.rebels}}% </th>
-                        <th></th>
+                        <th>{{rebellion.division.rebels}} </th>
+                        <th>{{rebellion.party_vote}}</th>
                         <th>{{rebellion.vote}}</th>
                     </tr>
                     {% endif %}
