@@ -18,7 +18,7 @@
                 <th>Turnout</th>
                 <th>Rebels</th>
                 <th>Party Vote</th>
-                <th>His Vote</th>
+                <th>MSP Vote</th>
             </tr>
             </thead>
 
@@ -32,10 +32,31 @@
                         <th>{{rebellion.division.topic}}</th>
                         <th>Carried</th>
                         <th>{{rebellion.division.turnout}}% </th>
-                        <th><a href="/msp/rebels/{{rebellion.division.id}}">{{rebellion.division.rebels}} </a></th>
-                        <th>{{rebellion.party_vote}}</th>
-                        <th>{{rebellion.vote}}</th>
+                        <th><a href="/msp/rebels/{{rebellion.division.id}}">{{rebellion.division.rebels}} </a> </th>
+                        {% if rebellion in party_for %}
+                            <th>For</th>
+                        {% elif rebellion in party_against %}
+                            <th>Against</th>
+                        {% elif rebellion in party_abstain %}
+                            <th>Abstain</th>
+                        {% elif rebellion in party_absent%}
+                            <th>Absent</th>
+                        {% else %}
+                            <th>NA</th>
+                        {% endif %}
+                        {% if rebellion in for %}
+                            <th>For</th>
+                        {% elif rebellion in against %}
+                            <th>Against</th>
+                        {% elif rebellion in abstain %}
+                            <th>Abstain</th>
+                        {% elif rebellion in absent%}
+                            <th>Absent</th>
+                        {% else %}
+                            <th>NA</th>
+                        {% endif %}
                     </tr>
+
                     {% else %}
                     <tr>
                         <th><a href="/msp/division/{{rebellion.division.id}}">{{rebellion.division}}</a></th>
@@ -44,9 +65,30 @@
                         <th>Defeated</th>
                         <th>{{rebellion.division.turnout}}% </th>
                         <th><a href="/msp/rebels/{{rebellion.division.id}}">{{rebellion.division.rebels}} </a> </th>
-                        <th>{{rebellion.party_vote}}</th>
-                        <th>{{rebellion.vote}}</th>
+                        {% if rebellion in party_for %}
+                            <th>For</th>
+                        {% elif rebellion in party_against %}
+                            <th>Against</th>
+                        {% elif rebellion in party_abstain %}
+                            <th>Abstain</th>
+                        {% elif rebellion in party_absent%}
+                            <th>Absent</th>
+                        {% else %}
+                            <th>NA</th>
+                        {% endif %}
+                        {% if rebellion in for %}
+                            <th>For</th>
+                        {% elif rebellion in against %}
+                            <th>Against</th>
+                        {% elif rebellion in abstain %}
+                            <th>Abstain</th>
+                        {% elif rebellion in absent%}
+                            <th>Absent</th>
+                        {% else %}
+                            <th>NA</th>
+                        {% endif %}
                     </tr>
+
                     {% endif %}
             {% endfor %}
             </tbody>

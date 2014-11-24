@@ -14,7 +14,7 @@
                 <th>MSP</th>
                 <th>Party</th>
                 <th>Party Vote</th>
-                <th>His Vote</th>
+                <th>MSP Vote</th>
                 <th>Result</th>
                 <th>Turnout</th>
             </tr>
@@ -25,50 +25,58 @@
 
                 {% if rebel.division.result == '1' %}
                     <tr class="bg-success">
-                        <th><a href="/msp/msp/{{rebel.msp.id}}">{{rebel.msp}}</a></th>
+                        <th><a href="/msp/msp/{{rebel.msp.foreignid}}">{{rebel.msp}}</a></th>
                         <th>{{rebel.msp.party}}</th>
-                        {% if rebel.party_vote = 1 %}
+                        {% if rebel in party_for %}
                             <th>For</th>
-                        {% elif rebel.party_vote == 2 %}
+                        {% elif rebel in party_against %}
                             <th>Against</th>
-                        {% elif rebel.party_vote == 3 %}
+                        {% elif rebel in party_abstain %}
                             <th>Abstain</th>
-                        {% elif rebel.party_vote == 4 %}
+                        {% elif rebel in party_absent%}
                             <th>Absent</th>
+                        {% else %}
+                            <th>NA</th>
                         {% endif %}
-                        {% if rebel.vote == 1 %}
+                        {% if rebel in for %}
                             <th>For</th>
-                        {% elif rebel.vote == 2 %}
+                        {% elif rebel in against %}
                             <th>Against</th>
-                        {% elif rebel.vote == 3 %}
+                        {% elif rebel in abstain %}
                             <th>Abstain</th>
-                        {% elif rebel.vote == 4 %}
+                        {% elif rebel in absent%}
                             <th>Absent</th>
+                        {% else %}
+                            <th>NA</th>
                         {% endif %}
                         <th>Carried</th>
                         <th>{{rebel.division.turnout}}% </th>
                     </tr>
                 {% else %}
                     <tr>
-                        <th><a href="/msp/msp/{{rebel.msp.id}}">{{rebel.msp}}</a></th>
+                        <th><a href="/msp/msp/{{rebel.msp.foreignid}}">{{rebel.msp}}</a></th>
                         <th>{{rebel.msp.party}}</th>
-                        {% if rebel.party_vote == 1 %}
+                        {% if rebel in party_for %}
                             <th>For</th>
-                        {% elif rebel.party_vote == 2 %}
+                        {% elif rebel in party_against %}
                             <th>Against</th>
-                        {% elif rebel.party_vote == 3 %}
+                        {% elif rebel in party_abstain %}
                             <th>Abstain</th>
-                        {% elif rebel.party_vote == 4 %}
+                        {% elif rebel in party_absent%}
                             <th>Absent</th>
+                        {% else %}
+                            <th>NA</th>
                         {% endif %}
-                        {% if rebel.vote == 1 %}
+                        {% if rebel in for %}
                             <th>For</th>
-                        {% elif rebel.vote == 2 %}
+                        {% elif rebel in against %}
                             <th>Against</th>
-                        {% elif rebel.vote == 3 %}
+                        {% elif rebel in abstain %}
                             <th>Abstain</th>
-                        {% elif rebel.vote == 4 %}
+                        {% elif rebel in absent%}
                             <th>Absent</th>
+                        {% else %}
+                            <th>NA</th>
                         {% endif %}
                         <th>Defeated</th>
                         <th>{{rebel.division.turnout}}% </th>

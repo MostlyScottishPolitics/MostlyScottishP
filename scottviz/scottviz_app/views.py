@@ -224,6 +224,14 @@ def rebellions(request, mspID):
         'desc': "Rebellions of " + str(this_msp),
     }
     content['rebellions'] = Vote.objects.filter(msp = this_msp, rebellious = True)
+    content['for'] =  Vote.objects.filter(msp = this_msp, rebellious = True, vote = Vote.YES)
+    content['against'] =  Vote.objects.filter(msp = this_msp, rebellious = True, vote = Vote.NO)
+    content['abstain'] =  Vote.objects.filter(msp = this_msp, rebellious = True, vote = Vote.ABSTAIN)
+    content['absent'] =  Vote.objects.filter(msp = this_msp, rebellious = True, vote = Vote.ABSENT)
+    content['party_for'] =  Vote.objects.filter(msp = this_msp, rebellious = True, party_vote = Vote.YES)
+    content['party_against'] =  Vote.objects.filter(msp = this_msp, rebellious = True, party_vote = Vote.NO)
+    content['party_abstain'] =  Vote.objects.filter(msp = this_msp, rebellious = True, party_vote = Vote.ABSTAIN)
+    content['party_absent'] =  Vote.objects.filter(msp = this_msp, rebellious = True, party_vote = Vote.ABSENT)
     return render_to_response('scottviz_app/rebellions.html', content, context)
 
 
@@ -236,6 +244,14 @@ def rebels(request, divisionID):
         'desc': "Rebels of " + str(this_division),
     }
     content['rebels'] = Vote.objects.filter(division = this_division, rebellious = True)
+    content['for'] =  Vote.objects.filter(division = this_division, rebellious = True, vote = Vote.YES)
+    content['against'] =  Vote.objects.filter(division = this_division, rebellious = True, vote = Vote.NO)
+    content['abstain'] =  Vote.objects.filter(division = this_division, rebellious = True, vote = Vote.ABSTAIN)
+    content['absent'] =  Vote.objects.filter(division = this_division, rebellious = True, vote = Vote.ABSENT)
+    content['party_for'] =  Vote.objects.filter(division = this_division, rebellious = True, party_vote = Vote.YES)
+    content['party_against'] =  Vote.objects.filter(division = this_division, rebellious = True, party_vote = Vote.NO)
+    content['party_abstain'] =  Vote.objects.filter(division = this_division, rebellious = True, party_vote = Vote.ABSTAIN)
+    content['party_absent'] =  Vote.objects.filter(division = this_division, rebellious = True, party_vote = Vote.ABSENT)
     return render_to_response('scottviz_app/rebels.html', content, context)
 
 def aboutus(request):
