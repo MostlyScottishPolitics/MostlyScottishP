@@ -1,0 +1,83 @@
+{% extends "scottviz_app/base.html" %}
+
+{% block content %}
+<a class="btn btn-default back" href="/msp/msps"><i class="glyphicon glyphicon-circle-arrow-left"></i>All MSPs</a>
+<a class="btn btn-default back" href="/msp/export_csv/rebellions"><i class="glyphicon glyphicon-download"></i> Export to Csv</a>
+{% if rebels %}
+<div class="container">
+    <div class="table-responsive">
+        <table class="table table-hover sortable">
+             <caption>A 'rebellion' is when an MSP votes differently than his party . Here you can see the 'rebels' that voted differently for this division. </caption>
+
+            <thead>
+            <tr>
+                <th>MSP</th>
+                <th>Party</th>
+                <th>Party Vote</th>
+                <th>His Vote</th>
+                <th>Result</th>
+                <th>Turnout</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            {% for rebel in rebels %}
+
+                {% if rebel.division.result == '1' %}
+                    <tr class="bg-success">
+                        <th><a href="/msp/msp/{{rebel.msp.id}}">{{rebel.msp}}</a></th>
+                        <th>{{rebel.msp.party}}</th>
+                        {% if rebel.party_vote = 1 %}
+                            <th>For</th>
+                        {% elif rebel.party_vote == 2 %}
+                            <th>Against</th>
+                        {% elif rebel.party_vote == 3 %}
+                            <th>Abstain</th>
+                        {% elif rebel.party_vote == 4 %}
+                            <th>Absent</th>
+                        {% endif %}
+                        {% if rebel.vote == 1 %}
+                            <th>For</th>
+                        {% elif rebel.vote == 2 %}
+                            <th>Against</th>
+                        {% elif rebel.vote == 3 %}
+                            <th>Abstain</th>
+                        {% elif rebel.vote == 4 %}
+                            <th>Absent</th>
+                        {% endif %}
+                        <th>Carried</th>
+                        <th>{{rebel.division.turnout}}% </th>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <th><a href="/msp/msp/{{rebel.msp.id}}">{{rebel.msp}}</a></th>
+                        <th>{{rebel.msp.party}}</th>
+                        {% if rebel.party_vote == 1 %}
+                            <th>For</th>
+                        {% elif rebel.party_vote == 2 %}
+                            <th>Against</th>
+                        {% elif rebel.party_vote == 3 %}
+                            <th>Abstain</th>
+                        {% elif rebel.party_vote == 4 %}
+                            <th>Absent</th>
+                        {% endif %}
+                        {% if rebel.vote == 1 %}
+                            <th>For</th>
+                        {% elif rebel.vote == 2 %}
+                            <th>Against</th>
+                        {% elif rebel.vote == 3 %}
+                            <th>Abstain</th>
+                        {% elif rebel.vote == 4 %}
+                            <th>Absent</th>
+                        {% endif %}
+                        <th>Defeated</th>
+                        <th>{{rebel.division.turnout}}% </th>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

@@ -226,6 +226,18 @@ def rebellions(request, mspID):
     content['rebellions'] = Vote.objects.filter(msp = this_msp, rebellious = True)
     return render_to_response('scottviz_app/rebellions.html', content, context)
 
+
+def rebels(request, divisionID):
+    context = RequestContext(request)
+    this_division = Division.objects.get(id = divisionID)
+    content['activesite'] = {
+        'id': this_division,
+        'title' : this_division,
+        'desc': "Rebels of " + str(this_division),
+    }
+    content['rebels'] = Vote.objects.filter(division = this_division, rebellious = True)
+    return render_to_response('scottviz_app/rebels.html', content, context)
+
 def aboutus(request):
     context = RequestContext(request)
     content['activesite'] = about['aboutus']
