@@ -26,8 +26,8 @@
                     <th>{{division.date}}</th>
                     <th>{{division.topic}}</th>
                     <th>Carried</th>
-                    <th></th>
-                    <th></th>
+                    <th>{{division.turnout}}% </th>
+                    <th>{{division.rebels}} </th>
                 </tr>
                 {% else %}
                 <tr>
@@ -35,8 +35,8 @@
                     <th>{{division.date}}</th>
                     <th>{{division.topic}}</th>
                     <th>Defeated</th>
-                    <th></th>
-                    <th></th>
+                    <th>{{division.turnout}}% </th>
+                    <th>{{division.rebels}}</th>
                 </tr>
                 {% endif %}
 

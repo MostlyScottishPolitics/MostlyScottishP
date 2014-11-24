@@ -23,8 +23,20 @@
                 <th><a href="/msp/msp/{{msp.foreignid}}">{{msp}}</a></th>
                 <th><a href="/msp/party/{{msp.party.id}}">{{msp.party}}</a></th>
                 <th><a href="/msp/constituency/{{msp.constituency.id}}">{{msp.constituency}}</a></th>
-                <th></th>
-                <th></th>
+                {% if msp.rebellions != None %}
+                    {% if msp.rebellions %}
+                        <th><a href="/msp/rebellions/{{msp.id}}">{{msp.rebellions}}</a></th>
+                    {% else %}
+                        <th>{{msp.rebellions}}%</th>
+                    {% endif %}
+                {% else %}
+                    <th>NA</th>
+                {% endif %}
+                {% if msp.presence %}
+                    <th>{{msp.presence}}%</th>
+                {% else %}
+                    <th>NA</th>
+                {% endif %}
             </tr>
             {% endfor %}
             </tbody>

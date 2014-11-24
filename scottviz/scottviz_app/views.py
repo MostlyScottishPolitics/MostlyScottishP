@@ -5,7 +5,7 @@ from django.template import RequestContext
 from django.shortcuts import render_to_response
 from django.http import HttpResponse
 
-from scottviz_app import postcode_search
+import postcode_search
 from models import *
 
 
@@ -215,6 +215,16 @@ def division(request, divisionID):
     content['division_msps'] = division_msps
     return render_to_response('scottviz_app/division.html', content, context)
 
+def rebellions(request, mspID):
+    context = RequestContext(request)
+    this_msp = MSP.objects.get(id = mspID)
+    content['activesite'] = {
+        'id': this_msp,
+        'title' : this_msp,
+        'desc': "Rebellions of " + str(this_msp),
+    }
+    content['rebellions'] = Vote.objects.filter(msp = this_msp, rebellious = True)
+    return render_to_response('scottviz_app/rebellions.html', content, context)
 
 def aboutus(request):
     context = RequestContext(request)

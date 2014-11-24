@@ -1,0 +1,56 @@
+{% extends "scottviz_app/base.html" %}
+
+{% block content %}
+{% if rebellions %}
+<a class="btn btn-default back" href="/msp/export_csv/rebellions"><i class="glyphicon glyphicon-download"></i> Export to Csv</a>
+<div class="container">
+    <div class="table-responsive">
+        <table class="table table-hover sortable">
+             <caption>A 'rebellion' is when an MSP votes differently than his party . Here you can see the divisions for which this MSP rebelled. </caption>
+
+            <thead>
+            <tr>
+                <th>Division</th>
+                <th>Date</th>
+                <th>Topic</th>
+                <th>Result</th>
+                <th>Turnout</th>
+                <th>Rebels</th>
+                <th>Party Vote</th>
+                <th>His Vote</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            {% for rebellion in rebellions %}
+
+
+                    <tr class="bg-success">
+                        <th><a href="/msp/division/{{division.id}}">{{rebelion.division}}</a></th>
+                        <th>{{rebelion.division.date}}</th>
+                        <th>{{rebellion.division.topic}}</th>
+                        <th>Carried</th>
+                        <th>{{rebellion.division.turnout}}% </th>
+                        <th>{{rebellion.division.rebels}}% </th>
+                        <th></th>
+                        <th>{{rebellion.vote}}</th>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <th><a href="/msp/division/{{division.id}}">{{rebelion.division}}</a></th>
+                        <th>{{rebelion.division.date}}</th>
+                        <th>{{rebellion.division.topic}}</th>
+                        <th>Defeated</th>
+                        <th>{{rebellion.division.turnout}}% </th>
+                        <th>{{rebellion.division.rebels}}% </th>
+                        <th></th>
+                        <th>{{rebellion.vote}}</th>
+                    </tr>
+                    {% endif %}
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
