@@ -27,65 +27,65 @@
 
                 {% if rebellion.division.result == '1' %}
                     <tr class="bg-success">
-                        <th><a href="/msp/division/{{rebellion.division.id}}">{{rebellion.division}}</a></th>
-                        <th>{{rebellion.division.date}}</th>
-                        <th>{{rebellion.division.topic}}</th>
-                        <th>Carried</th>
-                        <th>{{rebellion.division.turnout}}% </th>
-                        <th><a href="/msp/rebels/{{rebellion.division.id}}">{{rebellion.division.rebels}} </a> </th>
+                        <td><a href="/msp/division/{{rebellion.division.id}}">{{rebellion.division}}</a></td>
+                        <td>{{rebellion.division.date}}</td>
+                        <td>{{rebellion.division.topic}}</td>
+                        <td>Carried</td>
+                        <td>{{rebellion.division.turnout}}% </td>
+                        <td><a href="/msp/rebels/{{rebellion.division.id}}">{{rebellion.division.rebels}} </a> </td>
                         {% if rebellion in party_for %}
-                            <th>For</th>
+                            <td>For</td>
                         {% elif rebellion in party_against %}
-                            <th>Against</th>
+                            <td>Against</td>
                         {% elif rebellion in party_abstain %}
-                            <th>Abstain</th>
+                            <td>Abstain</td>
                         {% elif rebellion in party_absent%}
-                            <th>Absent</th>
+                            <td>Absent</td>
                         {% else %}
-                            <th>NA</th>
+                            <td>NA</td>
                         {% endif %}
                         {% if rebellion in for %}
-                            <th>For</th>
+                            <td>For</td>
                         {% elif rebellion in against %}
-                            <th>Against</th>
+                            <td>Against</td>
                         {% elif rebellion in abstain %}
-                            <th>Abstain</th>
+                            <td>Abstain</td>
                         {% elif rebellion in absent%}
-                            <th>Absent</th>
+                            <td>Absent</td>
                         {% else %}
-                            <th>NA</th>
+                            <td>NA</td>
                         {% endif %}
                     </tr>
 
                     {% else %}
                     <tr>
-                        <th><a href="/msp/division/{{rebellion.division.id}}">{{rebellion.division}}</a></th>
-                        <th>{{rebellion.division.date}}</th>
-                        <th>{{rebellion.division.topic}}</th>
-                        <th>Defeated</th>
-                        <th>{{rebellion.division.turnout}}% </th>
-                        <th><a href="/msp/rebels/{{rebellion.division.id}}">{{rebellion.division.rebels}} </a> </th>
+                        <td><a href="/msp/division/{{rebellion.division.id}}">{{rebellion.division}}</a></td>
+                        <td>{{rebellion.division.date}}</td>
+                        <td>{{rebellion.division.topic}}</td>
+                        <td>Defeated</td>
+                        <td>{{rebellion.division.turnout}}% </td>
+                        <td><a href="/msp/rebels/{{rebellion.division.id}}">{{rebellion.division.rebels}} </a> </td>
                         {% if rebellion in party_for %}
-                            <th>For</th>
+                            <td>For</td>
                         {% elif rebellion in party_against %}
-                            <th>Against</th>
+                            <td>Against</td>
                         {% elif rebellion in party_abstain %}
-                            <th>Abstain</th>
+                            <td>Abstain</td>
                         {% elif rebellion in party_absent%}
-                            <th>Absent</th>
+                            <td>Absent</td>
                         {% else %}
-                            <th>NA</th>
+                            <td>NA</td>
                         {% endif %}
                         {% if rebellion in for %}
-                            <th>For</th>
+                            <td>For</td>
                         {% elif rebellion in against %}
-                            <th>Against</th>
+                            <td>Against</td>
                         {% elif rebellion in abstain %}
-                            <th>Abstain</th>
+                            <td>Abstain</td>
                         {% elif rebellion in absent%}
-                            <th>Absent</th>
+                            <td>Absent</td>
                         {% else %}
-                            <th>NA</th>
+                            <td>NA</td>
                         {% endif %}
                     </tr>
 

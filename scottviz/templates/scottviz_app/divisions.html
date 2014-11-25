@@ -22,28 +22,28 @@
             {% for division in divisions %}
                 {% if division.result == '1' %}
                 <tr class="bg-success">
-                    <th><a href="/msp/division/{{division.id}}">{{division.motionid}}</a></th>
-                    <th>{{division.date}}</th>
-                    <th>{{division.topic}}</th>
-                    <th>Carried</th>
-                    <th>{{division.turnout}}% </th>
+                    <td><a href="/msp/division/{{division.id}}">{{division.motionid}}</a></td>
+                    <td>{{division.date}}</td>
+                    <td>{{division.topic}}</td>
+                    <td>Carried</td>
+                    <td>{{division.turnout}}% </td>
                     {% if division.rebels %}
-                        <th><a href="/msp/rebels/{{division.id}}">{{division.rebels}}</a> </th>
+                        <td><a href="/msp/rebels/{{division.id}}">{{division.rebels}}</a> </td>
                     {% else %}
-                        <th>{{division.rebels}}</th>
+                        <td>{{division.rebels}}</td>
                     {% endif %}
                 </tr>
                 {% else %}
                 <tr>
-                    <th><a href="/msp/division/{{division.id}}">{{division.motionid}}</a></th>
-                    <th>{{division.date}}</th>
-                    <th>{{division.topic}}</th>
-                    <th>Defeated</th>
-                    <th>{{division.turnout}}% </th>
+                    <td><a href="/msp/division/{{division.id}}">{{division.motionid}}</a></td>
+                    <td>{{division.date}}</td>
+                    <td>{{division.topic}}</td>
+                    <td>Defeated</td>
+                    <td>{{division.turnout}}% </td>
                     {% if division.rebels %}
-                        <th><a href="/msp/rebels/{{division.id}}">{{division.rebels}}</a> </th>
+                        <td><a href="/msp/rebels/{{division.id}}">{{division.rebels}}</a> </td>
                     {% else %}
-                        <th>{{division.rebels}}</th>
+                        <td>{{division.rebels}}</td>
                     {% endif %}
                 </tr>
                 {% endif %}

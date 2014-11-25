@@ -23,7 +23,9 @@ body {
     font-size: 13px;
     font-weight: 400
 }
-
+table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sorttable_nosort):after {
+    content: " \25B4\25BE"
+}
 .btn-outline {
     color: #563d7c;
     background-color: transparent;

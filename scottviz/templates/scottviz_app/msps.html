@@ -9,7 +9,7 @@
         <table class="table table-striped table-hover sortable">
             <thead>
             <tr>
-                <th>Msp</th>
+                <th>MSP</th>
                 <th>Party</th>
                 <th>Constituency</th>
                 <th>Rebellions</th>
@@ -20,22 +20,22 @@
             <tbody>
             {% for msp in msps %}
             <tr>
-                <th><a href="/msp/msp/{{msp.foreignid}}">{{msp}}</a></th>
-                <th><a href="/msp/party/{{msp.party.id}}">{{msp.party}}</a></th>
-                <th><a href="/msp/constituency/{{msp.constituency.id}}">{{msp.constituency}}</a></th>
+                <td sorttable_customkey="{{msp.lastname}}"><a href="/msp/msp/{{msp.foreignid}}">{{msp}}</a></td>
+                <td><a href="/msp/party/{{msp.party.id}}">{{msp.party}}</a></td>
+                <td><a href="/msp/constituency/{{msp.constituency.id}}">{{msp.constituency}}</a></td>
                 {% if msp.rebellions != None %}
                     {% if msp.rebellions %}
-                        <th><a href="/msp/rebellions/{{msp.id}}">{{msp.rebellions}}%</a></th>
+                        <td><a href="/msp/rebellions/{{msp.id}}">{{msp.rebellions}}%</a></td>
                     {% else %}
-                        <th>{{msp.rebellions}}%</th>
+                        <td>{{msp.rebellions}}%</td>
                     {% endif %}
                 {% else %}
-                    <th>NA</th>
+                    <td>NA</td>
                 {% endif %}
                 {% if msp.presence %}
-                    <th>{{msp.presence}}%</th>
+                    <td>{{msp.presence}}%</td>
                 {% else %}
-                    <th>NA</th>
+                    <td>NA</td>
                 {% endif %}
             </tr>
             {% endfor %}

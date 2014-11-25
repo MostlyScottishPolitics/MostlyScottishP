@@ -26,61 +26,61 @@
 
                 {% if rebel.division.result == '1' %}
                     <tr class="bg-success">
-                        <th><a href="/msp/msp/{{rebel.msp.foreignid}}">{{rebel.msp}}</a></th>
-                        <th>{{rebel.msp.party}}</th>
+                        <td><a href="/msp/msp/{{rebel.msp.foreignid}}">{{rebel.msp}}</a></td>
+                        <td>{{rebel.msp.party}}</td>
                         {% if rebel in party_for %}
-                            <th>For</th>
+                            <td>For</td>
                         {% elif rebel in party_against %}
-                            <th>Against</th>
+                            <td>Against</td>
                         {% elif rebel in party_abstain %}
-                            <th>Abstain</th>
+                            <td>Abstain</td>
                         {% elif rebel in party_absent%}
-                            <th>Absent</th>
+                            <td>Absent</td>
                         {% else %}
-                            <th>NA</th>
+                            <td>NA</td>
                         {% endif %}
                         {% if rebel in for %}
-                            <th>For</th>
+                            <td>For</td>
                         {% elif rebel in against %}
-                            <th>Against</th>
+                            <td>Against</td>
                         {% elif rebel in abstain %}
-                            <th>Abstain</th>
+                            <td>Abstain</td>
                         {% elif rebel in absent%}
-                            <th>Absent</th>
+                            <td>Absent</td>
                         {% else %}
-                            <th>NA</th>
+                            <td>NA</td>
                         {% endif %}
-                        <th>Carried</th>
-                        <th>{{rebel.division.turnout}}% </th>
+                        <td>Carried</td>
+                        <td>{{rebel.division.turnout}}% </td>
                     </tr>
                 {% else %}
                     <tr>
-                        <th><a href="/msp/msp/{{rebel.msp.foreignid}}">{{rebel.msp}}</a></th>
-                        <th>{{rebel.msp.party}}</th>
+                        <td><a href="/msp/msp/{{rebel.msp.foreignid}}">{{rebel.msp}}</a></td>
+                        <td>{{rebel.msp.party}}</td>
                         {% if rebel in party_for %}
-                            <th>For</th>
+                            <td>For</td>
                         {% elif rebel in party_against %}
-                            <th>Against</th>
+                            <td>Against</td>
                         {% elif rebel in party_abstain %}
-                            <th>Abstain</th>
+                            <td>Abstain</td>
                         {% elif rebel in party_absent%}
-                            <th>Absent</th>
+                            <td>Absent</td>
                         {% else %}
-                            <th>NA</th>
+                            <td>NA</td>
                         {% endif %}
                         {% if rebel in for %}
-                            <th>For</th>
+                            <td>For</td>
                         {% elif rebel in against %}
-                            <th>Against</th>
+                            <td>Against</td>
                         {% elif rebel in abstain %}
-                            <th>Abstain</th>
+                            <td>Abstain</td>
                         {% elif rebel in absent%}
-                            <th>Absent</th>
+                            <td>Absent</td>
                         {% else %}
-                            <th>NA</th>
+                            <td>NA</td>
                         {% endif %}
-                        <th>Defeated</th>
-                        <th>{{rebel.division.turnout}}% </th>
+                        <td>Defeated</td>
+                        <td>{{rebel.division.turnout}}% </td>
                     </tr>
                 {% endif %}
             {% endfor %}

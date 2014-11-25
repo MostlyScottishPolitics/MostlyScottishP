@@ -29,14 +29,14 @@
 
             <tbody>
             <tr>
-                <th>{{msp.member_startdate}}</th>
-                <th>{{msp.member_enddate}}</th>
+                <td>{{msp.member_startdate}}</td>
+                <td>{{msp.member_enddate}}</td>
                 {% if msp.rebellions %}
-                    <th><a href="/msp/rebellions/{{msp.id}}">{{msp.rebellions}}% </a></th>
+                    <td><a href="/msp/rebellions/{{msp.id}}">{{msp.rebellions}}% </a></td>
                 {% else %}
-                    <th>{{msp.rebellions}}% </th>
+                    <td>{{msp.rebellions}}% </td>
                 {% endif %}
-                <th>{{msp.presence}}%</th>
+                <td>{{msp.presence}}%</td>
             </tr>
 
             </tbody>
