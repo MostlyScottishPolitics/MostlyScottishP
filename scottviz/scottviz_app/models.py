@@ -17,6 +17,17 @@ class Constituency(models.Model):
 
 
 class MSP(models.Model):
+
+    MEMBER = 1
+    RESIGNED = 2
+    DECEASED = 3
+
+    SITUATIONS = (
+        (MEMBER, 'Member'),
+        (RESIGNED, 'Resigned'),
+        (DECEASED, 'Deceased')
+    )
+
     # spsession = models.ManyToManyField(SPsession)
     foreignid = models.PositiveIntegerField(max_length=8, unique=True)
     member_startdate = models.DateField(null=True)
@@ -33,6 +44,7 @@ class MSP(models.Model):
     img = models.CharField(max_length=256)
     presence=models.DecimalField(max_digits=5, decimal_places=2, null=True)
     rebellions=models.DecimalField(max_digits=5, decimal_places=2, null=True)
+    status = models.CharField(max_length=1, choices=SITUATIONS)
 
     def __unicode__(self):
         return u'%s %s' % (self.firstname, self.lastname)

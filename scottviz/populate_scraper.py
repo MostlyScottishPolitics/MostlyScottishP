@@ -248,7 +248,7 @@ def populate_votes(files):
     for party in parties:
         party_msps = MSP.objects.filter(party = party)
         threshold = (len(party_msps))/2
-        for division in divisions:
+        for division in divisions[:20]:
             print division
             division_votes = Vote.objects.filter(division = division)
             relevant_votes = [vote for vote in division_votes if vote.msp in party_msps]
@@ -307,24 +307,43 @@ def populate_votes(files):
         msp.presence = votes_present * 100 / Decimal(len(divisions))
         msp.save()
 
+# no longer members, but were in this session
 def add_other_msps():
     m = MSP(firstname='Brian', lastname='Adam', constituency=Constituency.objects.get(name='Aberdeen Donside'),
-            party=Party.objects.get(name='Scottish National Party'), foreignid=129)
+            member_startdate=parser.parse('5 May 2011'), member_enddate=parser.parse(' 25 April 2013'),
+            party=Party.objects.get(name='Scottish National Party'),
+            party_startdate=parser.parse('5 May 2011'), party_enddate=parser.parse('25 April 2013'),
+            status=MSP.DECEASED, foreignid=129,)
     m.save()
     m = MSP(firstname='Helen', lastname='Eadie', constituency=Constituency.objects.get(name='Cowdenbeath'),
-            party=Party.objects.get(name='Scottish Labour'), foreignid=130)
+            member_startdate=parser.parse('5 May 2011'), member_enddate=parser.parse('9 November 2013'),
+            party=Party.objects.get(name='Scottish Labour'),
+            party_startdate=parser.parse('5 May 2011'), party_enddate=parser.parse('9 November 2013'),
+            status=MSP.DECEASED, foreignid=130)
     m.save()
     m = MSP(firstname='Margo', lastname='MacDonald', constituency=Constituency.objects.get(name='Lothian'),
-            party=Party.objects.get(name='Independent'), foreignid=131)
+            member_startdate = parser.parse('5 May 2011'), member_enddate = parser.parse('4 April 2014'),
+            party=Party.objects.get(name='Independent'),
+            party_startdate = parser.parse('5 May 2011'), party_enddate = parser.parse('4 April 2014'),
+            status=MSP.DECEASED, foreignid=131)
     m.save()
     m = MSP(firstname='David', lastname='McLetchie', constituency=Constituency.objects.get(name='Lothian'),
-            party=Party.objects.get(name='Scottish Conservative and Unionist Party'), foreignid=132)
+            member_startdate = parser.parse('5 May 2011'), member_enddate = parser.parse('12 August 2013'),
+            party=Party.objects.get(name='Scottish Conservative and Unionist Party'),
+            party_startdate = parser.parse('5 May 2011'), party_enddate = parser.parse('12 August 2013'),
+            status=MSP.DECEASED, foreignid=132)
     m.save()
     m = MSP(firstname='John', lastname='Park', constituency=Constituency.objects.get(name='Mid Scotland and Fife'),
-            party=Party.objects.get(name='Scottish Labour'), foreignid=133)
+            member_startdate = parser.parse('5 May 2011'), member_enddate = parser.parse('9 November 2013'),
+            party=Party.objects.get(name='Scottish Labour'),
+            party_startdate = parser.parse('5 May 2011'), party_enddate = parser.parse('9 November 2013'),
+            status=MSP.RESIGNED, foreignid=133)
     m.save()
     m = MSP(firstname='Bill', lastname='Walker', constituency=Constituency.objects.get(name='Dunfermline'),
-            party=Party.objects.get(name='Independent'), foreignid=134)
+            member_startdate = parser.parse('5 May 2011'), member_enddate = parser.parse('9 November 2013'),
+            party=Party.objects.get(name='Independent'),
+            party_startdate = parser.parse('5 May 2011'), party_enddate = parser.parse('9 November 2013'),
+            foreignid=134)
     m.save()
 
 
