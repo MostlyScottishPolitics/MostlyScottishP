@@ -5,7 +5,7 @@
     <!--meta, title -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="Mostly Scottish Politics, a web app for visualising how Members of Scottish parliament vote">
     <meta name="keywords" content="visualisation, Scottish Parliament, msp, constituency, votes, divisions, framework">
     <meta name="author" content="Pierre Hallot, Kris Camilleri, Lama Alssum, Laura Voinea, Cristina Mihailescu">
@@ -51,21 +51,15 @@
                 {% endfor %}
             </ul>
 
-            <ul class="nav navbar-nav navbar-right">
-                <div class="search_container">
-                <form class="navbar-form" role="search" method="GET" action="{% url 'search_results' %}">
-                    <div class="input-group">
-                        <input type="text" class="form-control pull-left" placeholder="search by postcode" name="q">
 
-                        <div class="input-group-btn">
-                            <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i>
-                            </button>
+                <form class="navbar-form pull-right col-sm-4" role="search" method="GET" action="{% url 'search_results' %}">
+                        <div class="form-group" style="display:inline;">
+                          <div class="input-group">
+                            <input type="text" class="form-control" placeholder="search by postcode" name="q" autocomplete="off">
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
+                          </div>
                         </div>
-                    </div>
-                </form>
-                </div>
-            </ul>
-
+                  </form>
         </div>
     </div>
     </div>
@@ -109,6 +103,7 @@
     <li class="tweet-btn">
       <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://getbootstrap.com/" data-count="horizontal" data-via="twbootstrap" data-related="mdo:Creator of Bootstrap">Tweet</a>
     </li>
+      <li class="socials"><div class="fb-like" data-send="false" data-width="150" data-show-faces="true"></div></li>
   </ul>
    </div>
 
