@@ -101,7 +101,7 @@ def home(request):
     content['activesite'] = {
         'id': 'home',
         'title': 'Welcome to Mostly Scottish Politics(MSP)',
-        'desc': "Browse motions, regions, MSPs, see how they vote, and don't forget to have a go at out interactive visualisations and map ",
+        'desc': "Browse motions, regions, MSPs, see how they vote, and don't forget to have a go at our interactive visualisations and map ",
     }
     return render_to_response('scottviz_app/base.html', content, context)
 
