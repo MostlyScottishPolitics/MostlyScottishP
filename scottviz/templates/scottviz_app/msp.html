@@ -30,34 +30,109 @@
     </div>
 </div>
 
+<div class="container-fluid">
+<ul class="nav nav-tabs">
+  <li role="presentation" class="active" id="rebellions"><a href="#rebellions" >Rebellions</a></li>
+  <li role="presentation" id="attendance"><a href="#attendance" >Attendance</a></li>
+</ul>
+    </div>
+<div id="rebel">
+{% if rebellions %}
 <div class="container">
     <div class="table-responsive">
-        <table class="table table-striped table-hover sortable">
+        <table class="table table-hover sortable">
+             <caption>A 'rebellion' is when an MSP votes differently than his party . Here you can see the divisions for which this MSP rebelled. </caption>
+
             <thead>
             <tr>
-                <th>From</th>
-                <th>To</th>
-                <th>Rebellions</th>
-                <th>Attendance</th>
+                <th>Division</th>
+                <th>Date</th>
+                <th>Topic</th>
+                <th>Result</th>
+                <th>Turnout</th>
+                <th>Rebels</th>
+                <th>Party Vote</th>
+                <th>MSP Vote</th>
             </tr>
             </thead>
 
             <tbody>
-            <tr>
-                <td>{{msp.member_startdate}}</td>
-                <td>{{msp.member_enddate}}</td>
-                {% if msp.rebellions %}
-                    <td><a href="/msp/rebellions/{{msp.id}}">{{msp.rebellions}}% </a></td>
-                {% else %}
-                    <td>{{msp.rebellions}}% </td>
-                {% endif %}
-                <!-- NEEEEED TO ALSO PRINT DIVISIONS -->
-                <td>{{msp.presence}}%</td>
-            </tr>
+            {% for rebellion in rebellions %}
 
+                {% if rebellion.division.result == '1' %}
+                    <tr class="bg-success">
+                        <td><a href="/msp/division/{{rebellion.division.id}}">{{rebellion.division}}</a></td>
+                        <td>{{rebellion.division.date}}</td>
+                        <td>{{rebellion.division.topic}}</td>
+                        <td>Carried</td>
+                        <td>{{rebellion.division.turnout}}% </td>
+                        <td><a href="/msp/rebels/{{rebellion.division.id}}">{{rebellion.division.rebels}} </a> </td>
+                        {% if rebellion in party_for %}
+                            <td>For</td>
+                        {% elif rebellion in party_against %}
+                            <td>Against</td>
+                        {% elif rebellion in party_abstain %}
+                            <td>Abstain</td>
+                        {% elif rebellion in party_absent%}
+                            <td>Absent</td>
+                        {% else %}
+                            <td>NA</td>
+                        {% endif %}
+                        {% if rebellion in for %}
+                            <td>For</td>
+                        {% elif rebellion in against %}
+                            <td>Against</td>
+                        {% elif rebellion in abstain %}
+                            <td>Abstain</td>
+                        {% elif rebellion in absent%}
+                            <td>Absent</td>
+                        {% else %}
+                            <td>NA</td>
+                        {% endif %}
+                    </tr>
+
+                    {% else %}
+                    <tr>
+                        <td><a href="/msp/division/{{rebellion.division.id}}">{{rebellion.division}}</a></td>
+                        <td>{{rebellion.division.date}}</td>
+                        <td>{{rebellion.division.topic}}</td>
+                        <td>Defeated</td>
+                        <td>{{rebellion.division.turnout}}% </td>
+                        <td><a href="/msp/rebels/{{rebellion.division.id}}">{{rebellion.division.rebels}} </a> </td>
+                        {% if rebellion in party_for %}
+                            <td>For</td>
+                        {% elif rebellion in party_against %}
+                            <td>Against</td>
+                        {% elif rebellion in party_abstain %}
+                            <td>Abstain</td>
+                        {% elif rebellion in party_absent%}
+                            <td>Absent</td>
+                        {% else %}
+                            <td>NA</td>
+                        {% endif %}
+                        {% if rebellion in for %}
+                            <td>For</td>
+                        {% elif rebellion in against %}
+                            <td>Against</td>
+                        {% elif rebellion in abstain %}
+                            <td>Abstain</td>
+                        {% elif rebellion in absent%}
+                            <td>Absent</td>
+                        {% else %}
+                            <td>NA</td>
+                        {% endif %}
+                    </tr>
+
+                    {% endif %}
+            {% endfor %}
             </tbody>
         </table>
     </div>
+</div>
+{% endif %}
+</div>
+ <div id="attend">
+
 </div>
 {% endif %}
 <a class="btn btn-default back" href="/msp/msps"><i class="glyphicon glyphicon-circle-arrow-left"></i>All MSPs</a>
