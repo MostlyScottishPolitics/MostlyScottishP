@@ -8,7 +8,7 @@ $(function () {
     var bordercolor = "black";
     var dataset = [];
     var colors = [
-            ["Scottish Conservative and Unionist Party", "#5ABFF4"],
+            ["Scottish Conservative and Unionist", "#5ABFF4"],
             ["Scottish Labour", "#846DD4"],
             ["Scottish Liberal Democrats", "#FA6485"],
             ["Scottish National Party", "#F6DC60"],

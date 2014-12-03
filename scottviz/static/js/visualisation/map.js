@@ -1,16 +1,4 @@
-<!DOCTYPE html>
-<meta charset="utf-8">
-<style>
-svg{
-    background:#fff;
-}
-
-</style>
-<body>
-<script src="http://d3js.org/d3.v3.min.js"></script>
-<script src="http://d3js.org/topojson.v1.min.js"></script>
-<script>
-
+$(function () {
 var w=960, h=750;
 var pLoad = [];
 var party={};
@@ -52,6 +40,7 @@ var gssCode = {
     "S12000041":"Tayside",
     "S12000042":"Tayside"
 };
+})
 
 var color = {
    "Scottish Conservative and Unionist Party" : "#5ABFF4",
@@ -85,7 +74,8 @@ var path = d3.geo.path()
 var svg = d3.select("body")
     .append("svg")
     .attr("width",w)
-    .attr("height",h);
+    .attr("height",h)
+    .style("background","#fff");
     
 var borderPath = svg.append("rect")
        			.attr("x", 0)
@@ -98,7 +88,7 @@ var borderPath = svg.append("rect")
 
 var generateVisualization = function()
 {
-d3.json("scotland-topojson-file.json",function(err,load){
+d3.json("/static/json/scotland-topojson-file.json",function(err,load){
     svg.selectAll("path")
         .data(topojson.feature(load,load.objects.layer1).features)
       .enter().append("path")
@@ -129,7 +119,7 @@ var legend = svg.selectAll(".legend")
       				.attr("class", "text")
     				.text(function(d) { return d[0]; });
 };
-d3.csv("map_data.csv", function(error, d) {
+d3.csv("/static/csv/map_data.csv", function(error, d) {
   				pLoad = d.map(function(d) { return [d["region"], d["party"]]; 
   				});
   				
@@ -138,5 +128,3 @@ d3.csv("map_data.csv", function(error, d) {
 				}
   				console.log(party);
   				generateVisualization();});
-</script>
-</body>
