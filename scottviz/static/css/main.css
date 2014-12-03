@@ -19,6 +19,14 @@ body {
     position: relative
 }
 
+#top.affix {
+   position: fixed;
+   top: 0;
+    width: 100%;
+   z-index:10;
+   -webkit-transition: all .6s ease-in-out;
+}
+
 .table code {
     font-size: 13px;
     font-weight: 400
@@ -118,4 +126,11 @@ table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sor
     margin-bottom: 30px;
     line-height: 1
 
+}
+#cc{
+    display: none;
+}
+.map{
+    position: relative;
+    width: 100%;
 }

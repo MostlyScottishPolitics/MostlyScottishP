@@ -15,8 +15,18 @@ class Constituency(models.Model):
     def __unicode__(self):
         return self.name
 
-
 class MSP(models.Model):
+
+    MEMBER = 1
+    RESIGNED = 2
+    DECEASED = 3
+
+    SITUATIONS = (
+        (MEMBER, 'Member'),
+        (RESIGNED, 'Resigned'),
+        (DECEASED, 'Deceased')
+    )
+
     # spsession = models.ManyToManyField(SPsession)
     foreignid = models.PositiveIntegerField(max_length=8, unique=True)
     member_startdate = models.DateField(null=True)
@@ -27,16 +37,23 @@ class MSP(models.Model):
     party_enddate = models.DateField(null=True)
     firstname = models.CharField(max_length=128)
     lastname = models.CharField(max_length=128)
-    job = models.CharField(max_length=128)
-    job_startdate = models.DateField(null=True)
-    job_enddate = models.DateField(null=True)
     img = models.CharField(max_length=256)
     presence=models.DecimalField(max_digits=5, decimal_places=2, null=True)
     rebellions=models.DecimalField(max_digits=5, decimal_places=2, null=True)
+    status = models.CharField(max_length=1, choices=SITUATIONS)
 
     def __unicode__(self):
         return u'%s %s' % (self.firstname, self.lastname)
 
+class Job(models.Model):
+    job_foreignid = models.PositiveIntegerField(max_length=8, unique=True)
+    name = models.CharField(max_length=128)
+    msp = models.ForeignKey(MSP)
+    job_startdate = models.DateField()
+    job_enddate = models.DateField()
+
+    def __unicode__(self):
+        return u'%s: %s - %s' (self.name, self.job_startdate, self.job_enddate)
 
 class SPsession(models.Model):
     msps = models.ManyToManyField(MSP)

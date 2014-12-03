@@ -6,6 +6,8 @@ import psycopg2 as pq
 
 import mdp
 
+#Update me to appropriate output location for CSV to be read by D3
+outputLocation = "H:\Spviz-appWorking\Spviz-app-master\scottviz\static\csv\OutputMatrix.csv"
 
 print ''
 print "-----Program Started-----"
@@ -31,9 +33,9 @@ maxDivision_int = map(int, maxDivision)[0] + 1
 data = {}
 matrix = numpy.zeros((int(maxMSP_int), int(maxDivision_int)))
 
-#Gets MSP Firs and Second Names
+#Gets MSP First and Second Names
 def selectMSP():
-    result = cr.execute('SELECT firstname, lastname FROM scottviz_app_msp;')
+    result = cr.execute('SELECT firstname, lastname FROM scottviz_app_msp ORDER BY foreignid;')
     msp = cr.fetchall()
     count = -1
     mspList = []
@@ -49,7 +51,7 @@ def selectMSP():
 #Fills in values of 2D null matrix, with each entry being a vote (X=divisions, Y=MSPs)
 def selectVotes():
     result = cr.execute(
-        "SELECT msp.foreignid, div.id, vote.vote FROM scottviz_app_msp AS msp, scottviz_app_division AS div, scottviz_app_vote AS vote WHERE msp.id = vote.msp_id AND div.id= vote.division_id")
+        "SELECT msp.foreignid, div.id, vote.vote FROM scottviz_app_msp AS msp, scottviz_app_division AS div, scottviz_app_vote AS vote WHERE msp.id = vote.msp_id AND div.id= vote.division_id ORDER BY msp.foreignid")
     vote = cr.fetchall()
     count = -1
     for rows in vote:
@@ -66,11 +68,10 @@ def selectVotes():
     print "1) Data has been retrieved from database."
     return matrix
 
-
 #Gets each MSP's Party's name
 def selectParty():
     result = cr.execute(
-        "SELECT party.name FROM scottviz_app_party AS party, scottviz_app_msp AS msp WHERE msp.party_id = party.id")
+        "SELECT party.name FROM scottviz_app_party AS party, scottviz_app_msp AS msp WHERE msp.party_id = party.id ORDER BY msp.foreignid")
     party = cr.fetchall()
     count = -1
     partyList = []
@@ -82,6 +83,10 @@ def selectParty():
 
 
 matrix = selectVotes()
+#Slightly hacky solution to removing null first row and column which exist as a bi-product of required matrix dimensions
+matrix = numpy.delete(matrix,(0),axis=0)
+matrix = numpy.delete(matrix,(0),axis=1)
+
 numpy.savetxt("InputMatrix.csv", matrix, fmt="%s", delimiter=",")
 print '2) Input Data stored in matrix, and printed to InputMatrix.csv.'
 
@@ -90,16 +95,16 @@ output = imdp(matrix)
 
 
 #Ouput everything to CSV so as to be read by D3
-numpy.savetxt("OutputMatrix.csv", output, fmt="%s", delimiter=",")
+numpy.savetxt(outputLocation, output, fmt="%s", delimiter=",")
 print "3) PCA Data saved to file."
 
 #Append name of party (as a string) to each row of output text
 mspList = selectMSP()
 partyList = selectParty()
 count = -1
-path = os.path.dirname(os.path.abspath(__file__)) + '\OutputMatrix.csv'
+path = os.path.dirname(os.path.abspath(__file__)) + outputLocation
 firstLine = 0
-for line in fileinput.input('OutputMatrix.csv', inplace=1):
+for line in fileinput.input(outputLocation, inplace=1):
     count += 1
     #If first line of csv add header, else append party name
     if firstLine == 0:
