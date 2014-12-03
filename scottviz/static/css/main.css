@@ -130,3 +130,7 @@ table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sor
 #cc{
     display: none;
 }
+.map{
+    position: relative;
+    width: 100%;
+}

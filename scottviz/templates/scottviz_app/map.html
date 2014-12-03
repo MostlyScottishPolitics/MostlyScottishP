@@ -1,5 +1,10 @@
 {% extends "scottviz_app/base.html" %}
 
 {% block content %}
+{% load staticfiles %}
+<div class="map" id = "map"> </div>
+
+<script src="http://d3js.org/topojson.v1.min.js"></script>
 <script src="{% static 'js/visualisation/map.js' %}"></script>
+
 {% endblock %}
