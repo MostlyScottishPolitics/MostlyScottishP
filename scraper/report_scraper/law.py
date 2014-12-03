@@ -21,6 +21,7 @@ class Law(object):
     law_presenter_party = ""
     law_presenter_constituency = ""
     law_topic = ""
+    law_category = ""
     law_text = ""
     law_agreed = False
     law_for = []
@@ -34,6 +35,7 @@ class Law(object):
         self.law_presenter_name = ""
         self.law_presenter_surname = ""
         self.law_topic = ""
+        self.law_category = ""
         self.law_text = ""
         self.law_agreed = ""
         self.law_for = []
@@ -68,6 +70,17 @@ class Law(object):
             #log("Can't add constituency to node.")
             return
 
+    # Check if there is enough data in the law to make it worthwhile
+    def is_correct(self):
+        if (self.law_type == ""
+                or self.law_id == ""
+                or self.law_agreed == ""
+                or self.law_presenter_name == ""
+                or self.law_presenter_surname == ""):
+            return False
+        else:
+            return True
+
     def data_to_xml_node(self, parent_node):
         law_node = ET.SubElement(parent_node, "law")
 
@@ -88,6 +101,10 @@ class Law(object):
 
         topic_node = ET.SubElement(law_node, "topic")
         topic_node.text = self.law_topic
+
+        if self.law_category:
+            category_node = ET.SubElement(law_node, "category")
+            category_node.text = self.law_category
 
         if self.law_text:
             text_node = ET.SubElement(law_node, "text")
@@ -119,6 +136,7 @@ class Law(object):
         self.law_presenter_name = ""
         self.law_presenter_surname = ""
         self.law_topic = ""
+        self.law_category = ""
         self.law_text = ""
         self.law_agreed = ""
         self.law_for = []
