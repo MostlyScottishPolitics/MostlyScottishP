@@ -15,7 +15,6 @@ class Constituency(models.Model):
     def __unicode__(self):
         return self.name
 
-
 class MSP(models.Model):
 
     MEMBER = 1
@@ -38,9 +37,6 @@ class MSP(models.Model):
     party_enddate = models.DateField(null=True)
     firstname = models.CharField(max_length=128)
     lastname = models.CharField(max_length=128)
-    job = models.CharField(max_length=128)
-    job_startdate = models.DateField(null=True)
-    job_enddate = models.DateField(null=True)
     img = models.CharField(max_length=256)
     presence=models.DecimalField(max_digits=5, decimal_places=2, null=True)
     rebellions=models.DecimalField(max_digits=5, decimal_places=2, null=True)
@@ -49,6 +45,14 @@ class MSP(models.Model):
     def __unicode__(self):
         return u'%s %s' % (self.firstname, self.lastname)
 
+class Job(models.Model):
+    name = models.CharField(max_length=128, unique=True)
+    msp = models.ForeignKey(MSP)
+    startdate = models.DateField()
+    enddate = models.DateField()
+
+    def __unicode__(self):
+        return self.name
 
 class SPsession(models.Model):
     msps = models.ManyToManyField(MSP)
