@@ -18,6 +18,8 @@ import time
 
 # Law class, contains the data for a law
 import law
+# To extract the topic from the text of the law
+import topic_extracter
 
 
 # For log messages
@@ -33,6 +35,7 @@ def process_id_line(line1, current_law):
     name_read = False
     # Remove the html
     line1 = trim_html(line1)
+    # Split the sentence with commas
     split_array = line1.split(",")
     for element in split_array:
         # Split the piece of sentence into words
@@ -41,38 +44,55 @@ def process_id_line(line1, current_law):
         if "that" in element:
             # Second word is type
             try:
-                current_law.law_type = words[2]
+                # Malformed data with no type
+                # Assumed amendment
+                if "S4" in words[2]:
+                    current_law.law_type = "amendment"
+                else:
+                    current_law.law_type = words[2]
             except Exception:
                 log("Can't get the type.")
             # Third word is id
             try:
-                current_law.law_id = words[3]
+                # Malformed data with no type
+                if "S4" in words[2]:
+                    current_law.law_id = words[2]
+                else:
+                    current_law.law_id = words[3]
             except Exception:
                 log("Can't get the id.")
         # Piece of sentence with surname and name
-        elif "in the name of" in element:
+        elif "in the name of" in element and "in" in words[1]:
             # If the law is an amendment, we only need the first surname/name
             # The second ones are those for the original bill, which we don't need here
             if not name_read:
                 # Fifth word is surname, sixth name
                 try:
-                    current_law.law_presenter_surname = words[5]
+                    if "Dr" in words[5]:
+                        current_law.law_presenter_surname = words[6]
+                    else:
+                        current_law.law_presenter_surname = words[5]
                 except Exception:
                     log("Can't get the surname.")
                 try:
-                    current_law.law_presenter_name = words[6]
+                    if "Dr" in words[5]:
+                        current_law.law_presenter_name = words[7]
+                    else:
+                        current_law.law_presenter_name = words[6]
                 except Exception:
                     log("Can't get the name.")
                 name_read = True
         # Piece of sentence with topic
         elif "on" in element:
-            # The whole piece, minus on
-            current_law.law_topic = element.replace(" on ", "")
+            # The whole piece, minus " on "
+            current_law.law_topic = element[4:]
 
 
 # Process the lines which contains lists of msps
 def process_msps_line(line, node, current_law):
     line = trim_html(line)
+    # Remove title of msps
+    line = line.replace("Dr ", "")
     if "for" in node:
         current_law.law_for.append(line.replace(",", "", 1))
     elif "against" in node:
@@ -84,9 +104,11 @@ def process_msps_line(line, node, current_law):
 # Process the lines which contains lists of msps
 # Version for the old format
 def process_old_msp(line, current_law):
-    # Remove the debut of the string, depends on for?against/...
+    # Remove the debut of the string, depends on for/against/...
     # Could be cleaner
     line = line.strip("<div class='content'>There will be a division.<br /><br />")
+    # Remove title of msps
+    line = line.replace("Dr ", "")
     split = line.split("<br />")
     level = 0
     for element in split:
@@ -243,12 +265,16 @@ def process_html(filename, id_file):
                         current_law.law_agreed = split_array[len(split_array) - 2]
                     except Exception:
                         log("Can't get the agreement on the law.")
-                    if not "disagreed" in line and ("amended" in line or "Motion" in line or "Amendment" in line):
+                    if "disagreed" not in line and ("amended" in line or "Motion" in line or "Amendment" in line):
                         agreed = True
                 # Text voted
                 # Value of the text is the next line
                 elif agreed:
-                    current_law.law_text = trim_html(line)
+                    # If there is actually a text
+                    if "The Presiding Officer:" not in line:
+                        current_law.law_text = trim_html(line)
+                        # Topic category
+                        current_law.law_category = topic_extracter.get_topic_from_text(trim_html(line))
                     agreed = False
 
                 # Result of the vote
@@ -268,6 +294,8 @@ def process_html(filename, id_file):
                         try:
                             if "agreed" in element and "</div>" not in split[i + 1]:
                                 current_law.law_text = split[i + 1]
+                                # Topic category
+                                current_law.law_category = topic_extracter.get_topic_from_text(split[i + 1])
                             i += 1
                         except Exception:
                             log("Can't get the text of the law.")
@@ -276,7 +304,10 @@ def process_html(filename, id_file):
     # Write xml nodes only if data is of interest
     # Flush last value
     if record_data:
-        current_law.data_to_xml_node(root)
+        if current_law.is_correct():
+            current_law.data_to_xml_node(root)
+        else:
+            log("Invalid data in law. No data written.")
 
     if not write:
         log("No file created because there is no vote data in scraped file " + str(id_file) + ", no data written.")
