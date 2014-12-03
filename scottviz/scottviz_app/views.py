@@ -8,7 +8,6 @@ from django.http import HttpResponse
 import postcode_search
 from models import *
 
-
 navbar = (
 
     ('msps', {'id': 'msps', 'title': 'MSPs', 'desc': 'List of all Members of Scottish Parliament'}),
@@ -135,6 +134,7 @@ def msp(request, mspID):
     }
     content['msp'] = this_msp
     content['msp'].votecount = Vote.objects.filter(msp=this_msp).count()
+    content['jobs']=Job.objects.filter(msp=this_msp)
     return render_to_response('scottviz_app/msp.html', content, context)
 
 

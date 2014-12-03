@@ -9,10 +9,25 @@
     <div class="panel-body">
         <img src="{{ msp.img }}">
 
-        <p>Currently member of: <a href="/msp/party/{{msp.party.id}}">{{msp.party.name}}</a></p>
-        <p>Previously member of: </p>
+            <p>Member of: <a href="/msp/party/{{msp.party.id}}">{{msp.party.name}}</a> from {{msp.party_startdate}} to {{msp.party_enddate}} </p>
+<!--        <p>Previously member of: </p> -->
 
-        <p>Represents: <a href="/msp/constituency/{{msp.constituency.id}}">{{msp.constituency.name}}</a></p></div>
+        <p>Represents: <a href="/msp/constituency/{{msp.constituency.id}}">{{msp.constituency.name}}</a></p>
+
+        {% if jobs %}
+            <p>Positions held: </p>
+            {% for job in jobs %}
+                <p>{{job.name}} from {{msp.party_startdate}} to {{msp.party_enddate}}</p>
+            {% endfor %}
+        {% endif %}
+
+        {% if msp.status == '2' %}
+            <p> Has resigned </p>
+        {% elif msp.status == '3'%}
+            <p> Unfortunately deceased </p>
+        {% endif %}
+
+    </div>
 </div>
 
 <div class="container">
@@ -36,6 +51,7 @@
                 {% else %}
                     <td>{{msp.rebellions}}% </td>
                 {% endif %}
+                <!-- NEEEEED TO ALSO PRINT DIVISIONS -->
                 <td>{{msp.presence}}%</td>
             </tr>
 

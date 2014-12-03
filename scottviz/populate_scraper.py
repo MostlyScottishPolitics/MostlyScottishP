@@ -33,7 +33,7 @@ msp_img_urls = {
 'Patricia Ferguson' : "http://www.scottish.parliament.uk/images/MSP%20Photos/scottishparliament_9853242528.jpg",
 'Neil Findlay' : "http://www.scottish.parliament.uk/images/MSP%20Photos/scottishparliament_9853244349.jpg",
 'John Finnie' : "http://www.scottish.parliament.uk/images/MSP%20Photos/scottishparliament_9853245791.jpg",
-'Joe Fitzpatrick' : "http://www.scottish.parliament.uk/images/MSP%20Photos/scottishparliament_9853249335.jpg",
+'Joe FitzPatrick' : "http://www.scottish.parliament.uk/images/MSP%20Photos/scottishparliament_9853249335.jpg",
 'Murdo Fraser' : "http://www.scottish.parliament.uk/images/MSP%20Photos/scottishparliament_9853250520.jpg",
 'Rob Gibson' : "http://www.scottish.parliament.uk/images/MSP%20Photos/scottishparliament_9853255175.jpg",
 'Annabel Goldie' : "http://www.scottish.parliament.uk/images/MSP%20Photos/scottishparliament_9853257110.jpg",
@@ -93,15 +93,15 @@ msp_img_urls = {
 # TO DO: more jobs
 # TO TO: think how to have a history of jobs
 jobs = [
-['Alex', 'Salmond', 'First Minister', parser.parse('16 May 2007').date, parser.parse('20 November 2014').date()],
-['Nicola', 'Sturgeon', 'First Minister', parser.parse('20 November 2014').date(), parser.parse('5 May 2016').date()],
-['Tricia', 'Marwick', 'Presiding Officer', parser.parse('11 May 2011').date(), parser.parse('5 May 2016').date()],
-['Joe', 'Fitzpatrick', 'Minister for Parliamentary business', parser.parse('5 September 2012').date(), parser.parse('5 May 2016').date()],
-['Elaine', 'Smith', 'Deputy Presiding Officer', parser.parse('11 May 2011').date(), parser.parse('5 May 2016').date()],
-['John', 'Scott', 'Deputy Presiding Officer', parser.parse('11 May 2011').date(), parser.parse('5 May 2016').date()],
-['John', 'Swinney', 'Cabinet Secretary for Finance, Constitution and Economy', parser.parse('21 November 2014').date(),parser.parse('5 May 2016').date()],
-['Alasdair', 'Allan', 'Minister for Learning, Science and Scotland\'s Languages', parser.parse('7 December 2011').date(),parser.parse('5 May 2016').date()],
-['Angela', 'Constance', 'Minister for Youth Employment', parser.parse('7 December 2011').date(),parser.parse('22 April 2014').date()]
+['Alex', 'Salmond', 'First Minister', parser.parse('16 May 2007'), parser.parse('20 November 2014')],
+['Nicola', 'Sturgeon', 'First Minister', parser.parse('20 November 2014'), parser.parse('5 May 2016')],
+['Tricia', 'Marwick', 'Presiding Officer', parser.parse('11 May 2011'), parser.parse('5 May 2016')],
+['Joe', 'FitzPatrick', 'Minister for Parliamentary business', parser.parse('5 September 2012'), parser.parse('5 May 2016')],
+['Elaine', 'Smith', 'Deputy Presiding Officer', parser.parse('11 May 2011'), parser.parse('5 May 2016')],
+['John', 'Scott', 'Deputy Presiding Officer', parser.parse('11 May 2011'), parser.parse('5 May 2016')],
+['John', 'Swinney', 'Cabinet Secretary for Finance, Constitution and Economy', parser.parse('21 November 2014'),parser.parse('5 May 2016')],
+['Alasdair', 'Allan', 'Minister for Learning, Science and Scotland\'s Languages', parser.parse('7 December 2011'),parser.parse('5 May 2016')],
+['Angela', 'Constance', 'Minister for Youth Employment', parser.parse('7 December 2011'),parser.parse('22 April 2014')]
 ]
 
 def delete_data():
@@ -111,6 +111,7 @@ def delete_data():
     Division.objects.all().delete()
     Party.objects.all().delete()
     SPsession.objects.all().delete()
+    Job.objects.all().delete()
 
 
 def populate_constituency():
@@ -198,15 +199,17 @@ def msp_photos():
             msp.save()
 
 def msp_jobs():
+    i=0
     for job in jobs:
-        j = Job(name=job[2],msp=MSP.objects.get(firstname=job[0], lastname=job[1]),startdate=job[3],enddate=job[4])
+        i+=1
+        j = Job(job_foreignid=i,name=job[2],msp=MSP.objects.get(firstname=job[0], lastname=job[1]),job_startdate=job[3],job_enddate=job[4])
         j.save()
 
 def populate_votes(files):
     # naive skip files before 06 May 2011, using a switch: currentsession
     # change encouraged
     currentsession = False
-    for f in files[:85]:
+    for f in files[:72]:
         doc = minidom.parse(f)
         date = doc.getElementsByTagName("date")[0].firstChild.data
         dt = parser.parse(date).date()

@@ -46,13 +46,14 @@ class MSP(models.Model):
         return u'%s %s' % (self.firstname, self.lastname)
 
 class Job(models.Model):
-    name = models.CharField(max_length=128, unique=True)
+    job_foreignid = models.PositiveIntegerField(max_length=8, unique=True)
+    name = models.CharField(max_length=128)
     msp = models.ForeignKey(MSP)
-    startdate = models.DateField()
-    enddate = models.DateField()
+    job_startdate = models.DateField()
+    job_enddate = models.DateField()
 
     def __unicode__(self):
-        return self.name
+        return u'%s: %s - %s' (self.name, self.job_startdate, self.job_enddate)
 
 class SPsession(models.Model):
     msps = models.ManyToManyField(MSP)
