@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import csv
 import os
 
@@ -359,9 +360,13 @@ def populate_votes(files):
             for law in laws:
                 motionid = law.getElementsByTagName("id")[0].firstChild.data
                 topic_raw = law.getElementsByTagName("topic")[0].firstChild.data
-                topic = unicode(topic_raw).encode('latin-1', 'replace')
-                text_raw = law.getElementsByTagName("text")[0].firstChild.data
-                text = unicode(text_raw).encode('latin-1', 'replace')
+                topic = str(topic_raw.encode('ascii','replace'))
+                text_raw = law.getElementsByTagName("text")
+                if text_raw == [] :
+                    text='n/a'
+                else:
+                    text_less_raw = text_raw[0].firstChild.data
+                    text = str(text_less_raw.encode('ascii','replace'))
                 yup = law.getElementsByTagName("agreed")[0].firstChild
 
                 if yup:
