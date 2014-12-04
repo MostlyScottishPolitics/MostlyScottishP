@@ -80,15 +80,15 @@
             <tbody>
 
             <tr>
-
+            <tr>
                {% for party in parties %}
-                    <td>{{party}}</td>
-                    <td>{{party['pro']*100/party['size']}}</td>
-                    <td>{{party['con']*100/party['size']}}</td>
-                    <td>{{party['turnout']*100/party['size']}}</td>
+                    <td>{{party.name}}</td>
+                    <td>{{party.pro}}</td>
+                    <td>{{party.con}}</td>
+                    <td>{{party.turnout}}</td>
                 {% endfor %}
             </tr>
-
+            </tr>
             </tbody>
         </table>
     </div>
