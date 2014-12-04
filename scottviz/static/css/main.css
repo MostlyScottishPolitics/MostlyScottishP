@@ -34,6 +34,7 @@ body {
 table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sorttable_nosort):after {
     content: " \25B4\25BE"
 }
+
 .btn-outline {
     color: #563d7c;
     background-color: transparent;
@@ -130,7 +131,11 @@ table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sor
 #cc{
     display: none;
 }
+#attend{
+    display: none;
+}
 .map{
     position: relative;
     width: 100%;
 }
+

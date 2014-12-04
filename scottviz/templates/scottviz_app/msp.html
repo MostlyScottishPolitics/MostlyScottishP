@@ -59,12 +59,12 @@
 
                 {% if rebellion.division.result == '1' %}
                     <tr class="bg-success">
-                        <td><a href="/msp/division/{{rebellion.division.id}}">{{rebellion.division}}</a></td>
-                        <td>{{rebellion.division.date}}</td>
+                        <td>{{rebellion.division}}</a></td>
+                        <td sorttable_customkey="{{rebellion.division.id}}">{{rebellion.division.date}}</td>
                         <td>{{rebellion.division.topic}}</td>
                         <td>Carried</td>
                         <td>{{rebellion.division.turnout}}% </td>
-                        <td><a href="/msp/rebels/{{rebellion.division.id}}">{{rebellion.division.rebels}} </a> </td>
+                        <td>{{rebellion.division.rebels}} </a> </td>
                         {% if rebellion in party_for %}
                             <td>For</td>
                         {% elif rebellion in party_against %}
@@ -91,12 +91,12 @@
 
                     {% else %}
                     <tr>
-                        <td><a href="/msp/division/{{rebellion.division.id}}">{{rebellion.division}}</a></td>
-                        <td>{{rebellion.division.date}}</td>
+                        <td>{{rebellion.division}}</a></td>
+                        <td sorttable_customkey="{{rebellion.division.id}}">{{rebellion.division.date}}</td>
                         <td>{{rebellion.division.topic}}</td>
                         <td>Defeated</td>
                         <td>{{rebellion.division.turnout}}% </td>
-                        <td><a href="/msp/rebels/{{rebellion.division.id}}">{{rebellion.division.rebels}} </a> </td>
+                        <td>{{rebellion.division.rebels}} </a> </td>
                         {% if rebellion in party_for %}
                             <td>For</td>
                         {% elif rebellion in party_against %}
@@ -127,10 +127,70 @@
         </table>
     </div>
 </div>
+    {% else %}
+    <div class="well">
+    <p class="lead">Nothing to see here</p></div>
 {% endif %}
 </div>
  <div id="attend">
+     {% if attendance %}
+     <div class="container">
+    <div class="table-responsive">
+        <table class="table table-hover sortable">
+             <caption>{{msp.presence}}% </caption>
 
+            <thead>
+            <tr>
+                <th>Division</th>
+                <th>Date</th>
+                <th>Topic</th>
+                <th>Result</th>
+                <th>MSP Vote</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            {% for attend in attendance %}
+                {% if attend.division.result == '1' %}
+                    <tr class="bg-success">
+                        <td>{{attend.division}}</a></td>
+                        <td sorttable_customkey="{{attend.division.id}}">{{attend.division.date}}</td>
+                        <td>{{attend.division.topic}}</td>
+                        <td>Carried</td>
+                        {% if attend.vote == '1' %}
+                            <td>For</td>
+                        {% elif attend.vote == '2' %}
+                            <td>Against</td>
+                        {% elif attend.vote == '3' %}
+                            <td>Abstain</td>
+                        {% endif %}
+                    </tr>
+
+                    {% else %}
+                    <tr>
+                        <td>{{attend.division}}</a></td>
+                        <td sorttable_customkey="{{attend.division.id}}">{{attend.division.date}}</td>
+                        <td>{{attend.division.topic}}</td>
+                        <td>Defeated</td>
+                        {% if attend.vote == '1' %}
+                            <td>For</td>
+                        {% elif attend.vote == '2' %}
+                            <td>Against</td>
+                        {% elif attend.vote == '3' %}
+                            <td>Abstain</td>
+                        {% endif %}
+                    </tr>
+
+                    {% endif %}
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+    {% else %}
+    <div class="well">
+    <p class="lead">Nothing to see here</p></div>
+{% endif %}
 </div>
 {% endif %}
 <a class="btn btn-default back" href="/msp/msps"><i class="glyphicon glyphicon-circle-arrow-left"></i>All MSPs</a>
