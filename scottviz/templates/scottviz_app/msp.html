@@ -44,7 +44,7 @@
 <div class="container">
     <div class="table-responsive">
         <table class="table table-hover sortable">
-             <caption>A 'rebellion' is when an MSP votes differently than his party . Here you can see the divisions for which this MSP rebelled. </caption>
+             <caption>A 'rebellion' is when a MSP votes differently than his party. <br> {{msp}} rebelled {{msp.rebellions}}  </caption>
 
             <thead>
             <tr>
@@ -64,7 +64,7 @@
 
                 {% if rebellion.division.result == '1' %}
                     <tr class="bg-success">
-                        <td>{{rebellion.division}}</a></td>
+                        <td><a href="/msp/division/{{rebellion.division.id}}">{{rebellion.division}}</a></td>
                         <td sorttable_customkey="{{rebellion.division.id}}">{{rebellion.division.date}}</td>
                         <td>{{rebellion.division.topic}}</td>
                         <td>Carried</td>
@@ -96,7 +96,7 @@
 
                     {% else %}
                     <tr>
-                        <td>{{rebellion.division}}</a></td>
+                        <td><a href="/msp/division/{{rebellion.division.id}}">{{rebellion.division}}</a></td>
                         <td sorttable_customkey="{{rebellion.division.id}}">{{rebellion.division.date}}</td>
                         <td>{{rebellion.division.topic}}</td>
                         <td>Defeated</td>
@@ -142,7 +142,7 @@
      <div class="container">
     <div class="table-responsive">
         <table class="table table-hover sortable">
-             <caption>{{msp.presence}}% </caption>
+             <caption> Attendance is computed over all votes possible. <br> {{msp}} was present for {{msp.presence}}% </caption>
 
             <thead>
             <tr>
@@ -158,7 +158,7 @@
             {% for attend in attendance %}
                 {% if attend.division.result == '1' %}
                     <tr class="bg-success">
-                        <td>{{attend.division}}</a></td>
+                        <td><a href="/msp/division/{{attend.division.id}}"> {{attend.division}}</a></td>
                         <td sorttable_customkey="{{attend.division.id}}">{{attend.division.date}}</td>
                         <td>{{attend.division.topic}}</td>
                         <td>Carried</td>
@@ -173,7 +173,7 @@
 
                     {% else %}
                     <tr>
-                        <td>{{attend.division}}</a></td>
+                        <td><a href="/msp/division/{{attend.division.id}}">{{attend.division}}</a></td>
                         <td sorttable_customkey="{{attend.division.id}}">{{attend.division.date}}</td>
                         <td>{{attend.division.topic}}</td>
                         <td>Defeated</td>
