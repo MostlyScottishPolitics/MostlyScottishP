@@ -6,6 +6,7 @@
     <surname>Mark</surname>
     <name>Griffin</name>
     <topic>air passenger duty</topic>
+    <category>Transport</category>
     <agreed>disagreed</agreed>
     <for>
       <msp>
@@ -651,6 +652,7 @@
     <surname>Alex</surname>
     <name>Johnstone</name>
     <topic>air passenger duty</topic>
+    <category>Transport</category>
     <agreed>disagreed</agreed>
     <for>
       <msp>
@@ -1294,6 +1296,7 @@
     <surname>Patrick</surname>
     <name>Harvie</name>
     <topic>air passenger duty</topic>
+    <category>Transport</category>
     <agreed>disagreed</agreed>
     <for>
       <msp>

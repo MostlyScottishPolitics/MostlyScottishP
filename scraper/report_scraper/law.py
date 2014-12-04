@@ -42,6 +42,20 @@ class Law(object):
         self.law_against = []
         self.law_abstention = []
 
+
+    def clean(self):
+        self.law_type = ""
+        self.law_id = ""
+        self.law_presenter_name = ""
+        self.law_presenter_surname = ""
+        self.law_topic = ""
+        self.law_category = ""
+        self.law_text = ""
+        self.law_agreed = ""
+        self.law_for = []
+        self.law_against = []
+        self.law_abstention = []
+
     def add_to_msp_node(self, msp_node, msps):
         # Split for space, but not when they are between parentheses
         split_array = re.split(r"\s+(?=[^()]*(?:\(|$))", msps)

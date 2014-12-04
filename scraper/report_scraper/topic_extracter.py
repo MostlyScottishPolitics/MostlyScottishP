@@ -57,33 +57,99 @@ def topic_score(array):
             civ_score += 3
         if "education" in word:
             ed_score += 3
+        if "school" in word:
+            ed_score += 3
+        if "student" in word:
+            ed_score += 3
+        if "pupil" in word:
+            ed_score += 3
+        if "learn" in word:
+            ed_score += 1
         if "environment" in word:
             env_score += 3
+        if "green" in word:
+            env_score += 3
+        if "energy" in word:
+            env_score += 1
+        if "carbon" in word:
+            env_score += 1
+        if "electricity" in word:
+            env_score += 1
+        if "renewable" in word:
+            env_score += 3
+        if "fossil" in word:
+            env_score += 2
+        if "fuel" in word:
+            env_score += 1
+        if "natur" in word:
+            env_score += 1
         if "health" in word:
+            health_score += 3
+        if "welfare" in word:
             health_score += 3
         if "obesity" in word:
             health_score += 3
         if "overweight" in word:
             health_score += 3
-        if "house" in word:
+        if "hous" in word:
+            house_score += 4
+            social_score += 1
+        if "home" in word:
+            house_score += 3
+            social_score += 1
+        if "rent" in word:
+            house_score += 2
+            social_score += 1
+        if "landlord" in word:
             house_score += 3
         if "habitation" in word:
             house_score += 3
+            social_score += 1
         if "energy" in word:
             house_score += 1
             env_score += 1
+        if "protect" in word:
+            social_score += 1
+            police_score +=1
+        if "social" in word:
+            social_score += 3
+        if "children" in word:
+            social_score += 1
+        if "famil" in word:
+            social_score += 1
+        if "support" in word:
+            social_score += 1
+        if "wellbeing" in word:
+            social_score += 1
+            health_score += 1
         if "government" in word:
             loc_score += 1
         if "parliament" in word:
             loc_score += 1
         if "scot" in word:
             loc_score += 1
+        if "policies" in word:
+            loc_score += 1
+        if "business" in word:
+            loc_score += 2
+        if "econom" in word:
+            loc_score += 2
         if "devolv" in word:
             loc_score += 1
         if "planning" in word:
             plan_score += 3
         if "police" in word:
             police_score += 3
+        if "crim" in word:
+            police_score += 3
+        if "justice" in word:
+            police_score += 3
+        if "plaw" in word:
+            police_score += 1
+        if "legal" in word:
+            police_score += 1
+        if "corroboration" in word:
+            police_score += 1
         if "officer" in word:
             police_score += 2
         if "social" in word:
@@ -103,8 +169,8 @@ def topic_score(array):
         if "athlet" in word:
             sport_score += 2
         if "transport" in word:
-            trans_score += 3
-        if "bus" in word:
+            trans_score += 5
+        if "bus" in word and "business" not in word:
             trans_score += 3
         if "driv" in word:
             trans_score += 2
@@ -206,5 +272,3 @@ def get_topic_from_text(text):
     cleaned_token_array = [x for x in token_array if x not in stop_array]
 
     return topic_score(cleaned_token_array)
-
-

@@ -6,6 +6,7 @@
     <surname>Alex</surname>
     <name>Fergusson</name>
     <topic>land reform</topic>
+    <category>unknown</category>
     <agreed>disagreed</agreed>
     <for>
       <msp>
@@ -1354,6 +1355,7 @@
     <surname>Michael</surname>
     <name>Russell</name>
     <topic>student support</topic>
+    <category>Education</category>
     <agreed>agreed</agreed>
     <for>
       <msp>
@@ -2027,6 +2029,7 @@
     <surname>Murdo</surname>
     <name>Fraser</name>
     <topic>student support</topic>
+    <category>Education</category>
     <agreed>disagreed</agreed>
     <for>
       <msp>
@@ -2702,7 +2705,7 @@
     <surname>Hugh</surname>
     <name>Henry</name>
     <topic>student support</topic>
-    <category>Local Government</category>
+    <category>Education</category>
     <text>That the Parliament believes that access to university should be based on ability to learn, not ability to pay; further believes that neither upfront nor backdoor tuition fees have any place in Scotland; welcomes the removal of tuition fees, saving around 125,000 students up to £27,000 compared with England; further welcomes the introduction of the minimum income guarantee to give the poorest students a minimum income of £7,250 per year in maintenance support from 2013-14 and the increase in the minimum level of student loan to £4,500 a year for every eligible student, and agrees with comments by the National Union of Students Scotland that Scotland has ‘the best support package in the whole of the UK’.</text>
     <agreed>agreed</agreed>
     <for>
