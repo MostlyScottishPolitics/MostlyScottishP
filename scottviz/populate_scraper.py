@@ -360,14 +360,16 @@ def populate_votes(files):
                 motionid = law.getElementsByTagName("id")[0].firstChild.data
                 topic_raw = law.getElementsByTagName("topic")[0].firstChild.data
                 topic = unicode(topic_raw).encode('latin-1', 'replace')
+                text_raw = law.getElementsByTagName("text")[0].firstChild.data
+                text = unicode(text_raw).encode('latin-1', 'replace')
                 yup = law.getElementsByTagName("agreed")[0].firstChild
 
                 if yup:
                     if yup.data == "agreed":
-                        d = Division(parent=None, motionid=motionid, topic=topic, result=1, date=dt)
+                        d = Division(parent=None, motionid=motionid, topic=topic, motiontext=text, result=1, date=dt)
                         d.save()
                     else:
-                        d = Division(parent=None, motionid=motionid, topic=topic, result=2, date=dt)
+                        d = Division(parent=None, motionid=motionid, topic=topic, motiontext=text, result=2, date=dt)
                         d.save()
                 else:
                     # TO DO: see if agreeed or disagreed from votes

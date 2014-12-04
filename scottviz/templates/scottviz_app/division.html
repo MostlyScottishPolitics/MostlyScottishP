@@ -3,26 +3,66 @@
 {% block content %}
 <a class="btn btn-default back" href="/msp/divisions"><i class="glyphicon glyphicon-circle-arrow-left"></i>All Divisions</a>
 <div class="panel panel-default">
-    <div class="panel-heading"></div>
+<!--    <div class="panel-heading"></div> -->
     <div class="panel-body">
 
         <p>Topic: {{division.topic}} </p>
 
-        <p>Proposed by: <a href="/msp/msp/{{msp.foreignid}}">{{division.msp.firstname}} {{division.msp.lastname}}</a></p>
+ <!-- proposer not in the db yet -->
+ <!--       <p>Proposed by: <a href="/msp/msp/{{msp.foreignid}}">{{division.msp.firstname}} {{division.msp.lastname}}</a></p> -->
 
         <p>Description: {{division.description}}</p>
-        {% if division.result == '1'%}
-        <p>Result: Carried </p>
-        {% else %}
-        <p>Result: Defeated </p>
-        {% endif %}
 
-        <p>See on Scottish Parliament website: {{division.link}}
+
+        <p>See on Scottish Parliament website:  {{division.link}}
 
     </div>
 
 
 </div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">More about this division</div>
+    <div class="table-responsive">
+        <table class="table table-striped table-hover sortable">
+            <thead>
+            <tr>
+                <th>Division</th>
+                <th>Date</th>
+                <th>Topic</th>
+                <th>Result</th>
+                <th>Turnout</th>
+                <th>Rebels</th>
+            </tr>
+            </thead>
+
+            <tbody>
+
+            <tr>
+            <tr>
+
+                <td>{{division}}</td>
+                <td>{{division.date}}</td>
+                <td>{{division.topic}}</td>
+                {% if division.result == '1'%}
+                    <td><p> Carried </p></td>
+                {% else %}
+                    <td><p> Defeated </p></td>
+                {% endif %}
+                <td>{{division.turnout}}</td>
+                {% if division.rebels %}
+                    <td><a href="/msp/rebels/{{division.id}}">{{division.rebels}}</a> </td>
+                {% else %}
+                    <td>{{division.rebels}}</td>
+                {% endif %}
+            </tr>
+            </tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
 
 <div class="panel panel-default">
     <div class="panel-heading">Votes by party</div>
@@ -54,37 +94,6 @@
 </div>
 
 
-<div class="panel panel-default">
-    <div class="panel-heading">Panel heading</div>
-    <div class="table-responsive">
-        <table class="table table-striped table-hover sortable">
-            <thead>
-            <tr>
-                <th>Division</th>
-                <th>Date</th>
-                <th>Topic</th>
-                <th>Result</th>
-                <th>Turnout</th>
-                <th>Rebels</th>
-            </tr>
-            </thead>
 
-            <tbody>
-
-            <tr>
-            <tr>
-
-                <td></td>
-                <td></td>
-
-                <td></td>
-                <td></td>
-            </tr>
-            </tr>
-
-            </tbody>
-        </table>
-    </div>
-</div>
 <a class="btn btn-default back" href="/msp/divisions"><i class="glyphicon glyphicon-circle-arrow-left"></i>All Divisions</a>
 {% endblock %}
