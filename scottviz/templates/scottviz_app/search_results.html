@@ -68,4 +68,13 @@
 {% endfor %}
 {% endif %}
 
+<!--Divisions -->
+{% if divisions %}
+{% for division in divisions %}
+<p class="lead"> Divisions: </p>
+
+    <div class="well" id="{{division.motionid}}">
+    <p class="lead"><a href="/msp/division/{{division.motionid}}">{{division.motionid}}</a>&nbsp; {{division.topic}}</p></div>
+{% endfor %}
+{% endif %}
 {% endblock %}

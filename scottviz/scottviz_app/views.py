@@ -275,8 +275,6 @@ def search_results(request):
     content['regions'] = {}
     content['parties'] = {}
 
-
-
     if ('q' in request.GET) and request.GET['q'].strip():
         if postcode_search.is_valid(query):
             results = postcode_search.get_msps(query)
@@ -285,15 +283,16 @@ def search_results(request):
             entry_query = model_search.get_query(query, ['firstname', 'lastname',])
             content['msps'] = MSP.objects.filter(entry_query)
             if len(content['msps']) == 0:
-                entry_query = model_search.get_query(query, ['motionid', 'topic',])
+                entry_query = model_search.get_query(query, ['motionid', 'topic','motiontext',])
                 content['divisions'] = Division.objects.filter(entry_query)
+                print content['divisions']
                 if len(content['divisions']) == 0:
                     entry_query = model_search.get_query(query, ['name',])
                     content['regions'] = Constituency.objects.filter(entry_query)
                     if len(content['regions']) == 0:
                         entry_query = model_search.get_query(query, ['name',])
                         content['parties'] = Party.objects.filter(entry_query)
-
+        print "miau", content['divisions']
         return render_to_response('scottviz_app/search_results.html', content, context)
 
 
