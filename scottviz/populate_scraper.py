@@ -306,9 +306,9 @@ def add_other_msps():
             status=MSP.DECEASED, foreignid=132)
     m.save()
     m = MSP(firstname='John', lastname='Park', constituency=Constituency.objects.get(name='Mid Scotland and Fife'),
-            member_startdate = parser.parse('5 May 2011'), member_enddate = parser.parse('9 November 2013'),
+            member_startdate = parser.parse('5 May 2011'), member_enddate = parser.parse('9 November 2012'),
             party=Party.objects.get(name='Scottish Labour'),
-            party_startdate = parser.parse('5 May 2011'), party_enddate = parser.parse('9 November 2013'),
+            party_startdate = parser.parse('5 May 2011'), party_enddate = parser.parse('7 September 2013'),
             status=MSP.RESIGNED, foreignid=133)
     m.save()
     m = MSP(firstname='Bill', lastname='Walker', constituency=Constituency.objects.get(name='Dunfermline'),
