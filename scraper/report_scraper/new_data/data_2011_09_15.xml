@@ -6,6 +6,7 @@
     <surname>Richard</surname>
     <name>Lochhead</name>
     <topic>waste management</topic>
+    <category>unknown</category>
     <agreed>agreed</agreed>
     <for>
       <msp>
@@ -1510,6 +1511,7 @@
     <surname>Aileen</surname>
     <name>Campbell</name>
     <topic>the procurement of social care services</topic>
+    <category>Social Work</category>
     <agreed>agreed</agreed>
     <for>
       <msp>
@@ -2261,6 +2263,7 @@
     <surname>Mary</surname>
     <name>Scanlon</name>
     <topic>the procurement of social care services</topic>
+    <category>Social Work</category>
     <agreed>disagreed</agreed>
     <for>
       <msp>
@@ -3763,6 +3766,7 @@
     <surname>Richard</surname>
     <name>Baker</name>
     <topic>the Scotland Bill—corporation tax</topic>
+    <category>Local Government</category>
     <agreed>disagreed</agreed>
     <for>
       <msp>
@@ -4514,6 +4518,7 @@
     <surname>David</surname>
     <name>McLetchie</name>
     <topic>the Scotland Bill—corporation tax</topic>
+    <category>Local Government</category>
     <agreed>disagreed</agreed>
     <for>
       <msp>
@@ -5265,6 +5270,7 @@
     <surname>Willie</surname>
     <name>Rennie</name>
     <topic>the Scotland Bill—corporation tax</topic>
+    <category>Local Government</category>
     <agreed>disagreed</agreed>
     <for>
       <msp>

@@ -6,6 +6,7 @@
     <surname>Kenny</surname>
     <name>MacAskill</name>
     <topic>stop and search</topic>
+    <category>unknown</category>
     <agreed>agreed</agreed>
     <for>
       <msp>
@@ -1436,6 +1437,7 @@
     <surname>Michael</surname>
     <name>Matheson</name>
     <topic>improving Scotland’s mental health</topic>
+    <category>Health</category>
     <agreed>agreed</agreed>
     <for>
       <msp>
@@ -2153,6 +2155,7 @@
     <surname>Richard</surname>
     <name>Simpson</name>
     <topic>improving Scotland’s mental health</topic>
+    <category>Health</category>
     <agreed>disagreed</agreed>
     <for>
       <msp>

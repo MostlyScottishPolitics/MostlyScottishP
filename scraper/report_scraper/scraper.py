@@ -210,6 +210,8 @@ def process_html(filename, id_file):
                         write = True
                         # Set it back to false
                         record_data = False
+                    else :
+                        current_law.clean()
                     process_id_line(line, current_law)
                     # Add the date
                     # Got it at the beginning of the document
@@ -267,6 +269,9 @@ def process_html(filename, id_file):
                         log("Can't get the agreement on the law.")
                     if "disagreed" not in line and ("amended" in line or "Motion" in line or "Amendment" in line):
                         agreed = True
+                    # No text so get the topic category from the topic
+                    else:
+                        current_law.law_category = topic_extracter.get_topic_from_text(current_law.law_topic)
                 # Text voted
                 # Value of the text is the next line
                 elif agreed:
@@ -275,6 +280,8 @@ def process_html(filename, id_file):
                         current_law.law_text = trim_html(line)
                         # Topic category
                         current_law.law_category = topic_extracter.get_topic_from_text(trim_html(line))
+                    if not current_law.law_category:
+                        current_law.law_category = topic_extracter.get_topic_from_text(current_law.law_topic)
                     agreed = False
 
                 # Result of the vote
@@ -296,6 +303,8 @@ def process_html(filename, id_file):
                                 current_law.law_text = split[i + 1]
                                 # Topic category
                                 current_law.law_category = topic_extracter.get_topic_from_text(split[i + 1])
+                            elif not current_law.law_category:
+                                current_law.law_category = topic_extracter.get_topic_from_text(current_law.law_topic)
                             i += 1
                         except Exception:
                             log("Can't get the text of the law.")

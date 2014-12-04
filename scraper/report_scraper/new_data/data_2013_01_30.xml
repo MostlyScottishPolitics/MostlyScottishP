@@ -6,6 +6,7 @@
     <surname>Michael</surname>
     <name>Russell</name>
     <topic>further education</topic>
+    <category>Education</category>
     <agreed>agreed</agreed>
     <for>
       <msp>
@@ -709,7 +710,7 @@
     <surname>Hugh</surname>
     <name>Henry</name>
     <topic>further education</topic>
-    <category>Local Government</category>
+    <category>Education</category>
     <text>That the Parliament congratulates the Scottish Government on its decision to undertake an audit of college “waiting lists” to better understand the application and “waiting list” process in colleges and the reliability of recently quoted figures; notes that the preliminary findings have exposed as wildly exaggerated many of the claims made about the number of people who are waiting for a course; notes that the quoted figures do not give any accurate indication of unmet need; further notes that under no previous administration has anyone had an entitlement to their first choice of college or university place; welcomes the current administration’s efforts in going further than any of its predecessors through the Opportunities for All guarantee; recognises the efforts made by colleges in redirecting applicants to oversubscribed courses toward other courses; welcomes the fact that the college sector is being funded in a way that is ensuring that student numbers are being maintained; recognises that the college reform programme is creating more efficient colleges of scale with, as proposed in the Post-16 Education (Scotland) Bill, improved governance and accountability, and welcomes the intention of the reform programme to create colleges that can better address economic need and consequently boost the employability of learners.</text>
     <agreed>agreed</agreed>
     <for>
@@ -1414,6 +1415,7 @@
     <surname>Fergus</surname>
     <name>Ewing</name>
     <topic>the cost of living</topic>
+    <category>unknown</category>
     <agreed>agreed</agreed>
     <for>
       <msp>
@@ -2118,6 +2120,7 @@
     <surname>Alex</surname>
     <name>Johnstone</name>
     <topic>the cost of living</topic>
+    <category>unknown</category>
     <agreed>disagreed</agreed>
     <for>
       <msp>

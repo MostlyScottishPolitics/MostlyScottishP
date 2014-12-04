@@ -6,6 +6,7 @@
     <surname>Michael</surname>
     <name>Russell</name>
     <topic>education</topic>
+    <category>Education</category>
     <agreed>agreed</agreed>
     <for>
       <msp>
@@ -727,6 +728,7 @@
     <surname>Hugh</surname>
     <name>Henry</name>
     <topic>education</topic>
+    <category>Education</category>
     <agreed>disagreed</agreed>
     <for>
       <msp>
@@ -1448,7 +1450,7 @@
     <surname>Liz</surname>
     <name>Smith</name>
     <topic>education</topic>
-    <category>Transport</category>
+    <category>Local Government</category>
     <text>That the Parliament recognises the significant economic and social benefits of the Scottish Government’s proposals for the reform of a college sector that has been neglected for far too long by previous administrations; welcomes in particular the regionalisation of the sector, leading to the creation of new institutions of significant scale, reputation and efficiency that are better able to identify and address the skills needs of the regional economy, and further recognises the guarantee, unique in these islands, that the Scottish Government has given to every 16 to 19-year-old not already in education, employment or training, of an offer of a place in learning or training.</text>
     <agreed>agreed</agreed>
     <for>

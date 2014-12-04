@@ -6,6 +6,7 @@
     <surname>Alex</surname>
     <name>Neil</name>
     <topic>the cost of living</topic>
+    <category>unknown</category>
     <agreed>agreed</agreed>
     <for>
       <msp>
@@ -703,6 +704,7 @@
     <surname>Gavin</surname>
     <name>Brown</name>
     <topic>the cost of living</topic>
+    <category>unknown</category>
     <agreed>disagreed</agreed>
     <for>
       <msp>
@@ -1400,6 +1402,7 @@
     <surname>Liam</surname>
     <name>McArthur</name>
     <topic>the cost of living</topic>
+    <category>unknown</category>
     <agreed>disagreed</agreed>
     <for>
       <msp>
