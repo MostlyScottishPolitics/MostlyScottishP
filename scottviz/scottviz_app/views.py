@@ -135,25 +135,16 @@ def msp(request, mspID):
     content['msp'] = this_msp
     content['msp'].votecount = Vote.objects.filter(msp=this_msp).count()
     content['jobs']=Job.objects.filter(msp=this_msp)
+    content['rebellions'] = Vote.objects.filter(msp = this_msp, rebellious = True)
+    content['for'] =  Vote.objects.filter(msp = this_msp, rebellious = True, vote = Vote.YES)
+    content['against'] =  Vote.objects.filter(msp = this_msp, rebellious = True, vote = Vote.NO)
+    content['abstain'] =  Vote.objects.filter(msp = this_msp, rebellious = True, vote = Vote.ABSTAIN)
+    content['absent'] =  Vote.objects.filter(msp = this_msp, rebellious = True, vote = Vote.ABSENT)
+    content['party_for'] =  Vote.objects.filter(msp = this_msp, rebellious = True, party_vote = Vote.YES)
+    content['party_against'] =  Vote.objects.filter(msp = this_msp, rebellious = True, party_vote = Vote.NO)
+    content['party_abstain'] =  Vote.objects.filter(msp = this_msp, rebellious = True, party_vote = Vote.ABSTAIN)
+    content['party_absent'] =  Vote.objects.filter(msp = this_msp, rebellious = True, party_vote = Vote.ABSENT)
     return render_to_response('scottviz_app/msp.html', content, context)
-
-
-"""
-def parties(request):
-    context = RequestContext(request)
-    content['activesite'] = navbar['parties']
-    content['parties'] = Party.objects.order_by('name')
-    content['msps'] = MSP.objects.order_by('lastname', 'firstname')
-    return render_to_response('scottviz_app/parties.html', content, context)
-
-
-def constituencies(request):
-    context = RequestContext(request)
-    content['activesite'] = navbar['constituencies']
-    content['constituencies'] = Constituency.objects.exclude(parent=None).order_by('name')
-    content['msps'] = MSP.objects.all()
-    return render_to_response('scottviz_app/constituencies.html', content, context)
-"""
 
 
 def party(request, partyID):
