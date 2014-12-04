@@ -236,6 +236,7 @@ def rebels(request, divisionID):
         'title': this_division,
         'desc': "Rebels of " + str(this_division),
     }
+    content['division'] = this_division
     content['rebels'] = Vote.objects.filter(division=this_division, rebellious=True)
     content['for'] = Vote.objects.filter(division=this_division, rebellious=True, vote=Vote.YES)
     content['against'] = Vote.objects.filter(division=this_division, rebellious=True, vote=Vote.NO)
@@ -269,6 +270,12 @@ def search_results(request):
         'desc': 'Results for: ' + query,
     }
     content['postcode'] = {}
+    content['msps'] = {}
+    content['divisions'] = {}
+    content['regions'] = {}
+    content['parties'] = {}
+
+
 
     if ('q' in request.GET) and request.GET['q'].strip():
         if postcode_search.is_valid(query):
