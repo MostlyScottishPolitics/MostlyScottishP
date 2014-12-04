@@ -443,7 +443,7 @@ def rebellious_votes():
     for party in parties:
         party_msps = MSP.objects.filter(party = party)
         threshold = (len(party_msps))/2
-        for division in divisions[:20]:
+        for division in divisions:
 #            print division
             division_votes = Vote.objects.filter(division = division)
             relevant_votes = [vote for vote in division_votes if vote.msp in party_msps]
