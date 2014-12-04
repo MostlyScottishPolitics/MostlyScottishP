@@ -202,27 +202,7 @@ def division(request, divisionID):
         'title': this_division.motionid,
         'desc': "More info on division " + this_division.motionid,
     }
-    relevant_votes = Vote.objects.filter(division=this_division)
     content['division'] = this_division
-    parties = Party.objects.order_by('name')
-    for party in parties:
-        content[party].size = MSP.objects.filter(party=party).count()
-        content[party].pro = 0
-        content[party].con = 0
-        content[party].turnout = 0
-    for vote in relevant_votes:
-        party = vote.msp.party
-        if vote is Vote.YES:
-            content[party].pro += 1
-            content[party].turnout += 1
-        elif vote is Vote.NO:
-            content[party].con += 1
-            content[party].turnout += 1
-    for party in parties:
-        content[party].pro = content[party].pro * 100 / content[party].size
-        content[party].con = content[party].con * 100 / content[party].size
-        content[party].turnout = content[party].turnout * 100 / content[party].size
-    content['parties'] = parties
     return render_to_response('scottviz_app/division.html', content, context)
 
 
