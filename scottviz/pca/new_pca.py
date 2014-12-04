@@ -7,7 +7,7 @@ import psycopg2 as pq
 import mdp
 
 #Update me to appropriate output location for CSV to be read by D3
-outputLocation = "H:\Spviz-appWorking\Spviz-app-master\scottviz\static\csv\OutputMatrix.csv"
+outputLocation = "H:\Spviz-app\Spviz-app\scottviz\static\csv\OutputMatrix.csv"
 
 print ''
 print "-----Program Started-----"

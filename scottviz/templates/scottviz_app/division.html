@@ -11,7 +11,7 @@
  <!-- proposer not in the db yet -->
  <!--       <p>Proposed by: <a href="/msp/msp/{{msp.foreignid}}">{{division.msp.firstname}} {{division.msp.lastname}}</a></p> -->
 
-        <p>Description: {{division.description}}</p>
+        <p>Description: {{division.motiontext}}</p>
 
 
         <p>See on Scottish Parliament website:  {{division.link}}
@@ -81,11 +81,12 @@
 
             <tr>
 
-                <td></td>
-                <td></td>
-
-                <td></td>
-                <td></td>
+               {% for party in parties %}
+                    <td>{{party}}</td>
+                    <td>{{party['pro']*100/party['size']}}</td>
+                    <td>{{party['con']*100/party['size']}}</td>
+                    <td>{{party['turnout']*100/party['size']}}</td>
+                {% endfor %}
             </tr>
 
             </tbody>

@@ -44,7 +44,7 @@
 <div class="container">
     <div class="table-responsive">
         <table class="table table-hover sortable">
-             <caption>A 'rebellion' is when a MSP votes differently than his party. <br> {{msp}} rebelled {{msp.rebellions}}  </caption>
+             <caption>A 'rebellion' is when a MSP votes differently than his party. <br> {{msp}} rebelled {{msp.rebellions}}%  </caption>
 
             <thead>
             <tr>
@@ -69,7 +69,7 @@
                         <td>{{rebellion.division.topic}}</td>
                         <td>Carried</td>
                         <td>{{rebellion.division.turnout}}% </td>
-                        <td>{{rebellion.division.rebels}} </a> </td>
+                        <td><a href="/msp/rebels/{{rebellion.division.id}}">{{rebellion.division.rebels}} </a> </td>
                         {% if rebellion in party_for %}
                             <td>For</td>
                         {% elif rebellion in party_against %}
@@ -101,7 +101,7 @@
                         <td>{{rebellion.division.topic}}</td>
                         <td>Defeated</td>
                         <td>{{rebellion.division.turnout}}% </td>
-                        <td>{{rebellion.division.rebels}} </a> </td>
+                        <td><a href="/msp/rebels/{{rebellion.division.id}}">{{rebellion.division.rebels}} </a> </td>
                         {% if rebellion in party_for %}
                             <td>For</td>
                         {% elif rebellion in party_against %}
