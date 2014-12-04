@@ -1,19 +1,18 @@
 {% extends "scottviz_app/base.html" %}
 
 {% block content %}
-
+{% if postcode %}
 <div class="container">
-
-    {% if 'ERROR' in dict %}
-    <h3>{{dict.values.0}}</h3>
+    {% if 'ERROR' in postcode %}
+    <h3>{{postcode.values.0}}</h3>
 
     {% else %}
-    You are represented by:
+    <p class="lead">You are represented by:</p>
 
     <div class="container container-xs-height">
         <div class="row row-xs-height">
 
-            {% for region, msps in dict.items %}
+            {% for region, msps in postcode.items %}
             <div class="col-xs-3 col-xs-height col-top">
                 <div class="item">
                     <div class="content">
@@ -37,4 +36,36 @@
 
     </div>
 </div>
+{% endif %}
+
+<!--MSPS -->
+{% if msps %}
+{% for msp in msps %}
+<p class="lead"> MSPs: </p>
+    <div class="well" id="{{msp.id}}">
+    <p class="lead"><a href="/msp/msp/{{msp.foreignid}}">{{msp}}</a></p></div>
+{% endfor %}
+{% endif %}
+
+<!--Regions -->
+{% if regions %}
+<p class="lead"> Regions: </p>
+
+{% for region in regions %}
+    <div class="well" id="{{region.id}}">
+    <p class="lead"><a href="/msp/division/{{region.id}}">{{region.name}}</a></p></div>
+    {% endfor %}
+
+{% endif %}
+
+<!--Parties -->
+{% if parties %}
+{% for party in parties %}
+<p class="lead"> Parties: </p>
+
+    <div class="well" id="{{party.id}}">
+    <p class="lead"><a href="/msp/party/{{party.id}}">{{party.name}}</a></p></div>
+{% endfor %}
+{% endif %}
+
 {% endblock %}
