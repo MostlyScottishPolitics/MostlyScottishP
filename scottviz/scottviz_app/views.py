@@ -290,7 +290,6 @@ def search_results(request):
                     if len(content['regions']) == 0:
                         entry_query = model_search.get_query(query, ['name',])
                         content['parties'] = Party.objects.filter(entry_query)
-        print "miau", content['divisions']
         return render_to_response('scottviz_app/search_results.html', content, context)
 
 
