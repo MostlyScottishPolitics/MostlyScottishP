@@ -345,12 +345,12 @@ def populate_votes(files):
     # naive skip files before 06 May 2011, using a switch: currentsession
     # change encouraged
     currentsession = False
-    for f in files[:72]:
+    for f in files:
         doc = minidom.parse(f)
         date = doc.getElementsByTagName("date")[0].firstChild.data
         dt = parser.parse(date).date()
 
-        if date == '09 June 2011':
+        if date == '02 June 2011':
             currentsession = True
 
         if currentsession:
@@ -358,14 +358,16 @@ def populate_votes(files):
 
             for law in laws:
                 motionid = law.getElementsByTagName("id")[0].firstChild.data
+                topic_raw = law.getElementsByTagName("topic")[0].firstChild.data
+                topic = unicode(topic_raw).encode('latin-1', 'replace')
                 yup = law.getElementsByTagName("agreed")[0].firstChild
 
                 if yup:
                     if yup.data == "agreed":
-                        d = Division(parent=None, motionid=motionid, result=1, date=dt)
+                        d = Division(parent=None, motionid=motionid, topic=topic, result=1, date=dt)
                         d.save()
                     else:
-                        d = Division(parent=None, motionid=motionid, result=2, date=dt)
+                        d = Division(parent=None, motionid=motionid, topic=topic, result=2, date=dt)
                         d.save()
                 else:
                     # TO DO: see if agreeed or disagreed from votes
@@ -381,7 +383,11 @@ def populate_votes(files):
                             firstname = str(firstname.data)
                             lastname = str(lastname.data)
                             d = Division.objects.get(motionid=motionid)
-                            if lastname not in ['Allan', 'Simpson', 'Mackenzie', 'Copy', 'GIBson']:
+                            if lastname == 'Mackenzie':
+                                lastname =  'MacKenzie'
+                            if lastname == 'GIBson':
+                                lastname =  'Gibson'
+                            if lastname != 'Copy':
                                 msp = MSP.objects.get(lastname=lastname, firstname=firstname)
                                 v = Vote(msp=msp, division=d, vote=Vote.YES)
                                 v.save()
@@ -395,7 +401,11 @@ def populate_votes(files):
                             firstname = str(firstname.data)
                             lastname = str(lastname.data)
                             d = Division.objects.get(motionid=motionid)
-                            if lastname not in ['Allan', 'Simpson', 'Mackenzie', 'Copy', 'GIBson']:
+                            if lastname == 'Mackenzie':
+                                lastname =  'MacKenzie'
+                            if lastname == 'GIBson':
+                                lastname =  'Gibson'
+                            if lastname !='Copy':
                                 msp = MSP.objects.get(lastname=lastname, firstname=firstname)
                                 v = Vote(msp=msp, division=d, vote=Vote.NO)
                                 v.save()
@@ -409,10 +419,10 @@ def populate_votes(files):
                             firstname = str(firstname.data)
                             lastname = str(lastname.data)
                             d = Division.objects.get(motionid=motionid)
-                            if lastname not in ['Allan', 'Simpson', 'Mackenzie', 'Copy', 'GIBson']:
-                                msp = MSP.objects.get(lastname=lastname, firstname=firstname)
-                                v = Vote(msp=msp, division=d, vote=Vote.ABSTAIN)
-                                v.save()
+                            #if lastname not in ['Allan', 'Simpson', 'Mackenzie', 'Copy', 'GIBson']:
+                            msp = MSP.objects.get(lastname=lastname, firstname=firstname)
+                            v = Vote(msp=msp, division=d, vote=Vote.ABSTAIN)
+                            v.save()
 
 def rebellious_votes():
 
@@ -521,14 +531,14 @@ if __name__ == '__main__':
     print "_msps_"
     add_other_msps()
     print "_other_"
-#    update_transient_msps()
-#    print "_update_"
+    update_transient_msps()
+    print "_update_"
     msp_photos()
     print "_photos_"
     msp_jobs()
     print "_jobs_"
     print "And now we wait"
-    populate_votes(get_files('../scraper/report_scraper/data/'))
+    populate_votes(get_files('../scraper/report_scraper/new_data/'))
     print "_votes_"
     rebellious_votes()
     print "_rebellious_votes_"

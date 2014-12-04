@@ -82,7 +82,7 @@ class Division(models.Model):
     question = models.TextField(null=True)
     motionid = models.CharField(max_length=20)
     motiontext = models.TextField()
-    topic = models.CharField(max_length=30, null=True)
+    topic = models.CharField(max_length=128, null=True)
     votes = models.ManyToManyField(MSP, through='Vote', null=True)
     turnout=models.DecimalField(max_digits=5, decimal_places=2, null=True)
     rebels=models.IntegerField(null=True)
