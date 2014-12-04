@@ -270,6 +270,12 @@ def search_results(request):
         'desc': 'Results for: ' + query,
     }
     content['postcode'] = {}
+    content['msps'] = {}
+    content['divisions'] = {}
+    content['regions'] = {}
+    content['parties'] = {}
+
+
 
     if ('q' in request.GET) and request.GET['q'].strip():
         if postcode_search.is_valid(query):
