@@ -23,7 +23,7 @@
                 {% if division.result == '1' %}
                 <tr class="bg-success">
                     <td><a href="/msp/division/{{division.id}}">{{division.motionid}}</a></td>
-                    <td>{{division.date}}</td>
+                    <td sorttable_customkey="{{division.id}}">{{division.date}}</td>
                     <td>{{division.topic}}</td>
                     <td>Carried</td>
                     <td>{{division.turnout}}% </td>
@@ -36,7 +36,7 @@
                 {% else %}
                 <tr>
                     <td><a href="/msp/division/{{division.id}}">{{division.motionid}}</a></td>
-                    <td>{{division.date}}</td>
+                    <td sorttable_customkey="{{division.id}}">{{division.date}}</td>
                     <td>{{division.topic}}</td>
                     <td>Defeated</td>
                     <td>{{division.turnout}}% </td>
