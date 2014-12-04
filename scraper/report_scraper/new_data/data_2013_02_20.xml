@@ -6,6 +6,7 @@
     <surname>Nicola</surname>
     <name>Sturgeon</name>
     <topic>capital projects</topic>
+    <category>unknown</category>
     <agreed>agreed</agreed>
     <for>
       <msp>
@@ -709,6 +710,7 @@
     <surname>Richard</surname>
     <name>Baker</name>
     <topic>capital projects</topic>
+    <category>unknown</category>
     <agreed>disagreed</agreed>
     <for>
       <msp>
@@ -2117,6 +2119,7 @@
     <surname>Alex</surname>
     <name>Neil</name>
     <topic>health</topic>
+    <category>Health</category>
     <agreed>agreed</agreed>
     <for>
       <msp>
@@ -2822,6 +2825,7 @@
     <surname>Jackie</surname>
     <name>Baillie</name>
     <topic>health</topic>
+    <category>Health</category>
     <agreed>disagreed</agreed>
     <for>
       <msp>

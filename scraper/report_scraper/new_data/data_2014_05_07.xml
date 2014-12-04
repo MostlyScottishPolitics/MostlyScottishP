@@ -6,6 +6,7 @@
     <surname>John</surname>
     <name>Swinney</name>
     <topic>energy and climate change</topic>
+    <category>Environment</category>
     <agreed>agreed</agreed>
     <for>
       <msp>
@@ -729,7 +730,7 @@
     <surname>Alison</surname>
     <name>Johnstone</name>
     <topic>energy and climate change</topic>
-    <category>Local Government</category>
+    <category>Environment</category>
     <text>That the Parliament notes that Scotland has a rich diversity of energy sources including a very successful oil and gas sector and growing expertise in renewables including wind, wave and tidal; welcomes Scotland’s evidence-based approach to unconventional fossil fuels; supports the ongoing review of the scientific evidence by the expert scientific panel in relation to unconventional fossil fuels and looks forward to its report; welcomes the Scottish Government’s announcement of a strengthening of Scottish planning policy, coming into force in June 2014, in relation to unconventional fossil fuel extraction as an indication that the concerns of environmental campaigners and local communities are taken seriously; further welcomes the recent UK Committee on Climate Change report that praised Scottish progress in decarbonising its energy sector; notes that almost half of Scotland’s electricity is now delivered from renewables, and further notes that Scotland has the world’s leading climate change legislation and the largest carbon emission reductions in western Europe. </text>
     <agreed>agreed</agreed>
     <for>
@@ -1452,6 +1453,7 @@
     <surname>Margaret</surname>
     <name>Burgess</name>
     <topic>wealth and income inequality</topic>
+    <category>unknown</category>
     <agreed>agreed</agreed>
     <for>
       <msp>
@@ -2173,6 +2175,7 @@
     <surname>Jackie</surname>
     <name>Baillie</name>
     <topic>wealth and income inequality</topic>
+    <category>unknown</category>
     <agreed>disagreed</agreed>
     <for>
       <msp>
@@ -2894,6 +2897,7 @@
     <surname>Gavin</surname>
     <name>Brown</name>
     <topic>wealth and income inequality</topic>
+    <category>unknown</category>
     <agreed>disagreed</agreed>
     <for>
       <msp>

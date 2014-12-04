@@ -6,6 +6,7 @@
     <surname>Keith</surname>
     <name>Brown</name>
     <topic>housing</topic>
+    <category>Housing</category>
     <agreed>agreed</agreed>
     <for>
       <msp>
@@ -703,7 +704,7 @@
     <surname>Alex</surname>
     <name>Johnstone</name>
     <topic>housing</topic>
-    <category>Local Government</category>
+    <category>Housing</category>
     <text>That the Parliament recognises the pivotal role of the housing market to the Scottish economy; notes the Scottish Government’s recent announcement that £460 million will be invested to build 4,300 homes as part of its commitment to build 30,000 affordable homes during this parliamentary session, including 5,000 council houses in spite of significant cuts to Scotland’s capital budget by the UK Government; recognises the Scottish Government’s progress in modernising the legislative framework for housing, and calls on the Scottish Government to continue with an innovative approach to housing policy and invest in all types of houses to meet the demands and needs of the population.</text>
     <agreed>agreed</agreed>
     <for>
@@ -1404,6 +1405,7 @@
     <surname>John</surname>
     <name>Swinney</name>
     <topic>the role of the public sector</topic>
+    <category>unknown</category>
     <agreed>agreed</agreed>
     <for>
       <msp>
@@ -2804,6 +2806,7 @@
     <surname>Lewis</surname>
     <name>Macdonald</name>
     <topic>the oil and gas framework</topic>
+    <category>unknown</category>
     <agreed>disagreed</agreed>
     <for>
       <msp>
@@ -3503,6 +3506,7 @@
     <surname>Gavin</surname>
     <name>Brown</name>
     <topic>the oil and gas framework</topic>
+    <category>unknown</category>
     <agreed>disagreed</agreed>
     <for>
       <msp>

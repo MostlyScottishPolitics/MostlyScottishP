@@ -6,6 +6,7 @@
     <surname>Smith</surname>
     <name />
     <topic>child benefit</topic>
+    <category>unknown</category>
     <agreed>disagreed</agreed>
     <for>
       <msp>
@@ -717,6 +718,7 @@
     <surname>Alex</surname>
     <name>Johnstone</name>
     <topic>child benefit</topic>
+    <category>unknown</category>
     <agreed>disagreed</agreed>
     <for>
       <msp>
@@ -1426,6 +1428,7 @@
     <surname>Willie</surname>
     <name>Rennie</name>
     <topic>child benefit</topic>
+    <category>unknown</category>
     <agreed>disagreed</agreed>
     <for>
       <msp>

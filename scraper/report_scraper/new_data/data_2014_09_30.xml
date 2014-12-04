@@ -6,6 +6,7 @@
     <surname>Mary</surname>
     <name>Fee</name>
     <topic>housing supply</topic>
+    <category>Housing</category>
     <agreed>disagreed</agreed>
     <for>
       <msp>
@@ -709,6 +710,7 @@
     <surname>Alex</surname>
     <name>Johnstone</name>
     <topic>housing supply</topic>
+    <category>Housing</category>
     <agreed>disagreed</agreed>
     <for>
       <msp>
@@ -1412,6 +1414,7 @@
     <surname>Jim</surname>
     <name>Hume</name>
     <topic>housing supply</topic>
+    <category>Housing</category>
     <agreed>disagreed</agreed>
     <for>
       <msp>
@@ -2115,7 +2118,7 @@
     <surname>Margaret</surname>
     <name>Burgess</name>
     <topic>housing supply</topic>
-    <category>Social Work</category>
+    <category>Housing</category>
     <text>That the Parliament recognises that housing is and will remain a high priority for the current administration; welcomes the fact that the Scottish Government plans to spend over £1.7 billion on affordable housing in the current parliamentary session, which will support an estimated 8,000 jobs each year, and has delivered 21,322 affordable homes, including 15,088 social rented homes; notes that Scotland is outperforming other parts of the UK, with the rates of all home completions and social housing completions much higher than the equivalent in England or Wales; acknowledges that the Housing (Scotland) Act 2014 will protect the existing stock of social rented homes by ending the right to buy and enable social landlords to do more to help people in need of social housing; welcomes these achievements by the Scottish Government, despite the drastic reduction in its capital budget over the current spending review period as a result of the UK Government’s spending cuts, and calls on the UK Government to increase capital spending so that the Scottish Government can make a greater investment in housing.</text>
     <agreed>agreed</agreed>
     <for>

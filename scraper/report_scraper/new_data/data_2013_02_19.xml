@@ -6,6 +6,7 @@
     <surname>Hugh</surname>
     <name>Henry</name>
     <topic>tuition fees</topic>
+    <category>unknown</category>
     <agreed>disagreed</agreed>
     <for>
       <msp>
@@ -709,6 +710,7 @@
     <surname>Liz</surname>
     <name>Smith</name>
     <topic>tuition fees</topic>
+    <category>unknown</category>
     <agreed>disagreed</agreed>
     <for>
       <msp>
@@ -1412,6 +1414,7 @@
     <surname>Michael</surname>
     <name>Russell</name>
     <topic>tuition fees</topic>
+    <category>unknown</category>
     <agreed>agreed</agreed>
     <for>
       <msp>

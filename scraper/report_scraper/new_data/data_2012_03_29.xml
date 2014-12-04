@@ -6,6 +6,7 @@
     <surname>Elaine</surname>
     <name>Murray</name>
     <topic>cycling</topic>
+    <category>unknown</category>
     <agreed>disagreed</agreed>
     <for>
       <msp>
@@ -673,6 +674,7 @@
     <surname>John</surname>
     <name>Lamont</name>
     <topic>cycling</topic>
+    <category>unknown</category>
     <agreed>disagreed</agreed>
     <for>
       <msp>
@@ -1334,6 +1336,7 @@
     <surname>Fergus</surname>
     <name>Ewing</name>
     <topic>local energy companies</topic>
+    <category>Environment</category>
     <agreed>agreed</agreed>
     <for>
       <msp>

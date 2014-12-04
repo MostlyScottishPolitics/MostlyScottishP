@@ -6,6 +6,7 @@
     <surname>Aileen</surname>
     <name>Campbell</name>
     <topic>childcare</topic>
+    <category>Transport</category>
     <agreed>agreed</agreed>
     <for>
       <msp>
@@ -687,6 +688,7 @@
     <surname>Neil</surname>
     <name>Bibby</name>
     <topic>childcare</topic>
+    <category>Transport</category>
     <agreed>disagreed</agreed>
     <for>
       <msp>
@@ -2047,6 +2049,7 @@
     <surname>Kenny</surname>
     <name>MacAskill</name>
     <topic>prisons</topic>
+    <category>unknown</category>
     <agreed>agreed</agreed>
     <for>
       <msp>
