@@ -34,7 +34,7 @@ navbar = (
     ('scatter', {
         'id': 'scatter',
         'title': 'Scatter',
-        'desc': 'Scatter plot',
+        'desc': 'MSPs are plotted based on their votes',
     })
 )
 
@@ -49,7 +49,7 @@ navbarviz = (
     ('scatter', {
         'id': 'scatter',
         'title': 'Scatter',
-        'desc': 'Scatter plot',
+        'desc': 'MSPs are plotted based on their votes',
     })
 
 )
