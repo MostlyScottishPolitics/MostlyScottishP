@@ -134,8 +134,29 @@ table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sor
 #attend{
     display: none;
 }
+#bpc{
+    display: none;
+}
+#relc{
+    display: none;
+}
+
 .map{
     position: relative;
     width: 100%;
 }
-
+.results{
+    float:left;
+    width: 50%;
+    padding-bottom: 15px;
+}
+.results:hover {
+    background-color: #eeeeee;
+}
+/*
+.img-thumbnail{
+    transform: scale(0.5, 0.5);
+    -ms-transform: scale(0.5, 0.5);
+    -webkit-transform: scale(0.5, 0.5);
+}
+*/

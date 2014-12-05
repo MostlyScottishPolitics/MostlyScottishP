@@ -40,41 +40,62 @@
 
 <!--MSPS -->
 {% if msps %}
-{% for msp in msps %}
+<div class="container-fluid" id="mspResults">
+
 <p class="lead"> MSPs: </p>
-    <div class="well" id="{{msp.id}}">
-    <p class="lead"><a href="/msp/msp/{{msp.foreignid}}">{{msp}}</a></p></div>
+
+{% for msp in msps %}
+    <div class="results" id="{{msp.id}}">
+        <p class="lead"><a href="/msp/msp/{{msp.foreignid}}">{{msp}}</a></p>
+        Represents {{msp.constituency}}<br>
+        Member of {{msp.party.name}}<br>
+</div>
 {% endfor %}
+    </div>
 {% endif %}
 
 <!--Regions -->
 {% if regions %}
+<div class="container-fluid" id="regionResults">
+
 <p class="lead"> Regions: </p>
 
 {% for region in regions %}
-    <div class="well" id="{{region.id}}">
-    <p class="lead"><a href="/msp/division/{{region.id}}">{{region.name}}</a></p></div>
+    <div class="results" id="{{region.id}}">
+    <p><a href="/msp/constituency/{{region.id}}">{{region.name}}</a></p></div>
     {% endfor %}
-
+</div>
 {% endif %}
 
 <!--Parties -->
 {% if parties %}
-{% for party in parties %}
+<div class="container-fluid" id="partyResults">
 <p class="lead"> Parties: </p>
 
-    <div class="well" id="{{party.id}}">
-    <p class="lead"><a href="/msp/party/{{party.id}}">{{party.name}}</a></p></div>
+{% for party in parties %}
+    <div class="results" id="{{party.id}}">
+    <p><a href="/msp/party/{{party.id}}">{{party.name}}</a></p></div>
 {% endfor %}
+    </div>
 {% endif %}
 
 <!--Divisions -->
 {% if divisions %}
-{% for division in divisions %}
+<div class="container-fluid" id="motionResults">
 <p class="lead"> Divisions: </p>
-
-    <div class="well" id="{{division.motionid}}">
-    <p class="lead"><a href="/msp/division/{{division.id}}">{{division.motionid}}</a>&nbsp; {{division.topic}}</p></div>
+{% for division in divisions %}
+    <div class="results" id="{{division.motionid}}">
+    <p class="lead"><a href="/msp/division/{{division.id}}">{{division.motionid}}</a></p>
+       Motion about: {{division.topic}}<br>
+        {% if division.result == '1' %}
+      Motion carried<br>
+        {% else %}
+        Motion defeated<br>
+        {% endif %}
+        Voted on:{{division.date}} by {{division.turnout}}% of MSPs
+    </div>
 {% endfor %}
+    </div>
 {% endif %}
+
 {% endblock %}

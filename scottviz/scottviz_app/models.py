@@ -15,6 +15,7 @@ class Constituency(models.Model):
     def __unicode__(self):
         return self.name
 
+
 class MSP(models.Model):
 
     MEMBER = 1

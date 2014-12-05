@@ -1,5 +1,6 @@
 from collections import OrderedDict
 import csv
+from django.db.models import Count
 
 from django.template import RequestContext
 from django.shortcuts import render_to_response
@@ -12,23 +13,11 @@ navbar = (
 
     ('msps', {'id': 'msps', 'title': 'MSPs', 'desc': 'List of all Members of Scottish Parliament'}),
 
-    # ("constituencies", {
-    # 'id': 'constituencies',
-    # 'title': 'Constituencies',
-    # 'desc': 'List of all constituencies in Scotland',
-    # }),
-
     ("regions", {
         'id': 'regions',
         'title': 'Regions',
         'desc': 'List of all regions in Scotland',
     }),
-
-    # ('parties', {
-    # 'id': 'parties',
-    # 'title': 'Parties',
-    # 'desc': 'List of all parties and their members'
-    #}),
 
     ('divisions', {
         'id': 'divisions',
@@ -203,27 +192,19 @@ def division(request, divisionID):
         'desc': "More info on division " + this_division.motionid,
     }
     content['division'] = this_division
+    content['rebels'] = Vote.objects.filter(division=this_division, rebellious=True)
+    content['for'] = Vote.objects.filter(division=this_division, rebellious=True, vote=Vote.YES)
+    content['against'] = Vote.objects.filter(division=this_division, rebellious=True, vote=Vote.NO)
+    content['abstain'] = Vote.objects.filter(division=this_division, rebellious=True, vote=Vote.ABSTAIN)
+    content['absent'] = Vote.objects.filter(division=this_division, rebellious=True, vote=Vote.ABSENT)
+    content['party_for'] = Vote.objects.filter(division=this_division, rebellious=True, party_vote=Vote.YES)
+    content['party_against'] = Vote.objects.filter(division=this_division, rebellious=True, party_vote=Vote.NO)
+    content['party_abstain'] = Vote.objects.filter(division=this_division, rebellious=True, party_vote=Vote.ABSTAIN)
+    content['party_absent'] = Vote.objects.filter(division=this_division, rebellious=True, party_vote=Vote.ABSENT)
+    q = Division.objects.filter(motionid__startswith=this_division.motionid.split('.')[0])
+    print this_division.motionid.split('.')[0]
+    content['related'] = q.exclude(motionid__exact=this_division.motionid)
     return render_to_response('scottviz_app/division.html', content, context)
-
-
-def rebellions(request, mspID):
-    context = RequestContext(request)
-    this_msp = MSP.objects.get(id=mspID)
-    content['activesite'] = {
-        'id': this_msp,
-        'title': this_msp,
-        'desc': "Rebellions of " + str(this_msp),
-    }
-    content['rebellions'] = Vote.objects.filter(msp=this_msp, rebellious=True)
-    content['for'] = Vote.objects.filter(msp=this_msp, rebellious=True, vote=Vote.YES)
-    content['against'] = Vote.objects.filter(msp=this_msp, rebellious=True, vote=Vote.NO)
-    content['abstain'] = Vote.objects.filter(msp=this_msp, rebellious=True, vote=Vote.ABSTAIN)
-    content['absent'] = Vote.objects.filter(msp=this_msp, rebellious=True, vote=Vote.ABSENT)
-    content['party_for'] = Vote.objects.filter(msp=this_msp, rebellious=True, party_vote=Vote.YES)
-    content['party_against'] = Vote.objects.filter(msp=this_msp, rebellious=True, party_vote=Vote.NO)
-    content['party_abstain'] = Vote.objects.filter(msp=this_msp, rebellious=True, party_vote=Vote.ABSTAIN)
-    content['party_absent'] = Vote.objects.filter(msp=this_msp, rebellious=True, party_vote=Vote.ABSENT)
-    return render_to_response('scottviz_app/rebellions.html', content, context)
 
 
 def rebels(request, divisionID):
@@ -266,7 +247,7 @@ def search_results(request):
         'id': 'search',
         'title': '',
         'desc': 'Results for: ' + query,
-    }
+        }
     content['postcode'] = {}
     content['msps'] = {}
     content['divisions'] = {}
@@ -278,22 +259,19 @@ def search_results(request):
             results = postcode_search.get_msps(query)
             content['postcode'] = results
         else:
-            entry_query = model_search.get_query(query, ['firstname', 'lastname',])
+            entry_query = model_search.get_query(query, ['firstname', 'lastname', ])
             content['msps'] = MSP.objects.filter(entry_query)
-            if len(content['msps']) == 0:
-                entry_query = model_search.get_query(query, ['motionid', 'topic','motiontext',])
-                content['divisions'] = Division.objects.filter(entry_query)
-                print content['divisions']
-                if len(content['divisions']) == 0:
-                    entry_query = model_search.get_query(query, ['name',])
-                    content['regions'] = Constituency.objects.filter(entry_query)
-                    if len(content['regions']) == 0:
-                        entry_query = model_search.get_query(query, ['name',])
-                        content['parties'] = Party.objects.filter(entry_query)
-        return render_to_response('scottviz_app/search_results.html', content, context)
+            entry_query = model_search.get_query(query, ['motionid', 'topic', 'motiontext', ])
+            content['divisions'] = Division.objects.filter(entry_query)
+            entry_query = model_search.get_query(query, ['name', ])
+            content['regions'] = Constituency.objects.filter(entry_query)
+            entry_query = model_search.get_query(query, ['name', ])
+            content['parties'] = Party.objects.filter(entry_query)
+
+    return render_to_response('scottviz_app/search_results.html', content, context)
 
 
-def export_csv(thing):
+def export_csv(request, thing):
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename="' + thing + '".csv"'
 

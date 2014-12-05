@@ -5,10 +5,11 @@
 		        shape-rendering: crispEdges;
 		}
 		.text{
-		font-size: 12px;
+		font-size: 11px;
 		}
 		svg{
 			stroke: black;
+			width: 100%;
 		}
 		.tooltip {
             position: absolute;
