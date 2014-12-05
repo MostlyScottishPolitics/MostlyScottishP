@@ -4,17 +4,14 @@
 <a class="btn btn-default back" href="/msp/regions"><i class="glyphicon glyphicon-circle-arrow-left"></i>All
     Constituencies</a>
 
-<div class="panel panel-default">
-    <div class="panel-heading"></div>
-    <div class="panel-body">
+
+    <div >
         {% if constituency.parent == None %}
 
-        <p>Region: {{ constituency.name }}</p>
+        <p>Main region: {{ constituency.name }}</p>
         {% else %}
-        <p> Region: {{ constituency.parent }}</p>
+        <p> Region: <a href="/msp/constituency/{{constituency.parent.id}}">{{ constituency.parent }}</a></p>
         {% endif %}
-    </div>
-
 
 </div>
 
