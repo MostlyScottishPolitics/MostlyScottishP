@@ -42,23 +42,24 @@ var gssCode = {
 };
 
 var color = {
-   "Scottish Conservative and Unionist Party" : "#5ABFF4",
-    "Scottish Labour" : "#EB2743",
+    "Central" : "#5ABFF4",
+    "Dumfries and Galloway" : "#EB2743",
     "Scottish Liberal Democrats" : "#FF784E",
-    "Scottish National Party" : "#F6DC60",
-    "Scottish Green Party" : "#31C48E",
-    "Independent" : "#986561",
-    "No Party Affiliation" : "#475070"
+    "Strathclyde" : "#F6DC60",
+    "Lothian" : "#31C48E",
+    "Highland" : "#986561",
+    "Grampian" : "#475070",
+    "Tayside" : "#000"
 };
 
-var colors = [["Scottish Conservative and Unionist Party","#5ABFF4"],
+/*var colors = [["Scottish Conservative and Unionist Party","#5ABFF4"],
 			["Scottish Labour","#EB2743"],
 			["Scottish Liberal Democrats","#FF784E"],
 			["Scottish National Party","#F6DC60"],
 			["Scottish Green Party","#31C48E"],
 			["Independent","#986561"],
 			["No Party Affiliation", "#475070"]]
-			;
+			;*/
 
 var projection = d3.geo.albers()
     .center([0, 55.4])
@@ -92,14 +93,14 @@ d3.json("/static/json/scotland-topojson-file.json",function(err,load){
         .data(topojson.feature(load,load.objects.layer1).features)
       .enter().append("path")
         .attr("d",path)
-        .style("fill",function(d){return color[party[gssCode[d.properties.gss]]];})
+        .style("fill",function(d){return color[gssCode[d.properties.gss]];})
         .style("opacity", 0.6)
         .style("stroke", "#fff")
       	.append("title")
-        .text(function(d){return gssCode[d.properties.gss];});
+        .text(function(d){return gssCode[d.properties.gss]+"\n"+party[gssCode[d.properties.gss]];});
 });
 
-var legend = svg.selectAll(".legend")
+/*var legend = svg.selectAll(".legend")
       			.data(colors)
     			.enter().append("g")
       			.attr("class", "legend")
@@ -116,7 +117,7 @@ var legend = svg.selectAll(".legend")
       				.attr("x", w - 268)
       				.attr("y", 12)
       				.attr("class", "text")
-    				.text(function(d) { return d[0]; });
+    				.text(function(d) { return d[0]; });*/
 };
 d3.csv("/static/csv/map_data.csv", function(error, d) {
   				pLoad = d.map(function(d) { return [d["region"], d["party"]]; 
