@@ -1,4 +1,4 @@
-$(function () {
+var scatter = function () {
 //Width and height
 			var w = 800;
 			var h = 400;
@@ -16,7 +16,7 @@ $(function () {
 			;
 		
 			//Create SVG element
-			var svg = d3.select("body")
+			var svg = d3.select(".plot")
 						.append("svg")
 						.attr("width", w)
 						.attr("height", h);
@@ -31,7 +31,7 @@ $(function () {
        			.style("stroke-width", border);
 			
 			// add the tooltip area to the webpage
-			var tooltip = d3.select("body").append("div")
+			var tooltip = d3.select(".plot").append("div")
     		.attr("class", "tooltip")
    		 	.style("opacity", 0);
 			
@@ -142,8 +142,16 @@ $(function () {
 
 			};
 				
-			d3.csv("static/csv/OutputMatrix.csv", function(error, d) {
+			d3.csv("/static/csv/OutputMatrix.csv", function(error, d) {
   				dataset = d.map(function(d) { return [ +d["X"], +d["Y"], d["Party"], d["MSP Name"]]; 
   				});
   				generateVisualization();});
-})
+
+}
+//so it shows the map when you load the page
+$(scatter())
+var reset = function() {
+	$('.plot').empty();
+	$(scatter())
+}
+

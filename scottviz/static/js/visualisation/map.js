@@ -70,7 +70,7 @@ var projection = d3.geo.albers()
 var path = d3.geo.path()
     .projection(projection);
 
-var svg = d3.select("body")
+var svg = d3.select(".map")
     .append("svg")
     .attr("width",w)
     .attr("height",h)
@@ -87,7 +87,7 @@ var borderPath = svg.append("rect")
 
 var generateVisualization = function()
 {
-d3.json("scotland-topojson-file.json",function(err,load){
+d3.json("/static/json/scotland-topojson-file.json",function(err,load){
     svg.selectAll("path")
         .data(topojson.feature(load,load.objects.layer1).features)
       .enter().append("path")
@@ -118,7 +118,7 @@ var legend = svg.selectAll(".legend")
       				.attr("class", "text")
     				.text(function(d) { return d[0]; });
 };
-d3.csv("map_data.csv", function(error, d) {
+d3.csv("/static/csv/map_data.csv", function(error, d) {
   				pLoad = d.map(function(d) { return [d["region"], d["party"]]; 
   				});
   				
