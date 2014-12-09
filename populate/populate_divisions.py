@@ -125,11 +125,11 @@ def populate_divisions_from(files_location,startdate,enddate):
                                 v.save()
 
                 votes_divison = Vote.objects.filter(division=d)
-                allMSPs = set(MSP.objects.all())
+                absentMSPs = MSP.objects.all()
                 for vote in votes_divison:
-                    absentMSPs = [msp for msp in allMSPs if msp!= vote.msp]
+                    absentMSPs = absentMSPs.exclude(foreignid=vote.msp.foreignid)
                 for msp in absentMSPs:
-                    v = Vote(msp = msp, division = d, vote = Vote.ABSENT)
+                    v = Vote(msp=msp, division=d, vote=Vote.ABSENT)
                     v.save()
 
 
