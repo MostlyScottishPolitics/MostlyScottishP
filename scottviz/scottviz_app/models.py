@@ -2,22 +2,32 @@ from django.db import models
 
 
 class Party(models.Model):
+    """
+    represents party
+    """
     name = models.CharField(max_length=128, unique=True)
+    description = models.TextField(null=True)
 
     def __unicode__(self):
         return self.name
 
 
 class Constituency(models.Model):
+    """
+    represents a constituency
+    """
     parent = models.ForeignKey('self', default=0, null=True)
     name = models.CharField(max_length=128, unique=True)
+    description = models.TextField(null=True)
 
     def __unicode__(self):
         return self.name
 
 
 class MSP(models.Model):
-
+    """
+    reprezents msps, stores presence, rebellions and status
+    """
     MEMBER = 1
     RESIGNED = 2
     DECEASED = 3
@@ -39,14 +49,18 @@ class MSP(models.Model):
     firstname = models.CharField(max_length=128)
     lastname = models.CharField(max_length=128)
     img = models.CharField(max_length=256)
-    presence=models.DecimalField(max_digits=5, decimal_places=2, null=True)
-    rebellions=models.DecimalField(max_digits=5, decimal_places=2, null=True)
+    presence = models.DecimalField(max_digits=5, decimal_places=2, null=True)
+    rebellions = models.DecimalField(max_digits=5, decimal_places=2, null=True)
     status = models.CharField(max_length=1, choices=SITUATIONS)
 
     def __unicode__(self):
         return u'%s %s' % (self.firstname, self.lastname)
 
+
 class Job(models.Model):
+    """
+    represents jobs that an msp can have
+    """
     job_foreignid = models.PositiveIntegerField(max_length=8, unique=True)
     name = models.CharField(max_length=128)
     msp = models.ForeignKey(MSP)
@@ -54,9 +68,13 @@ class Job(models.Model):
     job_enddate = models.DateField()
 
     def __unicode__(self):
-        return u'%s: %s - %s' (self.name, self.job_startdate, self.job_enddate)
+        return u'%s: %s - %s'(self.name, self.job_startdate, self.job_enddate)
+
 
 class SPsession(models.Model):
+    """
+    represents a Scottish Parliament session
+    """
     msps = models.ManyToManyField(MSP)
     session = models.IntegerField()
     startdate = models.DateField()
@@ -67,6 +85,9 @@ class SPsession(models.Model):
 
 
 class Division(models.Model):
+    """
+    represents division
+    """
     CARRIED = 1
     DEFEATED = 2
 
@@ -85,8 +106,8 @@ class Division(models.Model):
     motiontopic = models.CharField(max_length=128, null=True)
     topic = models.CharField(max_length=128, null=True)
     votes = models.ManyToManyField(MSP, through='Vote', null=True)
-    turnout=models.DecimalField(max_digits=5, decimal_places=2, null=True)
-    rebels=models.IntegerField(null=True)
+    turnout = models.DecimalField(max_digits=5, decimal_places=2, null=True)
+    rebels = models.IntegerField(null=True)
     result = models.CharField(max_length=1, choices=RESULTS)
 
     def __unicode__(self):
@@ -94,6 +115,9 @@ class Division(models.Model):
 
 
 class Vote(models.Model):
+    """
+    represents an msp's vote for a division
+    """
     YES = 1
     NO = 2
     ABSTAIN = 3
