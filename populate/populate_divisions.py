@@ -9,6 +9,7 @@ from Spviz.scottviz.scottviz_app.models import *
 from data import *
 from dateutil import parser
 from xml.dom import minidom
+from string import replace, upper
 
 
 def get_files(d):
@@ -45,25 +46,28 @@ def populate_divisions_from(files_location,startdate,enddate):
 
                 motionid = law.getElementsByTagName("id")[0].firstChild.data
 
-                motiontopic_raw = law.getElementsByTagName("topic")[0].firstChild.data
-                motiontopic = motiontopic_raw.encode('ascii','replace')
+                motiontopic = law.getElementsByTagName("topic")[0].firstChild.data.encode('latin1','backslashreplace').replace("\\u2019","\'")
 
                 text_raw = law.getElementsByTagName("text")
                 if text_raw == [] :
                     text='n/a'
                 else:
-                    text_less_raw = text_raw[0].firstChild.data
-                    text = str(text_less_raw.encode('ascii','replace'))
+                    text = text_raw[0].firstChild.data.encode('latin1','backslashreplace').replace("\\u2019","\'")
+
+                topic_raw = law.getElementsByTagName("category")
+                if topic_raw == [] :
+                    topic='Unknown'
+                else:
+                    topic = topic_raw[0].firstChild.data.encode('latin1','backslashreplace').replace("\\u2019","\'")
+
+
                 yup = law.getElementsByTagName("agreed")[0].firstChild
-
-                topic = ""
-
                 if yup:
                     if yup.data == "agreed":
-                        d = Division(parent=None, motionid=motionid, motiontext=text, motiontopic=motiontopic, topic = topic, result=1, date=dt)
+                        d = Division(parent=None, motionid=motionid, motiontext=text.decode('latin1'), motiontopic=motiontopic.decode('latin1'), topic=topic.decode('latin1'), result=1, date=dt)
                         d.save()
                     else:
-                        d = Division(parent=None, motionid=motionid, motiontext=text, motiontopic=motiontopic,topic = topic, result=2, date=dt)
+                        d = Division(parent=None, motionid=motionid, motiontext=text.decode('latin1'), motiontopic=motiontopic.decode('latin1'), topic=topic.decode('latin1'), result=2, date=dt)
                         d.save()
                 else:
                     # TO DO: see if agreeed or disagreed from votes

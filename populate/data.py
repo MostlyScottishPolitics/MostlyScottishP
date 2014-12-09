@@ -8,8 +8,8 @@ from Spviz.scottviz.scottviz_app.models import MSP
 divisions_location = '../scraper/report_scraper/new_data/'
 
 # change here to only get subset of divisions
-startdate = '02 June 2011'          # first meeting of new parliament
-enddate = '06 October 2011'          # last day of new parliament               -- CHANGE!!! to 6 May 2016
+startdate = '02 June 2011'          # first meeting of new parliament       -- 2 June 2011
+enddate = '6 May 2016'              # last day of new parliament            -- 6 May 2016
 
 # msps for the current session that were not members at the time of scraping
 former_or_new_msps = [
