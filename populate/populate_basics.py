@@ -9,6 +9,7 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "Spviz.scottviz.scottviz.setting
 from Spviz.scottviz.scottviz_app.models import *
 from data import *
 from populate_divisions import populate_divisions_from
+import updatedb
 
 
 
@@ -105,6 +106,10 @@ if __name__ == '__main__':
     print "_photos_for_all_msps_"
     msp_jobs()
     print "_all_jobs_"
+    # reads new scraped data; can be run to overwrite from populate_divisions
     populate_divisions_from(divisions_location, startdate, enddate)
-    print "_divisions_and_votes_"
+    print "_read_divisions_and_votes_"
+    # updates analytics; can be run to overwrite only for some from uptadedb
+    updatedb
+    print "_analytics_done_"
     print "_done_"

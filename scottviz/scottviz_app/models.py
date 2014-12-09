@@ -101,6 +101,7 @@ class Division(models.Model):
     date = models.DateField(null=True)
     proposer = models.ForeignKey(MSP, related_name='msp_proposer', null=True)
     link = models.URLField(max_length=128, null=True)
+    motion = models.BooleanField()
     motionid = models.CharField(max_length=20)
     motiontext = models.TextField()
     motiontopic = models.CharField(max_length=128, null=True)

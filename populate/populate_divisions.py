@@ -15,6 +15,38 @@ from string import replace, upper
 def get_files(d):
     return [os.path.join(d, f) for f in os.listdir(d) if os.path.isfile(os.path.join(d, f))]
 
+def absent_votes(division):
+    # if an msp did not have a vote read, he/she was absent
+
+    # get votes read until now
+    votes_read = Vote.objects.filter(division=division)
+    # get msps that didn't vote
+    absentMSPs = MSP.objects.all()
+    for vote in votes_read:
+        absentMSPs = absentMSPs.exclude(foreignid=vote.msp.foreignid)
+    # those msps had an absent vote
+    for msp in absentMSPs:
+        v = Vote(msp=msp, division=division, vote=Vote.ABSENT)
+        v.save()
+
+def get_votes(parsing_law,division,type):
+    if len(parsing_law.getElementsByTagName(type)):
+        msps = parsing_law.getElementsByTagName(type)[0].getElementsByTagName("msp")
+        for msp in msps:
+            firstname = msp.getElementsByTagName("name")[0].firstChild
+            lastname = msp.getElementsByTagName("surname")[0].firstChild
+            if firstname and lastname:
+                firstname = str(firstname.data)
+                lastname = str(lastname.data)
+                # check for recorded errors with scraper
+                if lastname == 'Mackenzie':
+                    lastname =  'MacKenzie'
+                if lastname == 'GIBson':
+                    lastname =  'Gibson'
+                if lastname != 'Copy':
+                    msp = MSP.objects.get(lastname=lastname, firstname=firstname)
+                    v = Vote(msp=msp, division=division, vote=Vote.YES)
+                    v.save()
 
 def populate_divisions_from(files_location,startdate,enddate):
 
@@ -41,8 +73,13 @@ def populate_divisions_from(files_location,startdate,enddate):
 
         if currentsession:
             laws = doc.getElementsByTagName("law")
-
+            # parse each law
             for law in laws:
+
+                motiontype = law.getElementsByTagName("type")
+                if motiontype != []:
+                    if motiontype[0].FirsChild.data == "motion":
+                        motion = True
 
                 motionid = law.getElementsByTagName("id")[0].firstChild.data
 
@@ -60,85 +97,29 @@ def populate_divisions_from(files_location,startdate,enddate):
                 else:
                     topic = topic_raw[0].firstChild.data.encode('latin1','backslashreplace').replace("\\u2019","\'")
 
+                # parsed most info for division
+                division = Division(parent=None, motion=motion, motionid=motionid, motiontext=text.decode('latin1'), motiontopic=motiontopic.decode('latin1'), topic=topic.decode('latin1'), date=dt)
 
+                # get result for this division
                 yup = law.getElementsByTagName("agreed")[0].firstChild
                 if yup:
                     if yup.data == "agreed":
-                        d = Division(parent=None, motionid=motionid, motiontext=text.decode('latin1'), motiontopic=motiontopic.decode('latin1'), topic=topic.decode('latin1'), result=1, date=dt)
-                        d.save()
+                        division.result = 1
                     else:
-                        d = Division(parent=None, motionid=motionid, motiontext=text.decode('latin1'), motiontopic=motiontopic.decode('latin1'), topic=topic.decode('latin1'), result=2, date=dt)
-                        d.save()
-                else:
-                    # TO DO: see if agreeed or disagreed from votes
-                    d = Division(parent=None, motionid=motionid, date=dt)
-                    d.save()
+                        division.result = 2
+                # done with division
+                division.save()
 
-                if len(law.getElementsByTagName("for")):
-                    forMSPs = law.getElementsByTagName("for")[0].getElementsByTagName("msp")
-                    for msp in forMSPs:
-                        firstname = msp.getElementsByTagName("name")[0].firstChild
-                        lastname = msp.getElementsByTagName("surname")[0].firstChild
-                        if firstname and lastname:
-                            firstname = str(firstname.data)
-                            lastname = str(lastname.data)
-                            d = Division.objects.get(motionid=motionid)
-                            if lastname == 'Mackenzie':
-                                lastname =  'MacKenzie'
-                            if lastname == 'GIBson':
-                                lastname =  'Gibson'
-                            if lastname != 'Copy':
-                                msp = MSP.objects.get(lastname=lastname, firstname=firstname)
-                                v = Vote(msp=msp, division=d, vote=Vote.YES)
-                                v.save()
-
-                if len(law.getElementsByTagName("against")):
-                    againstMSPs = law.getElementsByTagName("against")[0].getElementsByTagName("msp")
-                    for msp in againstMSPs:
-                        firstname = msp.getElementsByTagName("name")[0].firstChild
-                        lastname = msp.getElementsByTagName("surname")[0].firstChild
-                        if firstname and lastname:
-                            firstname = str(firstname.data)
-                            lastname = str(lastname.data)
-                            d = Division.objects.get(motionid=motionid)
-                            if lastname == 'Mackenzie':
-                                lastname =  'MacKenzie'
-                            if lastname == 'GIBson':
-                                lastname =  'Gibson'
-                            if lastname !='Copy':
-                                msp = MSP.objects.get(lastname=lastname, firstname=firstname)
-                                v = Vote(msp=msp, division=d, vote=Vote.NO)
-                                v.save()
-
-                if len(law.getElementsByTagName("abstention")):
-                    abstainMSPs = law.getElementsByTagName("abstention")[0].getElementsByTagName("msp")
-                    for msp in abstainMSPs:
-                        firstname = msp.getElementsByTagName("name")[0].firstChild
-                        lastname = msp.getElementsByTagName("surname")[0].firstChild
-                        if firstname and lastname:
-                            firstname = str(firstname.data)
-                            lastname = str(lastname.data)
-                            d = Division.objects.get(motionid=motionid)
-                            if lastname == 'Mackenzie':
-                                lastname =  'MacKenzie'
-                            if lastname == 'GIBson':
-                                lastname =  'Gibson'
-                            if lastname !='Copy':
-                                msp = MSP.objects.get(lastname=lastname, firstname=firstname)
-                                v = Vote(msp=msp, division=d, vote=Vote.ABSTAIN)
-                                v.save()
-
-                votes_divison = Vote.objects.filter(division=d)
-                absentMSPs = MSP.objects.all()
-                for vote in votes_divison:
-                    absentMSPs = absentMSPs.exclude(foreignid=vote.msp.foreignid)
-                for msp in absentMSPs:
-                    v = Vote(msp=msp, division=d, vote=Vote.ABSENT)
-                    v.save()
+                # read the votes
+                get_votes(law, division, "for")
+                get_votes(law, division, "against")
+                get_votes(law, division, "abstention")
+                absent_votes(division)
 
 
 if __name__ == '__main__':
     Division.objects.all().delete()
-    print "_deleted_old_divisions_"
+    Vote.objects.all().delete()
+    print "_deleted_old_divisions_and_votes_"
     populate_divisions_from(divisions_location, startdate, enddate)
-    print "_new_divisions_and_votes_"
+    print "_read_new_divisions_and_votes_"

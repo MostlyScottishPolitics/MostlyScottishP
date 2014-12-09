@@ -4,12 +4,21 @@ import os
 from dateutil import parser
 from Spviz.scottviz.scottviz_app.models import MSP
 
+# change here the number of msps
+number_of_msps = 129
+
 # change here for location of scraped divisions
 divisions_location = '../scraper/report_scraper/new_data/'
 
 # change here to only get subset of divisions
 startdate = '02 June 2011'          # first meeting of new parliament       -- 2 June 2011
 enddate = '6 May 2016'              # last day of new parliament            -- 6 May 2016
+
+# add here independent parties:
+independent_parties = [
+    'No Party Affiliation',
+    'Independent'
+]
 
 # msps for the current session that were not members at the time of scraping
 former_or_new_msps = [
