@@ -4,7 +4,7 @@ import os
 from decimal import *
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "scottviz.settings")
 
-from scottviz_app.models import *
+from Spviz.scottviz.scottviz_app.models import *
 
 def rebellious_votes():
 

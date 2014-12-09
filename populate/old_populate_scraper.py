@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
+# works fine, but not great for frameworky, updaty stuff
 import csv
 import os
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "scottviz.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "Spviz.scottviz.scottviz.settings")
 from dateutil import parser
 from decimal import *
 from xml.dom import minidom
-from scottviz_app.models import *
+from Spviz.scottviz.scottviz_app.models import *
 
 # images from http://www.scottish.parliament.uk/msps/53234.aspx, need to include licence
 # TO DO: more manual urls??  or photos from Pierre
@@ -246,7 +247,7 @@ def delete_data():
 
 
 def populate_constituency():
-    with open('static/test_data/districts.csv') as f:
+    with open('../scottviz/static/test_data/districts.csv') as f:
         next(f)
         for line in f:
             line = line.split(',')
@@ -434,12 +435,22 @@ def populate_votes(files):
 def rebellious_votes():
 
     divisions = Division.objects.all()
-    parties = Party.objects.all()
+
+    query = Party.objects.exclude(name__exact='Independent')
+    parties = query.exclude(name__exact='No Party Affiliation')
+    allparties = Party.objects.all()
+    independentparties = allparties.exclude(parties)
 
     # That means taking into account the dates between which he was a member -- for the latest party??
-    # TO DO: exclude independent??
+    # exclude independent
+    for party in independentparties:
+        party_msps = MSP.objects.filter(party = party)
+        this_votes = [vote for vote in Vote.objects.all() if vote.msp in party_msps]
+        for vote in this_votes:
+            vote.rebellious = False
+            vote.save()
 
-    # Check if a vote is rebellious
+    # Check if a vote for msps in not independent parties is rebellious
     for party in parties:
         party_msps = MSP.objects.filter(party = party)
         threshold = (len(party_msps))/2

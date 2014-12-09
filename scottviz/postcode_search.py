@@ -3,7 +3,7 @@ import re
 
 import requests
 
-from models import Constituency, MSP
+from Spviz.scottviz.scottviz_app.models import Constituency, MSP
 
 
 __author__ = 'laura'
