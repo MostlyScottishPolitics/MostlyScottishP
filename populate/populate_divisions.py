@@ -1,7 +1,12 @@
 __author__ = '2168879m'
 
+# run to repopulate divisions and vote
+# should probably be followed up by updating the db with the computable statistics
+
 import os
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "Spviz.scottviz.scottviz.settings")
 from Spviz.scottviz.scottviz_app.models import *
+from data import *
 from dateutil import parser
 from xml.dom import minidom
 
@@ -101,8 +106,8 @@ def populate_divisions_from(files_location,startdate,enddate):
                                 v = Vote(msp=msp, division=d, vote=Vote.NO)
                                 v.save()
 
-                if len(law.getElementsByTagName("abstain")):
-                    abstainMSPs = law.getElementsByTagName("abstain")[0].getElementsByTagName("msp")
+                if len(law.getElementsByTagName("abstention")):
+                    abstainMSPs = law.getElementsByTagName("abstention")[0].getElementsByTagName("msp")
                     for msp in abstainMSPs:
                         firstname = msp.getElementsByTagName("name")[0].firstChild
                         lastname = msp.getElementsByTagName("surname")[0].firstChild
@@ -118,3 +123,18 @@ def populate_divisions_from(files_location,startdate,enddate):
                                 msp = MSP.objects.get(lastname=lastname, firstname=firstname)
                                 v = Vote(msp=msp, division=d, vote=Vote.ABSTAIN)
                                 v.save()
+
+                votes_divison = Vote.objects.filter(division=d)
+                allMSPs = set(MSP.objects.all())
+                for vote in votes_divison:
+                    absentMSPs = [msp for msp in allMSPs if msp!= vote.msp]
+                for msp in absentMSPs:
+                    v = Vote(msp = msp, division = d, vote = Vote.ABSENT)
+                    v.save()
+
+
+if __name__ == '__main__':
+    Division.objects.all().delete()
+    print "_deleted_old_divisions_"
+    populate_divisions_from(divisions_location, startdate, enddate)
+    print "_new_divisions_and_votes_"

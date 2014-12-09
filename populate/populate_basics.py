@@ -1,5 +1,9 @@
 __author__ = '2168879m'
+
+# run to get default db
+
 import csv
+import os
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "Spviz.scottviz.scottviz.settings")
 from Spviz.scottviz.scottviz_app.models import *
@@ -102,4 +106,5 @@ if __name__ == '__main__':
     msp_jobs()
     print "_all_jobs_"
     populate_divisions_from(divisions_location, startdate, enddate)
+    print "_divisions_and_votes_"
     print "_done_"
