@@ -1,0 +1,108 @@
+% This example is a LaTeX document showing how to use the lmproj class to
+% write your report. The chapter headings are by no means prescriptive. Instead
+% use an appropriate report structure for your project as you see fit.
+% Use pdflatex and bibtex to process the file, creating a PDF file as output 
+% (there is no need to use dvips when using pdflatex).
+
+% Modified 
+
+\documentclass{lmproj}
+\begin{document}
+\title{An Example Project}
+\author{Lama Rasheed M. Alssum, 2155242A \\
+        Kris Camilleri, 2165430C \\
+        Pierre Hallot, 2162068H  \\
+        Cristina Mihailescu, 2168879M \\
+        Adriana Laura Voinea, 1006414V}
+
+
+\date{17 December 2014}
+\maketitle
+\begin{abstract}
+
+The abstract goes here
+
+\end{abstract}
+\educationalconsent
+\tableofcontents
+%==============================================================================
+\chapter{Introduction}
+\label{intro}
+
+
+%==============================================================================
+\chapter{Background Research}
+\label{background}
+
+Blah ....
+
+
+%==============================================================================
+\chapter{Requirements}
+\label{requirement}
+
+Blah ....
+
+
+
+%==============================================================================
+\chapter{Design \& Implementation}
+\label{design}
+
+The following diagrams (especially figure \ref{fig:alice}) illustrate the
+process...
+
+
+%------------------------------------------------------------------------------
+\section{User Interface}
+
+Blah blah blah
+Blah blah blah
+Blah blah blah
+Blah blah blah
+
+% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+\subsection{Foo}
+
+Blah blah blah
+Blah blah blah
+Blah blah blah
+Blah blah blah
+
+%------------------------------------------------------------------------------
+\section{Database Model}
+
+\begin{enumerate}
+\item Blah blah blah
+\item Blah blah blah
+\item Blah blah blah
+\item Blah blah blah
+\end{enumerate}
+
+
+
+%==============================================================================
+\chapter{Evaluation}
+
+Discusses and analyses the evaluation of the product. 
+
+We evaluated the project by...
+
+%==============================================================================
+\chapter{Conclusion}
+
+Reflects on the project and the technical achievements.
+
+A great project!
+
+%==============================================================================
+\section{Contributions}
+
+Here we explain that Lewis Carroll wrote chapter \ref{intro} and implemented the Pixo component. 
+John Wayne was out riding his horse every day and didn't do anything. Marilyn Monroe
+was great at getting the requirements specification and coordinating the writing of the report, as well as coding the Blah library. Betty Davis did the coding of the kernel of the project, described in Chapter \ref{impl} and designed the evaluation methodology.  James Dean handled the multimedia content of the project, including its write-up.
+
+%==============================================================================
+\bibliographystyle{plain}
+\bibliography{example}
+\end{document}
