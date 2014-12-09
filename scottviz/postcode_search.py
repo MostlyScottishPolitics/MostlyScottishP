@@ -10,6 +10,11 @@ __author__ = 'laura'
 
 
 def is_valid(postcode):
+    """
+    check if parameter provided could be a postcode
+    :param postcode:
+    :return:True or False
+    """
     postcode = postcode.upper()
     postcode = re.sub('\s+', '', postcode)
     inward = 'ABDEFGHJLNPQRSTUWXYZ'
@@ -27,6 +32,11 @@ def is_valid(postcode):
 
 
 def get_constituencies(postcode):
+    """
+    request regions mapit.mysociety.org for the given postcode
+    :param postcode:
+    :return:dictionary
+    """
     if not is_valid(postcode):
         return {'ERROR': "Invalid postcode."}
 
@@ -47,6 +57,11 @@ def get_constituencies(postcode):
 
 
 def get_msps(postcode):
+    """
+    search the database for msps for each constituency received from get_constituencies
+    :param postcode:
+    :return:dictionary
+    """
     regions = get_constituencies(postcode)
     if regions.has_key('ERROR'):
         return regions
