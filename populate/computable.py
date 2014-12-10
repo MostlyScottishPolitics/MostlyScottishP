@@ -97,7 +97,7 @@ def not_independent_party_rebellious_votes(parties):
     for party in parties:
         for division in divisions:
             expressed_votes_from_party = len([vote for vote in Vote.objects.filter(division=division).exclude(vote=Vote.ABSENT) if vote.msp.party == party])
-            threshold = (len (expressed_votes_from_party) + 1)/2
+            threshold = (expressed_votes_from_party + 1)/2
             # get all the votes for this division
             division_votes = Vote.objects.filter(division=division)
             # split the votes by vote
