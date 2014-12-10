@@ -26,10 +26,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'm_14_pgtproja',  # Or path to database file if using sqlite3.
+        'NAME': 'm_14_2168879m',  # Or path to database file if using sqlite3.
         # The following settings are not used with sqlite3:
-        'USER': 'm_14_pgtproja',
-        'PASSWORD': 'pgtproja',
+        'USER': 'm_14_2168879m',
+        'PASSWORD': '2168879m',
         'HOST': 'yacata.dcs.gla.ac.uk',  # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
         'PORT': '5432',  # Set to empty string for default.
         'OPTIONS': {
@@ -140,7 +140,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'scottviz_app',
+    'Spviz.scottviz.scottviz_app',
     # Uncomment the next line to enable the admin:
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:

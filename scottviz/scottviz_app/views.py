@@ -252,23 +252,23 @@ def division(request, divisionID):
     content['party_abstain'] = Vote.objects.filter(division=this_division, rebellious=True, party_vote=Vote.ABSTAIN)
     content['party_absent'] = Vote.objects.filter(division=this_division, rebellious=True, party_vote=Vote.ABSENT)
     parties = Party.objects.all().order_by('name')
-    pro={}
-    con={}
-    turnout = {}
+    results = []
+    TWOPLACES = Decimal(10) ** -2
     for party in parties:
         expressed_votes = len([vote for vote in Vote.objects.filter(division=this_division).exclude(vote=Vote.ABSENT) if vote.msp.party == party])
-        pro[party.id] = len([vote for vote in Vote.objects.filter(division=this_division, vote=Vote.YES) if vote.msp.party == party])
-        con[party.id] = len([vote for vote in Vote.objects.filter(division=this_division, vote=Vote.NO) if vote.msp.party == party])
-        print expressed_votes
-        print len(MSP.objects.filter(party=party))
-        turnout[party.id] = Decimal(100*expressed_votes)/Decimal(len(MSP.objects.filter(party=party)))
+        if expressed_votes>0:
+            pro = Decimal(Decimal(100*len([vote for vote in Vote.objects.filter(division=this_division, vote=Vote.YES) if vote.msp.party == party]))/Decimal(expressed_votes)).quantize(TWOPLACES)
+            con = Decimal(Decimal(100*len([vote for vote in Vote.objects.filter(division=this_division, vote=Vote.NO) if vote.msp.party == party]))/Decimal(expressed_votes)).quantize(TWOPLACES)
+        else:
+            pro = 0
+            con = 0
+        turnout = Decimal(Decimal(100*expressed_votes)/Decimal(len(MSP.objects.filter(party=party)))).quantize(TWOPLACES)
+        results.append([party,pro,con,turnout])
     q = Division.objects.filter(motionid__startswith=this_division.motionid.split('.')[0])
     print this_division.motionid.split('.')[0]
     content['related'] = q.exclude(motionid__exact=this_division.motionid)
     content['parties'] = parties
-    content['party_pro'] = pro
-    content['party_con'] = con
-    content['party_turnout'] = turnout
+    content['results'] = results
     return render_to_response('scottviz_app/division.html', content, context)
 
 
