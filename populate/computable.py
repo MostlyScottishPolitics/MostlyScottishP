@@ -2,8 +2,8 @@
 __author__ = '2168879m'
 
 import os
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "Spviz.scottviz.msp.settings")
-from Spviz.scottviz.msp.models import *
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "scottviz.scottviz.settings")
+from scottviz.msp.models import *
 from decimal import *
 from data import number_of_msps, independent_parties, topics_divisions, topic_extracter_location
 
