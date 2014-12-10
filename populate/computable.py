@@ -112,10 +112,10 @@ def not_independent_party_rebellious_votes(parties):
                 put(votes_abstain, Vote.YES, True)
                 put(votes_absent,Vote.YES,False)
             elif len(votes_no)>threshold:
-                put(votes_yes, Vote.YES, True)
-                put(votes_no, Vote.YES, False)
-                put(votes_abstain, Vote.YES, True)
-                put(votes_absent,Vote.YES,False)
+                put(votes_yes, Vote.NO, True)
+                put(votes_no, Vote.NO, False)
+                put(votes_abstain, Vote.NO, True)
+                put(votes_absent,Vote.NO,False)
             elif len(votes_abstain)>threshold:
                 put(votes_yes, Vote.ABSTAIN, True)
                 put(votes_no, Vote.ABSTAIN, True)
