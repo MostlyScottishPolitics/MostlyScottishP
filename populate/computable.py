@@ -47,14 +47,15 @@ def compute_division_rebels():
 
 
 def compute_msp_rebellions():
-    divisions = Division.objects.all()
+    alldivisions = len(Division.objects.all())
     msps = MSP.objects.all()
 
     # rebellions for each msp
     for msp in msps:
         # if msp.presence already computed :
-        msp.rebellions = Decimal(len(Vote.objects.filter(msp=msp, rebellious=True)))*msp.presence/100
-        msp.save()
+        if msp.presence and alldivisions:
+            msp.rebellions = 10000 * Decimal(len(Vote.objects.filter(msp=msp, rebellious=True)))/(msp.presence * alldivisions)
+            msp.save()
 
         # otherwise, comment the previous 2 lines and uncomment the next 4 lines:
         #

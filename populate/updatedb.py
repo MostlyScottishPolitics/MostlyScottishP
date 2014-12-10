@@ -7,16 +7,16 @@ if __name__ == '__main__':
     # change any def in computable to get other statistics
 
     # this one takes a while
-    compute_rebellious_votes()
+#    compute_rebellious_votes()
     print "_rebelious_votes_"
 
-    compute_division_turnout()
+#    compute_division_turnout()
     print "_division_turnout_"
 
-    compute_msp_turnout()
+#    compute_msp_turnout()
     print "_msp_turnout_"
 
-    compute_division_rebels()
+#    compute_division_rebels()
     print "_division_rebels_"
 
     compute_msp_rebellions()
