@@ -250,10 +250,18 @@ def division(request, divisionID):
     content['party_against'] = Vote.objects.filter(division=this_division, rebellious=True, party_vote=Vote.NO)
     content['party_abstain'] = Vote.objects.filter(division=this_division, rebellious=True, party_vote=Vote.ABSTAIN)
     content['party_absent'] = Vote.objects.filter(division=this_division, rebellious=True, party_vote=Vote.ABSENT)
-
+    parties = Party.objects.all().order_by('name')
+    pro={}
+    con={}
+    for party in parties:
+        pro[party.id] = len([vote for vote in Vote.objects.filter(division=this_division, vote=Vote.YES) if vote.msp.party == party])
+        con[party.id] = len([vote for vote in Vote.objects.filter(division=this_division, vote=Vote.NO) if vote.msp.party == party])
     q = Division.objects.filter(motionid__startswith=this_division.motionid.split('.')[0])
     print this_division.motionid.split('.')[0]
     content['related'] = q.exclude(motionid__exact=this_division.motionid)
+    content['parties'] = parties
+    content['party_pro'] = pro
+    content['party_con'] = con
     return render_to_response('scottviz_app/division.html', content, context)
 
 

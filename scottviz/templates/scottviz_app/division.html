@@ -176,6 +176,7 @@
 </div>
 
 <div id="bpc">
+{% if parties %}
      <div class="container">
     <div class="table-responsive">
         <table class="table table-striped table-hover">
@@ -189,12 +190,21 @@
             </thead>
 
             <tbody>
-
-            <tr>
-            </tr>
+            {% for party in parties %}
+                <tr>
+                    <td>{{party}}</td>
+                    <td>{{party_pro}}</td>
+                    <td>{{party_con}}</td>
+                    <td>{{party.id}}</td>
+                </tr>
+            {% endfor %}
             </tbody>
         </table>
     </div> </div>
+{% else %}
+    <div class="well">
+    <p class="lead">Nothing to see here</p></div>
+{% endif %}
 </div>
 
 <div id="relc">
