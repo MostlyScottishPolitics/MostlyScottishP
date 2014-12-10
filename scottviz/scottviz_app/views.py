@@ -7,6 +7,7 @@ from django.http import HttpResponse
 
 from Spviz.scottviz import postcode_search, model_search
 from models import *
+from decimal import *
 
 navbar = (
 
@@ -253,15 +254,21 @@ def division(request, divisionID):
     parties = Party.objects.all().order_by('name')
     pro={}
     con={}
+    turnout = {}
     for party in parties:
+        expressed_votes = len([vote for vote in Vote.objects.filter(division=this_division).exclude(vote=Vote.ABSENT) if vote.msp.party == party])
         pro[party.id] = len([vote for vote in Vote.objects.filter(division=this_division, vote=Vote.YES) if vote.msp.party == party])
         con[party.id] = len([vote for vote in Vote.objects.filter(division=this_division, vote=Vote.NO) if vote.msp.party == party])
+        print expressed_votes
+        print len(MSP.objects.filter(party=party))
+        turnout[party.id] = Decimal(100*expressed_votes)/Decimal(len(MSP.objects.filter(party=party)))
     q = Division.objects.filter(motionid__startswith=this_division.motionid.split('.')[0])
     print this_division.motionid.split('.')[0]
     content['related'] = q.exclude(motionid__exact=this_division.motionid)
     content['parties'] = parties
     content['party_pro'] = pro
     content['party_con'] = con
+    content['party_turnout'] = turnout
     return render_to_response('scottviz_app/division.html', content, context)
 
 
