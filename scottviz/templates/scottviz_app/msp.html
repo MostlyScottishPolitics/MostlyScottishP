@@ -69,7 +69,7 @@
                         <td>{{rebellion.division.topic}}</td>
                         <td>Carried</td>
                         <td>{{rebellion.division.turnout}}% </td>
-                        <td><a href="/msp/rebels/{{rebellion.division.id}}">{{rebellion.division.rebels}} </a> </td>
+                        <td>{{rebellion.division.rebels}}</td>
                         {% if rebellion in party_for %}
                             <td>For</td>
                         {% elif rebellion in party_against %}
@@ -101,7 +101,7 @@
                         <td>{{rebellion.division.topic}}</td>
                         <td>Defeated</td>
                         <td>{{rebellion.division.turnout}}% </td>
-                        <td><a href="/msp/rebels/{{rebellion.division.id}}">{{rebellion.division.rebels}} </a> </td>
+                        <td>{{rebellion.division.rebels}} </td>
                         {% if rebellion in party_for %}
                             <td>For</td>
                         {% elif rebellion in party_against %}

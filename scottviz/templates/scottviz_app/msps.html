@@ -24,11 +24,7 @@
                 <td><a href="/msp/party/{{msp.party.id}}">{{msp.party}}</a></td>
                 <td><a href="/msp/constituency/{{msp.constituency.id}}">{{msp.constituency}}</a></td>
                 {% if msp.rebellions != None %}
-                    {% if msp.rebellions %}
-                        <td><a href="/msp/msp/{{msp.foreignid}}">{{msp.rebellions}}%</a></td>
-                    {% else %}
-                        <td>{{msp.rebellions}}%</td>
-                    {% endif %}
+                    <td>{{msp.rebellions}}%</td>
                 {% else %}
                     <td>NA</td>
                 {% endif %}
