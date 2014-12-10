@@ -151,7 +151,7 @@
             {% for vote in votes %}
                     <tr>
                         <td sorttable_customkey="{{vote.msp.lastname}}"><a href="/msp/msp/{{vote.msp.foreignid}}">{{vote.msp}}</a></td>
-                        <td><a href="/msp/msp/{{vote.msp.party}}">{{vote.msp.party}}</a></td>
+                        <td><a href="/msp/party/{{vote.msp.party.id}}">{{vote.msp.party}}</a></td>
                         {% if vote.vote == '1' %}
                             <td>For</td>
                         {% elif vote.vote == '2' %}
@@ -193,7 +193,7 @@
             <tbody>
             {% for result in results %}
                 <tr>
-                    <td>{{result.0}}</td>
+                    <td><a href="/msp/party/{{result.0.id}}">{{result.0}}</a></td>
                     <td>{{result.1}}%</td>
                     <td>{{result.2}}%</td>
                     <td>{{result.3}}%</td>
