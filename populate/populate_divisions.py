@@ -29,7 +29,7 @@ def absent_votes(division):
         v = Vote(msp=msp, division=division, vote=Vote.ABSENT)
         v.save()
 
-def get_votes(parsing_law,division,type):
+def get_votes(parsing_law,division,type,result):
     if len(parsing_law.getElementsByTagName(type)):
         msps = parsing_law.getElementsByTagName(type)[0].getElementsByTagName("msp")
         for msp in msps:
@@ -45,7 +45,7 @@ def get_votes(parsing_law,division,type):
                     lastname =  'Gibson'
                 if lastname != 'Copy':
                     msp = MSP.objects.get(lastname=lastname, firstname=firstname)
-                    v = Vote(msp=msp, division=division, vote=Vote.YES)
+                    v = Vote(msp=msp, division=division, vote=result)
                     v.save()
 
 def populate_divisions_from(files_location,startdate,enddate):
@@ -76,9 +76,10 @@ def populate_divisions_from(files_location,startdate,enddate):
             # parse each law
             for law in laws:
 
+                motion = False
                 motiontype = law.getElementsByTagName("type")
-                if motiontype != []:
-                    if motiontype[0].FirsChild.data == "motion":
+                if motiontype!=[]:
+                    if motiontype[0].firstChild.data == "motion":
                         motion = True
 
                 motionid = law.getElementsByTagName("id")[0].firstChild.data
@@ -111,9 +112,9 @@ def populate_divisions_from(files_location,startdate,enddate):
                 division.save()
 
                 # read the votes
-                get_votes(law, division, "for")
-                get_votes(law, division, "against")
-                get_votes(law, division, "abstention")
+                get_votes(law, division, "for", Vote.YES)
+                get_votes(law, division, "against", Vote.NO)
+                get_votes(law, division, "abstention", Vote.ABSTAIN)
                 absent_votes(division)
 
 

@@ -96,10 +96,10 @@ def not_independent_party_rebellious_votes(parties):
             # get all the votes by MSPs in this party
             division_votes_party = [vote for vote in division_votes if vote.msp in party_msps]
             # split the votes by vote
-            votes_yes = division_votes_party.filter(vote=Vote.YES)
-            votes_no = division_votes_party.filter(vote=Vote.NO)
-            votes_abstain = division_votes_party.filter(vote=Vote.ABSTAIN)
-            votes_absent = division_votes_party.filter(vote=Vote.ABSENT)
+            votes_yes = [vote for vote in division_votes.filter(vote=Vote.YES) if vote.msp in party_msps]
+            votes_no = [vote for vote in division_votes.filter(vote=Vote.NO) if vote.msp in party_msps]
+            votes_abstain = [vote for vote in division_votes.filter(vote=Vote.ABSTAIN) if vote.msp in party_msps]
+            votes_absent = [vote for vote in division_votes.filter(vote=Vote.ABSENT) if vote.msp in party_msps]
             # decide a party vote if threshold reached
             if len(votes_yes)>threshold:
                 vote.party_vote = Vote.YES
@@ -114,10 +114,14 @@ def not_independent_party_rebellious_votes(parties):
                 if vote.party_vote:
                     if vote.party_vote != vote.vote :
                         vote.rebellious = True
+                        print "OH MY!"
                     else:
                         vote.rebellious = False
                 vote.save()
 
+
+# DOES NOT WORK
+# TO DO: FIX!
 def compute_rebellious_votes():
 
     parties = Party.objects.all()
@@ -130,6 +134,8 @@ def compute_rebellious_votes():
     not_independent_party_rebellious_votes(notindparties)
 
     # get a list of independent parties
-    indparties = parties.exclude(notindparties)
+    indparties = parties
+    for party in parties:
+        indparties = indparties.exclude(id=party.id)
     # compute for independent parties
     independent_party_rebellious_votes(indparties)

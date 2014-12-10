@@ -110,6 +110,6 @@ if __name__ == '__main__':
     populate_divisions_from(divisions_location, startdate, enddate)
     print "_read_divisions_and_votes_"
     # updates analytics; can be run to overwrite only for some from uptadedb
-    updatedb
+    os.system('updatedb.py')
     print "_analytics_done_"
     print "_done_"
