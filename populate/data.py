@@ -6,10 +6,11 @@ from scottviz.msp.models import MSP,Division
 
 
 # change the topic_extracter location script here
-topic_extracter_location = 'Spviz.scraper.report_scraper'
+topic_extracter_location = 'scraper.report_scraper'
+topic_extracter_name = '.topic_extracter'
 
 # change the divisions for which to compute topic
-topics_divisions = Division.objects.all()
+topics_divisions = Division.objects.all().order_by('id')
 
 # change here the number of msps
 number_of_msps = 129

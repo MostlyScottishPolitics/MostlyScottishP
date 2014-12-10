@@ -258,6 +258,7 @@ def get_topic_from_text(text):
     # To lowercase
     token_array = [x.lower() for x in token_array]
 
+    stop_array = []
     # Stop-words removal
     # Open the stop-words file and load it into an array
     # Remove the token matching those from this array from the token array

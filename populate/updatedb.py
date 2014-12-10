@@ -21,7 +21,8 @@ if __name__ == '__main__':
 
     compute_msp_rebellions()
     print "_msp_rebellions_"
-
+    """  #already in the db
     compute_topics()
     print "_topics_"
+    """
     print "_done_"
