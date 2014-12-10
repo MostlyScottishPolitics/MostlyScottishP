@@ -35,7 +35,7 @@ $('#votes a').click(function (e) {
     $(this).tab('show')
     $("#rsc").hide();
     $("#relc").hide();
-    $("#bpd").hide();
+    $("#bpc").hide();
     $("#vot").show();
 });
 $('#byparty a').click(function (e) {
