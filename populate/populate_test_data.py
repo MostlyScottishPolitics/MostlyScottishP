@@ -1,12 +1,11 @@
 import csv
 import os
 import datetime
+from scottviz.msp.models import *
+from scottviz.scottviz.settings import STATIC_PATH
 
-from scottviz.settings import STATIC_PATH
 
-
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "scottviz.settings")
-from scottviz_app.models import *
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "msp.settings")
 
 
 def delete_data():

@@ -19,9 +19,9 @@ cn = pq.connect('dbname=m_14_pgtproja user=m_14_pgtproja password=pgtproja host=
 cr = cn.cursor()
 print "0) Database Connected."
 
-result = cr.execute('SELECT MAX(id) FROM scottviz_app_division;')
+result = cr.execute('SELECT MAX(id) FROM msp_division;')
 maxDivision = cr.fetchone()
-result = cr.execute('SELECT COUNT(DISTINCT id) FROM scottviz_app_msp;')
+result = cr.execute('SELECT COUNT(DISTINCT id) FROM msp_msp;')
 maxMSP = cr.fetchone()
 
 #Convert tuples to list of ints, extract the first (and only value)
@@ -35,7 +35,7 @@ matrix = numpy.zeros((int(maxMSP_int), int(maxDivision_int)))
 
 #Gets MSP First and Second Names
 def selectMSP():
-    result = cr.execute('SELECT firstname, lastname FROM scottviz_app_msp ORDER BY foreignid;')
+    result = cr.execute('SELECT firstname, lastname FROM msp_msp ORDER BY foreignid;')
     msp = cr.fetchall()
     count = -1
     mspList = []
@@ -51,7 +51,7 @@ def selectMSP():
 #Fills in values of 2D null matrix, with each entry being a vote (X=divisions, Y=MSPs)
 def selectVotes():
     result = cr.execute(
-        "SELECT msp.foreignid, div.id, vote.vote FROM scottviz_app_msp AS msp, scottviz_app_division AS div, scottviz_app_vote AS vote WHERE msp.id = vote.msp_id AND div.id= vote.division_id ORDER BY msp.foreignid")
+        "SELECT msp.foreignid, div.id, vote.vote FROM msp_msp AS msp, msp_division AS div, msp_vote AS vote WHERE msp.id = vote.msp_id AND div.id= vote.division_id ORDER BY msp.foreignid")
     vote = cr.fetchall()
     count = -1
     for rows in vote:
@@ -71,7 +71,7 @@ def selectVotes():
 #Gets each MSP's Party's name
 def selectParty():
     result = cr.execute(
-        "SELECT party.name FROM scottviz_app_party AS party, scottviz_app_msp AS msp WHERE msp.party_id = party.id ORDER BY msp.foreignid")
+        "SELECT party.name FROM msp_party AS party, msp_msp AS msp WHERE msp.party_id = party.id ORDER BY msp.foreignid")
     party = cr.fetchall()
     count = -1
     partyList = []

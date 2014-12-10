@@ -2,7 +2,8 @@ __author__ = '2168879m'
 
 import os
 from dateutil import parser
-from Spviz.scottviz.scottviz_app.models import MSP,Division
+from scottviz.msp.models import MSP,Division
+
 
 # change the topic_extracter location script here
 topic_extracter_location = '../scraper/report_scraper/topic_extracter.py'
