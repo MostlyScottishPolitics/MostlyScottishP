@@ -95,16 +95,16 @@ def not_independent_party_rebellious_votes(parties):
     divisions = Division.objects.all()
     # Check if a vote for msps in not independent parties is rebellious
     for party in parties:
-        party_msps = MSP.objects.filter(party=party)
-        threshold = (len(party_msps))/2
         for division in divisions:
+            expressed_votes_from_party = len([vote for vote in Vote.objects.filter(division=division).exclude(vote=Vote.ABSENT) if vote.msp.party == party])
+            threshold = (len (expressed_votes_from_party) + 1)/2
             # get all the votes for this division
             division_votes = Vote.objects.filter(division=division)
             # split the votes by vote
-            votes_yes = [vote for vote in division_votes.filter(vote=Vote.YES) if vote.msp in party_msps]
-            votes_no = [vote for vote in division_votes.filter(vote=Vote.NO) if vote.msp in party_msps]
-            votes_abstain = [vote for vote in division_votes.filter(vote=Vote.ABSTAIN) if vote.msp in party_msps]
-            votes_absent = [vote for vote in division_votes.filter(vote=Vote.ABSENT) if vote.msp in party_msps]
+            votes_yes = [vote for vote in division_votes.filter(vote=Vote.YES) if vote.msp.party == party]
+            votes_no = [vote for vote in division_votes.filter(vote=Vote.NO) if vote.msp.party == party]
+            votes_abstain = [vote for vote in division_votes.filter(vote=Vote.ABSTAIN) if vote.msp.party == party]
+            votes_absent = [vote for vote in division_votes.filter(vote=Vote.ABSENT) if vote.msp.party == party]
             # decide a party vote if threshold reached
             # and put the results in
             if len(votes_yes)>threshold:
