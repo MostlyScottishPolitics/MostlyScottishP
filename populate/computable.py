@@ -4,7 +4,8 @@ import os
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "Spviz.scottviz.scottviz.settings")
 from Spviz.scottviz.scottviz_app.models import *
 from decimal import *
-from data import number_of_msps, independent_parties
+from data import number_of_msps, independent_parties, topics_divisions, topic_extracter
+
 
 # the definitions here can be changed to get other statistics
 
@@ -128,8 +129,6 @@ def not_independent_party_rebellious_votes(parties):
                 put(votes_abstain, Vote.ABSENT, False)
                 put(votes_absent,Vote.ABSENT,False)
 
-# DOES NOT WORK
-# TO DO: FIX!
 def compute_rebellious_votes():
 
     parties = Party.objects.all()
@@ -147,3 +146,12 @@ def compute_rebellious_votes():
         indparties = indparties.exclude(id=party.id)
     # compute for independent parties
     independent_party_rebellious_votes(indparties)
+
+# computer topics for the topic_divisions using topic_extracter
+# change the set of topic_divisions in data
+# change the topic_extracter in data
+def compute_topics():
+
+    for division in topics_divisions:
+        topic = topic_extracter.get_topic_from_text(division.motiontext)
+        print topic
