@@ -2,7 +2,7 @@ __author__ = '2168879m'
 
 import os
 from dateutil import parser
-from Spviz.scottviz.scottviz_app.models import MSP
+from scottviz.msp.models import MSP
 
 # change here the number of msps
 number_of_msps = 129

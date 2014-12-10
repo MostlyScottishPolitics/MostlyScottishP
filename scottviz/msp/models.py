@@ -6,7 +6,6 @@ class Party(models.Model):
     represents party
     """
     name = models.CharField(max_length=128, unique=True)
-    description = models.TextField(null=True)
 
     def __unicode__(self):
         return self.name
@@ -18,7 +17,6 @@ class Constituency(models.Model):
     """
     parent = models.ForeignKey('self', default=0, null=True)
     name = models.CharField(max_length=128, unique=True)
-    description = models.TextField(null=True)
 
     def __unicode__(self):
         return self.name

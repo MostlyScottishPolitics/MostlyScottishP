@@ -5,7 +5,7 @@ from django.template import RequestContext
 from django.shortcuts import render_to_response
 from django.http import HttpResponse
 
-from Spviz.scottviz import postcode_search, model_search
+import postcode_search, model_search
 from models import *
 from decimal import *
 
@@ -90,7 +90,7 @@ def home(request):
         'title': 'Welcome to Mostly Scottish Politics(MSP)',
         'desc': "Browse motions, regions, MSPs, see how they vote, and don't forget to have a go at our interactive visualisations and map ",
     }
-    return render_to_response('scottviz_app/base.html', content, context)
+    return render_to_response('msp/base.html', content, context)
 
 
 def map(request):
@@ -101,7 +101,7 @@ def map(request):
     """
     context = RequestContext(request)
     content['activesite'] = navbar['map']
-    return render_to_response('scottviz_app/map.html', content, context)
+    return render_to_response('msp/map.html', content, context)
 
 
 def scatter(request):
@@ -112,7 +112,7 @@ def scatter(request):
     """
     context = RequestContext(request)
     content['activesite'] = navbar['scatter']
-    return render_to_response('scottviz_app/scatter.html', content, context)
+    return render_to_response('msp/scatter.html', content, context)
 
 
 def msps(request):
@@ -124,7 +124,7 @@ def msps(request):
     context = RequestContext(request)
     content['activesite'] = navbar['msps']
     content['msps'] = MSP.objects.order_by('lastname', 'firstname')
-    return render_to_response('scottviz_app/msps.html', content, context)
+    return render_to_response('msp/msps.html', content, context)
 
 
 def msp(request, mspID):
@@ -154,7 +154,7 @@ def msp(request, mspID):
     content['party_abstain'] = Vote.objects.filter(msp=this_msp, rebellious=True, party_vote=Vote.ABSTAIN)
     content['party_absent'] = Vote.objects.filter(msp=this_msp, rebellious=True, party_vote=Vote.ABSENT)
     content['attendance'] = Vote.objects.filter(msp=this_msp).exclude(vote=Vote.ABSENT).order_by('division')
-    return render_to_response('scottviz_app/msp.html', content, context)
+    return render_to_response('msp/msp.html', content, context)
 
 
 def party(request, partyID):
@@ -174,7 +174,7 @@ def party(request, partyID):
     party_msps = MSP.objects.filter(party=this_party).order_by('lastname')
     content['party'] = this_party
     content['partymsps'] = party_msps
-    return render_to_response('scottviz_app/party.html', content, context)
+    return render_to_response('msp/party.html', content, context)
 
 
 def regions(request):
@@ -190,7 +190,7 @@ def regions(request):
     content['region'] = const[0]
     content['constituencies'] = Constituency.objects.exclude(parent=None).order_by('name')
     content['msps'] = MSP.objects.order_by('lastname', 'firstname')
-    return render_to_response('scottviz_app/regions.html', content, context)
+    return render_to_response('msp/regions.html', content, context)
 
 
 def constituency(request, constituencyID):
@@ -210,7 +210,7 @@ def constituency(request, constituencyID):
     constituency_msps = MSP.objects.filter(constituency=this_constituency).order_by('party')
     content['constituency'] = this_constituency
     content['constituency_msps'] = constituency_msps
-    return render_to_response('scottviz_app/constituency.html', content, context)
+    return render_to_response('msp/constituency.html', content, context)
 
 
 def divisions(request):
@@ -222,7 +222,7 @@ def divisions(request):
     context = RequestContext(request)
     content['activesite'] = navbar['divisions']
     content['divisions'] = Division.objects.order_by('-date')
-    return render_to_response('scottviz_app/divisions.html', content, context)
+    return render_to_response('msp/divisions.html', content, context)
 
 
 def division(request, divisionID):
@@ -269,7 +269,7 @@ def division(request, divisionID):
     content['related'] = q.exclude(motionid__exact=this_division.motionid)
     content['parties'] = parties
     content['results'] = results
-    return render_to_response('scottviz_app/division.html', content, context)
+    return render_to_response('msp/division.html', content, context)
 
 
 def rebels(request, divisionID):
@@ -296,7 +296,7 @@ def rebels(request, divisionID):
     content['party_against'] = Vote.objects.filter(division=this_division, rebellious=True, party_vote=Vote.NO)
     content['party_abstain'] = Vote.objects.filter(division=this_division, rebellious=True, party_vote=Vote.ABSTAIN)
     content['party_absent'] = Vote.objects.filter(division=this_division, rebellious=True, party_vote=Vote.ABSENT)
-    return render_to_response('scottviz_app/rebels.html', content, context)
+    return render_to_response('msp/rebels.html', content, context)
 
 
 def aboutus(request):
@@ -307,7 +307,7 @@ def aboutus(request):
     """
     context = RequestContext(request)
     content['activesite'] = about['aboutus']
-    return render_to_response('scottviz_app/aboutus.html', content, context)
+    return render_to_response('msp/aboutus.html', content, context)
 
 
 def aboutsp(request):
@@ -318,7 +318,7 @@ def aboutsp(request):
     """
     context = RequestContext(request)
     content['activesite'] = about['aboutsp']
-    return render_to_response('scottviz_app/aboutsp.html', content, context)
+    return render_to_response('msp/aboutsp.html', content, context)
 
 
 def search_results(request):
@@ -354,7 +354,7 @@ def search_results(request):
             entry_query = model_search.get_query(query, ['name', ])
             content['parties'] = Party.objects.filter(entry_query)
 
-    return render_to_response('scottviz_app/search_results.html', content, context)
+    return render_to_response('msp/search_results.html', content, context)
 
 
 def export_csv(request, thing):
