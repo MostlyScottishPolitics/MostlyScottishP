@@ -1,11 +1,11 @@
-from scottviz.msp.models import *
 
 __author__ = '2168879m'
 
 import os
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "scottviz.msp.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "Spviz.scottviz.msp.settings")
+from Spviz.scottviz.msp.models import *
 from decimal import *
-from data import number_of_msps, independent_parties, topics_divisions, topic_extracter
+from data import number_of_msps, independent_parties, topics_divisions, topic_extracter_location
 
 
 # the definitions here can be changed to get other statistics
@@ -154,5 +154,5 @@ def compute_rebellious_votes():
 def compute_topics():
 
     for division in topics_divisions:
-        topic = topic_extracter.get_topic_from_text(division.motiontext)
+        topic = topic_extracter_location.topic_extracter.get_topic_from_text(division.motiontext)
         print topic

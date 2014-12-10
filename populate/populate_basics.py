@@ -1,4 +1,4 @@
-from scottviz.msp.models import *
+from Spviz.scottviz.msp.models import *
 
 __author__ = '2168879m'
 
@@ -9,8 +9,8 @@ import os
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "scottviz.msp.settings")
 from data import *
+from dateutil import parser
 from populate_divisions import populate_divisions_from
-import updatedb
 
 
 
