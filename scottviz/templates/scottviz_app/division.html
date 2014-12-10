@@ -11,7 +11,12 @@
  <!-- proposer not in the db yet -->
  <!--       <p>Proposed by: <a href="/msp/msp/{{msp.foreignid}}">{{division.msp.firstname}} {{division.msp.lastname}}</a></p> -->
 
-        <p><b> Description:</b> {{division.motiontext}}</p>
+       {% if division.motiontext != 'n/a' %}
+            <p><b> Description:</b> {{division.motiontext}}</p>
+       {% else %}
+            <p><b> Description:</b> {{division.motiontext}}; Look for related divisions</p>
+            <p><b> Some related text:</b> {{division.motiontopic}}</p>
+       {% endif %}
 
 
         <p>See on <b>Scottish Parliament website</b>:  {{division.link}}
@@ -22,11 +27,8 @@
                     Defeated
                 {% endif %} </p>
         <p><b>Turnout: </b>{{division.turnout}}%</p>
-        <p><b>Rebels: </b>              {% if division.rebels %}
-                    <a href="/msp/rebels/{{division.id}}">{{division.rebels}}</a>
-                {% else %}
-                   {{division.rebels}}
-                {% endif %}
+        <p><b>Date: </b>{{division.date}}</p>
+
 </p>
     </div>
     </div>
@@ -169,7 +171,7 @@
 
             {% for division in related %}
             <tr>
-                <td>{{division}}</td>
+                <td><a href="/msp/division/{{division.id}}">{{division}}</a></td>
                 <td>{{division.date}}</td>
                 <td>{{division.topic}}</td>
                 {% if division.result == '1'%}
