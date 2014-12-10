@@ -240,6 +240,7 @@ def division(request, divisionID):
     }
 
     content['division'] = this_division
+    content['votes'] = Vote.objects.filter(division=this_division).order_by('msp')
     content['rebels'] = Vote.objects.filter(division=this_division, rebellious=True)
     content['for'] = Vote.objects.filter(division=this_division, rebellious=True, vote=Vote.YES)
     content['against'] = Vote.objects.filter(division=this_division, rebellious=True, vote=Vote.NO)

@@ -25,7 +25,7 @@
                    Carried
                 {% else %}
                     Defeated
-                {% endif %} </p>
+         {% endif %} </p>
         <p><b>Turnout: </b>{{division.turnout}}%</p>
         <p><b>Date: </b>{{division.date}}</p>
 
@@ -37,12 +37,14 @@
 </div>
 <ul class="nav nav-tabs">
   <li role="presentation" class="active" id="rebels"><a href="#rsc" >Rebels</a></li>
+  <li role="presentation" id="votes"><a href="#vot" >Votes</a></li>
   <li role="presentation" id="byparty"><a href="#bpc" >Votes by Party</a></li>
-    <li role="presentation" id="related"><a href="#relc" >Related divisions</a></li>
-
+  <li role="presentation" id="related"><a href="#relc" >Related divisions</a></li>
 </ul>
+
 <div id="rsc">
 {% if rebels %}
+     <div class="container">
     <div class="table-responsive">
         <table class="table table-hover sortable">
              <caption>A 'rebellion' is when an MSP votes differently than his party . Here you can see the 'rebels' that voted differently for this division. </caption>
@@ -123,7 +125,50 @@
             {% endfor %}
             </tbody>
         </table>
+    </div> </div>
+    {% else %}
+    <div class="well">
+    <p class="lead">Nothing to see here</p></div>
+{% endif %}
+</div>
+
+<div id="vot">
+{% if votes %}
+     <div class="container">
+    <div class="table-responsive">
+        <table class="table table-hover sortable">
+             <caption> All the votes for this division with turnout: {{division.turnout}} </caption>
+
+            <thead>
+            <tr>
+                <th>MSP</th>
+                <th>Party</th>
+                <th>MSP Vote</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            {% for vote in votes %}
+                    <tr>
+                        <td sorttable_customkey="{{vote.msp.lastname}}"><a href="/msp/msp/{{vote.msp.foreignid}}">{{vote.msp}}</a></td>
+                        <td><a href="/msp/msp/{{vote.msp.party}}">{{vote.msp.party}}</a></td>
+                        {% if vote.vote == '1' %}
+                            <td>For</td>
+                        {% elif vote.vote == '2' %}
+                            <td>Against</td>
+                        {% elif vote.vote == '3' %}
+                            <td>Abstain</td>
+                        {% elif vote.vote == '4' %}
+                            <td>Absent</td>
+                        {% else %}
+                            <td>NA</td>
+                        {% endif %}
+                    </tr>
+            {% endfor %}
+            </tbody>
+        </table>
     </div>
+         </div>
     {% else %}
     <div class="well">
     <p class="lead">Nothing to see here</p></div>
@@ -131,7 +176,7 @@
 </div>
 
 <div id="bpc">
-
+     <div class="container">
     <div class="table-responsive">
         <table class="table table-striped table-hover">
             <thead>
@@ -149,11 +194,12 @@
             </tr>
             </tbody>
         </table>
-    </div>
+    </div> </div>
 </div>
 
 <div id="relc">
     {% if related %}
+    <div class="container">
     <div class="table-responsive">
         <table class="table table-striped table-hover sortable">
             <thead>
@@ -190,7 +236,7 @@
 
             </tbody>
         </table>
-</div>
+</div> </div>
         {% else %}
     <div class="well">
     <p class="lead">Nothing to see here</p></div>

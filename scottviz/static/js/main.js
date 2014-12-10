@@ -27,13 +27,23 @@ $('#rebels a').click(function (e) {
     $(this).tab('show')
     $("#bpc").hide();
     $("#relc").hide();
+    $("#vot").hide();
     $("#rsc").show();
+});
+$('#votes a').click(function (e) {
+    e.preventDefault()
+    $(this).tab('show')
+    $("#rsc").hide();
+    $("#relc").hide();
+    $("#bpd").hide();
+    $("#vot").show();
 });
 $('#byparty a').click(function (e) {
     e.preventDefault()
     $(this).tab('show')
     $("#rsc").hide();
     $("#relc").hide();
+    $("#vot").hide();
     $("#bpc").show();
 });
 $('#related a').click(function (e) {
@@ -41,5 +51,6 @@ $('#related a').click(function (e) {
     $(this).tab('show')
     $("#rsc").hide();
     $("#bpc").hide();
+    $("#vot").hide();
     $("#relc").show();
 });
