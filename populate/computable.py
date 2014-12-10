@@ -53,7 +53,7 @@ def compute_msp_rebellions():
     # rebellions for each msp
     for msp in msps:
         # if msp.presence already computed :
-        msp.rebellions = Decimal(len(Vote.objects.filter(msp=msp, rebellious=True)))*msp.presence
+        msp.rebellions = Decimal(len(Vote.objects.filter(msp=msp, rebellious=True)))*msp.presence/100
         msp.save()
 
         # otherwise, comment the previous 2 lines and uncomment the next 4 lines:
@@ -82,10 +82,16 @@ def independent_party_rebellious_votes(parties):
     #           vote.rebellious = False
     #           vote.save()
 
+# do not change, helper functions
+def put(votes_list, party_vote, rebellious):
+    for vote in votes_list:
+        vote.party_vote = party_vote
+        vote.rebellious = rebellious
+        vote.save()
+
 def not_independent_party_rebellious_votes(parties):
 
     divisions = Division.objects.all()
-
     # Check if a vote for msps in not independent parties is rebellious
     for party in parties:
         party_msps = MSP.objects.filter(party=party)
@@ -93,32 +99,33 @@ def not_independent_party_rebellious_votes(parties):
         for division in divisions:
             # get all the votes for this division
             division_votes = Vote.objects.filter(division=division)
-            # get all the votes by MSPs in this party
-            division_votes_party = [vote for vote in division_votes if vote.msp in party_msps]
             # split the votes by vote
             votes_yes = [vote for vote in division_votes.filter(vote=Vote.YES) if vote.msp in party_msps]
             votes_no = [vote for vote in division_votes.filter(vote=Vote.NO) if vote.msp in party_msps]
             votes_abstain = [vote for vote in division_votes.filter(vote=Vote.ABSTAIN) if vote.msp in party_msps]
             votes_absent = [vote for vote in division_votes.filter(vote=Vote.ABSENT) if vote.msp in party_msps]
             # decide a party vote if threshold reached
+            # and put the results in
             if len(votes_yes)>threshold:
-                vote.party_vote = Vote.YES
+                put(votes_yes, Vote.YES, False)
+                put(votes_no, Vote.YES, True)
+                put(votes_abstain, Vote.YES, True)
+                put(votes_absent,Vote.YES,False)
             elif len(votes_no)>threshold:
-                vote.party_vote = Vote.NO
+                put(votes_yes, Vote.YES, True)
+                put(votes_no, Vote.YES, False)
+                put(votes_abstain, Vote.YES, True)
+                put(votes_absent,Vote.YES,False)
             elif len(votes_abstain)>threshold:
-                vote.party_vote = Vote.ABSTAIN
-            elif len(votes_absent)>threshold:
-                vote.party_vote = Vote.ABSENT
-            # for each vote for this party and division, put the right tag
-            for vote in division_votes_party:
-                if vote.party_vote:
-                    if vote.party_vote != vote.vote :
-                        vote.rebellious = True
-                        print "OH MY!"
-                    else:
-                        vote.rebellious = False
-                vote.save()
-
+                put(votes_yes, Vote.ABSTAIN, True)
+                put(votes_no, Vote.ABSTAIN, True)
+                put(votes_abstain, Vote.ABSTAIN, False)
+                put(votes_absent,Vote.ABSTAIN,False)
+            else:
+                put(votes_yes, Vote.ABSENT, False)
+                put(votes_no, Vote.ABSENT, False)
+                put(votes_abstain, Vote.ABSENT, False)
+                put(votes_absent,Vote.ABSENT,False)
 
 # DOES NOT WORK
 # TO DO: FIX!
