@@ -19,6 +19,7 @@ import re
 #       Transport
 
 
+topics = ['Agriculture', 'Civil and Criminal Justice', 'Education', 'Environment', 'Health', 'Housing', 'Local Government', 'Planning', 'Police and Fire Services', 'Social Work', 'Sports and the Arts', 'Transport', 'unknown']
 
 # Assign a score to each topic
 # Each time a keyword is encountered, points are awarded for a certain topic

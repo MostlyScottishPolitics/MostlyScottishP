@@ -5,7 +5,7 @@ from computable import *
 if __name__ == '__main__':
     # calls to compute analytics
     # change any def in computable to get other statistics
-
+    """
     # this one takes a while
     compute_rebellious_votes()
     print "_rebelious_votes_"
@@ -20,7 +20,11 @@ if __name__ == '__main__':
     print "_division_rebels_"
 
     compute_msp_rebellions()
-    print "_msp_rebellions_"
+    print "_msp_rebellions_" """
+
+    compute_parents_for_divisions()
+    print "_parents_for_divisions_"
+
     """  #already in the db
     compute_topics()
     print "_topics_"

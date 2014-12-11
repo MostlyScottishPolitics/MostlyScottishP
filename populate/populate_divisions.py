@@ -90,13 +90,13 @@ def populate_divisions_from(files_location,startdate,enddate):
                 if text_raw == [] :
                     text='n/a'
                 else:
-                    text = text_raw[0].firstChild.data.encode('latin1','backslashreplace').replace("\\u2019","\'")
+                    text = text_raw[0].firstChild.data.encode('latin1','backslashreplace').replace("\\u2019","\'").replace("\\u2014","-")
 
                 topic_raw = law.getElementsByTagName("category")
                 if topic_raw == [] :
-                    topic='Unknown'
+                    topic='unknown'
                 else:
-                    topic = topic_raw[0].firstChild.data.encode('latin1','backslashreplace').replace("\\u2019","\'")
+                    topic = topic_raw[0].firstChild.data.encode('latin1','backslashreplace').replace("\\u2019","\'").replace("\\u2014","-")
 
                 # parsed most info for division
                 division = Division(parent=None, motion=motion, motionid=motionid, motiontext=text.decode('latin1'), motiontopic=motiontopic.decode('latin1'), topic=topic.decode('latin1'), date=dt)

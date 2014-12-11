@@ -1,4 +1,8 @@
 
+# parents for divisions; more processing for topics;
+# new table for topics;
+# new table relation between divisions and votes with: the stuff on that page
+
 __author__ = '2168879m'
 
 import os
@@ -147,6 +151,16 @@ def compute_rebellious_votes():
         indparties = indparties.exclude(id=party.id)
     # compute for independent parties
     independent_party_rebellious_votes(indparties)
+
+
+def compute_parents_for_divisions():
+
+    divisions = Division.objects.all()
+
+    for division in divisions:
+        if not division.motion:
+            print division.motionid
+
 
 # compute topics for the topic_divisions using a topic_extracter
 # to use your own:
