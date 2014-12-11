@@ -34,7 +34,7 @@
                                     {% if msp.constituency.id == region.id %}
                                     <div class="item">
                                         <div class="content">
-                                            <h5><p><a href="/msp/msp/{{msp.foreignid}}">{{msp}}</a></p></h5>
+                                            <h5><p><a href="{% url 'msp' msp.foreignid %}">{{msp}}</a></p></h5>
                                         </div>
                                     </div>
                                     {% endif %}
@@ -55,7 +55,7 @@
                                     <div class="item">
                                         <div class="content">
                                             <h5><p><a
-                                                    href="/msp/constituency/{{constituency.id}}">{{constituency}}</a>
+                                                    href="{% url 'constituency' constituency.id %}">{{constituency}}</a>
                                             </p></h5>
                                         </div>
                                     </div>
@@ -101,7 +101,7 @@
                                     {% if msp.constituency.id == region.id %}
                                     <div class="item">
                                         <div class="content">
-                                            <h5><p><a href="/msp/msp/{{msp.foreignid}}">{{msp}}</a></p></h5>
+                                            <h5><p><a href="{% url 'msp' msp.foreignid %}">{{msp}}</a></p></h5>
                                         </div>
                                     </div>
                                     {% endif %}
@@ -122,7 +122,7 @@
                                     <div class="item">
                                         <div class="content">
                                             <h5><p><a
-                                                    href="/msp/constituency/{{constituency.id}}">{{constituency}}</a>
+                                                    href="{% url 'constituency' constituency.id %}">{{constituency}}</a>
                                             </p></h5>
                                         </div>
                                     </div>
@@ -151,12 +151,12 @@
   {% for constituency in constituencies %}
 
     <div class="constituencies" id="{{constituency.id}}">
-          <p class="lead"><a href="/msp/constituency/{{constituency.id}}">{{constituency}}</a></p>
-          <h5><p>Region: <a href="/msp/constituency/{{constituency.parent.id}}">{{constituency.parent}}</a></p></h5>
+          <p class="lead"><a href="{% url 'constituency' constituency.id %}">{{constituency}}</a></p>
+          <h5><p>Region: <a href="{% url 'constituency' constituency.parent.id %}">{{constituency.parent}}</a></p></h5>
           {% if msps %}
             {% for msp in msps %}
                 {% if msp.constituency.id == constituency.id %}
-                    <h5><p> MSP: <a href="/msp/msp/{{msp.foreignid}}">{{msp}}</a></p></h5>
+                    <h5><p> MSP: <a href="{% url 'msp' msp.foreignid %}">{{msp}}</a></p></h5>
                 {% endif %}
             {% endfor %}
           {% endif %}
@@ -170,6 +170,5 @@
 </div>
 {% endif %}
 
-    </div>
     </div>
 {% endblock %}

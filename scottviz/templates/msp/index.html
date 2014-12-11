@@ -1,6 +1,51 @@
 {% extends "msp/base.html" %}
 
 {% block content %}
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eleifend blandit elit, vel faucibus dui cursus sed. Quisque a dolor iaculis, tincidunt orci eget, pretium nunc. Nulla facilisi. Cras euismod justo erat, eu semper nulla pulvinar non. Fusce hendrerit viverra lacinia. Mauris et ex vel nibh eleifend tincidunt. Praesent nec facilisis felis, ornare vestibulum felis. Nunc non pharetra felis, in volutpat sapien. Nunc varius nisi in tempus maximus. Integer in eros nec tortor mollis venenatis.
 
+Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In hac habitasse platea dictumst. Nam fermentum erat sit amet elit ornare, at gravida arcu tincidunt. Cras mollis purus lacus, hendrerit bibendum urna porttitor laoreet. Ut id fermentum orci. Proin posuere erat ut nisi gravida feugiat at et dolor. Vestibulum ultricies fringilla posuere. Maecenas eu purus suscipit, venenatis leo vitae, ultrices massa. Suspendisse blandit quam nunc, vel interdum justo viverra id. Vivamus condimentum egestas libero ac finibus. Ut at finibus nisi.
+
+Ut vehicula nisl at urna euismod, in pellentesque dui consequat. Donec lacinia leo in eros facilisis aliquam. Pellentesque pulvinar elit orci, vitae dictum leo euismod at. Cras commodo velit sit amet mauris finibus ornare. Maecenas viverra feugiat justo vitae ullamcorper. Sed pharetra leo rutrum tincidunt dignissim. Suspendisse sed urna placerat, vestibulum nibh ut, fermentum nisl. Mauris a sem tincidunt, bibendum tortor vitae, porttitor lacus. Maecenas ultricies auctor mi sit amet varius. Mauris massa metus, luctus et metus sed, mattis vestibulum urna. Proin imperdiet massa diam, a luctus nisi elementum vel. Suspendisse potenti.{% if divisions %}
+    <div class="table-responsive">
+        <table class="table table-hover sortable">
+             <caption>Latest divisions </caption>
+            <thead>
+            <tr>
+                <th>Division</th>
+                <th>Date</th>
+                <th width="50%">Topic</th>
+                <th>Result</th>
+                <th>Turnout</th>
+                <th>Rebels</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            {% for division in divisions %}
+                {% if division.result == '1' %}
+                <tr class="bg-success">
+                    <td><a href="{% url 'division' division.id %}">{{division.motionid}}</a></td>
+                    <td sorttable_customkey="{{division.id}}">{{division.date}}</td>
+                    <td>{{division.topic}}</td>
+                    <td>Carried</td>
+                    <td>{{division.turnout}}% </td>
+                    <td>{{division.rebels}}</td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td><a href="{% url 'division' division.id %}">{{division.motionid}}</a></td>
+                    <td sorttable_customkey="{{division.id}}">{{division.date}}</td>
+                    <td>{{division.topic}}</td>
+                    <td>Defeated</td>
+                    <td>{{division.turnout}}% </td>
+                    <td>{{division.rebels}}</td>
+                </tr>
+                {% endif %}
+
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endif %}
 
 {% endblock %}

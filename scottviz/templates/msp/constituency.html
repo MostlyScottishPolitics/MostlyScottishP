@@ -1,7 +1,7 @@
 {% extends "msp/base.html" %}
 
 {% block content %}
-<a class="btn btn-default back" href="/msp/regions"><i class="glyphicon glyphicon-circle-arrow-left"></i>All
+<a class="btn btn-default back" href="{% url 'regions' %}"><i class="glyphicon glyphicon-circle-arrow-left"></i>All
     Constituencies</a>
 
 
@@ -10,15 +10,15 @@
 
         <p>Main region: {{ constituency.name }}</p>
         {% else %}
-        <p> Region: <a href="/msp/constituency/{{constituency.parent.id}}">{{ constituency.parent }}</a></p>
+        <p> Region: <a href="{% url 'constituency' constituency.parent.id %}">{{ constituency.parent }}</a></p>
         {% endif %}
 
 </div>
 
 <ul class="list-group">
     {% for msp in constituency_msps %}
-    <li class="list-group-item"><i class="glyphicon glyphicon-user"></i> <a href="/msp/msp/{{msp.foreignid}}">{{msp.firstname}}
-        {{msp.lastname}}</a> &emsp; &emsp; <a href="/msp/party/{{msp.party.id}}">{{msp.party}}</a>
+    <li class="list-group-item"><i class="glyphicon glyphicon-user"></i> <a href="{% url 'msp' msp.foreignid %}">{{msp.firstname}}
+        {{msp.lastname}}</a> &emsp; &emsp; <a href="{% url 'party' msp.party.id %}">{{msp.party}}</a>
     </li>
 
     {% endfor %}

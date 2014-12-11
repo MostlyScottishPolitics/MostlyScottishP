@@ -26,13 +26,13 @@
             <tr>
 
                 <td>
-                    <i class="glyphicon glyphicon-user"></i> <a href="/msp/msp/{{msp.foreignid}}">{{msp.firstname}}
+                    <i class="glyphicon glyphicon-user"></i> <a href="{% url 'msp' msp.foreignid %}">{{msp.firstname}}
                     {{msp.lastname}}</a>
                 </td>
                 <td>{{msp.party_startdate}}</td>
 
                 <td>{{msp.party_enddate}}</td>
-                <td><a href="/msp/constituency/{{msp.constituency.id}}">{{msp.constituency}}</a></td>
+                <td><a href="{% url 'constituency' constituency.id %}">{{msp.constituency}}</a></td>
             </tr>
     {% endfor %}
 

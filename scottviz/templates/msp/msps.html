@@ -2,9 +2,8 @@
 
 {% block content %}
 {% if msps %}
-<a class="btn btn-default back" href="/msp/export_csv/msps"><i class="glyphicon glyphicon-download"></i> Export to Csv</a>
+<a class="btn btn-default back" href="{% url 'export_csv' 'msps' %}"><i class="glyphicon glyphicon-download"></i> Export to Csv</a>
 
-<div class="container">
     <div class="table-responsive">
         <table class="table table-striped table-hover sortable">
             <thead>
@@ -20,9 +19,9 @@
             <tbody>
             {% for msp in msps %}
             <tr>
-                <td sorttable_customkey="{{msp.lastname}}"><a href="/msp/msp/{{msp.foreignid}}">{{msp}}</a></td>
-                <td><a href="/msp/party/{{msp.party.id}}">{{msp.party}}</a></td>
-                <td><a href="/msp/constituency/{{msp.constituency.id}}">{{msp.constituency}}</a></td>
+                <td sorttable_customkey="{{msp.lastname}}"><a href="{% url 'msp' msp.foreignid %}">{{msp}}</a></td>
+                <td><a href="{% url 'party' msp.party.id %}">{{msp.party}}</a></td>
+                <td><a href="{% url 'constituency' msp.constituency.id %}">{{msp.constituency}}</a></td>
                 {% if msp.rebellions != None %}
                     <td>{{msp.rebellions}}%</td>
                 {% else %}
@@ -38,6 +37,5 @@
             </tbody>
         </table>
     </div>
-</div>
 {% endif %}
 {% endblock %}

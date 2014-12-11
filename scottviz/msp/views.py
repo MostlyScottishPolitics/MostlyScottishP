@@ -5,9 +5,9 @@ from django.template import RequestContext
 from django.shortcuts import render_to_response
 from django.http import HttpResponse
 
-import postcode_search, model_search
 from models import *
 from decimal import *
+from search import postcode_search, model_search
 
 navbar = (
 
@@ -47,6 +47,11 @@ navbar = (
         'id': 'scatter',
         'title': 'Scatter',
         'desc': 'MSPs are plotted based on their votes',
+    }),
+    ('topics', {
+        'id': 'topic',
+        'title': 'Topics',
+        'desc': 'Browse topics and divisions related to them'
     })
 )
 
@@ -90,7 +95,9 @@ def home(request):
         'title': 'Welcome to Mostly Scottish Politics(MSP)',
         'desc': "Browse motions, regions, MSPs, see how they vote, and don't forget to have a go at our interactive visualisations and map ",
     }
-    return render_to_response('msp/base.html', content, context)
+    content["divisions"] = Division.objects.order_by('-date')[:10]
+
+    return render_to_response('msp/index.html', content, context)
 
 
 def map(request):
@@ -255,17 +262,22 @@ def division(request, divisionID):
     results = []
     TWOPLACES = Decimal(10) ** -2
     for party in parties:
-        expressed_votes = len([vote for vote in Vote.objects.filter(division=this_division).exclude(vote=Vote.ABSENT) if vote.msp.party == party])
-        if expressed_votes>0:
-            pro = Decimal(Decimal(100*len([vote for vote in Vote.objects.filter(division=this_division, vote=Vote.YES) if vote.msp.party == party]))/Decimal(expressed_votes)).quantize(TWOPLACES)
-            con = Decimal(Decimal(100*len([vote for vote in Vote.objects.filter(division=this_division, vote=Vote.NO) if vote.msp.party == party]))/Decimal(expressed_votes)).quantize(TWOPLACES)
+        expressed_votes = len([vote for vote in Vote.objects.filter(division=this_division).exclude(vote=Vote.ABSENT) if
+                               vote.msp.party == party])
+        if expressed_votes > 0:
+            pro = Decimal(Decimal(100 * len(
+                [vote for vote in Vote.objects.filter(division=this_division, vote=Vote.YES) if
+                 vote.msp.party == party])) / Decimal(expressed_votes)).quantize(TWOPLACES)
+            con = Decimal(Decimal(100 * len(
+                [vote for vote in Vote.objects.filter(division=this_division, vote=Vote.NO) if
+                 vote.msp.party == party])) / Decimal(expressed_votes)).quantize(TWOPLACES)
         else:
             pro = 0
             con = 0
-        turnout = Decimal(Decimal(100*expressed_votes)/Decimal(len(MSP.objects.filter(party=party)))).quantize(TWOPLACES)
-        results.append([party,pro,con,turnout])
+        turnout = Decimal(Decimal(100 * expressed_votes) / Decimal(len(MSP.objects.filter(party=party)))).quantize(
+            TWOPLACES)
+        results.append([party, pro, con, turnout])
     q = Division.objects.filter(motionid__startswith=this_division.motionid.split('.')[0])
-    print this_division.motionid.split('.')[0]
     content['related'] = q.exclude(motionid__exact=this_division.motionid)
     content['parties'] = parties
     content['results'] = results
@@ -297,6 +309,23 @@ def rebels(request, divisionID):
     content['party_abstain'] = Vote.objects.filter(division=this_division, rebellious=True, party_vote=Vote.ABSTAIN)
     content['party_absent'] = Vote.objects.filter(division=this_division, rebellious=True, party_vote=Vote.ABSENT)
     return render_to_response('msp/rebels.html', content, context)
+
+
+def topics(request):
+    context = RequestContext(request)
+    ts = Division.objects.values('topic').distinct()
+    i = 0
+    topics = []
+    for topic in ts:
+        i += 1
+        t = str(topic["topic"])
+        if t != 'unknown':
+            topics += [[t, i, Division.objects.filter(topic__iexact=t).order_by('-date')]]
+    content["topic"] = topics[:1]
+    print content["topic"]
+    content["topics"] = topics[1:]
+
+    return render_to_response('msp/topics.html', content, context)
 
 
 def aboutus(request):
@@ -333,7 +362,7 @@ def search_results(request):
         'id': 'search',
         'title': '',
         'desc': 'Results for: ' + query,
-        }
+    }
     content['postcode'] = {}
     content['msps'] = {}
     content['divisions'] = {}

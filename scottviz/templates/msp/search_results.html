@@ -20,7 +20,7 @@
                         {% for msp in msps %}
                         <div class="item">
                             <div class="content">
-                                <h5><p><a href="/msp/msp/{{msp.foreignid}}">{{msp}}</a></p></h5>
+                                <h5><p><a href="{% url 'msp' msp.foreignid %}">{{msp}}</a></p></h5>
                             </div>
                         </div>
 
@@ -46,7 +46,7 @@
 
 {% for msp in msps %}
     <div class="results" id="{{msp.id}}">
-        <p class="lead"><a href="/msp/msp/{{msp.foreignid}}">{{msp}}</a></p>
+        <p class="lead"><a href="{% url 'msp' msp.foreignid %}">{{msp}}</a></p>
         Represents {{msp.constituency}}<br>
         Member of {{msp.party.name}}<br>
 </div>
@@ -62,7 +62,7 @@
 
 {% for region in regions %}
     <div class="results" id="{{region.id}}">
-    <p><a href="/msp/constituency/{{region.id}}">{{region.name}}</a></p></div>
+    <p><a href="{% url 'constituency' region.id %}">{{region.name}}</a></p></div>
     {% endfor %}
 </div>
 {% endif %}
@@ -74,7 +74,7 @@
 
 {% for party in parties %}
     <div class="results" id="{{party.id}}">
-    <p><a href="/msp/party/{{party.id}}">{{party.name}}</a></p></div>
+    <p><a href="{% url 'party' party.id %}">{{party.name}}</a></p></div>
 {% endfor %}
     </div>
 {% endif %}
@@ -85,7 +85,7 @@
 <p class="lead"> Divisions: </p>
 {% for division in divisions %}
     <div class="results" id="{{division.motionid}}">
-    <p class="lead"><a href="/msp/division/{{division.id}}">{{division.motionid}}</a></p>
+    <p class="lead"><a href="{% url 'division' division.id %}">{{division.motionid}}</a></p>
        Motion about: {{division.topic}}<br>
         {% if division.result == '1' %}
       Motion carried<br>
