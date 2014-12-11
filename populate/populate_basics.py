@@ -1,6 +1,16 @@
 __author__ = '2168879m'
+"""
+This file is the default populator for the tables (yes, I did say populator!!). Takes between 0.5 and 1.5 h.
 
-# run to get default db
+It contains definitions for populating with minimal info the tables: MSP, Jobs, Party, Constituency
+The main makes calls to:
+    - these definitions
+    - reading divisions from scraped files (the function is in populate_divisions.py and the parameters are in data.py)
+    - runs updatedb.py (to process all this data and compute analytics; if you f*cked with it make sure it has the right calls)
+If you get an error instead of severally happy messages from updatedb, run it after this script is done.
+
+You can change this file, but it manages important, sensible data, so I discourage such behaviour.
+"""
 
 import csv
 import os

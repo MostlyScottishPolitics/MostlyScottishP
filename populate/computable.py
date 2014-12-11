@@ -4,6 +4,12 @@
 # new table relation between divisions and votes with: the stuff on that page
 
 __author__ = '2168879m'
+"""
+This file contains all the functions definition that populate fields in tables already containing minimal data
+Mostly processes the data in the tables to populate fields with analytics
+I strongly encourage you to put any such definitions here, and the appropriate calls in updatedb.py
+All static data comes from data.py, please put any such data there.
+"""
 
 import os
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "scottviz.scottviz.settings")
