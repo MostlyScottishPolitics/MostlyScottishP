@@ -50,7 +50,7 @@ navbar = (
         'desc': 'MSPs are plotted based on their votes',
     }),
     ('topics', {
-        'id': 'topic',
+        'id': 'topics',
         'title': 'Topics',
         'desc': 'Browse topics and divisions related to them'
     })
@@ -313,7 +313,12 @@ def rebels(request, divisionID):
 
 
 def topics(request):
+    """
+    :param request:
+    :return:
+    """
     context = RequestContext(request)
+    content['activesite'] = navbar['topics']
     ts = Division.objects.values('topic').distinct()
     i = 0
     topics = []
