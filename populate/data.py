@@ -1,4 +1,11 @@
 __author__ = '2168879m'
+"""
+This file contains all the static information accessed by populating function definitions
+I strongly encourage you to put any other such information here to make it:
+    - easy to view out-dated info
+    - easy to change
+    - accessible by other functions
+"""
 
 import os
 from dateutil import parser
