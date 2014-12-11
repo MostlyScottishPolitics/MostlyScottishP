@@ -159,6 +159,16 @@ def compute_parents_for_divisions():
 
     for division in divisions:
         if not division.motion:
+            q = Division.objects.filter(motionid__startswith=division.motionid.split('.')[0])
+            q = q.exclude(motionid__exact=division.motionid)
+#            print "my non-motion division"
+            print division.motionid
+#            print "relatives"
+#            for d in q:
+#                print d.motionid
+    print "change"
+    for division in divisions:
+        if division.motion:
             print division.motionid
 
 

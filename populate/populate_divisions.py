@@ -16,6 +16,11 @@ def get_files(d):
     return [os.path.join(d, f) for f in os.listdir(d) if os.path.isfile(os.path.join(d, f))]
 
 def absent_votes(division):
+    """
+    For each msp that did not express a vote for a division, populate the vote table with an ABSENT vote
+    :param division: division instance
+    :return:
+    """
     # if an msp did not have a vote read, he/she was absent
 
     # get votes read until now
@@ -29,7 +34,16 @@ def absent_votes(division):
         v = Vote(msp=msp, division=division, vote=Vote.ABSENT)
         v.save()
 
+
 def get_votes(parsing_law,division,type,result):
+    """
+    Populates the vote table with result vote, for all votes of some type, from parsing_law, for division
+    :param parsing_law : a minidom element from the scraped file
+    :param division : the division instance already created for which we are parsing votes
+    :param type : the type of vote parsed: "for", "against", "abstention"
+    :param result: the type of vote to be saved in the db: "YES", "NO", "ABSENT"
+    :return:
+    """
     if len(parsing_law.getElementsByTagName(type)):
         msps = parsing_law.getElementsByTagName(type)[0].getElementsByTagName("msp")
         for msp in msps:
@@ -49,6 +63,13 @@ def get_votes(parsing_law,division,type,result):
                     v.save()
 
 def populate_divisions_from(files_location,startdate,enddate):
+    """
+    reads all files within an interval from a location
+    :param files_location : path to the folder where the scraped files are at
+    :param startdate : first date for which to read files
+    :param enddate : last date for which to read files
+    :returns : populates division and vote tables
+    """
 
     # naive skip files before startdate and after enddate, using a switch: currentsession
 
