@@ -132,6 +132,7 @@ def msps(request):
     context = RequestContext(request)
     content['activesite'] = navbar['msps']
     content['msps'] = MSP.objects.order_by('lastname', 'firstname')
+    content['count'] = MSP.objects.count()
     return render_to_response('msp/msps.html', content, context)
 
 
@@ -230,6 +231,7 @@ def divisions(request):
     context = RequestContext(request)
     content['activesite'] = navbar['divisions']
     content['divisions'] = Division.objects.order_by('-date')
+    content['count'] = Division.objects.count()
     return render_to_response('msp/divisions.html', content, context)
 
 
