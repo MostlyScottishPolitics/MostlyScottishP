@@ -285,33 +285,6 @@ def division(request, divisionID):
     return render_to_response('msp/division.html', content, context)
 
 
-def rebels(request, divisionID):
-    """
-
-    :param request:
-    :param divisionID:
-    :return:
-    """
-    context = RequestContext(request)
-    this_division = Division.objects.get(id=divisionID)
-    content['activesite'] = {
-        'id': this_division,
-        'title': this_division,
-        'desc': "Rebels of " + str(this_division),
-    }
-    content['division'] = this_division
-    content['rebels'] = Vote.objects.filter(division=this_division, rebellious=True)
-    content['for'] = Vote.objects.filter(division=this_division, rebellious=True, vote=Vote.YES)
-    content['against'] = Vote.objects.filter(division=this_division, rebellious=True, vote=Vote.NO)
-    content['abstain'] = Vote.objects.filter(division=this_division, rebellious=True, vote=Vote.ABSTAIN)
-    content['absent'] = Vote.objects.filter(division=this_division, rebellious=True, vote=Vote.ABSENT)
-    content['party_for'] = Vote.objects.filter(division=this_division, rebellious=True, party_vote=Vote.YES)
-    content['party_against'] = Vote.objects.filter(division=this_division, rebellious=True, party_vote=Vote.NO)
-    content['party_abstain'] = Vote.objects.filter(division=this_division, rebellious=True, party_vote=Vote.ABSTAIN)
-    content['party_absent'] = Vote.objects.filter(division=this_division, rebellious=True, party_vote=Vote.ABSENT)
-    return render_to_response('msp/rebels.html', content, context)
-
-
 def topics(request):
     """
     :param request:
