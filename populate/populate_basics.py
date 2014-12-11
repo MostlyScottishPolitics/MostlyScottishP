@@ -1,5 +1,3 @@
-from Spviz.scottviz.msp.models import *
-
 __author__ = '2168879m'
 
 # run to get default db
@@ -7,7 +5,8 @@ __author__ = '2168879m'
 import csv
 import os
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "scottviz.msp.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "scottviz.scottviz.settings")
+from scottviz.msp.models import *
 from data import *
 from dateutil import parser
 from populate_divisions import populate_divisions_from

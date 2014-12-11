@@ -2,11 +2,11 @@
 __author__ = '2168879m'
 
 import os
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "Spviz.scottviz.msp.settings")
-from Spviz.scottviz.msp.models import *
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "scottviz.scottviz.settings")
+from scottviz.msp.models import *
 from decimal import *
-from data import number_of_msps, independent_parties, topics_divisions, topic_extracter_location
-
+from data import number_of_msps, independent_parties, topics_divisions, topic_extracter_name, topic_extracter_location
+import importlib
 
 # the definitions here can be changed to get other statistics
 
@@ -148,11 +148,21 @@ def compute_rebellious_votes():
     # compute for independent parties
     independent_party_rebellious_votes(indparties)
 
-# computer topics for the topic_divisions using topic_extracter
+# compute topics for the topic_divisions using a topic_extracter
+# to use your own:
 # change the set of topic_divisions in data
-# change the topic_extracter in data
+# change the topic_extracter_name and topic_extracter_location in data
 def compute_topics():
 
+    extracter = importlib.import_module(topic_extracter_name,topic_extracter_location)
+
     for division in topics_divisions:
-        topic = topic_extracter_location.topic_extracter.get_topic_from_text(division.motiontext)
-        print topic
+        if (division.motion):
+            topic = extracter.get_topic_from_text(division.motiontext)
+        else:
+            topic = extracter.get_topic_from_text(division.motiontopic)
+        division.topic=topic
+        division.save()
+
+    # TO DO: should go again through divisions and check if parent knows better
+    # (but when we have parents)
