@@ -13,6 +13,11 @@ from string import replace, upper
 
 
 def get_files(d):
+    """
+    gets a list of paths for all the files located in the directory d
+    :param d: path to a directory
+    :return: list of paths for files
+    """
     return [os.path.join(d, f) for f in os.listdir(d) if os.path.isfile(os.path.join(d, f))]
 
 def absent_votes(division):

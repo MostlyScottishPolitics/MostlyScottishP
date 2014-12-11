@@ -16,6 +16,10 @@ import importlib
 
 
 def compute_division_turnout():
+    """
+    For all divisions computes turnout
+    :return: populate turnout field in division table
+    """
     divisions = Division.objects.all()
     msps = MSP.objects.all()
 
@@ -29,6 +33,10 @@ def compute_division_turnout():
         division.save()
 
 def compute_msp_turnout():
+    """
+    For all msps computes turnout
+    :return: populate presence field in MSP table
+    """
     divisions = Division.objects.all()
     msps = MSP.objects.all()
 
@@ -44,6 +52,10 @@ def compute_msp_turnout():
 
 
 def compute_division_rebels():
+    """
+    for all divisions adds the rebelious votes
+    :return: populates the rebels field in division table
+    """
     divisions = Division.objects.all()
 
     # rebels for each division
@@ -53,6 +65,10 @@ def compute_division_rebels():
 
 
 def compute_msp_rebellions():
+    """
+    for all msps adds their rebelious votes and weights it using presence, to get a percentage
+    :return: populates the rebellions field in MSP table
+    """
     alldivisions = len(Division.objects.all())
     msps = MSP.objects.all()
 
@@ -71,6 +87,12 @@ def compute_msp_rebellions():
         # msp.save()
 
 def independent_party_rebellious_votes(parties):
+    """
+    For all given parties (assumed independent), marks all votes as non-rebellious
+    - since there is no-one to rebel against
+    :param parties: list/set of Party instances
+    :return: populates, for all given parties, rebellious field for vote with False
+    """
 
     # MSPs for independent cannot make rebellious votes
     votes = Vote.objects.all()
@@ -89,14 +111,27 @@ def independent_party_rebellious_votes(parties):
     #           vote.rebellious = False
     #           vote.save()
 
-# do not change, helper functions
+# do not change, helper function
 def put(votes_list, party_vote, rebellious):
+    """
+    for all given votes in the votes_list, puts the given values in the relevant fields
+    :param votes_list: a list/set of Vote instances
+    :param party_vote: a vote type (Vote.YES, Vote.NO, Vote.ABSTAIN, Vote.ABSENT)
+    :param rebellious: a vote type (Vote.YES, Vote.NO, Vote.ABSTAIN, Vote.ABSENT)
+    :return: populates the party_vote and rebellious fields of vote table, for the given votes
+    """
     for vote in votes_list:
         vote.party_vote = party_vote
         vote.rebellious = rebellious
         vote.save()
 
 def not_independent_party_rebellious_votes(parties):
+    """
+    For all given parties (assumed not independent), for all divisions, gets the majoritary party vote
+    and for all votes for that join, populates the Vote fields accordingly
+    :param parties: list/set of Party instances
+    :return: populates, for all given parties, rebellious and party_vote fields for Vote table
+    """
 
     divisions = Division.objects.all()
     # Check if a vote for msps in not independent parties is rebellious
@@ -135,6 +170,11 @@ def not_independent_party_rebellious_votes(parties):
                 put(votes_absent,Vote.ABSENT,False)
 
 def compute_rebellious_votes():
+    """
+    Splits the parties in Party into independent and not-independent (based on static list in data.py)
+     and makes the appropriate calls to populate the fields
+    :return: populates party_vote and rebellious fields in Vote table
+    """
 
     parties = Party.objects.all()
 
@@ -153,7 +193,18 @@ def compute_rebellious_votes():
     independent_party_rebellious_votes(indparties)
 
 
+def compute_type_for_divisions():
+    """
+    Gets the type
+    :return: populates the type field in Division table
+    """
+
+
 def compute_parents_for_divisions():
+    """
+    Assumes the type field is already populated and looks for immediate parent of a division (based on motionid field)
+    :return: populates parent field in Division table
+    """
 
     divisions = Division.objects.all()
 
@@ -172,11 +223,14 @@ def compute_parents_for_divisions():
             print division.motionid
 
 
-# compute topics for the topic_divisions using a topic_extracter
-# to use your own:
-# change the set of topic_divisions in data
-# change the topic_extracter_name and topic_extracter_location in data
 def compute_topics():
+    """
+    computes topics for the topic_divisions using a topic_extracter (all info taken from data)
+    to use your own:
+        change the set of topic_divisions in data
+        change the topic_extracter_name and topic_extracter_location in data
+    :return: populates topic field in Division table
+    """
 
     extracter = importlib.import_module(topic_extracter_name,topic_extracter_location)
 
