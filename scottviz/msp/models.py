@@ -6,6 +6,8 @@ class Party(models.Model):
     represents party
     """
     name = models.CharField(max_length=128, unique=True)
+    #link = models.URLField(max_length=128, null=True)
+    #description = models.TextField()
 
     def __unicode__(self):
         return self.name
@@ -93,7 +95,6 @@ class Division(models.Model):
         (CARRIED, 'Carried'),
         (DEFEATED, 'Defeated')
     )
-    # number = models.IntegerField(null=True)
 
     parent = models.ForeignKey('self', default=0, null=True)
     date = models.DateField(null=True)
