@@ -1,5 +1,10 @@
-
 __author__ = '2168879m'
+"""
+This file contains all the functions definition that populate fields in tables already containing minimal data
+Mostly processes the data in the tables to populate fields with analytics
+I strongly encourage you to put any such definitions here, and the appropriate calls in updatedb.py
+All static data comes from data.py, please put any such data there.
+"""
 
 import os
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "scottviz.scottviz.settings")
@@ -12,6 +17,10 @@ import importlib
 
 
 def compute_division_turnout():
+    """
+    For all divisions computes turnout
+    :return: populate turnout field in division table
+    """
     divisions = Division.objects.all()
     msps = MSP.objects.all()
 
@@ -25,6 +34,10 @@ def compute_division_turnout():
         division.save()
 
 def compute_msp_turnout():
+    """
+    For all msps computes turnout
+    :return: populate presence field in MSP table
+    """
     divisions = Division.objects.all()
     msps = MSP.objects.all()
 
@@ -40,6 +53,10 @@ def compute_msp_turnout():
 
 
 def compute_division_rebels():
+    """
+    for all divisions adds the rebelious votes
+    :return: populates the rebels field in division table
+    """
     divisions = Division.objects.all()
 
     # rebels for each division
@@ -49,6 +66,10 @@ def compute_division_rebels():
 
 
 def compute_msp_rebellions():
+    """
+    for all msps adds their rebelious votes and weights it using presence, to get a percentage
+    :return: populates the rebellions field in MSP table
+    """
     alldivisions = len(Division.objects.all())
     msps = MSP.objects.all()
 
@@ -67,6 +88,12 @@ def compute_msp_rebellions():
         # msp.save()
 
 def independent_party_rebellious_votes(parties):
+    """
+    For all given parties (assumed independent), marks all votes as non-rebellious
+    - since there is no-one to rebel against
+    :param parties: list/set of Party instances
+    :return: populates, for all given parties, rebellious field for vote with False
+    """
 
     # MSPs for independent cannot make rebellious votes
     votes = Vote.objects.all()
@@ -85,14 +112,27 @@ def independent_party_rebellious_votes(parties):
     #           vote.rebellious = False
     #           vote.save()
 
-# do not change, helper functions
+# do not change, helper function
 def put(votes_list, party_vote, rebellious):
+    """
+    for all given votes in the votes_list, puts the given values in the relevant fields
+    :param votes_list: a list/set of Vote instances
+    :param party_vote: a vote type (Vote.YES, Vote.NO, Vote.ABSTAIN, Vote.ABSENT)
+    :param rebellious: a vote type (Vote.YES, Vote.NO, Vote.ABSTAIN, Vote.ABSENT)
+    :return: populates the party_vote and rebellious fields of vote table, for the given votes
+    """
     for vote in votes_list:
         vote.party_vote = party_vote
         vote.rebellious = rebellious
         vote.save()
 
 def not_independent_party_rebellious_votes(parties):
+    """
+    For all given parties (assumed not independent), for all divisions, gets the majoritary party vote
+    and for all votes for that join, populates the Vote fields accordingly
+    :param parties: list/set of Party instances
+    :return: populates, for all given parties, rebellious and party_vote fields for Vote table
+    """
 
     divisions = Division.objects.all()
     # Check if a vote for msps in not independent parties is rebellious
@@ -131,7 +171,11 @@ def not_independent_party_rebellious_votes(parties):
                 put(votes_absent,Vote.ABSENT,False)
 
 def compute_rebellious_votes():
-
+    """
+    Splits the parties in Party into independent and not-independent (based on static list in data.py)
+     and makes the appropriate calls to populate the fields
+    :return: populates party_vote and rebellious fields in Vote table
+    """
     parties = Party.objects.all()
 
     # get a list of not independent parties:
@@ -148,21 +192,105 @@ def compute_rebellious_votes():
     # compute for independent parties
     independent_party_rebellious_votes(indparties)
 
-# compute topics for the topic_divisions using a topic_extracter
-# to use your own:
-# change the set of topic_divisions in data
-# change the topic_extracter_name and topic_extracter_location in data
+
+def compute_type_for_divisions():
+    """
+    Gets the type
+    :return: populates the type field in Division table
+    """
+    divisions = Division.objects.all()
+
+    for division in divisions:
+        if '.' in division.motionid:
+            division.motion = False
+        else:
+            division.motion = True
+        division.save()
+
+
+def compute_parents_for_divisions():
+    """
+    Assumes the type field is already populated and looks for immediate parent of a division (based on motionid field)
+    :return: populates parent field in Division table
+    """
+
+    divisions = Division.objects.all()
+
+    for division in divisions:
+        if not division.motion:
+            ammend_length = 1 + len(division.motionid.split('.')[-1:])
+            parent = Division.objects.filter(motionid__exact=division.motionid[:-ammend_length])
+            if len(parent)>1:
+                print 'We found a duplicate entry for this motion: '+parent[0].motionid
+                print 'More info:'
+                for p in parent:
+                    print p.motionid+' with id '+str(p.id)+' on date '+str(p.date)
+            else:
+                for p in parent:
+                    division.parent = p
+                division.save()
+
+def get_parents_topic(division):
+    """
+    Helper function
+    :param division: a division instance
+    :return: the topic of the most ancient parent we can find
+    """
+    if (not division.motion) and (division.parent):
+        return get_parents_topic(division.parent)
+    else:
+        return division.topic
+
+
 def compute_topics():
+    """
+    computes topics for the topic_divisions using a topic_extracter (all info taken from data)
+    to use your own:
+        change the set of topic_divisions in data
+        change the topic_extracter_name and topic_extracter_location in data
+    :return: populates topic field in Division table
+    """
 
     extracter = importlib.import_module(topic_extracter_name,topic_extracter_location)
 
+    # extract all topics as good as possible
     for division in topics_divisions:
-        if (division.motion):
+        if division.motion:
             topic = extracter.get_topic_from_text(division.motiontext)
         else:
             topic = extracter.get_topic_from_text(division.motiontopic)
         division.topic=topic
         division.save()
 
-    # TO DO: should go again through divisions and check if parent knows better
-    # (but when we have parents)
+    # adjust topics for ammendments
+    # why not do it before? cause we can have ammendments to ammendments with no main parent, or ammendments to ammendments with parent
+    for division in topics_divisions:
+        if (not division.motion) and (division.parent):
+            division.topic = get_parents_topic(division.parent)
+            division.save()
+
+
+
+
+def see_diferences_with_new_topic_extractor():
+    """
+    Function to test a new topic extractor by comparison.
+    It works similarly to compute_topics, except:
+        It does not save to db the new topics
+        It prints the ones that are different (with division id and name for reference)
+    You need to change the extracter_name and extracter_location in data to your own.
+    :return: differences between the topics in db and new topics
+    """
+    extracter = importlib.import_module(topic_extracter_name,topic_extracter_location)
+
+    # extract all topics as good as possible
+    for division in topics_divisions:
+        if division.motion:
+            topic = extracter.get_topic_from_text(division.motiontext)
+        else:
+            topic = extracter.get_topic_from_text(division.motiontopic)
+        if (division.topic != topic) and (not division.parent):
+            if topic==None:
+                print str(division.id)+' '+division.motionid+' '+division.topic+'  '
+            else:
+                print str(division.id)+' '+division.motionid+' '+division.topic+'  '+topic

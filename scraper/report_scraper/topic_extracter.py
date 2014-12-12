@@ -19,226 +19,167 @@ import re
 #       Transport
 
 
+topics = [
+'unknown',                                  #0
+'Agriculture',                              #1
+'Civil and Criminal Justice',               #2
+'Education',                                #3
+'Environment',                              #4
+'Health',                                   #5
+'Housing',                                  #6
+'Local Government',                         #7
+'Planning/Future',                          #8
+'Police and Fire Services',                 #9
+'Social Work',                              #10
+'Sports and the Arts',                      #11
+'Transport'                                 #12
+]
+
+word_scores = {
+'default'       : {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0},
+'town'          : {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 4, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0},
+'logistical'    : {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 1, 8: 2, 9: 0, 10: 0, 11: 0, 12: 0},
+'extension'     : {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 1, 9: 0, 10: 0, 11: 0, 12: 0},
+'europe'        : {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 1, 9: 0, 10: 0, 11: 0, 12: 0},
+'countr'        : {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 1, 9: 0, 10: 0, 11: 0, 12: 0},
+'scotland'      : {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 1, 9: 0, 10: 0, 11: 0, 12: 0},
+'independence'  : {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 3, 9: 0, 10: 0, 11: 0, 12: 0},
+'independent'   : {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 3, 9: 0, 10: 0, 11: 0, 12: 0},
+'referendum'    : {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 3, 9: 0, 10: 0, 11: 0, 12: 0},
+'international' : {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 3, 9: 0, 10: 0, 11: 0, 12: 0},
+'war'           : {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 3, 9: 0, 10: 0, 11: 0, 12: 0},
+'national'      : {0: 0, 1: 1, 2: 1, 3: 1, 4: 1, 5: 1, 6: 1, 7: 0, 8: 2, 9: 0, 10: 1, 11: 1, 12: 1},
+'local'         : {0: 0, 1: 1, 2: 1, 3: 1, 4: 1, 5: 1, 6: 1, 7: 2, 8: 1, 9: 1, 10: 1, 11: 1, 12: 1},
+'climate'       : {0: 0, 1: 0, 2: 0, 3: 0, 4: 2, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0},
+'low-carbon'    : {0: 0, 1: 0, 2: 0, 3: 0, 4: 2, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0},
+'resource'      : {0: 0, 1: 0, 2: 0, 3: 0, 4: 2, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0},
+'oil'           : {0: 0, 1: 0, 2: 0, 3: 0, 4: 2, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0},
+'wild'          : {0: 0, 1: 0, 2: 0, 3: 0, 4: 2, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0},
+'wind'          : {0: 0, 1: 0, 2: 0, 3: 0, 4: 2, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0},
+'north sea'     : {0: 0, 1: 0, 2: 0, 3: 0, 4: 2, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0},
+'waste'         : {0: 0, 1: 0, 2: 0, 3: 0, 4: 2, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0},
+'recycle'       : {0: 0, 1: 0, 2: 0, 3: 0, 4: 2, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0},
+'emmisions'     : {0: 0, 1: 0, 2: 0, 3: 0, 4: 2, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0},
+'employ'        : {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 2, 8: 0, 9: 0, 10: 1, 11: 0, 12: 0},
+'strategy'      : {0: 0, 1: 0, 2: 0, 3: 1, 4: 1, 5: 0, 6: 0, 7: 2, 8: 3, 9: 0, 10: 0, 11: 0, 12: 0},
+'nhs'           : {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 4, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0},
+'hospital'      : {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 2, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0},
+'treatment'     : {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 2, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0},
+'medicine'      : {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 2, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0},
+'drug'          : {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 2, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0},
+'cancer'        : {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 1, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0},
+'agricult'      : {0: 0, 1: 3, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0},
+'aquacult'      : {0: 0, 1: 3, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0},
+'farm'          : {0: 0, 1: 3, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0},
+'fish'          : {0: 0, 1: 3, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0},
+'agriculture'   : {0: 0, 1: 3, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0},
+'crim'          : {0: 0, 1: 0, 2: 3, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 3, 10: 0, 11: 0, 12: 0},
+'justic'        : {0: 0, 1: 0, 2: 3, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 2, 10: 0, 11: 0, 12: 0},
+'legal'         : {0: 0, 1: 0, 2: 3, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 1, 10: 0, 11: 0, 12: 0},
+'law'           : {0: 0, 1: 0, 2: 3, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 1, 10: 0, 11: 0, 12: 0},
+'court'         : {0: 0, 1: 0, 2: 3, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 1, 10: 0, 11: 0, 12: 0},
+'tri'           : {0: 0, 1: 0, 2: 3, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0},
+'education'     : {0: 0, 1: 0, 2: 0, 3: 3, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0},
+'school'        : {0: 0, 1: 0, 2: 0, 3: 3, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0},
+'student'       : {0: 0, 1: 0, 2: 0, 3: 3, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0},
+'pupil'         : {0: 0, 1: 0, 2: 0, 3: 3, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0},
+'skills'        : {0: 0, 1: 0, 2: 0, 3: 1, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0},
+'training'      : {0: 0, 1: 0, 2: 0, 3: 1, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0},
+'curriculum'    : {0: 0, 1: 0, 2: 0, 3: 3, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0},
+'learn'         : {0: 0, 1: 0, 2: 0, 3: 1, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0},
+'study'         : {0: 0, 1: 0, 2: 0, 3: 1, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0},
+'environment'   : {0: 0, 1: 0, 2: 0, 3: 0, 4: 3, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0},
+'green'         : {0: 0, 1: 0, 2: 0, 3: 0, 4: 3, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0},
+'energy'        : {0: 0, 1: 0, 2: 0, 3: 0, 4: 1, 5: 0, 6: 1, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0},
+'carbon'        : {0: 0, 1: 0, 2: 0, 3: 0, 4: 1, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0},
+'electricity'   : {0: 0, 1: 0, 2: 0, 3: 0, 4: 1, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0},
+'renewable'     : {0: 1, 1: 0, 2: 0, 3: 0, 4: 3, 5: 0, 6: 0, 7: 0, 8: 1, 9: 0, 10: 0, 11: 0, 12: 0},
+'fossil'        : {0: 0, 1: 0, 2: 0, 3: 0, 4: 2, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0},
+'fuel'          : {0: 0, 1: 0, 2: 0, 3: 0, 4: 1, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 3},
+'natur'         : {0: 0, 1: 0, 2: 0, 3: 0, 4: 2, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0},
+'health'        : {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 3, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0},
+'mental'        : {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 1, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0},
+'welfare'       : {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 2, 6: 1, 7: 0, 8: 0, 9: 0, 10: 3, 11: 0, 12: 0},
+'obesity'       : {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 3, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0},
+'overweight'    : {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 3, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0},
+'hous'          : {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 4, 7: 0, 8: 0, 9: 0, 10: 1, 11: 0, 12: 0},
+'home'          : {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 3, 7: 0, 8: 0, 9: 0, 10: 1, 11: 0, 12: 0},
+'rent'          : {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 2, 7: 0, 8: 0, 9: 0, 10: 1, 11: 0, 12: 0},
+'landlord'      : {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 3, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0},
+'habitation'    : {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 3, 7: 0, 8: 0, 9: 0, 10: 1, 11: 0, 12: 0},
+'protect'       : {0: 0, 1: 0, 2: 2, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 2, 10: 2, 11: 0, 12: 0},
+'social'        : {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 3, 11: 0, 12: 0},
+'child'         : {0: 0, 1: 0, 2: 0, 3: 1, 4: 0, 5: 1, 6: 0, 7: 0, 8: 0, 9: 0, 10: 1, 11: 1, 12: 0},
+'young'         : {0: 0, 1: 0, 2: 0, 3: 1, 4: 0, 5: 1, 6: 0, 7: 0, 8: 0, 9: 0, 10: 1, 11: 1, 12: 0},
+'youth'         : {0: 0, 1: 0, 2: 0, 3: 1, 4: 0, 5: 1, 6: 0, 7: 0, 8: 0, 9: 0, 10: 1, 11: 1, 12: 0},
+'old'           : {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 1, 6: 1, 7: 0, 8: 0, 9: 0, 10: 3, 11: 0, 12: 1},
+'care'          : {0: 0, 1: 0, 2: 0, 3: 1, 4: 1, 5: 1, 6: 0, 7: 0, 8: 0, 9: 0, 10: 3, 11: 0, 12: 0},
+'caring'        : {0: 0, 1: 0, 2: 0, 3: 1, 4: 1, 5: 1, 6: 0, 7: 0, 8: 0, 9: 0, 10: 3, 11: 0, 12: 0},
+'famil'         : {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 1, 7: 0, 8: 0, 9: 0, 10: 1, 11: 0, 12: 0},
+'kinship'       : {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 1, 7: 0, 8: 0, 9: 0, 10: 1, 11: 0, 12: 0},
+'vulnerable'    : {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 1, 6: 1, 7: 0, 8: 0, 9: 0, 10: 2, 11: 0, 12: 0},
+'poverty'       : {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 1, 7: 0, 8: 0, 9: 0, 10: 2, 11: 0, 12: 0},
+'benefits'      : {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 1, 7: 0, 8: 0, 9: 0, 10: 2, 11: 0, 12: 0},
+'support'       : {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 1, 11: 0, 12: 0},
+'services'      : {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 2, 6: 0, 7: 0, 8: 0, 9: 2, 10: 2, 11: 0, 12: 0},
+'wellbeing'     : {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 1, 6: 0, 7: 0, 8: 0, 9: 0, 10: 1, 11: 0, 12: 0},
+'government'    : {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 2, 8: 1, 9: 0, 10: 0, 11: 0, 12: 0},
+'council'       : {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 1, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0},
+'community'     : {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 1, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0},
+'tax'           : {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 1, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0},
+'parliament'    : {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 1, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0},
+'scot'          : {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 1, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0},
+'policies'      : {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 1, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0},
+'business'      : {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 2, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0},
+'econom'        : {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 2, 8: 1, 9: 0, 10: 0, 11: 0, 12: 0},
+'devolv'        : {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 1, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0},
+'planning'      : {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 3, 9: 0, 10: 0, 11: 0, 12: 0},
+'development'   : {0: 0, 1: 0, 2: 0, 3: 1, 4: 0, 5: 0, 6: 0, 7: 0, 8: 3, 9: 0, 10: 0, 11: 0, 12: 0},
+'growth'        : {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 3, 9: 0, 10: 0, 11: 0, 12: 0},
+'invest'        : {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 3, 9: 0, 10: 0, 11: 0, 12: 0},
+'plan'          : {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 1, 9: 0, 10: 0, 11: 0, 12: 0},
+'police'        : {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 3, 10: 0, 11: 0, 12: 0},
+'plaw'          : {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 1, 10: 0, 11: 0, 12: 0},
+'corroboration' : {0: 0, 1: 0, 2: 1, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 1, 10: 0, 11: 0, 12: 0},
+'officer'       : {0: 0, 1: 0, 2: 1, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 2, 10: 0, 11: 0, 12: 0},
+'sport'         : {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 1, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 3, 12: 0},
+'football'      : {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 3, 12: 0},
+'rugby'         : {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 3, 12: 0},
+'golf'          : {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 3, 12: 0},
+'swim'          : {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 1, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 3, 12: 0},
+'athlet'        : {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 2, 12: 0},
+'transport'     : {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 3},
+'bus'           : {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 3},
+'driv'          : {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 2},
+'road'          : {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 2},
+'traffic'       : {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 2},
+'car'           : {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 2},
+'subway'        : {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 3},
+'passenger'     : {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 2},
+'journey'       : {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 1},
+'airport'       : {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 3},
+'train'         : {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 3},
+'food'          : {0: 0, 1: 1, 2: 0, 3: 0, 4: 0, 5: 1, 6: 0, 7: 0, 8: 0, 9: 0, 10: 1, 11: 0, 12: 0},
+'drink'         : {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 1, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0}
+}
 
 # Assign a score to each topic
 # Each time a keyword is encountered, points are awarded for a certain topic
 # Weighting based on me
 # Yeah, I know...
 def topic_score(array):
-    agr_score = 0
-    civ_score = 0
-    ed_score = 0
-    env_score = 0
-    health_score = 0
-    house_score = 0
-    loc_score = 0
-    plan_score = 0
-    police_score = 0
-    social_score = 0
-    sport_score = 0
-    trans_score = 0
+    scores = [0,0,0,0,0,0,0,0,0,0,0,0,0]  # one for each topic, list indices correspond to dict keys
 
-    for word in array:
-        if "agricult" in word:
-            agr_score += 3
-        if "aquacult" in word:
-            agr_score += 3
-        if "farm" in word:
-            agr_score += 3
-        if "fish" in word:
-            agr_score += 2
-        if "agriculture" in word:
-            agr_score += 3
-        if "crime" in word:
-            civ_score += 3
-        if "justice" in word:
-            civ_score += 3
-        if "tri" in word:
-            civ_score += 3
-        if "education" in word:
-            ed_score += 3
-        if "school" in word:
-            ed_score += 3
-        if "student" in word:
-            ed_score += 3
-        if "pupil" in word:
-            ed_score += 3
-        if "learn" in word:
-            ed_score += 1
-        if "environment" in word:
-            env_score += 3
-        if "green" in word:
-            env_score += 3
-        if "energy" in word:
-            env_score += 1
-        if "carbon" in word:
-            env_score += 1
-        if "electricity" in word:
-            env_score += 1
-        if "renewable" in word:
-            env_score += 3
-        if "fossil" in word:
-            env_score += 2
-        if "fuel" in word:
-            env_score += 1
-        if "natur" in word:
-            env_score += 1
-        if "health" in word:
-            health_score += 3
-        if "welfare" in word:
-            health_score += 3
-        if "obesity" in word:
-            health_score += 3
-        if "overweight" in word:
-            health_score += 3
-        if "hous" in word:
-            house_score += 4
-            social_score += 1
-        if "home" in word:
-            house_score += 3
-            social_score += 1
-        if "rent" in word:
-            house_score += 2
-            social_score += 1
-        if "landlord" in word:
-            house_score += 3
-        if "habitation" in word:
-            house_score += 3
-            social_score += 1
-        if "energy" in word:
-            house_score += 1
-            env_score += 1
-        if "protect" in word:
-            social_score += 1
-            police_score +=1
-        if "social" in word:
-            social_score += 3
-        if "children" in word:
-            social_score += 1
-        if "famil" in word:
-            social_score += 1
-        if "support" in word:
-            social_score += 1
-        if "wellbeing" in word:
-            social_score += 1
-            health_score += 1
-        if "government" in word:
-            loc_score += 1
-        if "parliament" in word:
-            loc_score += 1
-        if "scot" in word:
-            loc_score += 1
-        if "policies" in word:
-            loc_score += 1
-        if "business" in word:
-            loc_score += 2
-        if "econom" in word:
-            loc_score += 2
-        if "devolv" in word:
-            loc_score += 1
-        if "planning" in word:
-            plan_score += 3
-        if "police" in word:
-            police_score += 3
-        if "crim" in word:
-            police_score += 3
-        if "justice" in word:
-            police_score += 3
-        if "plaw" in word:
-            police_score += 1
-        if "legal" in word:
-            police_score += 1
-        if "corroboration" in word:
-            police_score += 1
-        if "officer" in word:
-            police_score += 2
-        if "social" in word:
-            social_score += 3
-        if "sport" in word:
-            sport_score += 3
-            health_score += 1
-        if "football" in word:
-            sport_score += 3
-        if "rugby" in word:
-            sport_score += 3
-        if "golf" in word:
-            sport_score += 3
-        if "swim" in word:
-            sport_score += 3
-            health_score += 1
-        if "athlet" in word:
-            sport_score += 2
-        if "transport" in word:
-            trans_score += 5
-        if "bus" in word and "business" not in word:
-            trans_score += 3
-        if "driv" in word:
-            trans_score += 2
-        if "road" in word:
-            trans_score += 2
-        if "traffic" in word:
-            trans_score += 2
-        if "car" in word:
-            trans_score += 2
-            env_score += 1
-        if "subway" in word:
-            trans_score += 3
-        if "passenger" in word:
-            trans_score += 2
-        if "journey" in word:
-            trans_score += 1
-        if "airport" in word:
-            trans_score += 3
-        if "train" in word:
-            trans_score += 3
-        if "food" in word:
-            health_score += 1
-            agr_score += 1
-        if "drink" in word:
-            health_score += 1
-        if "nature" in word:
-            env_score += 1
+    for received_word in array:
+        for word in word_scores:
+            if word in received_word:
+                for i, score in word_scores[word].items():
+                    scores[i]+=score
 
-    topic = "unknown"
-    topic_value = 0
-    if agr_score > 0 and agr_score > topic_value:
-        topic = "Agriculture"
-        topic_value = agr_score
-    if civ_score > 0 and civ_score > topic_value:
-        topic = "Civil and Criminal Justice"
-        topic_value = civ_score
-    if ed_score > 0 and ed_score > topic_value:
-        topic = "Education"
-        topic_value = ed_score
-    if env_score > 0 and env_score > topic_value:
-        topic = "Environment"
-        topic_value = env_score
-    if health_score > 0 and health_score > topic_value:
-        topic = "Health"
-        topic_value = health_score
-    if house_score > 0 and house_score > topic_value:
-        topic = "Housing"
-        topic_value = house_score
-    if loc_score > 0 and loc_score > topic_value:
-        topic = "Local Government"
-        topic_value = loc_score
-    if plan_score > 0 and plan_score > topic_value:
-        topic = "Planning"
-        topic_value = plan_score
-    if police_score > 0 and police_score > topic_value:
-        topic = "Police and Fire Services"
-        topic_value = police_score
-    if social_score > 0 and social_score > topic_value:
-        topic = "Social Work"
-        topic_value = social_score
-    if sport_score > 0 and sport_score > topic_value:
-        topic = "Sports and the Arts"
-        topic_value = sport_score
-    if trans_score > 0 and trans_score > topic_value:
-        topic = "Transport"
-        topic_value = trans_score
+    maximum = max(scores)
+    winning_topic_index = scores.index(maximum)
+    return topics[winning_topic_index]
 
-    return topic
 
 
 # Process :
@@ -263,12 +204,16 @@ def get_topic_from_text(text):
     # Open the stop-words file and load it into an array
     # Remove the token matching those from this array from the token array
     # Stop-words list courtesy of the Flair IR system
+    error_open_stopfile = False
     try:
         with open("stopfile.txt", "r") as stop_file:
             stop_array = stop_file.readlines()
             stop_array = [s.strip('\n') for s in stop_array]
     except IOError, e:
-        print("Can't open stopfile.txt")
+        error_open_stopfile = True
+
+#    if error_open_stopfile:
+#        print("Can't open stopfile.txt")
 
     cleaned_token_array = [x for x in token_array if x not in stop_array]
 

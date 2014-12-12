@@ -1,6 +1,17 @@
 __author__ = '2168879m'
+"""
+This file is the default populator for the tables (yes, I did say populator!!). Takes between 0.5 and 1.5 h.
 
-# run to get default db
+It contains definitions for populating with minimal info the tables: MSP, Jobs, Party, Constituency
+The main makes calls to:
+    - these definitions
+    - reading divisions from scraped files (the function is in populate_divisions.py and the parameters are in data.py)
+    - runs updatedb.py (to process all this data and compute analytics; if you f*cked with it make sure it has the right calls)
+If you get an error instead of severally happy messages from updatedb, run it after this script is done.
+
+You can change this file, but it manages important, sensible data, so I discourage such behaviour.
+(except for maybe update_new_msps)
+"""
 
 import csv
 import os
@@ -10,7 +21,6 @@ from scottviz.msp.models import *
 from data import *
 from dateutil import parser
 from populate_divisions import populate_divisions_from
-
 
 
 def delete_data():
@@ -58,16 +68,24 @@ def populate_current_msps():
             m.save()
 
 
-# get msps that were not in the parliment at the time of scraping
 def populate_former_msps():
+    """
+    Takes static data from data.py (unfortunately, nowhere to find this data up-to-date consistently)
+    :return: Populates the MSP table with instances of MSPs that are not in the Parliament at this time
+    """
     for (constituency,party,msp) in former_or_new_msps:
         m = msp
-        m.constituency = Constituency.objects.get(name = constituency)
-        m.party = Party.objects.get(name = party)
+        m.constituency = Constituency.objects.get(name=constituency)
+        m.party = Party.objects.get(name=party)
         m.save()
 
-# update dates for new msps
 def update_new_msps():
+    """
+    Unfortunately, some assumed universal info might not be applicable.
+    If msps (already in the db) came later to the Parliament or switched parties... or anything out of the ordinary...
+    here is the place to stick the changes!
+    :return: Adjusts some info in MSP
+    """
     m = MSP.objects.get(lastname='Allard',firstname ='Christian')
     m.member_startdate = parser.parse('15 May 2013')
     m.save()
@@ -75,8 +93,11 @@ def update_new_msps():
     m.member_startdate = parser.parse('4 September 2013')
     m.save()
 
-# photos for all msps in the db
 def msp_photos():
+    """
+    Takes static data (as urls or paths) from data.py
+    :return: Populates the img field in the MSP table
+    """
     msps = MSP.objects.all()
     for msp in msps:
         name = str(msp)
@@ -84,8 +105,11 @@ def msp_photos():
             msp.img = msp_img_urls[name]
             msp.save()
 
-# jobs for all msps in db
 def msp_jobs():
+    """
+    Takes static data from data.py (unfortunately, nowhere to find this data up-to-date consistently)
+    :return: Populate Job table
+    """
     i=0
     for job in jobs:
         i+=1

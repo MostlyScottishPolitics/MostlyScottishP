@@ -13,9 +13,19 @@ from string import replace, upper
 
 
 def get_files(d):
+    """
+    gets a list of paths for all the files located in the directory d
+    :param d: path to a directory
+    :return: list of paths for files
+    """
     return [os.path.join(d, f) for f in os.listdir(d) if os.path.isfile(os.path.join(d, f))]
 
 def absent_votes(division):
+    """
+    For each msp that did not express a vote for a division, populate the vote table with an ABSENT vote
+    :param division: division instance
+    :return:
+    """
     # if an msp did not have a vote read, he/she was absent
 
     # get votes read until now
@@ -29,7 +39,16 @@ def absent_votes(division):
         v = Vote(msp=msp, division=division, vote=Vote.ABSENT)
         v.save()
 
+
 def get_votes(parsing_law,division,type,result):
+    """
+    Populates the vote table with result vote, for all votes of some type, from parsing_law, for division
+    :param parsing_law : a minidom element from the scraped file
+    :param division : the division instance already created for which we are parsing votes
+    :param type : the type of vote parsed: "for", "against", "abstention"
+    :param result: the type of vote to be saved in the db: "YES", "NO", "ABSENT"
+    :return:
+    """
     if len(parsing_law.getElementsByTagName(type)):
         msps = parsing_law.getElementsByTagName(type)[0].getElementsByTagName("msp")
         for msp in msps:
@@ -49,6 +68,13 @@ def get_votes(parsing_law,division,type,result):
                     v.save()
 
 def populate_divisions_from(files_location,startdate,enddate):
+    """
+    reads all files within an interval from a location
+    :param files_location : path to the folder where the scraped files are at
+    :param startdate : first date for which to read files
+    :param enddate : last date for which to read files
+    :returns : populates division and vote tables
+    """
 
     # naive skip files before startdate and after enddate, using a switch: currentsession
 
@@ -84,19 +110,19 @@ def populate_divisions_from(files_location,startdate,enddate):
 
                 motionid = law.getElementsByTagName("id")[0].firstChild.data
 
-                motiontopic = law.getElementsByTagName("topic")[0].firstChild.data.encode('latin1','backslashreplace').replace("\\u2019","\'").replace("\\u2014","-")
+                motiontopic = law.getElementsByTagName("topic")[0].firstChild.data.encode('latin1','backslashreplace').replace("\\u2019","\'").replace("\\u2014","-").replace("\u201d","\"").replace("\u201c","\"")
 
                 text_raw = law.getElementsByTagName("text")
                 if text_raw == [] :
                     text='n/a'
                 else:
-                    text = text_raw[0].firstChild.data.encode('latin1','backslashreplace').replace("\\u2019","\'")
+                    text = text_raw[0].firstChild.data.encode('latin1','backslashreplace').replace("\\u2019","\'").replace("\\u2014","-").replace("\u201d","\"").replace("\u201c","\"")
 
                 topic_raw = law.getElementsByTagName("category")
                 if topic_raw == [] :
-                    topic='Unknown'
+                    topic='unknown'
                 else:
-                    topic = topic_raw[0].firstChild.data.encode('latin1','backslashreplace').replace("\\u2019","\'")
+                    topic = topic_raw[0].firstChild.data.encode('latin1','backslashreplace').replace("\\u2019","\'").replace("\\u2014","-")
 
                 # parsed most info for division
                 division = Division(parent=None, motion=motion, motionid=motionid, motiontext=text.decode('latin1'), motiontopic=motiontopic.decode('latin1'), topic=topic.decode('latin1'), date=dt)
