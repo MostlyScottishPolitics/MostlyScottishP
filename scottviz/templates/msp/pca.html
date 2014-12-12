@@ -7,5 +7,26 @@
 
 <script src="{% static 'js/visualisation/scatter.js' %}"></script>
 <button class="btn btn-default" onclick="reset()">Reset</button>
+<br>
+<form action = "/msp/pca/" method="POST">
+    {% csrf_token %}
+    <fieldset>
+        <legend>Parties</legend>
+        <input type="checkbox" name="party" value="1">Scottish National Party
+        <br>
+        <input type="checkbox" name="party" value="2">Scottish Labour
+        <br>
+        <input type="checkbox" name="party" value="3">Scottish Conservative and Unionist Party
+        <br>
+        <input type="checkbox" name="party" value="4">Independent
+        <br>
+        <input type="checkbox" name="party" value="5">Scottish Green Party
+        <br>
+        <input type="checkbox" name="party" value="6">Scottish Liberal Democrats
+        <br>
+        <input type="checkbox" name="party" value="7">No Party Affiliation
+    </fieldset>
+    <br>
+    <input type="submit">
+</form>
 {% endblock %}
-
