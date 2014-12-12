@@ -9,23 +9,22 @@ class HitCount(models.Model):
     """
     hitcount model
     """
-    created = models.DateTimeField(auto_now_add=True, editable=False)
-    modified = models.DateTimeField(auto_now=True, editable=False)
+    time = models.DateTimeField(auto_now_add=True, editable=False)
+    #modified = models.DateTimeField(auto_now=True, editable=False)
     ipAddress = models.IPAddressField()
+    session = models.CharField(max_length=40, null=True)
     url = models.CharField(_('URL'), max_length=2000)
     hits = models.PositiveIntegerField(_('Hits'), default=0)
 
     def save(self, *args, **kwargs):
         print self.ipAddress
         if self.id:
-            super(HitCount, self).save(*args, **kwargs)
-        else:
             hits = HitCount.objects.filter(ipAddress=self.ipAddress)
-            hits = hits.filter(url = self.url)
+            hits = hits.filter(url=self.url)
+            hits = hits.filter(session=self.session)
+            hits = hits.filter(time__gt=self.time-timedelta(minutes=int(settings.TIME_BETWEEN_HITS)))
+
             if len(hits) == 0:
                 super(HitCount, self).save(*args, **kwargs)
-
-
-    class Meta:
-        ordering = ('-created', '-modified')
-        get_latest_by = 'created'
+        else:
+            super(HitCount, self).save(*args, **kwargs)
