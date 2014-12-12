@@ -8,5 +8,5 @@ setup(
     description='Mostly Scottish Politics',
     author='Team C',
     packages=find_packages(),
-    include_package_data=True,
+    include_package_data=True, requires=['django']
 )
