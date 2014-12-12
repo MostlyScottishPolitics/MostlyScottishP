@@ -51,33 +51,71 @@ independent_parties = [
     'Independent'
 ]
 
-
-string1 = 'The Scottish National Party (SNP) (Scottish Gaelic: Partaidh Naiseanta na h-Alba, Scots: ' \
-          'Scots Naitional Pairtie) is a Scottish nationalist and social-democratic political party in Scotland. ' \
-          'The SNP supports and campaigns for Scottish independence. It is the third largest political party by ' \
-          'membership in the United Kingdom, behind the Conservative Party and the Labour Party.'.encode('latin1','replace')
-string2 = 'The Scottish Labour Party (Scottish Gaelic: Partaidh Labarach na h-Alba) (often branded Scottish Labour) ' \
-          'is the section of the United Kingdom\'s Labour Party which operates in Scotland. \n Labour had held a long ' \
-          'dominance over modern Scottish politics, having won the largest share of the vote in Scotland at every ' \
-          'UK general election since the 1960s, every European Parliament general election from 1979 until ' \
-          'defeated by the SNP in 2009, and in the first two elections to the Scottish Parliament, ' \
-          'held in 1999 and 2003. For each of these two terms, Scottish Labour entered into a coalition with ' \
-          'the Scottish Liberal Democrats, forming a majority Scottish Executive. \n In the 2007 ' \
-          'Scottish Parliament election Labour fell back to become the second largest party, ' \
-          'with a lower share of the vote and with one fewer seat than the Scottish National Party (SNP), ' \
-          'who subsequently formed a minority government. It fell back further but remained the second largest ' \
-          'party after the 2011 Scottish Parliament election while the SNP advanced to form the first ' \
-          'majority government since the Scottish Parliament was re-established in 1999.'.encode('latin1','replace')
+string1 = 'The Scottish National Party (SNP) is the main political party in Scotland which supports Scotland becoming ' \
+          'an independent nation. They are overall centre-left, advocating social democracy, nuclear disarmament and ' \
+          'closer ties to the European Union. \n They were founded in 1934 and formed a permanent grouping in parliament ' \
+          'in 1967. Their best election result in the 20th century was at the general election of October 1974 in which ' \
+          'they won 11 of Scotland\'s 72 Westminster seats as well as around 30% of the popular vote, however they lost ' \
+          'all but 2 of these seats in 1979. Support for the party was bolstered under the leadership of Alex Salmond, ' \
+          'who in 2011 led the SNP to their best electoral performance to date, in which they became the first party in ' \
+          'the devolved Scottish Parliament to win a majority of seats. \n They currently form the Scottish government, ' \
+          'and are now led by Scotland\'s First Minister, Nicola Sturgeon. They currently have 61 MSPs, 6 MPs and 2 MEPs.'.encode('latin1','ignore')
+string2 = 'The Scottish Labour Party was the most successful party in Scottish elections from 1959 to 2007. ' \
+          'Like the wider UK Labour Party, they are centre-left and they promote British unionism. \n' \
+          'They first overtook the Conservatives as Scotland\'s largest party at the 1959 general election. ' \
+          'In 1997, the UK Labour Party under Tony Blair offered Scotland a referendum on devolution ' \
+          'which was passed with around 74% of the electorate in favour. From 1999 to 2007, they were in power ' \
+          'in the Scottish Parliament through a coalition with the Liberal Democrats. From 2008-2011, ' \
+          'the party was led by Iain Gray in the Scottish Parliament, who announced his resignation ' \
+          'after the party\'s defeat at the 2011 Scottish election. Johann Lamont became leader in 2011 ' \
+          'and resigned in 2014 after an internal dispute within the party. \n They currently control 40/59 ' \
+          'Scottish seats in the House of Commons. They also have 37 seats in the Scottish Parliament and have 2 MEPs.'.encode('latin1','ignore')
+string3 = 'The Scottish Conservative and Unionist Party was founded in 1965 out of the old Scottish Unionist Party, ' \
+          'which had been a dominant political force in Scotland for much of the early 20th century, winning ' \
+          'the majority of votes and seats in the 1955 general election. \n However the party went into decline, ' \
+          'being reduced from 21 Scottish seats in 1983, to 10 in 1987. The 1997 general election was a catastrophe ' \
+          'for the Scottish Conservatives, who were left with no Scottish seats whatsoever. However the party ' \
+          'won 18 seats in the Scottish Parliament in the 1999 election due to proportional representation. ' \
+          'Since 2001 the Conservatives have held 1 Scottish seat in the UK parliament. \n Like the wider ' \
+          'UK Conservative Party, the party is a centre-right party, which promotes conservatism and British unionism. \n' \
+          'They are currently have 15 MSPs, led in the Scottish Parliament by Ruth Davidson, 1 MP and 1 MEP.'.encode('latin1','ignore')
+string4 = 'An independent or nonpartisan politician is an individual politician not affiliated to any political party. \n\n' \
+          'Independents may hold a centrist viewpoint between those of major political parties. ' \
+          'Sometimes they hold a viewpoint more extreme than any major party, have an ideology comprising ideas ' \
+          'from both sides of the political spectrum, or may have a viewpoint based on issues that they do not feel ' \
+          'that any major party addresses. \n Other independent politicians may be associated with a political party, ' \
+          'be former members of it, or have views that align with it, but choose not to stand under its label. ' \
+          'Others may belong to or support a political party but believe they should not formally represent it and ' \
+          'thus be subject to its policies.'.encode('latin1','ignore')
+string5 = 'The Scottish Green Party is centre-left and promotes Scottish independence and environmentalism. ' \
+          'It retains close ties with the Green Party of England and Wales, both having originated in ' \
+          'the breakup of the UK Green Party. \n It won a seat in the Scottish Parliament in 1999, which was ' \
+          'increased to 7 in 2003, and then reduced to 2 in 2007. The Greens retained both these seats in 2011.'.encode('latin1','ignore')
+string6 = 'The Scottish Liberal Democrats are a centre to centre-left social liberal party. They were formed out of ' \
+          'the old Liberal Party and the Social Democratic Party in 1988. \n Currently, they are Scotland\'s second ' \
+          'largest party in terms of seats in the UK Parliament, controlling 11 out of 59. Their leader is Willie Rennie. ' \
+          'Since the formation of the Conservative-Liberal Democrat coalition at Westminster, support for ' \
+          'the Liberal Democrats has fallen sharply, and the party won only 5 seats at the 2011 Scottish ' \
+          'parliamentary election. They also lost their Scottish MEP at the 2014 European Elections.'.encode('latin1','ignore')
+string7 = 'The Presiding Officer is expected to be nonpartisan. For this reason, it is customary for the Presiding Officer ' \
+          'to suspend his or her party membership for the duration of his or her term.'.encode('latin1','ignore')
 # links and descriptions for parties
 # descriptions from wikipedia
 party_links = {
-'Scottish National Party'                   : ('http://www.snp.org/', string1, 'http://en.wikipedia.org/wiki/Scottish_National_Party'),
-'Scottish Labour'                           : ('http://www.scottishlabour.org.uk/', 'string2','http://en.wikipedia.org/wiki/Scottish_Labour_Party'),
-'Scottish Conservative and Unionist Party'  : ('', '', ''),
-'Independent'                               : ('', '', ''),
-'Scottish Green Party'                      : ('', '', ''),
-'Scottish Liberal Democrats'                : ('', '', ''),
-'No Party Affiliation'                      : ('', '', '')
+'Scottish National Party'                   : ('http://www.snp.org/', string1,
+                                               'http://en.wikipedia.org/wiki/List_of_political_parties_in_Scotland#Political_parties'),
+'Scottish Labour'                           : ('http://www.scottishlabour.org.uk/', string2,
+                                               'http://en.wikipedia.org/wiki/List_of_political_parties_in_Scotland#Political_parties'),
+'Scottish Conservative and Unionist Party'  : ('http://www.scottishconservatives.com/', string3,
+                                               'http://en.wikipedia.org/wiki/List_of_political_parties_in_Scotland#Political_parties'),
+'Independent'                               : ('', string4,
+                                               'http://en.wikipedia.org/wiki/Independent_politician'),
+'Scottish Green Party'                      : ('http://www.scottishgreens.org.uk/', string5,
+                                               'http://en.wikipedia.org/wiki/List_of_political_parties_in_Scotland#Political_parties'),
+'Scottish Liberal Democrats'                : ('http://www.scotlibdems.org.uk/', string6,
+                                               'http://en.wikipedia.org/wiki/List_of_political_parties_in_Scotland#Political_parties'),
+'No Party Affiliation'                      : ('', string7,
+                                               'http://en.wikipedia.org/wiki/Presiding_Officer_of_the_Scottish_Parliament')
 }
 
 # msps for the current session that were not members at the time of scraping
