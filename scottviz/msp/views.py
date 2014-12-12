@@ -7,6 +7,7 @@ from django.http import HttpResponse
 from django.utils.timezone import now
 
 from models import *
+from ..hitcounter.models import HitCount
 from search import postcode_search, model_search
 
 
@@ -113,7 +114,10 @@ def pca(request):
         parties = query.getlist('party')
         topics = query.getlist('topic')
         
-
+    all_pca = HitCount.objects.filter(url__startswith='/msp/pca')
+    # You want to find the 'freshest' which you have not responded to
+    # either by timestamp and keeping a record of what you responded to
+    # or by having an extra field where you record the answer to requests
 
     content['parties'] = Party.objects.all().order_by('id')
     content['topics'] = Topic.objects.all().order_by('id')
