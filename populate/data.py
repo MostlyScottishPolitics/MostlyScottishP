@@ -101,22 +101,30 @@ string7 = 'The Presiding Officer is expected to be nonpartisan. For this reason,
           'to suspend his or her party membership for the duration of his or her term.'.encode('latin1','ignore')
 # links and descriptions for parties
 # descriptions from wikipedia
-party_links = {
+party_links_colours = {
 'Scottish National Party'                   : ('http://www.snp.org/', string1,
-                                               'http://en.wikipedia.org/wiki/List_of_political_parties_in_Scotland#Political_parties'),
+                                               'http://en.wikipedia.org/wiki/List_of_political_parties_in_Scotland#Political_parties',
+                                                '#F6DC60'),
 'Scottish Labour'                           : ('http://www.scottishlabour.org.uk/', string2,
-                                               'http://en.wikipedia.org/wiki/List_of_political_parties_in_Scotland#Political_parties'),
+                                               'http://en.wikipedia.org/wiki/List_of_political_parties_in_Scotland#Political_parties',
+                                                '#EB2743'),
 'Scottish Conservative and Unionist Party'  : ('http://www.scottishconservatives.com/', string3,
-                                               'http://en.wikipedia.org/wiki/List_of_political_parties_in_Scotland#Political_parties'),
+                                               'http://en.wikipedia.org/wiki/List_of_political_parties_in_Scotland#Political_parties',
+                                                '#5ABFF4'),
 'Independent'                               : ('', string4,
-                                               'http://en.wikipedia.org/wiki/Independent_politician'),
+                                               'http://en.wikipedia.org/wiki/Independent_politician',
+                                                '#986561'),
 'Scottish Green Party'                      : ('http://www.scottishgreens.org.uk/', string5,
-                                               'http://en.wikipedia.org/wiki/List_of_political_parties_in_Scotland#Political_parties'),
+                                               'http://en.wikipedia.org/wiki/List_of_political_parties_in_Scotland#Political_parties',
+                                                '#31C48E'),
 'Scottish Liberal Democrats'                : ('http://www.scotlibdems.org.uk/', string6,
-                                               'http://en.wikipedia.org/wiki/List_of_political_parties_in_Scotland#Political_parties'),
+                                               'http://en.wikipedia.org/wiki/List_of_political_parties_in_Scotland#Political_parties',
+                                                '#FF6936'),
 'No Party Affiliation'                      : ('', string7,
-                                               'http://en.wikipedia.org/wiki/Presiding_Officer_of_the_Scottish_Parliament')
+                                               'http://en.wikipedia.org/wiki/Presiding_Officer_of_the_Scottish_Parliament',
+                                                '#475070'),
 }
+
 
 # msps for the current session that were not members at the time of scraping
 former_or_new_msps = [

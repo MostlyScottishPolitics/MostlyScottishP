@@ -20,6 +20,7 @@ class Party(models.Model):
     link = models.URLField(max_length=128, null=True)
     description = models.TextField()
     description_link = models.URLField(max_length=128, null=True)
+    colour = models.CharField(max_length=10,null=True)
 
     def __unicode__(self):
         return self.name

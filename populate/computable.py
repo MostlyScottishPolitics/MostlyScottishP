@@ -5,13 +5,12 @@ Mostly processes the data in the tables to populate fields with analytics
 I strongly encourage you to put any such definitions here, and the appropriate calls in updatedb.py
 All static data comes from data.py, please put any such data there.
 """
-import csv
 
 import os
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "scottviz.scottviz.settings")
 from scottviz.msp.models import *
 from decimal import *
-from data import number_of_msps, independent_parties, topics_divisions, topic_extracter_name, topic_extracter_location, topics, party_links
+from data import number_of_msps, independent_parties, topics_divisions, topic_extracter_name, topic_extracter_location, topics, party_links_colours
 import importlib
 
 # the definitions here can be changed to get other statistics
@@ -315,11 +314,13 @@ def populate_data_parties():
     :return: populates link and description fields in Party table
     """
 
-    for party,(link,description,description_link) in party_links.items():
+
+    for party,(link,description,description_link,colour) in party_links_colours.items():
         p = Party.objects.get(name=party)
         p.link = link
         p.description = description.decode('latin1')
         p.description_link = description_link
+        p.colour = colour
         p.save()
 
 
