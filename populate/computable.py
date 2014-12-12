@@ -315,3 +315,28 @@ def populate_data_parties():
         p.link = link
         p.description = description
         p.save()
+
+
+def populate_analytics():
+    """
+
+    :return: populates the Analytics table
+    """
+    Analytics.objects.all().delete()
+
+    parties = Party.objects.all().exclude(name__startswith='No Party').order_by('name')
+    divisions = Division.objects.all()
+
+    for division in divisions:
+        TWOPLACES = Decimal(10) ** -2
+        for party in parties:
+            a = Analytics(division=division, party=party)
+            expressed_votes = len([vote for vote in Vote.objects.filter(division=division).exclude(vote=Vote.ABSENT) if vote.msp.party == party])
+            if expressed_votes > 0:
+                a.party_for = Decimal(100 * len([vote for vote in Vote.objects.filter(division=division, vote=Vote.YES) if vote.msp.party == party]) / Decimal(expressed_votes)).quantize(TWOPLACES)
+                a.party_against = Decimal(100 * len([vote for vote in Vote.objects.filter(division=division, vote=Vote.NO) if vote.msp.party == party]) / Decimal(expressed_votes)).quantize(TWOPLACES)
+            else:
+                a.party_for = 0
+                a.party_against = 0
+            a.party_turnout = Decimal((100 * expressed_votes) / Decimal(len(MSP.objects.filter(party=party)))).quantize(TWOPLACES)
+            a.save()

@@ -1,6 +1,5 @@
 from collections import OrderedDict
 import csv
-from decimal import *
 
 from django.template import RequestContext
 from django.shortcuts import render_to_response
@@ -139,15 +138,16 @@ def msp(request, mspID):
     content['msp'] = this_msp
     content['msp'].votecount = Vote.objects.filter(msp=this_msp).count()
     content['jobs'] = Job.objects.filter(msp=this_msp)
-    content['rebellions'] = Vote.objects.filter(msp=this_msp, rebellious=True)
-    content['for'] = Vote.objects.filter(msp=this_msp, rebellious=True, vote=Vote.YES)
-    content['against'] = Vote.objects.filter(msp=this_msp, rebellious=True, vote=Vote.NO)
-    content['abstain'] = Vote.objects.filter(msp=this_msp, rebellious=True, vote=Vote.ABSTAIN)
-    content['absent'] = Vote.objects.filter(msp=this_msp, rebellious=True, vote=Vote.ABSENT)
-    content['party_for'] = Vote.objects.filter(msp=this_msp, rebellious=True, party_vote=Vote.YES)
-    content['party_against'] = Vote.objects.filter(msp=this_msp, rebellious=True, party_vote=Vote.NO)
-    content['party_abstain'] = Vote.objects.filter(msp=this_msp, rebellious=True, party_vote=Vote.ABSTAIN)
-    content['party_absent'] = Vote.objects.filter(msp=this_msp, rebellious=True, party_vote=Vote.ABSENT)
+    rebellious = Vote.objects.filter(msp=this_msp, rebellious=True)
+    content['rebellions'] = rebellious
+    content['for'] = rebellious.filter(vote=Vote.YES)
+    content['against'] = rebellious.filter(vote=Vote.NO)
+    content['abstain'] = rebellious.filter(vote=Vote.ABSTAIN)
+    content['absent'] = rebellious.filter(vote=Vote.ABSENT)
+    content['party_for'] = rebellious.filter(party_vote=Vote.YES)
+    content['party_against'] = rebellious.filter(party_vote=Vote.NO)
+    content['party_abstain'] = rebellious.filter( party_vote=Vote.ABSTAIN)
+    content['party_absent'] = rebellious.filter(party_vote=Vote.ABSENT)
     content['attendance'] = Vote.objects.filter(msp=this_msp).exclude(vote=Vote.ABSENT).order_by('division')
     return render_to_response('msp/msp.html', content, context)
 
@@ -166,9 +166,8 @@ def party(request, partyID):
         'title': this_party.name,
         'desc': "Members for the " + this_party.name,
     }
-    party_msps = MSP.objects.filter(party=this_party).order_by('lastname')
     content['party'] = this_party
-    content['partymsps'] = party_msps
+    content['partymsps'] = MSP.objects.filter(party=this_party).order_by('lastname','firstname')
     return render_to_response('msp/party.html', content, context)
 
 
@@ -245,39 +244,12 @@ def division(request, divisionID):
     }
 
     content['division'] = this_division
+    rebellious = Vote.objects.filter(division=this_division, rebellious=True)
+    content['rebels'] = rebellious
     content['votes'] = Vote.objects.filter(division=this_division).order_by('msp')
-    content['rebels'] = Vote.objects.filter(division=this_division, rebellious=True)
-    content['for'] = Vote.objects.filter(division=this_division, rebellious=True, vote=Vote.YES)
-    content['against'] = Vote.objects.filter(division=this_division, rebellious=True, vote=Vote.NO)
-    content['abstain'] = Vote.objects.filter(division=this_division, rebellious=True, vote=Vote.ABSTAIN)
-    content['absent'] = Vote.objects.filter(division=this_division, rebellious=True, vote=Vote.ABSENT)
-    content['party_for'] = Vote.objects.filter(division=this_division, rebellious=True, party_vote=Vote.YES)
-    content['party_against'] = Vote.objects.filter(division=this_division, rebellious=True, party_vote=Vote.NO)
-    content['party_abstain'] = Vote.objects.filter(division=this_division, rebellious=True, party_vote=Vote.ABSTAIN)
-    content['party_absent'] = Vote.objects.filter(division=this_division, rebellious=True, party_vote=Vote.ABSENT)
-    parties = Party.objects.all().order_by('name')
-    results = []
-    TWOPLACES = Decimal(10) ** -2
-    for party in parties:
-        expressed_votes = len([vote for vote in Vote.objects.filter(division=this_division).exclude(vote=Vote.ABSENT) if
-                               vote.msp.party == party])
-        if expressed_votes > 0:
-            pro = Decimal(Decimal(100 * len(
-                [vote for vote in Vote.objects.filter(division=this_division, vote=Vote.YES) if
-                 vote.msp.party == party])) / Decimal(expressed_votes)).quantize(TWOPLACES)
-            con = Decimal(Decimal(100 * len(
-                [vote for vote in Vote.objects.filter(division=this_division, vote=Vote.NO) if
-                 vote.msp.party == party])) / Decimal(expressed_votes)).quantize(TWOPLACES)
-        else:
-            pro = 0
-            con = 0
-        turnout = Decimal(Decimal(100 * expressed_votes) / Decimal(len(MSP.objects.filter(party=party)))).quantize(
-            TWOPLACES)
-        results.append([party, pro, con, turnout])
+    content['analytics'] = Analytics.objects.filter(division=this_division).order_by('party')
     q = Division.objects.filter(motionid__startswith=this_division.motionid.split('.')[0])
-    content['related'] = q.exclude(motionid__exact=this_division.motionid)
-    content['parties'] = parties
-    content['results'] = results
+    content['related'] = q.exclude(motionid__exact=this_division.motionid).order_by('motionid')
     return render_to_response('msp/division.html', content, context)
 
 
