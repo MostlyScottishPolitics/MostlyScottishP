@@ -22,7 +22,7 @@ data = {}
 filter = 0
 
 #Update the following row to appropriate output location for CSV to be read by D3
-outputLocation = "..\static\csv\OutputMatrix.csv"
+outputLocation = "static\csv\OutputMatrix.csv"
 
 print ''
 print "-----Program Started-----"

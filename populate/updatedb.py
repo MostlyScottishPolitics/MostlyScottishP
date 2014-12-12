@@ -9,7 +9,9 @@ if __name__ == '__main__':
     change any function def in computable.py or any static data in data.py to get other statistics
     you can add your own functions here (but I would recommend to do it in computable.py)  and put the calls here.
     """
-
+    get_lama_her_csv()
+    print "_lama_got_her_csv_"
+    """
     populate_data_parties()
     print "_parties_info_"
 
@@ -42,5 +44,5 @@ if __name__ == '__main__':
 
     populate_analytics()
     print "_analytics_"
-
+    """
     print "_done_"

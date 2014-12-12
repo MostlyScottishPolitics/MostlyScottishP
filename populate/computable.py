@@ -20,8 +20,6 @@ from django.core.files import File
 def get_lama_her_csv():
     with open(settings.STATIC_PATH+'/csv/lama.csv','w') as f:
         myFile = File(f)
-
-
         header = 'Region'
         parties = Party.objects.all().order_by('id')
         for party in parties:

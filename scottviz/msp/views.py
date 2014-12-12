@@ -1,5 +1,6 @@
 from collections import OrderedDict
 import csv
+import importlib
 
 from django.template import RequestContext
 from django.shortcuts import render_to_response
@@ -113,14 +114,24 @@ def pca(request):
     content['activesite'] = scatter['pca']
     content['parties'] = Party.objects.all().order_by('id')
     content['topics'] = Topic.objects.all().order_by('id')
-    parties=[]
-    topics=[]
     if request.method == 'POST':
         query = request.POST
-        parties = query.getlist('party')
-        topics = query.getlist('topic')
+        parties = ' '.join(query.getlist('party'))
+        topics = ' '.join(query.getlist('topic'))
 
-    os.system('./pca/new_pca.py')
+
+    pca_runner = importlib.import_module('.new_pca','pca')
+    """
+    if parties and topics:
+        os.system(str(pca_runner), parties, topics())
+    elif parties:
+        os.system(str(pca_runner), parties)
+    elif topics:
+        os.system(str(pca_runner), topics())
+    else:
+        os.system(str(pca_runner))
+    """
+    os.system(str(pca_runner))
 
     # FOR THE CONCURRENCY
     # You want to find the 'freshest' which you have not responded to
