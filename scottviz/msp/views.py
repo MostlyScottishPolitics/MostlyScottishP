@@ -103,6 +103,10 @@ def pca(request):
     :param request:
     :return:
     """
+    if request.method == 'POST':
+        query = request.POST
+        choices = query.getlist('party')
+    
     context = RequestContext(request)
     content['activesite'] = scatter['pca']
     return render_to_response('msp/pca.html', content, context)
