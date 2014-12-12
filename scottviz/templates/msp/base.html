@@ -33,7 +33,8 @@
 <header class="navbar navbar-inverse navbar-fixed-top" id="top" role="banner">
     <div class="container">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".scott-navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -41,7 +42,7 @@
             <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'media/img/ScottCat.png' %}" width="50"
                                                                  title="MSP viz"/> {{title}}</a>
         </div>
-        <div class="navbar-collapse collapse">
+        <nav class="collapse navbar-collapse scott-navbar-collapse" role="navigation">
             <ul class="nav navbar-nav">
 
                 {% for navid, navelem in navbar.items %}
@@ -49,20 +50,31 @@
                 {% if activesite.id == navid %} class="active" {% endif %}><a
                     href="{% url navid %}">{{navelem.title}}</a></li>
                 {% endfor %}
-            </ul>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Scatter <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        {% for id, elem in scatter.items %}
+                        <li {% if activesite.id == aboutid %} class="active" {% endif %}>
+                            <a href="{% url id %}">{{elem.title}}</a>
+                        </li>
 
-
-                <form class="navbar-form pull-right col-sm-4" role="search" method="GET" action="{% url 'search_results' %}">
+                {% endfor %}
+                    </ul>
+                </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                <form class="navbar-form navbar-right" role="search" method="GET" action="{% url 'search_results' %}">
                         <div class="form-group" style="display:inline;">
-                          <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Search.." name="q" autocomplete="off">
+                          <div class="input-group" data-toggle="tooltip" data-placement="bottom" title="Postcode, msp name, topic, region, party and more..">
+                            <input type="text" class="form-control" name="q" autocomplete="off">
                             <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
                           </div>
                         </div>
                   </form>
-        </div>
+                </ul>
+        </nav>
     </div>
-    </div>
+
 </header>
 
 <div class="jumbotron">

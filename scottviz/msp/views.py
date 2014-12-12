@@ -14,11 +14,11 @@ navbar = (
 
     ('msps', {'id': 'msps', 'title': 'MSPs', 'desc': 'List of all Members of Scottish Parliament'}),
 
-    ("regions", {
-        'id': 'regions',
-        'title': 'Regions',
-        'desc': 'List of all regions in Scotland',
-    }),
+    # ("regions", {
+    #        'id': 'regions',
+    #        'title': 'Regions',
+    #        'desc': 'List of all regions in Scotland',
+    #    }),
 
     ('divisions', {
         'id': 'divisions',
@@ -29,28 +29,11 @@ navbar = (
     ('map', {
         'id': 'map',
         'title': 'Map',
-        'desc': 'map visualisation',
+        'desc': 'Interactive map of scottish regions',
     }),
 
-    ('scatter', {
-        'id': 'scatter',
-        'title': 'Scatter',
-        'desc': 'MSPs are plotted based on their votes',
-    }),
-
-    ('map', {
-        'id': 'map',
-        'title': 'Map',
-        'desc': 'map visualisation',
-    }),
-
-    ('scatter', {
-        'id': 'scatter',
-        'title': 'Scatter',
-        'desc': 'MSPs are plotted based on their votes',
-    }),
     ('topics', {
-        'id': 'topic',
+        'id': 'topics',
         'title': 'Topics',
         'desc': 'Browse topics and divisions related to them'
     })
@@ -68,19 +51,22 @@ about = (
         'title': 'About the Scottish Parliament',
         'desc': 'About the MSPs and their votes',
     })
-
 )
-
+scatter = {'pca': {
+    'id': 'pca',
+    'title': 'PCA',
+    'desc': 'PCA visualisation of MSPs based on their votes',
+}
+}
 about = OrderedDict(about)
 navbar = OrderedDict(navbar)
-
 content = {
     'title': "Mostly Scottish Politics",
     'copyr': "Team C 2014",
     'contact_name': "Team C",
     'contact_email': "1006414v@student.gla.ac.uk",
     'navbar': navbar,
-    'about': about,
+    'scatter': scatter,
 }
 
 
@@ -112,15 +98,15 @@ def map(request):
     return render_to_response('msp/map.html', content, context)
 
 
-def scatter(request):
+def pca(request):
     """
     PCA view
     :param request:
     :return:
     """
     context = RequestContext(request)
-    content['activesite'] = navbar['scatter']
-    return render_to_response('msp/scatter.html', content, context)
+    content['activesite'] = scatter['pca']
+    return render_to_response('msp/pca.html', content, context)
 
 
 def msps(request):
@@ -132,6 +118,7 @@ def msps(request):
     context = RequestContext(request)
     content['activesite'] = navbar['msps']
     content['msps'] = MSP.objects.order_by('lastname', 'firstname')
+    content['count'] = MSP.objects.count()
     return render_to_response('msp/msps.html', content, context)
 
 
@@ -215,9 +202,17 @@ def constituency(request, constituencyID):
         'title': this_constituency.name,
         'desc': "Representatives for " + this_constituency.name,
     }
-    constituency_msps = MSP.objects.filter(constituency=this_constituency).order_by('party')
+    constituency_msps = MSP.objects.filter(constituency=this_constituency)
+    parent_msps = []
+    kids = []
+    if this_constituency.parent is not None:
+        parent_msps = MSP.objects.filter(constituency=this_constituency.parent)
+    else:
+        kids = Constituency.objects.filter(parent=this_constituency)
     content['constituency'] = this_constituency
     content['constituency_msps'] = constituency_msps
+    content['parent_msps'] = parent_msps
+    content['constituencies'] = kids
     return render_to_response('msp/constituency.html', content, context)
 
 
@@ -230,6 +225,7 @@ def divisions(request):
     context = RequestContext(request)
     content['activesite'] = navbar['divisions']
     content['divisions'] = Division.objects.order_by('-date')
+    content['count'] = Division.objects.count()
     return render_to_response('msp/divisions.html', content, context)
 
 
@@ -285,35 +281,13 @@ def division(request, divisionID):
     return render_to_response('msp/division.html', content, context)
 
 
-def rebels(request, divisionID):
+def topics(request):
     """
-
     :param request:
-    :param divisionID:
     :return:
     """
     context = RequestContext(request)
-    this_division = Division.objects.get(id=divisionID)
-    content['activesite'] = {
-        'id': this_division,
-        'title': this_division,
-        'desc': "Rebels of " + str(this_division),
-    }
-    content['division'] = this_division
-    content['rebels'] = Vote.objects.filter(division=this_division, rebellious=True)
-    content['for'] = Vote.objects.filter(division=this_division, rebellious=True, vote=Vote.YES)
-    content['against'] = Vote.objects.filter(division=this_division, rebellious=True, vote=Vote.NO)
-    content['abstain'] = Vote.objects.filter(division=this_division, rebellious=True, vote=Vote.ABSTAIN)
-    content['absent'] = Vote.objects.filter(division=this_division, rebellious=True, vote=Vote.ABSENT)
-    content['party_for'] = Vote.objects.filter(division=this_division, rebellious=True, party_vote=Vote.YES)
-    content['party_against'] = Vote.objects.filter(division=this_division, rebellious=True, party_vote=Vote.NO)
-    content['party_abstain'] = Vote.objects.filter(division=this_division, rebellious=True, party_vote=Vote.ABSTAIN)
-    content['party_absent'] = Vote.objects.filter(division=this_division, rebellious=True, party_vote=Vote.ABSENT)
-    return render_to_response('msp/rebels.html', content, context)
-
-
-def topics(request):
-    context = RequestContext(request)
+    content['activesite'] = navbar['topics']
     ts = Division.objects.values('topic').distinct()
     i = 0
     topics = []

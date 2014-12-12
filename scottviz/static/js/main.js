@@ -54,3 +54,11 @@ $('#related a').click(function (e) {
     $("#vot").hide();
     $("#relc").show();
 });
+
+$('.dropdown').hover(function(){
+  $('.dropdown-toggle', this).trigger('click');
+});
+
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})

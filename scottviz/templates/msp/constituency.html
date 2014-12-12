@@ -1,29 +1,93 @@
 {% extends "msp/base.html" %}
 
 {% block content %}
-<a class="btn btn-default back" href="{% url 'regions' %}"><i class="glyphicon glyphicon-circle-arrow-left"></i>All
-    Constituencies</a>
 
 
-    <div >
         {% if constituency.parent == None %}
+                <div class="container container-xs-height">
+                    <div class="row row-xs-height">
 
-        <p>Main region: {{ constituency.name }}</p>
+
+                        <div class="col-xs-3 col-xs-height col-top">
+                            <div class="item">
+                                <div class="content">
+                                    <h4> MSPs </h4>
+                                    {% for msp in constituency_msps %}
+                                    <div class="item">
+                                        <div class="content">
+                                            <h5><p><a href="{% url 'msp' msp.foreignid %}">{{msp}}</a></p></h5>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-3 col-xs-height col-top">
+                            <div class="item">
+                                <div class="content">
+                                    <h4> Geographical
+                                    Constituencies </h4>
+                                    {% for constituency in constituencies %}
+                                    <div class="item">
+                                        <div class="content">
+                                            <h5><p><a
+                                                    href="{% url 'constituency' constituency.id %}">{{constituency}}</a>
+                                            </p></h5>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
         {% else %}
-        <p> Region: <a href="{% url 'constituency' constituency.parent.id %}">{{ constituency.parent }}</a></p>
+            <div class="container container-xs-height">
+        <div class="row row-xs-height">
+
+
+            <div class="col-xs-6 col-xs-height col-top">
+                <div class="item">
+                    <div class="content">
+                        <h4> MSP for this constituency</h4>
+                        {% for msp in constituency_msps %}
+                        <div class="item">
+                            <div class="content">
+                                <h5><p><a href="{% url 'msp' msp.foreignid %}">{{msp}}</a></p></h5>
+                            </div>
+                        </div>
+
+                        {% endfor %}
+                    </div>
+                </div>
+                </div>
+            <div class="col-xs-6 col-xs-height col-top">
+                <div class="item">
+                    <div class="content">
+                        <h4> MSPs for main region: <a href="{% url 'constituency' constituency.parent.id %}">{{constituency.parent}}</a></h4>
+                        {% for msp in parent_msps %}
+                        <div class="item">
+                            <div class="content">
+                                <h5><p><a href="{% url 'msp' msp.foreignid %}">{{msp}}</a></p></h5>
+                            </div>
+                        </div>
+
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
         {% endif %}
 
-</div>
+    </div>
 
-<ul class="list-group">
-    {% for msp in constituency_msps %}
-    <li class="list-group-item"><i class="glyphicon glyphicon-user"></i> <a href="{% url 'msp' msp.foreignid %}">{{msp.firstname}}
-        {{msp.lastname}}</a> &emsp; &emsp; <a href="{% url 'party' msp.party.id %}">{{msp.party}}</a>
-    </li>
 
-    {% endfor %}
-</ul>
 
-<a class="btn btn-default back" href="/msp/regions"><i class="glyphicon glyphicon-circle-arrow-left"></i>All
-    Constituencies</a>
 {% endblock %}
