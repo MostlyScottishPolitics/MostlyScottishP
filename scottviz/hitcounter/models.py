@@ -1,8 +1,7 @@
 from datetime import timedelta, datetime
 from django.db import models
 from django.utils.translation import ugettext as _
-from hitcounter import settings
-
+import settings
 
 class Hit(models.Model):
     """

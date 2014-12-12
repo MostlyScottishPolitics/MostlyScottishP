@@ -11,7 +11,7 @@ if __name__ == '__main__':
     """
     get_lama_her_csv()
     print "_lama_got_her_csv_"
-    """
+
     populate_data_parties()
     print "_parties_info_"
 
@@ -44,5 +44,5 @@ if __name__ == '__main__':
 
     populate_analytics()
     print "_analytics_"
-    """
+
     print "_done_"
