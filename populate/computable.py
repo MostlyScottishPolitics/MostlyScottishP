@@ -1,8 +1,3 @@
-
-# parents for divisions; more processing for topics;
-# new table for topics;
-# new table relation between divisions and votes with: the stuff on that page
-
 __author__ = '2168879m'
 """
 This file contains all the functions definition that populate fields in tables already containing minimal data
@@ -181,7 +176,6 @@ def compute_rebellious_votes():
      and makes the appropriate calls to populate the fields
     :return: populates party_vote and rebellious fields in Vote table
     """
-
     parties = Party.objects.all()
 
     # get a list of not independent parties:
@@ -204,6 +198,14 @@ def compute_type_for_divisions():
     Gets the type
     :return: populates the type field in Division table
     """
+    divisions = Division.objects.all()
+
+    for division in divisions:
+        if '.' in division.motionid:
+            division.motion = False
+        else:
+            division.motion = True
+        division.save()
 
 
 def compute_parents_for_divisions():
@@ -216,17 +218,28 @@ def compute_parents_for_divisions():
 
     for division in divisions:
         if not division.motion:
-            q = Division.objects.filter(motionid__startswith=division.motionid.split('.')[0])
-            q = q.exclude(motionid__exact=division.motionid)
-#            print "my non-motion division"
-            print division.motionid
-#            print "relatives"
-#            for d in q:
-#                print d.motionid
-    print "change"
-    for division in divisions:
-        if division.motion:
-            print division.motionid
+            ammend_length = 1 + len(division.motionid.split('.')[-1:])
+            parent = Division.objects.filter(motionid__exact=division.motionid[:-ammend_length])
+            if len(parent)>1:
+                print 'We found a duplicate entry for this motion: '+parent[0].motionid
+                print 'More info:'
+                for p in parent:
+                    print p.motionid+' with id '+str(p.id)+' on date '+str(p.date)
+            else:
+                for p in parent:
+                    division.parent = p
+                division.save()
+
+def get_parents_topic(division):
+    """
+    Helper function
+    :param division: a division instance
+    :return: the topic of the most ancient parent we can find
+    """
+    if (not division.motion) and (division.parent):
+        return get_parents_topic(division.parent)
+    else:
+        return division.topic
 
 
 def compute_topics():
@@ -240,13 +253,44 @@ def compute_topics():
 
     extracter = importlib.import_module(topic_extracter_name,topic_extracter_location)
 
+    # extract all topics as good as possible
     for division in topics_divisions:
-        if (division.motion):
+        if division.motion:
             topic = extracter.get_topic_from_text(division.motiontext)
         else:
             topic = extracter.get_topic_from_text(division.motiontopic)
         division.topic=topic
         division.save()
 
-    # TO DO: should go again through divisions and check if parent knows better
-    # (but when we have parents)
+    # adjust topics for ammendments
+    # why not do it before? cause we can have ammendments to ammendments with no main parent, or ammendments to ammendments with parent
+    for division in topics_divisions:
+        if (not division.motion) and (division.parent):
+            division.topic = get_parents_topic(division.parent)
+            division.save()
+
+
+
+
+def see_diferences_with_new_topic_extractor():
+    """
+    Function to test a new topic extractor by comparison.
+    It works similarly to compute_topics, except:
+        It does not save to db the new topics
+        It prints the ones that are different (with division id and name for reference)
+    You need to change the extracter_name and extracter_location in data to your own.
+    :return: differences between the topics in db and new topics
+    """
+    extracter = importlib.import_module(topic_extracter_name,topic_extracter_location)
+
+    # extract all topics as good as possible
+    for division in topics_divisions:
+        if division.motion:
+            topic = extracter.get_topic_from_text(division.motiontext)
+        else:
+            topic = extracter.get_topic_from_text(division.motiontopic)
+        if (division.topic != topic) and (not division.parent):
+            if topic==None:
+                print str(division.id)+' '+division.motionid+' '+division.topic+'  '
+            else:
+                print str(division.id)+' '+division.motionid+' '+division.topic+'  '+topic

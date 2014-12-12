@@ -110,13 +110,13 @@ def populate_divisions_from(files_location,startdate,enddate):
 
                 motionid = law.getElementsByTagName("id")[0].firstChild.data
 
-                motiontopic = law.getElementsByTagName("topic")[0].firstChild.data.encode('latin1','backslashreplace').replace("\\u2019","\'").replace("\\u2014","-")
+                motiontopic = law.getElementsByTagName("topic")[0].firstChild.data.encode('latin1','backslashreplace').replace("\\u2019","\'").replace("\\u2014","-").replace("\u201d","\"").replace("\u201c","\"")
 
                 text_raw = law.getElementsByTagName("text")
                 if text_raw == [] :
                     text='n/a'
                 else:
-                    text = text_raw[0].firstChild.data.encode('latin1','backslashreplace').replace("\\u2019","\'").replace("\\u2014","-")
+                    text = text_raw[0].firstChild.data.encode('latin1','backslashreplace').replace("\\u2019","\'").replace("\\u2014","-").replace("\u201d","\"").replace("\u201c","\"")
 
                 topic_raw = law.getElementsByTagName("category")
                 if topic_raw == [] :

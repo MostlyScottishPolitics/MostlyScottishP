@@ -75,9 +75,9 @@ former_or_new_msps = [
      status=MSP.RESIGNED, foreignid=134))
 ]
 
-# TO DO: images from static ??
-
 # images from http://www.scottish.parliament.uk/msps/53234.aspx, need to include licence
+# Thinking of changing to use our own photos in scottviz/static/media/images/www.scottish.parliament.uk
+# (only relevant if we process these photos)
 msp_img_urls = {
 'Brian Adam' : "http://upload.wikimedia.org/wikipedia/commons/a/a3/BrianAdamMSP20070509.jpg",
 'George Adam' : "http://www.scottish.parliament.uk/images/MSP%20Photos/scottishparliament_9853219542.jpg",
