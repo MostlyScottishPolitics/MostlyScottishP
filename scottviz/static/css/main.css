@@ -213,6 +213,7 @@ input.form-control, input.form-control:focus {
       border-bottom-color: #5d3c70;
 }
 
+
 @media (max-width:992px){
     .navbar-header {
         float: none;
