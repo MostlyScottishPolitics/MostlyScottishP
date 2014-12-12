@@ -244,8 +244,7 @@ def division(request, divisionID):
     }
 
     content['division'] = this_division
-    rebellious = Vote.objects.filter(division=this_division, rebellious=True)
-    content['rebels'] = rebellious
+    content['rebels'] = Vote.objects.filter(division=this_division, rebellious=True).order_by('msp')
     content['votes'] = Vote.objects.filter(division=this_division).order_by('msp')
     content['analytics'] = Analytics.objects.filter(division=this_division).order_by('party')
     q = Division.objects.filter(motionid__startswith=this_division.motionid.split('.')[0])
@@ -265,8 +264,7 @@ def topics(request):
     for topic in topics:
         divisions = Division.objects.filter(topic=topic.id).order_by('-date')
         results.append([topic, len(divisions), divisions])
-#    content['topic'] = pairs[1:]
-    content['topics'] = results#[:1]
+    content['topics'] = results
     return render_to_response('msp/topics.html', content, context)
 
 
