@@ -12,8 +12,8 @@ def pagehits(context):
     """
     try:
         request = context['request']
-        hit = HitCount.objects.get(url=request.path)
-        return hit.hits
+        hits = HitCount.objects.filter(url=request.path).count()
+        return hits
     except HitCount.DoesNotExist:
         return 0
 
@@ -24,7 +24,7 @@ def pagehits_url(path):
    hits by url
     """
     try:
-        hit = HitCount.objects.get(url=path)
-        return hit.hits
+        hits = HitCount.objects.filter(url=path).count()
+        return hits
     except HitCount.DoesNotExist:
         return 0
