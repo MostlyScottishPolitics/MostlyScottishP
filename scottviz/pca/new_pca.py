@@ -1,10 +1,12 @@
 __author__ = '2165430C'
 import fileinput
 import os
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "scottviz.settings")
 import sys
 import numpy
 import psycopg2 as pq
 import mdp
+
 
 #README:
 #No arguments will run the script without any filters
@@ -20,7 +22,7 @@ data = {}
 filter = 0
 
 #Update the following row to appropriate output location for CSV to be read by D3
-outputLocation = "H:\MostlyScottishP-master\scottviz\static\csv\OutputMatrix.csv"
+outputLocation = "..\static\csv\OutputMatrix.csv"
 
 print ''
 print "-----Program Started-----"

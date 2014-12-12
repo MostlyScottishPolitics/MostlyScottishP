@@ -7,8 +7,11 @@ from django.http import HttpResponse
 from django.utils.timezone import now
 
 from models import *
-from ..hitcounter.models import HitCount
 from search import postcode_search, model_search
+from hitcounter.models import Hit
+import  os
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "scottviz.settings")
+
 
 
 navbar = (
@@ -106,20 +109,24 @@ def pca(request):
     :param request:
     :return:
     """
+    context = RequestContext(request)
+    content['activesite'] = scatter['pca']
+    content['parties'] = Party.objects.all().order_by('id')
+    content['topics'] = Topic.objects.all().order_by('id')
     parties=[]
     topics=[]
-    content['selected-topics'] = []
     if request.method == 'POST':
         query = request.POST
         parties = query.getlist('party')
         topics = query.getlist('topic')
-        
 
+    os.system('./pca/new_pca.py')
 
-    content['parties'] = Party.objects.all().order_by('id')
-    content['topics'] = Topic.objects.all().order_by('id')
-    context = RequestContext(request)
-    content['activesite'] = scatter['pca']
+    # FOR THE CONCURRENCY
+    # You want to find the 'freshest' which you have not responded to
+    # either by timestamp and keeping a record of what you responded to
+    # or by having an extra field where you record the answer to requests
+    all_pca = Hit.objects.filter(url__startswith='/msp/pca')
     session = request.session.session_key
     if 'HTTP_X_FORWARDED_FOR' in request.META:
         ip_adds = request.META['HTTP_X_FORWARDED_FOR'].split(",")
@@ -127,6 +134,7 @@ def pca(request):
     else:
         ip = request.META['REMOTE_ADDR']
     content['sessioninfo'] = [ip, session, now()]
+
     return render_to_response('msp/pca.html', content, context)
 
 
