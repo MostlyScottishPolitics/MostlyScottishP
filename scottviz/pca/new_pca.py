@@ -3,7 +3,7 @@ import fileinput
 import os
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "scottviz.settings")
 from scottviz import settings
-from models import MSP
+from msp.models import MSP
 import sys
 import numpy
 import psycopg2 as pq
@@ -20,7 +20,6 @@ outputLocation = settings.STATIC_PATH+'/csv/OutputMatrix.csv'
 
 def createQuery(query, filter):
     output = ""
-    argLength = len(argList)
     
     if query == "divisionCount":
         output = "SELECT MAX(id) FROM msp_division;"
@@ -101,7 +100,7 @@ def createQuery(query, filter):
             output = output + ") ORDER BY msp.foreignid"
     return output
 
-def getDistinctParties(nameFromQuery):
+def getDistinctParties(cr,nameFromQuery):
 
     #Check if ID is a suitable value
     id =  cr.execute('SELECT name FROM msp_party WHERE id= %s', (nameFromQuery,))   #[party.name for party in Party.objects.filter(id=nameFromQuery)](0)
@@ -112,7 +111,7 @@ def getDistinctParties(nameFromQuery):
        
     return nameFromQuery
     
-def handleArguments():
+def handleArguments(argList):
     global filter
     global partyArguments
     global topicArguments
@@ -140,7 +139,7 @@ def handleArguments():
 
     
 #Fills in values of 2D null matrix, with each entry being a vote (X=divisions, Y=MSPs)
-def selectVotes():
+def selectVotes(cr,matrix):
     result = cr.execute(createQuery("votes",filter))
     vote = cr.fetchall()
     count = -1
@@ -166,56 +165,57 @@ def new_pca(parties, topics):
     cn = pq.connect('dbname=m_14_pgtproja user=m_14_pgtproja password=pgtproja host=yacata.dcs.gla.ac.uk')
     cr = cn.cursor()
 
-handleArguments()
+    handleArguments()
 
-result = cr.execute(createQuery("divisionCount", filter))
-maxDivision = cr.fetchone()
-result = cr.execute(createQuery("mspCount", filter))
-maxMSP = cr.fetchone()
+    result = cr.execute(createQuery("divisionCount", filter))
+    maxDivision = cr.fetchone()
+    result = cr.execute(createQuery("mspCount", filter))
+    maxMSP = cr.fetchone()
 
-#Convert tuples to list of ints, extract the first (and only value)
-maxMSP_int = map(int, maxMSP)[0] + 1
-maxDivision_int = map(int, maxDivision)[0] + 1
+    #Convert tuples to list of ints, extract the first (and only value)
+    maxMSP_int = map(int, maxMSP)[0] + 1
+    maxDivision_int = map(int, maxDivision)[0] + 1
 
 
-#Create null matrix (to be replaced with value wherever an msp voted on a division)
-matrix = numpy.zeros((int(maxMSP_int), int(maxDivision_int)))
+    #Create null matrix (to be replaced with value wherever an msp voted on a division)
+    matrix = numpy.zeros((int(maxMSP_int), int(maxDivision_int)))
 
-matrix = selectVotes()
+    matrix = selectVotes()
 
-#Slightly hacky solution to removing null first row and column which exist as a bi-product of required matrix dimensions
-matrix = numpy.delete(matrix,(0),axis=0)
-matrix = numpy.delete(matrix,(0),axis=1)
+    #Slightly hacky solution to removing null first row and column which exist as a bi-product of required matrix dimensions
+    matrix = numpy.delete(matrix,(0),axis=0)
+    matrix = numpy.delete(matrix,(0),axis=1)
 
-#Deletes every all-zero row in the input matrix (this is necessary for the filters to work correctly)
-matrix = matrix[~numpy.all(matrix == 0, axis=1)]
+    #Deletes every all-zero row in the input matrix (this is necessary for the filters to work correctly)
+    matrix = matrix[~numpy.all(matrix == 0, axis=1)]
 
-numpy.savetxt("InputMatrix.csv", matrix, fmt="%s", delimiter=",")
-print '2) Input Data stored in matrix, and printed to InputMatrix.csv.'
+    numpy.savetxt("InputMatrix.csv", matrix, fmt="%s", delimiter=",")
 
-#PCA magic happens here using MDP
-imdp = mdp.nodes.PCANode(output_dim=2)
-output = imdp(matrix)
 
-#Ouput everything to CSV so as to be read by D3/Javascript
-numpy.savetxt(outputLocation, output, fmt="%s", delimiter=",")
-print "3) PCA Data saved to file."
+    #PCA magic happens here using MDP
+    imdp = mdp.nodes.PCANode(output_dim=2)
+    output = imdp(matrix)
 
-#Append name of party and MSP names(as a string) to each row of output text
-msps = MSP.objects.all().order_by('id')
-count = -1
-path = os.path.dirname(os.path.abspath(__file__)) + outputLocation
-firstLine = 0
-for line in fileinput.input(outputLocation, inplace=1):
-    count += 1
-    #If first line of csv add header, else append party name
-    if firstLine == 0:
-        print 'X,Y,Party,MSP Name'
-        firstLine = 1;
-    else:
-        try:
-            print '{0}{1}'.format(line.rstrip('\n'), (',' + str(msps[count].party) + ',' + str(msps[count])))
-        except:
-            pass
+    #Ouput everything to CSV so as to be read by D3/Javascript
+    numpy.savetxt(outputLocation, output, fmt="%s", delimiter=",")
 
-print "4) Parties appended to CSV."
+
+    #Append name of party and MSP names(as a string) to each row of output text
+    msps = MSP.objects.all().order_by('id')
+    count = -1
+    path = os.path.dirname(os.path.abspath(__file__)) + outputLocation
+    firstLine = 0
+    for line in fileinput.input(outputLocation, inplace=1):
+        count += 1
+        #If first line of csv add header, else append party name
+        if firstLine == 0:
+            print 'X,Y,Party,MSP Name'
+            firstLine = 1;
+        else:
+            try:
+                print '{0}{1}'.format(line.rstrip('\n'), (',' + str(msps[count].party) + ',' + str(msps[count])))
+            except:
+                pass
+    print "done!"
+
+
