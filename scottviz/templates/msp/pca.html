@@ -8,25 +8,32 @@
 <script src="{% static 'js/visualisation/scatter.js' %}"></script>
 <button class="btn btn-default" onclick="reset()">Reset</button>
 <br>
-<form action = "/msp/pca/" method="POST">
+<form action = "/msp/scatter/" method="POST">
     {% csrf_token %}
+    <table>
+        <tr>
+            <td style="align-content: center">
     <fieldset>
         <legend>Parties</legend>
-        <input type="checkbox" name="party" value="1">Scottish National Party
+        {% for p in parties %}
+        <input type="checkbox" name="party" value={{p.id}}>{{p.name}}
         <br>
-        <input type="checkbox" name="party" value="2">Scottish Labour
-        <br>
-        <input type="checkbox" name="party" value="3">Scottish Conservative and Unionist Party
-        <br>
-        <input type="checkbox" name="party" value="4">Independent
-        <br>
-        <input type="checkbox" name="party" value="5">Scottish Green Party
-        <br>
-        <input type="checkbox" name="party" value="6">Scottish Liberal Democrats
-        <br>
-        <input type="checkbox" name="party" value="7">No Party Affiliation
+        {% endfor %}
     </fieldset>
-    <br>
+                </td>
+            <td>
+     <fieldset>
+        <legend>Topics</legend>
+         {% for t in topics %}
+        <input type="checkbox" name="topic" value={{t.id}}>{{t.name}}
+        <br>
+        {% endfor %}
+     </fieldset>
+            </td>
+            </tr>
+        </table>
     <input type="submit">
+
 </form>
 {% endblock %}
+
