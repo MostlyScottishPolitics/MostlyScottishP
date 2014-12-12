@@ -104,12 +104,13 @@ def pca(request):
     :param request:
     :return:
     """
-    content['choices_topics'] = []
-    content['choices_party'] = []
+    parties=[]
+    topics=[]
+    
     if request.method == 'POST':
         query = request.POST
-        content['choices_party'] = query.getlist('party')
-        content['choices_topics'] = query.getlist('topic')
+        parties = query.getlist('party')
+        topics = query.getlist('topic')
 
     content['parties'] = Party.objects.all().order_by('id')
     content['topics'] = Topic.objects.all().order_by('id')
