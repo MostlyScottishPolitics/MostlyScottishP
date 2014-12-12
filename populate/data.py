@@ -51,15 +51,33 @@ independent_parties = [
     'Independent'
 ]
 
+
+string1 = 'The Scottish National Party (SNP) (Scottish Gaelic: Partaidh Naiseanta na h-Alba, Scots: ' \
+          'Scots Naitional Pairtie) is a Scottish nationalist and social-democratic political party in Scotland. ' \
+          'The SNP supports and campaigns for Scottish independence. It is the third largest political party by ' \
+          'membership in the United Kingdom, behind the Conservative Party and the Labour Party.'.encode('latin1','replace')
+string2 = 'The Scottish Labour Party (Scottish Gaelic: Partaidh Labarach na h-Alba) (often branded Scottish Labour) ' \
+          'is the section of the United Kingdom\'s Labour Party which operates in Scotland. \n Labour had held a long ' \
+          'dominance over modern Scottish politics, having won the largest share of the vote in Scotland at every ' \
+          'UK general election since the 1960s, every European Parliament general election from 1979 until ' \
+          'defeated by the SNP in 2009, and in the first two elections to the Scottish Parliament, ' \
+          'held in 1999 and 2003. For each of these two terms, Scottish Labour entered into a coalition with ' \
+          'the Scottish Liberal Democrats, forming a majority Scottish Executive. \n In the 2007 ' \
+          'Scottish Parliament election Labour fell back to become the second largest party, ' \
+          'with a lower share of the vote and with one fewer seat than the Scottish National Party (SNP), ' \
+          'who subsequently formed a minority government. It fell back further but remained the second largest ' \
+          'party after the 2011 Scottish Parliament election while the SNP advanced to form the first ' \
+          'majority government since the Scottish Parliament was re-established in 1999.'.encode('latin1','replace')
 # links and descriptions for parties
+# descriptions from wikipedia
 party_links = {
-'Scottish National Party'                   : ('', ''),
-'Scottish Labour'                           : ('', ''),
-'Scottish Conservative and Unionist Party'  : ('', ''),
-'Independent'                               : ('', ''),
-'Scottish Green Party'                      : ('', ''),
-'Scottish Liberal Democrats'                : ('', ''),
-'No Party Affiliation'                      : ('', '')
+'Scottish National Party'                   : ('http://www.snp.org/', string1, 'http://en.wikipedia.org/wiki/Scottish_National_Party'),
+'Scottish Labour'                           : ('http://www.scottishlabour.org.uk/', 'string2','http://en.wikipedia.org/wiki/Scottish_Labour_Party'),
+'Scottish Conservative and Unionist Party'  : ('', '', ''),
+'Independent'                               : ('', '', ''),
+'Scottish Green Party'                      : ('', '', ''),
+'Scottish Liberal Democrats'                : ('', '', ''),
+'No Party Affiliation'                      : ('', '', '')
 }
 
 # msps for the current session that were not members at the time of scraping

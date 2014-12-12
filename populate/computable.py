@@ -6,6 +6,7 @@ I strongly encourage you to put any such definitions here, and the appropriate c
 All static data comes from data.py, please put any such data there.
 """
 import csv
+
 import os
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "scottviz.scottviz.settings")
 from scottviz.msp.models import *
@@ -309,17 +310,22 @@ def populate_topics():
 
 
 def populate_data_parties():
+    """
+    uses static data from data.py
+    :return: populates link and description fields in Party table
+    """
 
-    for party,(link,description) in party_links.items():
+    for party,(link,description,description_link) in party_links.items():
         p = Party.objects.get(name=party)
         p.link = link
-        p.description = description
+        p.description = description.decode('latin1')
+        p.description_link = description_link
         p.save()
 
 
 def populate_analytics():
     """
-
+    For the party by vote tab, in the division page
     :return: populates the Analytics table
     """
     Analytics.objects.all().delete()

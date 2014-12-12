@@ -19,6 +19,7 @@ class Party(models.Model):
     name = models.CharField(max_length=128, unique=True)
     link = models.URLField(max_length=128, null=True)
     description = models.TextField()
+    description_link = models.URLField(max_length=128, null=True)
 
     def __unicode__(self):
         return self.name
