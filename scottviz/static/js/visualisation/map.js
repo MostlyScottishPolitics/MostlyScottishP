@@ -42,14 +42,14 @@ var gssCode = {
 };
 
 var color = {
-    "Central Scotland" : "#5ABFF4",
-    "South Scotland" : "#EB2743",
-    "North East Scotland" : "#475070",
-    "Lothian" : "#31C48E",
-    "Highlands and Islands" : "#986561",
-    "Glasgow" : "#F6DC60",
-    "Mid Scotland and Fife" : "#000",
-    "West Scotland" : "#FF784E"
+    "Central Scotland" : "#0065BD",
+    "South Scotland" : "#70193d",
+    "North East Scotland" : "#002549",
+    "Lothian" : "#F000",
+    "Highlands and Islands" : "#59118e",
+    "Glasgow" : "#d10056",
+    "Mid Scotland and Fife" : "#b58c0a",
+    "West Scotland" : "#3d8e33"
 };
 
 /*var colors = [["Scottish Conservative and Unionist Party","#5ABFF4"],
