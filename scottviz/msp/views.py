@@ -4,6 +4,7 @@ import csv
 from django.template import RequestContext
 from django.shortcuts import render_to_response
 from django.http import HttpResponse
+from django.utils.timezone import now
 
 from models import *
 from search import postcode_search, model_search
@@ -118,6 +119,13 @@ def pca(request):
     content['topics'] = Topic.objects.all().order_by('id')
     context = RequestContext(request)
     content['activesite'] = scatter['pca']
+    session = request.session.session_key
+    if 'HTTP_X_FORWARDED_FOR' in request.META:
+        ip_adds = request.META['HTTP_X_FORWARDED_FOR'].split(",")
+        ip = ip_adds[0]
+    else:
+        ip = request.META['REMOTE_ADDR']
+    content['sessioninfo'] = [ip, session, now()]
     return render_to_response('msp/pca.html', content, context)
 
 
