@@ -17,6 +17,7 @@ def get_query(query_string, search_fields):
     for term in terms:
         or_query = None
         for field_name in search_fields:
+            print field_name
             q = Q(**{"%s__icontains" % field_name: term})
             if or_query is None:
                 or_query = q

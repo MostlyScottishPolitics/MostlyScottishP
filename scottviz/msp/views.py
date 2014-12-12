@@ -7,7 +7,7 @@ from django.http import HttpResponse
 from django.utils.timezone import now
 
 from models import *
-from search import postcode_search, model_search
+from search import model_search, postcode_search
 
 
 navbar = (
