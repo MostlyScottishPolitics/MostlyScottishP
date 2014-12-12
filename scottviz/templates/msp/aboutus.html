@@ -2,16 +2,58 @@
 
 {% block content %}
 
-We are 5 MSc Computing Science Students at the University of Glasgow and this is our Team Project!
+We are <b>5 MSc Computing Science </b> students at the <b> University of Glasgow </b> and this is our (mandatory) <b> Team Project </b>!
+<br>
+
+We have put much work and love into this project and while none of us happen to be Scottish born,
+we do hope this will be useful for the Scottish people.
 <br> <br>
 
-This website is supposed to help people have <b>easier access to statistics and visualise data</b> extracted
-from the votes of the <b>Members of the Scottish Parliament</b>.
-<br><br>
+<div class="panel panel-default">
+    <div class="panel-heading"> Disclaimer </div>
+    <div class="panel-body">
+        This is not a final product. It is rather a framework with some (extended) functionality. <br>
+        If you are interested to extend the website more, please contact us or download the project from github (see link at the bottom)
+    </div>
+</div>
 
-The data is extracted from the official <a href="http://www.scottish.parliament.uk/">Scottish Parliament website</a>.
-As we realise that we cannot provide all the visualisations users might want, we hope to allow for algorithms to be uploaded
-and used to render the data visualy.
+<div class="panel panel-default">
+    <div class="panel-heading"> What can you do? </div>
+    <div class="panel-body">
+        <div class="table">
+            <table>
+                <td> stuuffff</td>
+                <td> more stuuuf </td>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+What you can do? <br>
+We realise that we cannot provide all the visualisations users might want.
+Therefore, we have designed the system such that it is easy for you to add your own algorithm for scatter plotting and it will render the data visualy.
+All it needs is 2-dimensional data! <br>
+We know that the format in which the Scottish Parliament makes the divisions available can change (it did, and none of the other similar sites managed to cope with it).
+We have therefore isolated the script that reads the scraped files from which it gathers info regarding divisions.
+If the data changes, the scraper changes slightly and the populating script can change as well. <br>
+But you don't need to be waiting for change. You can try to get the analytics more fine tuned.
+As far as we know, most of the information processed is correct. However, there are some assumptions and some information we are not taking full advantage off. (both for textual and scatter display)
+Some MSPs have passed away, resigned or only came in after some time to replace another.<br>
+        At the moment we are not taking into account such MSPs as special in any way for computing analytics.
+        As a consequence, there weren't allways exactly 129 MSP members (for example, now there are 128). This could slightly affect rebellion and attendance rates.
+        Also, assuming and MSP was absent for many votes, it distances him from his party. It means that the scatter is not relevant for these MSPs.
+        They would most likely be outliers, even if they were loyal, non-rebellious <br>
+
+        At the moment we are not processing the dates for divisions to see trends for attendance through the week, year and even entire Parliament session.
+        (we would expect the MSPs to be present more towards the beginning and the end, so as to make a good impression on electors). <br>
+        Analogous, we could look for trends in rebellions acrros topics, the year or the Parliament session.
+        (we would expect MSPs to be less rebelious towards the beginning and the end, to get support from their party) <br>
+
+        The topics chosen and the wheigtings associated for the topic extractor are based more on our personal experience and critical evaluation.
+        There is little to no basis for why it was done this way and not another. But hey, most times it wokrs! <br>
+        We do encourage you to better the topic extracter or even replace it with your own.
+
 <br><br>
 
 
@@ -20,6 +62,6 @@ Our goals:
 <ul>
     <li>We aim to update the data weekly</li>
     <li>We will provide some visualisations</li>
-    <li>We will provide a framework for users to upload their own algorithms</li>
+    <li>We will provide a framework for users to integrate their own algorithms</li>
 </ul>
 {% endblock %}
