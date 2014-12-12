@@ -13,6 +13,7 @@ from hitcounter.models import Hit
 import  os
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "scottviz.settings")
 
+pca_runner = importlib.import_module('.new_pca','pca')
 
 
 navbar = (
@@ -120,7 +121,6 @@ def pca(request):
         topics = ' '.join(query.getlist('topic'))
 
 
-    pca_runner = importlib.import_module('.new_pca','pca')
     """
     if parties and topics:
         os.system(str(pca_runner), parties, topics())

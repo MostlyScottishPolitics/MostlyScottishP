@@ -2,6 +2,8 @@ __author__ = '2165430C'
 import fileinput
 import os
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "scottviz.settings")
+from scottviz.scottviz import settings
+from scottviz.msp.models import MSP
 import sys
 import numpy
 import psycopg2 as pq
@@ -22,17 +24,17 @@ data = {}
 filter = 0
 
 #Update the following row to appropriate output location for CSV to be read by D3
-outputLocation = "static\csv\OutputMatrix.csv"
+outputLocation = settings.STATIC_PATH+'/csv/OutputMatrix.csv'
 
-print ''
-print "-----Program Started-----"
-print ''
+#print ''
+#print "-----Program Started-----"
+#print ''
 
 # Connect to DB and gather Division and MSP counts
 #------Replace with your DB details accordingly--------
 cn = pq.connect('dbname=m_14_pgtproja user=m_14_pgtproja password=pgtproja host=yacata.dcs.gla.ac.uk')
 cr = cn.cursor()
-print "0) Database Connected."
+#print "0) Database Connected."
 
 def createQuery(query, filter):
     output = ""
@@ -122,10 +124,9 @@ def createQuery(query, filter):
 def getDistinctParties(nameFromQuery):
 
     #Check if ID is a suitable value
-    result = cr.execute('SELECT name FROM msp_party WHERE id= %s', (nameFromQuery,))
-    id = cr.fetchall()
+    id =  cr.execute('SELECT name FROM msp_party WHERE id= %s', (nameFromQuery,))   #[party.name for party in Party.objects.filter(id=nameFromQuery)](0)
     try:
-        idOutput = map(str, id[0])[0]
+        idOutput = map(str, id)[0]
     except:
         print "Couldn't find PartyID: " + nameFromQuery + " in database - Are you sure you're passing the right value?"
        
@@ -157,19 +158,6 @@ def handleArguments():
         print "Your 1st Argument was:" + argList[1]
         filter = 0
 
-#Gets MSP First and Second Names
-def selectMSP():
-    result = cr.execute(createQuery("msp",filter))
-    msp = cr.fetchall()
-    count = -1
-    mspList = []
-    for rows in msp:
-        count += 1
-        msp_entry = map(str, msp[count])[0]
-        msp_entry = msp_entry + ' ' + map(str, msp[count])[1]
-        mspList.append(msp_entry)
-    #print "MSP List: " + mspList
-    return mspList    
     
 #Fills in values of 2D null matrix, with each entry being a vote (X=divisions, Y=MSPs)
 def selectVotes():
@@ -188,22 +176,9 @@ def selectVotes():
             print "MSP Entry: " + str(msp_entry)
             print "Division Entry: " + str(division_entry)
     print "1) Data has been retrieved from database."
-    return matrix    
-    
-#Gets each MSP's Party's name
-def selectPartyMSPList():
-    result = cr.execute(createQuery("mspPartyList", filter))
-    party = cr.fetchall()
-    count = -1
-    partyList = []
-    for rows in party:
-        count += 1
-        party_entry = map(str, party[count])[0]
-        partyList.append(party_entry)
-    return partyList    
+    return matrix
 
-handleArguments() 
-
+handleArguments()
   
 result = cr.execute(createQuery("divisionCount", filter))
 maxDivision = cr.fetchone()
@@ -239,8 +214,7 @@ numpy.savetxt(outputLocation, output, fmt="%s", delimiter=",")
 print "3) PCA Data saved to file."
 
 #Append name of party and MSP names(as a string) to each row of output text
-mspList = selectMSP()
-partyList = selectPartyMSPList()
+msps = MSP.objects.all().order_by('id')
 count = -1
 path = os.path.dirname(os.path.abspath(__file__)) + outputLocation
 firstLine = 0
@@ -252,7 +226,7 @@ for line in fileinput.input(outputLocation, inplace=1):
         firstLine = 1;
     else:
         try:
-            print '{0}{1}'.format(line.rstrip('\n'), (',' + partyList[count] + ',' + mspList[count]))
+            print '{0}{1}'.format(line.rstrip('\n'), (',' + str(msps[count].party) + ',' + str(msps[count])))
         except:
             pass
 
