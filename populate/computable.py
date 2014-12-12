@@ -5,12 +5,12 @@ Mostly processes the data in the tables to populate fields with analytics
 I strongly encourage you to put any such definitions here, and the appropriate calls in updatedb.py
 All static data comes from data.py, please put any such data there.
 """
-
+import csv
 import os
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "scottviz.scottviz.settings")
 from scottviz.msp.models import *
 from decimal import *
-from data import number_of_msps, independent_parties, topics_divisions, topic_extracter_name, topic_extracter_location
+from data import number_of_msps, independent_parties, topics_divisions, topic_extracter_name, topic_extracter_location, topics, party_links
 import importlib
 
 # the definitions here can be changed to get other statistics
@@ -239,7 +239,7 @@ def get_parents_topic(division):
     if (not division.motion) and (division.parent):
         return get_parents_topic(division.parent)
     else:
-        return division.topic
+        return Topic.objects.get(name=division.topic.name)
 
 
 def compute_topics():
@@ -259,7 +259,7 @@ def compute_topics():
             topic = extracter.get_topic_from_text(division.motiontext)
         else:
             topic = extracter.get_topic_from_text(division.motiontopic)
-        division.topic=topic
+        division.topic = Topic.objects.get(name=topic)
         division.save()
 
     # adjust topics for ammendments
@@ -268,7 +268,6 @@ def compute_topics():
         if (not division.motion) and (division.parent):
             division.topic = get_parents_topic(division.parent)
             division.save()
-
 
 
 
@@ -294,3 +293,25 @@ def see_diferences_with_new_topic_extractor():
                 print str(division.id)+' '+division.motionid+' '+division.topic+'  '
             else:
                 print str(division.id)+' '+division.motionid+' '+division.topic+'  '+topic
+
+def populate_topics():
+    """
+    Populate the Topics table, needed by the scatter
+    uses static data from data.py
+    If you design your own topic extractor, make sure your topics and the static topics match
+    :return: populates the Topics table
+    """
+    Topic.objects.all().delete()
+
+    for topic,description in topics.items():
+        t = Topic(name=topic, description=description)
+        t.save()
+
+
+def populate_data_parties():
+
+    for party,(link,description) in party_links.items():
+        p = Party.objects.get(name=party)
+        p.link = link
+        p.description = description
+        p.save()

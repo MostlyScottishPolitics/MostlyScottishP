@@ -11,6 +11,22 @@ import os
 from dateutil import parser
 from scottviz.msp.models import MSP,Division
 
+# topics for divisions
+topics = {
+'unknown':'',                                  #0
+'Agriculture':'',                              #1
+'Civil and Criminal Justice':'',               #2
+'Education':'',                                #3
+'Environment':'',                              #4
+'Health':'',                                   #5
+'Housing':'',                                  #6
+'Local Government':'',                         #7
+'Planning/Future':'',                          #8
+'Police and Fire Services':'',                 #9
+'Social Work':'',                              #10
+'Sports and the Arts':'',                      #11
+'Transport':''                                 #12
+}
 
 # change the topic_extracter location script here
 topic_extracter_location = 'scraper.report_scraper'
@@ -34,6 +50,17 @@ independent_parties = [
     'No Party Affiliation',
     'Independent'
 ]
+
+# links and descriptions for parties
+party_links = {
+'Scottish National Party'                   : ('', ''),
+'Scottish Labour'                           : ('', ''),
+'Scottish Conservative and Unionist Party'  : ('', ''),
+'Independent'                               : ('', ''),
+'Scottish Green Party'                      : ('', ''),
+'Scottish Liberal Democrats'                : ('', ''),
+'No Party Affiliation'                      : ('', '')
+}
 
 # msps for the current session that were not members at the time of scraping
 former_or_new_msps = [

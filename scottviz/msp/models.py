@@ -1,13 +1,24 @@
 from django.db import models
 
 
+
+class Topic(models.Model):
+    """
+    represents topic for division
+    """
+    name = models.CharField(max_length=128, unique=True)
+    description = models.TextField()
+
+    def __unicode__(self):
+        return self.name
+
 class Party(models.Model):
     """
     represents party
     """
     name = models.CharField(max_length=128, unique=True)
-    #link = models.URLField(max_length=128, null=True)
-    #description = models.TextField()
+    link = models.URLField(max_length=128, null=True)
+    description = models.TextField()
 
     def __unicode__(self):
         return self.name
@@ -104,7 +115,7 @@ class Division(models.Model):
     motionid = models.CharField(max_length=20)
     motiontext = models.TextField()
     motiontopic = models.CharField(max_length=128, null=True)
-    topic = models.CharField(max_length=128, null=True)
+    topic = models.ForeignKey(Topic, null=True)
     votes = models.ManyToManyField(MSP, through='Vote', null=True)
     turnout = models.DecimalField(max_digits=5, decimal_places=2, null=True)
     rebels = models.IntegerField(null=True)
@@ -137,3 +148,16 @@ class Vote(models.Model):
 
     def __unicode__(self):
         return self.vote
+
+class Analytics(models.Model):
+    """
+    represents a relation between parties and divisions, to cut the middle-man: msp
+    """
+    division = models.ForeignKey(Division)
+    party = models.ForeignKey(Party)
+    party_turnout = models.IntegerField(null=True)
+    party_for = models.IntegerField(null=True)
+    party_against = models.IntegerField(null=True)
+
+    def __unicode__(self):
+        return  u'%s votes on %s'(self.party, self.division)

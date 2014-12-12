@@ -4,7 +4,7 @@ __author__ = '2168879m'
 # should probably be followed up by updating the db with the computable statistics
 
 import os
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "scottviz.msp.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "scottviz.scottviz.settings")
 from scottviz.msp.models import *
 from data import *
 from dateutil import parser
@@ -118,14 +118,9 @@ def populate_divisions_from(files_location,startdate,enddate):
                 else:
                     text = text_raw[0].firstChild.data.encode('latin1','backslashreplace').replace("\\u2019","\'").replace("\\u2014","-").replace("\u201d","\"").replace("\u201c","\"")
 
-                topic_raw = law.getElementsByTagName("category")
-                if topic_raw == [] :
-                    topic='unknown'
-                else:
-                    topic = topic_raw[0].firstChild.data.encode('latin1','backslashreplace').replace("\\u2019","\'").replace("\\u2014","-")
 
                 # parsed most info for division
-                division = Division(parent=None, motion=motion, motionid=motionid, motiontext=text.decode('latin1'), motiontopic=motiontopic.decode('latin1'), topic=topic.decode('latin1'), date=dt)
+                division = Division(parent=None, motion=motion, motionid=motionid, motiontext=text.decode('latin1'), motiontopic=motiontopic.decode('latin1'), date=dt)
 
                 # get result for this division
                 yup = law.getElementsByTagName("agreed")[0].firstChild
