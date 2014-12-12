@@ -2,13 +2,14 @@ __author__ = '2165430C'
 import fileinput
 import os
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "scottviz.settings")
-from scottviz.scottviz import settings
-from scottviz.msp.models import MSP
+from scottviz import settings
+from models import MSP
 import sys
 import numpy
 import psycopg2 as pq
 import mdp
 
+outputLocation = settings.STATIC_PATH+'/csv/OutputMatrix.csv'
 
 #README:
 #No arguments will run the script without any filters
@@ -16,25 +17,6 @@ import mdp
 #Do not forget to edit the variable 'outputLocation' as necessary
 #Do not forget to update DB details as necessary
 
-#Variable Definitions
-argList = sys.argv
-topicArguments = []
-partyArguments = []
-data = {}
-filter = 0
-
-#Update the following row to appropriate output location for CSV to be read by D3
-outputLocation = settings.STATIC_PATH+'/csv/OutputMatrix.csv'
-
-#print ''
-#print "-----Program Started-----"
-#print ''
-
-# Connect to DB and gather Division and MSP counts
-#------Replace with your DB details accordingly--------
-cn = pq.connect('dbname=m_14_pgtproja user=m_14_pgtproja password=pgtproja host=yacata.dcs.gla.ac.uk')
-cr = cn.cursor()
-#print "0) Database Connected."
 
 def createQuery(query, filter):
     output = ""
@@ -117,8 +99,6 @@ def createQuery(query, filter):
                 else:
                     output = output + " OR msp.party_id = " + partyArguments[count]
             output = output + ") ORDER BY msp.foreignid"
-    
-    
     return output
 
 def getDistinctParties(nameFromQuery):
@@ -136,7 +116,7 @@ def handleArguments():
     global filter
     global partyArguments
     global topicArguments
-    print "ARGLIST " + str(argList)
+    print argList
     argLength = len(argList)
     count = 1
     partyString = ''
@@ -178,8 +158,16 @@ def selectVotes():
     print "1) Data has been retrieved from database."
     return matrix
 
+
+def new_pca(parties, topics):
+    data = {}
+    filter = 0
+
+    cn = pq.connect('dbname=m_14_pgtproja user=m_14_pgtproja password=pgtproja host=yacata.dcs.gla.ac.uk')
+    cr = cn.cursor()
+
 handleArguments()
-  
+
 result = cr.execute(createQuery("divisionCount", filter))
 maxDivision = cr.fetchone()
 result = cr.execute(createQuery("mspCount", filter))

@@ -10,10 +10,11 @@ from django.utils.timezone import now
 from models import *
 from search import postcode_search, model_search
 from hitcounter.models import Hit
+from pca.new_pca import  new_pca
 import  os
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "scottviz.settings")
 
-pca_runner = importlib.import_module('.new_pca','pca')
+
 
 
 navbar = (
@@ -115,23 +116,17 @@ def pca(request):
     content['activesite'] = scatter['pca']
     content['parties'] = Party.objects.all().order_by('id')
     content['topics'] = Topic.objects.all().order_by('id')
+    parties = []
+    topics = []
     if request.method == 'POST':
         query = request.POST
-        parties = ' '.join(query.getlist('party'))
-        topics = ' '.join(query.getlist('topic'))
+        if query.getlist('party'):
+            parties = query.getlist('party')
+        if query.getlist('topic'):
+            topics = query.getlist('topic')
 
+    new_pca(parties,topics)
 
-    """
-    if parties and topics:
-        os.system(str(pca_runner), parties, topics())
-    elif parties:
-        os.system(str(pca_runner), parties)
-    elif topics:
-        os.system(str(pca_runner), topics())
-    else:
-        os.system(str(pca_runner))
-    """
-    os.system(str(pca_runner))
 
     # FOR THE CONCURRENCY
     # You want to find the 'freshest' which you have not responded to
