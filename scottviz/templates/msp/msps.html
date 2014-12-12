@@ -1,7 +1,7 @@
 {% extends "msp/base.html" %}
-{% load hitcounts %}
+
 {% block content %}
-{% pagehits %}
+
 {% if msps %}
 <a class="btn btn-default back" href="{% url 'export_csv' 'msps' %}"><i class="glyphicon glyphicon-download"></i> Export to Csv</a>
 
