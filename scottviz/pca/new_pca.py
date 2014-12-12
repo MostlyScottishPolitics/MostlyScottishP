@@ -1,3 +1,4 @@
+__author__ = '2165430C'
 import fileinput
 import os
 import sys
@@ -13,6 +14,8 @@ import mdp
 
 #Variable Definitions
 argList = sys.argv
+topicArguments = []
+partyArguments = []
 data = {}
 filter = 0
 
@@ -32,73 +35,86 @@ print "0) Database Connected."
 def createQuery(query, filter):
     output = ""
     argLength = len(argList)
-    print "CREATED QUERY, Filter = " + str(filter)
     
     if query == "divisionCount":
         output = "SELECT MAX(id) FROM msp_division;"
         
     if query == "mspCount":
-        if filter == 0:
-            output = "SELECT COUNT(DISTINCT id) FROM msp_msp;"
-            return output
-        elif filter == 1:
-
-            output = "SELECT COUNT(DISTINCT id) FROM msp_msp;"
+        output = "SELECT COUNT(DISTINCT id) FROM msp_msp;"
 
     if query == "votes":
+        #No Filter
         if filter == 0:
             output = "SELECT msp.foreignid, div.id, vote.vote FROM msp_msp AS msp, msp_division AS div, msp_vote AS vote WHERE msp.id = vote.msp_id AND div.id= vote.division_id ORDER BY msp.foreignid"
             return output
+        #Party Filter
         elif filter == 1:
             isFirst = 1
-            count = 1
+            count = -1
             output = "SELECT msp.foreignid, div.id, vote.vote FROM msp_msp AS msp, msp_division AS div, msp_vote AS vote WHERE msp.id = vote.msp_id AND div.id= vote.division_id "
-            while count < argLength-1:
+            print "len(partyarguments): " + str(len(partyArguments))
+            while count < len(partyArguments)-1:
                 count = count + 1
-                getDistinctParties(argList[count])
+                getDistinctParties(partyArguments[count])
                 if isFirst == 1:
-                    output = output + "AND (msp.party_id = " + argList[count]
+                    output = output + "AND (msp.party_id = " + partyArguments[count]
                     isFirst = 0
                 else:
-                    output = output + " OR msp.party_id = " + argList[count]
+                    output = output + " OR msp.party_id = " + partyArguments[count]
+            output = output + ") ORDER BY msp.foreignid"
+            print "Output: " + output
+        #Topic Filter
+        elif filter == 2:
+            isFirst = 1
+            count = -1
+            output = "SELECT msp.foreignid, div.id, vote.vote FROM msp_msp AS msp, msp_division AS div, msp_vote AS vote WHERE msp.id = vote.msp_id AND div.id= vote.division_id "
+            print "len(topicarguments): " + str(len(topicArguments))
+            while count < len(topicArguments)-1:
+                count = count + 1
+                if isFirst == 1:
+                    output = output + "AND (div.topic_id = " + topicArguments[count]
+                    isFirst = 0
+                else:
+                    output = output + " OR div.topic_id = " + topicArguments[count]
             output = output + ") ORDER BY msp.foreignid"
     
     if query == "msp":
-        if filter == 0:
+        if filter == 0 or filter == 2:
             output = "SELECT msp.firstname, msp.lastname FROM msp_msp AS msp ORDER BY msp.foreignid"
             return output
         elif filter == 1:
             isFirst = 1
-            count = 1
+            count = -1
             output = "SELECT msp.firstname, msp.lastname FROM msp_msp AS msp "
-            while count < argLength-1:
+            while count < len(partyArguments)-1:
                 count = count + 1
-                getDistinctParties(argList[count])
+                getDistinctParties(partyArguments[count])
                 if isFirst == 1:
-                    output = output + "WHERE (msp.party_id = " + argList[count]
+                    output = output + "WHERE (msp.party_id = " + partyArguments[count]
                     isFirst = 0
                 else:
-                    output = output + " OR msp.party_id = " + argList[count]
+                    output = output + " OR msp.party_id = " + partyArguments[count]
             output = output + ") ORDER BY msp.foreignid"
     
     if query == "mspPartyList":
-        if filter == 0:
+        if filter == 0 or filter == 2:
             output = "SELECT party.name FROM msp_party AS party, msp_msp AS msp WHERE msp.party_id = party.id ORDER BY msp.foreignid"
             return output
         elif filter == 1:
             isFirst = 1
-            count = 1
+            count = -1
             output = "SELECT party.name FROM msp_party AS party, msp_msp AS msp WHERE msp.party_id = party.id "
-            while count < argLength-1:
+            while count < len(partyArguments)-1:
                 count = count + 1
-                getDistinctParties(argList[count])
+                getDistinctParties(partyArguments[count])
                 if isFirst == 1:
-                    output = output + "AND (msp.party_id = " + argList[count]
+                    output = output + "AND (msp.party_id = " + partyArguments[count]
                     isFirst = 0
                 else:
-                    output = output + " OR msp.party_id = " + argList[count]
+                    output = output + " OR msp.party_id = " + partyArguments[count]
             output = output + ") ORDER BY msp.foreignid"
-    print "CreateQueryOutput = " + output
+    
+    
     return output
 
 def getDistinctParties(nameFromQuery):
@@ -108,35 +124,36 @@ def getDistinctParties(nameFromQuery):
     id = cr.fetchall()
     try:
         idOutput = map(str, id[0])[0]
-        print "id output: " + idOutput
     except:
         print "Couldn't find PartyID: " + nameFromQuery + " in database - Are you sure you're passing the right value?"
        
     return nameFromQuery
     
 def handleArguments():
-    global filter 
+    global filter
+    global partyArguments
+    global topicArguments
+    print "ARGLIST " + str(argList)
     argLength = len(argList)
     count = 1
     partyString = ''
     isFirst = 1
-    
+
     if argLength == 1:
         filter = 0
         return
     if argList[1] == '1':
         filter = 1
+        partyArguments = argList[2].split(",")
+        print "PartyArgumentsinHandleArguments: " + str(partyArguments)
     elif argList[1] == '2':
-        filter = 1
-        print argLength
-        print argList
+        filter = 2
+        topicArguments = argList[2].split(",")
+        print "TopicArgumentsinHandleArguments: " + str(topicArguments)
     else:
         print "Invalid 1st Argument, running on full dataset. "
         print "Your 1st Argument was:" + argList[1]
         filter = 0
-
-    
-    print partyString
 
 #Gets MSP First and Second Names
 def selectMSP():

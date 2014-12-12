@@ -4,4 +4,4 @@ from django.conf import settings
 TIME_BETWEEN_HITS = getattr(settings, 'TIME_BETWEEN_HITS', 60)
 
 # Set delete time for hits in minutes
-DELETE_HITS = getattr(settings, 'HIT_EXPIRATION', 5*24*60)
+HIT_EXPIRATION = getattr(settings, 'HIT_EXPIRATION', 5*24*60)
