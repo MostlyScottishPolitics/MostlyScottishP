@@ -9,6 +9,7 @@ All static data comes from data.py, please put any such data there.
 import os
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "scottviz.scottviz.settings")
 from scottviz.msp.models import *
+from scottviz.scottviz import settings
 from decimal import *
 from data import number_of_msps, independent_parties, topics_divisions, topic_extracter_name, topic_extracter_location, topics, party_links_colours
 import importlib
@@ -16,9 +17,8 @@ from django.core.files import File
 
 # the definitions here can be changed to get other statistics
 
-#Generate MapCSV - Currently wrong directory
 def get_lama_her_csv():
-    with open('lama.csv','w') as f:
+    with open(settings.STATIC_PATH+'/csv/lama.csv','w') as f:
         myFile = File(f)
 
 
