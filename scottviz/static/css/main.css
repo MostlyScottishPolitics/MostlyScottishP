@@ -206,3 +206,9 @@ input.form-control, input.form-control:focus {
     -moz-transition: none;
     -webkit-transition: none;
 }
+.tooltip.bottom .tooltip-inner {
+    background-color:#5d3c70;
+}
+.tooltip.bottom .tooltip-arrow {
+      border-bottom-color: #5d3c70;
+}
