@@ -93,9 +93,6 @@ def map(request):
     :param request:
     :return:
     """
-    regions = Constituency.objects.filter(parent=None)
-    for region in regions:
-        print region
     context = RequestContext(request)
     content['activesite'] = navbar['map']
     return render_to_response('msp/map.html', content, context)
