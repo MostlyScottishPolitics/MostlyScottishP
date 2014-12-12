@@ -202,9 +202,17 @@ def constituency(request, constituencyID):
         'title': this_constituency.name,
         'desc': "Representatives for " + this_constituency.name,
     }
-    constituency_msps = MSP.objects.filter(constituency=this_constituency).order_by('party')
+    constituency_msps = MSP.objects.filter(constituency=this_constituency)
+    parent_msps = []
+    kids = []
+    if this_constituency.parent is not None:
+        parent_msps = MSP.objects.filter(constituency=this_constituency.parent)
+    else:
+        kids = Constituency.objects.filter(parent=this_constituency)
     content['constituency'] = this_constituency
     content['constituency_msps'] = constituency_msps
+    content['parent_msps'] = parent_msps
+    content['constituencies'] = kids
     return render_to_response('msp/constituency.html', content, context)
 
 

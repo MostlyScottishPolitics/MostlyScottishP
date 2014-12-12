@@ -32,7 +32,7 @@
                 <td>{{msp.party_startdate}}</td>
 
                 <td>{{msp.party_enddate}}</td>
-                <td><a href="{% url 'constituency' constituency.id %}">{{msp.constituency}}</a></td>
+                <td><a href="{% url 'constituency' msp.constituency.id %}">{{msp.constituency}}</a></td>
             </tr>
     {% endfor %}
 
