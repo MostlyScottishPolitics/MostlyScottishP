@@ -104,12 +104,15 @@ def pca(request):
     :param request:
     :return:
     """
-
-    content['choices'] = []
+    content['choices_topics'] = []
+    content['choices_party'] = []
     if request.method == 'POST':
         query = request.POST
-        choices = query.getlist('party')
-        content['choices'] = choices
+        content['choices_party'] = query.getlist('party')
+        content['choices_topics'] = query.getlist('topic')
+
+    content['parties'] = Party.objects.all().order_by('id')
+    content['topics'] = Topic.objects.all().order_by('id')
     context = RequestContext(request)
     content['activesite'] = scatter['pca']
     return render_to_response('msp/pca.html', content, context)
