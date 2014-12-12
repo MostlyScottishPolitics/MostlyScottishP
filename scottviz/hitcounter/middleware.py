@@ -14,7 +14,6 @@ class HitCountMiddleware(object):
             ip = request.META['REMOTE_ADDR']
         session = request.session.session_key
         hit, hit_created = HitCount.objects.get_or_create(url=request.path, ipAddress=ip, session=session)
-        hit.hits = F('hits') + 1
         hit.save()
 
         return None
