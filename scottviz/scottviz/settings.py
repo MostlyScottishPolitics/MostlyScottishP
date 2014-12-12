@@ -26,11 +26,11 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'postgres',  # Or path to database file if using sqlite3.
+        'NAME': 'm_14_pgtproja',  # Or path to database file if using sqlite3.
         # The following settings are not used with sqlite3:
-        'USER': 'postgres',
-        'PASSWORD': 'lama48',
-        'HOST': 'localhost',  # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+        'USER': 'm_14_pgtproja',
+        'PASSWORD': 'pgtproja',
+        'HOST': 'yacata.dcs.gla.ac.uk',  # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
         'PORT': '5432',  # Set to empty string for default.
         'OPTIONS': {
             'autocommit': True,
@@ -117,10 +117,10 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'hitcounter.middleware.HitCountMiddleware',
 
     # Uncomment the next line for simple clickjacking protection:
-    # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'hitcounter.middleware.HitCountMiddleware',
 )
 
 ROOT_URLCONF = 'scottviz.urls'
@@ -134,9 +134,13 @@ TEMPLATE_DIRS = (
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
 )
+
 TEMPLATE_CONTEXT_PROCESSORS = (
-     'django.core.context_processors.request',
+    'django.core.context_processors.request',
+    'django.core.context_processors.request',
+    'django.contrib.auth.context_processors.auth'
 )
+
 INSTALLED_APPS = [
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -145,11 +149,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'hitcounter',
-    'scottviz.msp',
+    'msp',
     # Uncomment the next line to enable the admin:
-    # 'django.contrib.admin',
+    'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
-    # 'django.contrib.admindocs',
+    'django.contrib.admindocs',
 ]
 
 if django.VERSION < (1, 7):
