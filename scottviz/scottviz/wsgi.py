@@ -29,8 +29,10 @@ file_dir = os.path.realpath(os.path.dirname(__file__))
 sys.path.insert(0, os.path.normpath(os.path.join(file_dir, '..')))
 
 from django.core.wsgi import get_wsgi_application
-
 application = get_wsgi_application()
+
+from whitenoise.django import DjangoWhiteNoise
+application = DjangoWhiteNoise(application)
 
 # Apply WSGI middleware here.
 # from helloworld.wsgi import HelloWorldApplication

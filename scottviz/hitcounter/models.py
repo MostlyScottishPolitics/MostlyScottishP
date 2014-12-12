@@ -1,7 +1,10 @@
 from datetime import timedelta, datetime
 from django.db import models
 from django.utils.translation import ugettext as _
-import settings
+
+# Set the minimum time between two hits in minutes
+TIME_BETWEEN_HITS = 60
+
 
 class Hit(models.Model):
     """
@@ -18,7 +21,7 @@ class Hit(models.Model):
             hits = Hit.objects.filter(ipAddress=self.ipAddress)
             hits = hits.filter(url=self.url)
             hits = hits.filter(session=self.session)
-            hits = hits.filter(time__gt=self.time - timedelta(minutes=int(settings.TIME_BETWEEN_HITS)))
+            hits = hits.filter(time__gt=self.time - timedelta(minutes=int(TIME_BETWEEN_HITS)))
 
             if len(hits) == 0:
                 super(Hit, self).save(*args, **kwargs)

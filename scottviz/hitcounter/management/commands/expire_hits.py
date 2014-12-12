@@ -3,7 +3,8 @@ from django.core.management.base import NoArgsCommand
 from hitcounter.models import Hit
 from django.utils.timezone import now
 from django.db import transaction, DatabaseError
-from hitcounter import settings
+# Set delete time for hits in minutes
+HIT_EXPIRATION = 5*24*60
 
 
 class Command(NoArgsCommand):
@@ -12,7 +13,7 @@ class Command(NoArgsCommand):
 
     def handle_noargs(self, **options):
         try:
-            print Hit.objects.filter(time__gt=datetime.now() - timedelta(minutes=int(settings.HIT_EXPIRATION))).delete()
+            print Hit.objects.filter(time__gt=datetime.now() - timedelta(minutes=int(HIT_EXPIRATION))).delete()
         except DatabaseError:
             try:
                 transaction.rollback()
