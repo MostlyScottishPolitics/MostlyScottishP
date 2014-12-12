@@ -61,7 +61,7 @@ scatter = {'pca': {
 about = OrderedDict(about)
 navbar = OrderedDict(navbar)
 content = {
-    'title': "Mostly Scottish Politics",
+    'title': "MSP",
     'copyr': "Team C 2014",
     'contact_name': "Team C",
     'contact_email': "1006414v@student.gla.ac.uk",
