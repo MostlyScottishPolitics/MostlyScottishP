@@ -14,11 +14,11 @@ navbar = (
 
     ('msps', {'id': 'msps', 'title': 'MSPs', 'desc': 'List of all Members of Scottish Parliament'}),
 
-    ("regions", {
-        'id': 'regions',
-        'title': 'Regions',
-        'desc': 'List of all regions in Scotland',
-    }),
+    # ("regions", {
+    #        'id': 'regions',
+    #        'title': 'Regions',
+    #        'desc': 'List of all regions in Scotland',
+    #    }),
 
     ('divisions', {
         'id': 'divisions',
@@ -29,26 +29,9 @@ navbar = (
     ('map', {
         'id': 'map',
         'title': 'Map',
-        'desc': 'map visualisation',
+        'desc': 'Interactive map of scottish regions',
     }),
 
-    ('scatter', {
-        'id': 'scatter',
-        'title': 'Scatter',
-        'desc': 'MSPs are plotted based on their votes',
-    }),
-
-    ('map', {
-        'id': 'map',
-        'title': 'Map',
-        'desc': 'map visualisation',
-    }),
-
-    ('scatter', {
-        'id': 'scatter',
-        'title': 'Scatter',
-        'desc': 'MSPs are plotted based on their votes',
-    }),
     ('topics', {
         'id': 'topics',
         'title': 'Topics',
@@ -68,19 +51,22 @@ about = (
         'title': 'About the Scottish Parliament',
         'desc': 'About the MSPs and their votes',
     })
-
 )
-
+scatter = {'pca': {
+    'id': 'pca',
+    'title': 'PCA',
+    'desc': 'PCA visualisation of MSPs based on their votes',
+}
+}
 about = OrderedDict(about)
 navbar = OrderedDict(navbar)
-
 content = {
     'title': "Mostly Scottish Politics",
     'copyr': "Team C 2014",
     'contact_name': "Team C",
     'contact_email': "1006414v@student.gla.ac.uk",
     'navbar': navbar,
-    'about': about,
+    'scatter': scatter,
 }
 
 
@@ -112,15 +98,15 @@ def map(request):
     return render_to_response('msp/map.html', content, context)
 
 
-def scatter(request):
+def pca(request):
     """
     PCA view
     :param request:
     :return:
     """
     context = RequestContext(request)
-    content['activesite'] = navbar['scatter']
-    return render_to_response('msp/scatter.html', content, context)
+    content['activesite'] = scatter['pca']
+    return render_to_response('msp/pca.html', content, context)
 
 
 def msps(request):
