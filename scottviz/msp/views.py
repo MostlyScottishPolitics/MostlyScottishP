@@ -51,6 +51,7 @@ about = (
         'desc': 'About the MSPs and their votes',
     })
 )
+
 scatter = {'pca': {
     'id': 'pca',
     'title': 'PCA',
@@ -103,10 +104,12 @@ def pca(request):
     :param request:
     :return:
     """
+
+    content['choices'] = []
     if request.method == 'POST':
         query = request.POST
         choices = query.getlist('party')
-    
+        content['choices'] = choices
     context = RequestContext(request)
     content['activesite'] = scatter['pca']
     return render_to_response('msp/pca.html', content, context)
