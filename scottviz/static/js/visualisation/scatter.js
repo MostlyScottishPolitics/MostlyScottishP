@@ -1,12 +1,15 @@
-var scatter = function () {
-//Width and height
-			var w = 800;
-			var h = 400;
-			var padding = 20;
-			var border = 1;
-			var bordercolor = "black";
-			var dataset = [];
-			var colors = [["Scottish Conservative and Unionist","#5ABFF4"],
+var scatter = function (csvFile) {
+//setting up variables
+	var w = 800;
+	var h = 400;
+	var padding = 20;
+	var border = 1;
+	var bordercolor = "black";
+
+	var dataset = [];//Hold the data loaded from csv file
+
+	//setting a color for each party
+	var colors = [["Scottish Conservative and Unionist","#5ABFF4"],
 			["Scottish Labour","#EB2743"],
 			["Scottish Liberal Democrats","#FF6936"],
 			["Scottish National Party","#F6DC60"],
@@ -14,7 +17,7 @@ var scatter = function () {
 			["Independent","#986561"],
 			["No Party Affiliation", "#475070"]]
 			;
-		
+
 			//Create SVG element
 			var svg = d3.select(".plot")
 						.append("svg")
@@ -29,41 +32,28 @@ var scatter = function () {
        			.style("stroke", bordercolor)
        			.style("fill", "none")
        			.style("stroke-width", border);
-			
+
+		var generateVisualization = function(){
 			// add the tooltip area to the webpage
 			var tooltip = d3.select(".plot").append("div")
     		.attr("class", "tooltip")
    		 	.style("opacity", 0);
-			
-			var generateVisualization = function(){
-			
-				svg.selectAll(".dot").remove();
-				svg.selectAll(".legend").remove();
-				svg.selectAll(".text").remove();
-				//Create scaling functions
+
+
+			//Create scaling functions
 				
-				// X scaling functions
-				var xScale = d3.scale.linear()
+			// X scaling functions
+			var xScale = d3.scale.linear()
 								 .domain([d3.min(dataset, function(d) { return d[0]; }), d3.max(dataset, function(d) { return d[0]; })])
 								 .rangeRound([padding, w - padding * 10]);
-				// Y scaling functions
-				var yScale = d3.scale.linear()
+			// Y scaling functions
+			var yScale = d3.scale.linear()
 								 .domain([d3.min(dataset, function(d) { return d[1]; }), d3.max(dataset, function(d) { return d[1]; })])
 								 .rangeRound([h - padding, padding]);
-								 
-				//Define X axis
-				var xAxis = d3.svg.axis()
-							  .scale(xScale)
-							  .orient("bottom")
-							  .tickFormat("");
 
-				//Define Y axis
-				var yAxis = d3.svg.axis()
-							  .scale(yScale)
-							  .orient("left")
-							  .tickFormat("");
+
 							  
-				//Create circles
+			//Create circles
 				svg.append("g")
 			   .attr("id", "circles")
 			   .selectAll("circle")
@@ -108,20 +98,21 @@ var scatter = function () {
                .duration(500)
                .style("opacity", 0);
       			});
-			   
+
+			//Create legend
 				var legend = svg.selectAll(".legend")
       			.data(colors)
     			.enter().append("g")
       			.attr("class", "legend")
       			.attr("transform", function(d, i) { return "translate(0," + (i+1) * 20 + ")"; });
-
+			//legend colors
   				legend.append("rect")
       			.attr("x", w - 188)
      			.attr("width", 15)
       			.attr("height", 15)
      			.style("fill", function(d){return d[1]})
      			.style("opacity", .5);
-
+			//legend text
  				 legend.append("text")
       				.attr("x", w - 171)
       				.attr("y", 12)
@@ -136,22 +127,20 @@ var scatter = function () {
         			svg.selectAll(".dot")
             			 .attr("cx", function(d) { return xScale(d[0]); })
            				 .attr("cy", function(d) { return yScale(d[1]); });
-       				d3.select('.x.axis').call(xAxis);
-        			d3.select('.y.axis').call(yAxis);
     }
 
 			};
-				
-			d3.csv("/static/csv/OutputMatrix.csv", function(error, d) {
+
+
+			//Load the data from the csv file
+			d3.csv("/static/csv/"+csvFile+"", function(error, d) {
   				dataset = d.map(function(d) { return [ +d["X"], +d["Y"], d["Party"], d["MSP Name"]]; 
   				});
   				generateVisualization();});
 
 }
-//so it shows the map when you load the page
-$(scatter())
-var reset = function() {
+//Reset the visualization to its original state
+var reset = function(csvFile) {
 	$('.plot').empty();
-	$(scatter())
-}
-
+	scatter(csvFile)
+};

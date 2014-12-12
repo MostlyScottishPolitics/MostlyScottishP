@@ -6,34 +6,50 @@
 <link href="{% static 'css/scatter.css' %}" rel="stylesheet">
 
 <script src="{% static 'js/visualisation/scatter.js' %}"></script>
-<button class="btn btn-default" onclick="reset()">Reset</button>
+<script>
+    scatter("OutputMatrix.csv");
+    </script>
+<button class="btn btn-default" onclick="reset('OutputMatrix.csv')">Reset</button>
 <br>
-<form action = "/msp/scatter/" method="POST">
+<form action = "/msp/pca/" method="POST">
     {% csrf_token %}
-    <table>
-        <tr>
-            <td style="align-content: center">
-    <fieldset>
-        <legend>Parties</legend>
-        {% for p in parties %}
-        <input type="checkbox" name="party" value={{p.id}}>{{p.name}}
-        <br>
-        {% endfor %}
-    </fieldset>
-                </td>
-            <td>
-     <fieldset>
-        <legend>Topics</legend>
-         {% for t in topics %}
-        <input type="checkbox" name="topic" value={{t.id}}>{{t.name}}
-        <br>
-        {% endfor %}
-     </fieldset>
-            </td>
-            </tr>
-        </table>
-    <input type="submit">
+    <br><br>
 
+           <div class="container container-xs-height">
+                    <div class="row row-xs-height">
+
+
+                        <div class="col-xs-4 col-xs-height col-top">
+                            <div class="item">
+                                <div class="content">
+                                    <h4> Parties </h4>
+                                            <fieldset  class="module aligned" >
+                                                {% for p in parties %}
+                                                    <input type="checkbox" name="party" value={{p.id}}> {{p.name}}
+                                                    <br>
+                                                {% endfor %}
+                                            </fieldset>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-4 col-xs-height col-top">
+                            <div class="item">
+                                <div class="content">
+                                    <h4> Topics </h4>
+                                        <fieldset class="module aligned">
+                                            {% for t in topics %}
+                                                <input type="checkbox" name="topic" value={{t.id}}> {{t.name}}
+                                                <br>
+                                            {% endfor %}
+                                        </fieldset>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+    <input type="submit">
 </form>
 {% endblock %}
 
