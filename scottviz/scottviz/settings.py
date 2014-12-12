@@ -120,7 +120,7 @@ MIDDLEWARE_CLASSES = (
 
     # Uncomment the next line for simple clickjacking protection:
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'hitcounter.middleware.HitCountMiddleware',
+#    'hitcounter.middleware.HitCountMiddleware',
 )
 
 ROOT_URLCONF = 'scottviz.urls'
@@ -148,7 +148,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'hitcounter',
+#    'hitcounter',
     'msp',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',

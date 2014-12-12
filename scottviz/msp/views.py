@@ -124,7 +124,9 @@ def pca(request):
             parties = query.getlist('party')
         if query.getlist('topic'):
             topics = query.getlist('topic')
-
+    print parties
+    print topics
+    print 'now we call'
     new_pca(parties,topics)
 
 

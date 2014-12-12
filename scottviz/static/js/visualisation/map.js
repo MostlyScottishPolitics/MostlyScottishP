@@ -1,8 +1,8 @@
 $(function () {
-    var w=960, h=750;
+//setting up variables
+var w=960, h=750;
 var pLoad = [];
-var party={};
-
+var parties={};
 var border = .5;
 var bordercolor = "black";
 
@@ -51,32 +51,23 @@ var color = {
     "Mid Scotland and Fife" : "#b58c0a",
     "West Scotland" : "#3d8e33"
 };
-
-/*var colors = [["Scottish Conservative and Unionist Party","#5ABFF4"],
-			["Scottish Labour","#EB2743"],
-			["Scottish Liberal Democrats","#FF784E"],
-			["Scottish National Party","#F6DC60"],
-			["Scottish Green Party","#31C48E"],
-			["Independent","#986561"],
-			["No Party Affiliation", "#475070"]]
-			;*/
-
+//The projection of the map
 var projection = d3.geo.albers()
     .center([0, 55.4])
     .rotate([4.4, 0])
     .parallels([50, 60])
     .scale(9000)
     .translate([w/2, h/1.2]);
-
+//path that create the map
 var path = d3.geo.path()
     .projection(projection);
-
+//Create svg element
 var svg = d3.select(".map")
     .append("svg")
     .attr("width",w)
     .attr("height",h)
     .style("background","#fff");
-    
+//Create border for svg
 var borderPath = svg.append("rect")
        			.attr("x", 0)
        			.attr("y", 0)
@@ -86,8 +77,10 @@ var borderPath = svg.append("rect")
        			.style("fill", "none")
        			.style("stroke-width", border);
 
+//the function that create the visualization
 var generateVisualization = function()
 {
+//load the topojson file
 d3.json("/static/json/scotland-topojson-file.json",function(err,load){
     svg.selectAll("path")
         .data(topojson.feature(load,load.objects.layer1).features)
@@ -97,34 +90,34 @@ d3.json("/static/json/scotland-topojson-file.json",function(err,load){
         .style("opacity", 0.6)
         .style("stroke", "#fff")
       	.append("title")
-        .text(function(d){return gssCode[d.properties.gss]+"\n"+party[gssCode[d.properties.gss]];});
+        .text(function(d){
+        var str = gssCode[d.properties.gss];
+		var object = parties[gssCode[d.properties.gss]];
+		if(object["Scottish National Party"] > 0)
+			str = str+"\n"+"Scottish National Party: "+object["Scottish National Party"];
+		if(object["Scottish Labour"] > 0)
+			str = str+"\n"+"Scottish Labour: "+object["Scottish Labour"];
+		if(object["Scottish Conservative and Unionist Party"] > 0)
+			str = str+"\n"+"Scottish Conservative and Unionist Party: "+object["Scottish Conservative and Unionist Party"];
+		if(object["Independent"] > 0)
+			str = str+"\n"+"Independent: "+object["Independent"];
+		if(object["Scottish Green Party"] > 0)
+			str = str+"\n"+"Scottish Green Party: "+object["Scottish Green Party"];
+		if(object["Scottish Liberal Democrats"] > 0)
+			str = str+"\n"+"Scottish Liberal Democrats: "+object["Scottish Liberal Democrats"];
+		if(object["No Party Affiliation"] > 0)
+			str = str+"\n"+"No Party Affiliation: "+object["No Party Affiliation"];
+		return str;
+        });
 });
-
-/*var legend = svg.selectAll(".legend")
-      			.data(colors)
-    			.enter().append("g")
-      			.attr("class", "legend")
-      			.attr("transform", function(d, i) { return "translate(0," + (i+1) * 20 + ")"; });
-
-  				legend.append("rect")
-      			.attr("x", w - 285)
-     			.attr("width", 15)
-      			.attr("height", 15)
-     			.style("fill", function(d){return d[1]})
-     			.style("opacity", .7);
-
- 				 legend.append("text")
-      				.attr("x", w - 268)
-      				.attr("y", 12)
-      				.attr("class", "text")
-    				.text(function(d) { return d[0]; });*/
 };
+//Load csv file of regions and the parties distribution
 d3.csv("/static/csv/map_data.csv", function(error, d) {
-  				pLoad = d.map(function(d) { return [d["region"], d["party"]]; 
+  				pLoad = d.map(function(d) { return [d["Region"],+d["Scottish National Party"],+d["Scottish Labour"],+d["Scottish Conservative and Unionist Party"],+d["Independent"],+d["Scottish Green Party"],+d["Scottish Liberal Democrats"],+d["No Party Affiliation"]];
   				});
-  				
-  				for (i = 0; i < 8; i++) { 
-    			party[pLoad[i][0]] = pLoad[i][1];
+
+  				for (i = 0; i < 8; i++) {
+    			parties[pLoad[i][0]] = {"Scottish National Party": pLoad[i][1], "Scottish Labour": pLoad[i][2], "Scottish Conservative and Unionist Party": pLoad[i][3], "Independent": pLoad[i][4], "Scottish Green Party": pLoad[i][5], "Scottish Liberal Democrats": pLoad[i][6], "No Party Affiliation": pLoad[i][7]};
 				}
   				generateVisualization();});
     })
