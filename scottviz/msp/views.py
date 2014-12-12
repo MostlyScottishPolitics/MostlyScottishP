@@ -104,7 +104,7 @@ def pca(request):
     :param request:
     :return:
     """
-   parties=[]
+    parties=[]
     topics=[]
     content['selected-topics'] = []
     if request.method == 'POST':
