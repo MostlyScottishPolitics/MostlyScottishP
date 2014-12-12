@@ -4,9 +4,9 @@ from django.utils.translation import ugettext as _
 from hitcounter import settings
 
 
-class HitCount(models.Model):
+class Hit(models.Model):
     """
-    hitcount model
+    hit model
     """
     time = models.DateTimeField(auto_now_add=True, editable=False)
     ipAddress = models.IPAddressField()
@@ -17,15 +17,15 @@ class HitCount(models.Model):
         print self.ipAddress
         # save only if the required amount of time has passed since last visit
         if self.id:
-            hits = HitCount.objects.filter(ipAddress=self.ipAddress)
+            hits = Hit.objects.filter(ipAddress=self.ipAddress)
             hits = hits.filter(url=self.url)
             hits = hits.filter(session=self.session)
             hits = hits.filter(time__gt=self.time - timedelta(minutes=int(settings.TIME_BETWEEN_HITS)))
 
             if len(hits) == 0:
-                super(HitCount, self).save(*args, **kwargs)
+                super(Hit, self).save(*args, **kwargs)
         else:
-            super(HitCount, self).save(*args, **kwargs)
+            super(Hit, self).save(*args, **kwargs)
 
     def check_expiration(self):
         now = datetime.now()

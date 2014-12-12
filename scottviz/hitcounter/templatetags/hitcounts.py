@@ -1,5 +1,5 @@
 from django import template
-from hitcounter.models import HitCount
+from hitcounter.models import Hit
 
 
 register = template.Library()
@@ -14,9 +14,9 @@ def pagehits(context):
     """
     try:
         request = context['request']
-        hits = HitCount.objects.filter(url=request.path).count()
+        hits = Hit.objects.filter(url=request.path).count()
         return hits
-    except HitCount.DoesNotExist:
+    except Hit.DoesNotExist:
         return 0
 
 
@@ -28,9 +28,9 @@ def pagehits_url(path):
     :return:
     """
     try:
-        hits = HitCount.objects.filter(url=path).count()
+        hits = Hit.objects.filter(url=path).count()
         return hits
-    except HitCount.DoesNotExist:
+    except Hit.DoesNotExist:
         return 0
 
 
@@ -43,7 +43,7 @@ def hitinfo(context):
     """
     try:
         request = context['request']
-        hits = HitCount.objects.filter(url=request.path)
+        hits = Hit.objects.filter(url=request.path)
         return hits
-    except HitCount.DoesNotExist:
+    except Hit.DoesNotExist:
         return None
