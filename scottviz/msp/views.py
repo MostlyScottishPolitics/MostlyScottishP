@@ -288,18 +288,13 @@ def topics(request):
     """
     context = RequestContext(request)
     content['activesite'] = navbar['topics']
-    ts = Division.objects.values('topic').distinct()
-    i = 0
-    topics = []
-    for topic in ts:
-        i += 1
-        t = str(topic["topic"])
-        if t != 'unknown':
-            topics += [[t, i, Division.objects.filter(topic__iexact=t).order_by('-date')]]
-    content["topic"] = topics[:1]
-    print content["topic"]
-    content["topics"] = topics[1:]
-
+    results = []
+    topics = Topic.objects.all().order_by('name')
+    for topic in topics:
+        divisions = Division.objects.filter(topic=topic.id).order_by('-date')
+        results.append([topic, len(divisions), divisions])
+#    content['topic'] = pairs[1:]
+    content['topics'] = results#[:1]
     return render_to_response('msp/topics.html', content, context)
 
 
