@@ -12,9 +12,31 @@ from scottviz.msp.models import *
 from decimal import *
 from data import number_of_msps, independent_parties, topics_divisions, topic_extracter_name, topic_extracter_location, topics, party_links_colours
 import importlib
+from django.core.files import File
 
 # the definitions here can be changed to get other statistics
 
+#Generate MapCSV - Currently wrong directory
+def get_lama_her_csv():
+    with open('lama.csv','w') as f:
+        myFile = File(f)
+
+
+        header = 'Region'
+        parties = Party.objects.all().order_by('id')
+        for party in parties:
+            header += ','+party.name
+        print header
+        myFile.write(header)
+
+        regions = Constituency.objects.filter(parent=None)
+        for region in regions:
+            myFile.write('\n' + str(region.name))
+            for party in parties:
+                constituencies = Constituency.objects.filter(parent=region)
+                result = len([msp for msp in MSP.objects.filter(party=party) if msp.constituency in constituencies])
+                myFile.write(','+str(result))
+                
 
 def compute_division_turnout():
     """
