@@ -6,7 +6,10 @@
 <link href="{% static 'css/scatter.css' %}" rel="stylesheet">
 
 <script src="{% static 'js/visualisation/scatter.js' %}"></script>
-<button class="btn btn-default" onclick="reset()">Reset</button>
+<script>
+    scatter("OutputMatrix.csv");
+    </script>
+<button class="btn btn-default" onclick="reset('OutputMatrix.csv')">Reset</button>
 <br>
 <form action = "/msp/pca/" method="POST">
     {% csrf_token %}
