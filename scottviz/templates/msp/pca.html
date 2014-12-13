@@ -8,9 +8,18 @@
 <script src="{% static 'js/visualisation/scatter.js' %}"></script>
 <script>
     scatter("OutputMatrix.csv");
-    </script>
+</script>
 <button class="btn btn-default" onclick="reset('OutputMatrix.csv')">Reset</button>
 <br>
+{% for t in selected_topics %}
+{% for topic in topics %}
+{% if t == topic.id %}
+{{topic.name}}
+{% endif %}
+{% endfor %}
+{% endfor %}
+
+
 <form action = "/msp/pca/" method="POST">
     {% csrf_token %}
     <br><br>
