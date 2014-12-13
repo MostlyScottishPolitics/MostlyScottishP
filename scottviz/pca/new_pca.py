@@ -164,7 +164,7 @@ def new_pca(parties, topics):
         if firstLine == 0:
             print 'X,Y,Party,MSP Name'
             firstLine = 1;
-        elif (parties == []) or (msps[count].party.id in parties):
+        elif (parties == []) or (str(msps[count].party.id) in parties):
             try:
                 print '{0}{1}'.format(line.rstrip('\n'), (',' + str(msps[count].party) + ',' + str(msps[count])))
             except:
