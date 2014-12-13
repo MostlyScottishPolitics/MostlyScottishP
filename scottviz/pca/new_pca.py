@@ -20,10 +20,10 @@ outputLocation = settings.STATIC_PATH+'/csv/OutputMatrix.csv'
 
 def createQuery(cr,query, filter,parties,topics):
     output = ""
-    
+
     if query == "divisionCount":
         output = "SELECT MAX(id) FROM msp_division;"
-        
+
     if query == "mspCount":
         output = "SELECT COUNT(DISTINCT id) FROM msp_msp;"
 
@@ -69,9 +69,9 @@ def getDistinctParties(cr,nameFromQuery):
         idOutput = map(str, id)[0]
     except:
         print "Couldn't find PartyID: " + nameFromQuery + " in database - Are you sure you're passing the right value?"
-       
+
     return nameFromQuery
-    
+
 def handleArguments(parties,topics):
     global filter
 
@@ -82,7 +82,7 @@ def handleArguments(parties,topics):
     else:
         filter = 0
 
-    
+
 #Fills in values of 2D null matrix, with each entry being a vote (X=divisions, Y=MSPs)
 def selectVotes(cr,matrix,parties,topics):
     result = cr.execute(createQuery(cr,"votes",filter,parties,topics))
@@ -105,8 +105,17 @@ def selectVotes(cr,matrix,parties,topics):
 def new_pca(parties, topics):
     data = {}
     filter = 0
+    django_settings = __import__(os.environ['DJANGO_SETTINGS_MODULE'], fromlist='DATABASES')
+    databases = django_settings.DATABASES
+    for name, db in databases.iteritems():
+        host = db['HOST']
+        user = db['USER']
+        password = db['PASSWORD']
+        port = db['PORT']
+        db_name = db['NAME']
+        db_type = db['ENGINE']
 
-    cn = pq.connect('dbname=m_14_pgtproja user=m_14_pgtproja password=pgtproja host=yacata.dcs.gla.ac.uk')
+    cn = pq.connect('dbname='+db_name+' user='+user+' password='+password+' host='+host)
     cr = cn.cursor()
 
     handleArguments(parties,topics)
