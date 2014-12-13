@@ -20,7 +20,7 @@ from django.core.files import File
 def get_lama_her_csv():
     with open(settings.STATIC_PATH+'/csv/map_data.csv','w') as f:
         myFile = File(f)
-        header = 'Region'
+        header = 'Region,id'
         parties = Party.objects.all().order_by('id')
         for party in parties:
             header += ','+party.name
@@ -30,6 +30,7 @@ def get_lama_her_csv():
         regions = Constituency.objects.filter(parent=None)
         for region in regions:
             myFile.write('\n' + str(region.name))
+            myFile.write(',' + str(region.id))
             for party in parties:
                 constituencies = Constituency.objects.filter(parent=region)
                 result = len([msp for msp in MSP.objects.filter(party=party) if msp.constituency in constituencies])
