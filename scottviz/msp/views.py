@@ -115,9 +115,10 @@ def pca(request):
     """
     context = RequestContext(request)
     content['activesite'] = scatter['pca']
+    reusable_query = Topic.objects.all().order_by('id')
     content['parties'] = Party.objects.all().order_by('id')
-    content['topics'] = Topic.objects.all().order_by('id')
-    content['selected_topics']=[]
+    content['topics'] = reusable_query
+    content['selected_topics'] = []
     parties = []
     topics = []
     if request.method == 'POST':
@@ -126,19 +127,15 @@ def pca(request):
             parties = query.getlist('party')
         if query.getlist('topic'):
             topics = query.getlist('topic')
-            content['selected_topics']=topics
-    print parties
-    print topics
-    print content['selected_topics']
-    print 'now we call'
+            content['selected_topics'] = [topic for topic in reusable_query if topic.id in topics]
+
     new_pca(parties,topics)
-
-
 
     # FOR THE CONCURRENCY
     # You want to find the 'freshest' which you have not responded to
     # either by timestamp and keeping a record of what you responded to
     # or by having an extra field where you record the answer to requests
+    """
     all_pca = Hit.objects.filter(url__startswith='/msp/pca')
     session = request.session.session_key
     if 'HTTP_X_FORWARDED_FOR' in request.META:
@@ -147,7 +144,7 @@ def pca(request):
     else:
         ip = request.META['REMOTE_ADDR']
     content['sessioninfo'] = [ip, session, now()]
-
+    """
     return render_to_response('msp/pca.html', content, context)
 
 

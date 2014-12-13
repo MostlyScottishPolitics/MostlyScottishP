@@ -11,13 +11,6 @@
 </script>
 <button class="btn btn-default" onclick="reset('OutputMatrix.csv')">Reset</button>
 <br>
-{% for t in selected_topics %}
-{% for topic in topics %}
-{% if topic.id == t %}
-{{topic.name}}
-{% endif %}
-{% endfor %}
-{% endfor %}
 
 
 <form action = "/msp/pca/" method="POST">
@@ -56,6 +49,21 @@
                             </div>
                         </div>
 
+                        {% if selected_topics %}
+                        <div class="col-xs-4 col-xs-height col-top">
+                            <div class="item">
+                                <div class="content">
+                                    <h4> You have selected topics: </h4>
+                                        <fieldset class="module aligned">
+                                            {% for t in selected_topics %}
+                                                <input type="checkbox" name="topic" value={{t.id}}> {{t.name}}
+                                                <br>
+                                            {% endfor %}
+                                        </fieldset>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
                     </div>
                 </div>
     <input type="submit">
