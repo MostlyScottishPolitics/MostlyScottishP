@@ -2,10 +2,12 @@ $(function () {
 //setting up variables
 var w=960, h=750;
 var pLoad = [];
-var parties={};
+var parties={};//hold parties for each region
 var border = .5;
 var bordercolor = "black";
+var ids = {};//hold id for each region
 
+//link each council area to the region it belongs to
 var gssCode = {
     "S12000005":"Mid Scotland and Fife",
     "S12000014":"Central Scotland",
@@ -41,6 +43,7 @@ var gssCode = {
     "S12000042":"North East Scotland"
 };
 
+//hold the color for each region
 var color = {
     "Central Scotland" : "#0065BD",
     "South Scotland" : "#70193d",
@@ -89,6 +92,8 @@ d3.json("/static/json/scotland-topojson-file.json",function(err,load){
         .style("fill",function(d){return color[gssCode[d.properties.gss]];})
         .style("opacity", 0.6)
         .style("stroke", "#fff")
+        .on("click", function(d){
+        location.href='/msp/constituency/'+ids[gssCode[d.properties.gss]]+'/';})
       	.append("title")
         .text(function(d){
         var str = gssCode[d.properties.gss];
@@ -113,11 +118,12 @@ d3.json("/static/json/scotland-topojson-file.json",function(err,load){
 };
 //Load csv file of regions and the parties distribution
 d3.csv("/static/csv/map_data.csv", function(error, d) {
-  				pLoad = d.map(function(d) { return [d["Region"],+d["Scottish National Party"],+d["Scottish Labour"],+d["Scottish Conservative and Unionist Party"],+d["Independent"],+d["Scottish Green Party"],+d["Scottish Liberal Democrats"],+d["No Party Affiliation"]];
+  				pLoad = d.map(function(d) { return [d["Region"],+d["id"], +d["Scottish National Party"],+d["Scottish Labour"],+d["Scottish Conservative and Unionist Party"],+d["Independent"],+d["Scottish Green Party"],+d["Scottish Liberal Democrats"],+d["No Party Affiliation"]];
   				});
 
   				for (i = 0; i < 8; i++) {
-    			parties[pLoad[i][0]] = {"Scottish National Party": pLoad[i][1], "Scottish Labour": pLoad[i][2], "Scottish Conservative and Unionist Party": pLoad[i][3], "Independent": pLoad[i][4], "Scottish Green Party": pLoad[i][5], "Scottish Liberal Democrats": pLoad[i][6], "No Party Affiliation": pLoad[i][7]};
+    			parties[pLoad[i][0]] = {"Scottish National Party": pLoad[i][2], "Scottish Labour": pLoad[i][3], "Scottish Conservative and Unionist Party": pLoad[i][4], "Independent": pLoad[i][5], "Scottish Green Party": pLoad[i][6], "Scottish Liberal Democrats": pLoad[i][7], "No Party Affiliation": pLoad[i][8]};
+                ids[""+pLoad[i][0]] = pLoad[i][1];
 				}
   				generateVisualization();});
     })
