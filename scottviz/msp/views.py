@@ -8,6 +8,7 @@ from django.http import HttpResponse
 from django.utils.timezone import now
 
 from models import *
+
 from search import postcode_search, model_search
 from hitcounter.models import Hit
 from pca.new_pca import  new_pca
@@ -116,6 +117,7 @@ def pca(request):
     content['activesite'] = scatter['pca']
     content['parties'] = Party.objects.all().order_by('id')
     content['topics'] = Topic.objects.all().order_by('id')
+    content['selected_topics']=[]
     parties = []
     topics = []
     if request.method == 'POST':
@@ -124,10 +126,12 @@ def pca(request):
             parties = query.getlist('party')
         if query.getlist('topic'):
             topics = query.getlist('topic')
+            content['selected_topics']=topics
     print parties
     print topics
     print 'now we call'
     new_pca(parties,topics)
+
 
 
     # FOR THE CONCURRENCY
