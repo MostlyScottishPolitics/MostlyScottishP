@@ -35,10 +35,10 @@ def createQuery(cr,query, filter,parties,topics):
         #Party Filter
         elif filter == 1:
             isFirst = 1
-            count = -1
+            count = 0
             output = "SELECT msp.foreignid, div.id, vote.vote FROM msp_msp AS msp, msp_division AS div, msp_vote AS vote WHERE msp.id = vote.msp_id AND div.id= vote.division_id "
-            while count < len(parties)-1:
-                count = count + 1
+            while count < len(parties):
+                count += 1
                 getDistinctParties(cr,parties[count])
                 if isFirst == 1:
                     output = output + "AND (msp.party_id = " + parties[count]
@@ -155,7 +155,7 @@ def new_pca(parties, topics):
         if firstLine == 0:
             print 'X,Y,Party,MSP Name'
             firstLine = 1;
-        else:
+        elif (parties == []) or (msps[count].party.id in parties):
             try:
                 print '{0}{1}'.format(line.rstrip('\n'), (',' + str(msps[count].party) + ',' + str(msps[count])))
             except:

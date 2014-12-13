@@ -13,7 +13,7 @@
 <br>
 {% for t in selected_topics %}
 {% for topic in topics %}
-{% if t == topic.id %}
+{% if topic.id == t %}
 {{topic.name}}
 {% endif %}
 {% endfor %}

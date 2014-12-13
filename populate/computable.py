@@ -18,7 +18,7 @@ from django.core.files import File
 # the definitions here can be changed to get other statistics
 
 def get_lama_her_csv():
-    with open(settings.STATIC_PATH+'/csv/lama.csv','w') as f:
+    with open(settings.STATIC_PATH+'/csv/map_data.csv','w') as f:
         myFile = File(f)
         header = 'Region'
         parties = Party.objects.all().order_by('id')

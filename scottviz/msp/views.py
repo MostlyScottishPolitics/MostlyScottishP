@@ -129,6 +129,7 @@ def pca(request):
             content['selected_topics']=topics
     print parties
     print topics
+    print content['selected_topics']
     print 'now we call'
     new_pca(parties,topics)
 
