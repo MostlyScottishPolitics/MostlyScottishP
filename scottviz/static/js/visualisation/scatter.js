@@ -19,7 +19,7 @@ var scatter = function (csvFile) {
 			;
 
 			//Create SVG element
-			var svg = d3.select(".plot")
+			var svg = d3.select("#plot")
 						.append("svg")
 						.attr("width", w)
 						.attr("height", h);
@@ -139,8 +139,72 @@ var scatter = function (csvFile) {
   				generateVisualization();});
 
 }
-//Reset the visualization to its original state
+
 var reset = function(csvFile) {
-	$('.plot').empty();
+	$('#plot').empty();
 	scatter(csvFile)
 };
+// get me the cookie
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie != '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+var csrftoken = getCookie('csrftoken');
+
+$('#submitForm').click(function() {
+	event.preventDefault();
+    var str = $('#post-form').serialize();
+    $('#paramsSent').html(str);
+
+    $.post('',
+          str,
+          function(data){
+			  	reset("OutputMatrix.csv");
+
+          });
+ });
+//Reset the visualization to its original state
+
+$('#reset').click(function() {
+	event.preventDefault();
+    $.get('',
+          function(data){
+
+			$('input[name=party]').attr('checked', false);
+			$('input[name=topic]').attr('checked', false);
+			  	reset("OutputMatrix.csv");
+
+          });
+	$.ajax({
+        url : '',
+        type : "POST",
+        data : {
+			csrfmiddlewaretoken: csrftoken
+		},
+
+		success : function(json) {
+			$('input[name=party]').attr('checked', false);
+			$('input[name=topic]').attr('checked', false);
+			reset("OutputMatrix.csv");
+    		console.log("success"); // another sanity check
+},
+
+        // handle a non-successful response
+        error : function(xhr,errmsg,err) {
+            $('#results').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: "+errmsg+
+                " <a href='#' class='close'>&times;</a></div>"); // add the error to the dom
+            console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+        }
+    });
+ });

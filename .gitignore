@@ -10,6 +10,7 @@ scottviz/scottviz/settings.py
 *.db
 *.exe
 *.tar.gz
- 
+venv
+staticfiles
 ;;directories to ignore
 .idea/

@@ -216,7 +216,7 @@ input.form-control, input.form-control:focus {
 .tooltip.bottom .tooltip-arrow {
       border-bottom-color: #5d3c70;
 }
-
+/*
 
 @media (max-width:992px){
     .navbar-header {
@@ -253,4 +253,9 @@ input.form-control, input.form-control:focus {
     .collapse.in{
         display:block !important;
     }
-}
+}*/
+
+#reset{
+    margin-top: 20px;
+    padding-left: 18px;
+margin-left: 15px}

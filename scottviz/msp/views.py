@@ -1,11 +1,14 @@
 from collections import OrderedDict
 import csv
 import importlib
+from django.core.serializers import json
 
 from django.template import RequestContext
 from django.shortcuts import render_to_response
 from django.http import HttpResponse
 from django.utils.timezone import now
+from django.views.decorators.csrf import csrf_protect
+from django.views.decorators.http import require_POST
 
 from models import *
 
@@ -127,25 +130,17 @@ def pca(request):
             parties = query.getlist('party')
         if query.getlist('topic'):
             topics = query.getlist('topic')
-            content['selected_topics'] = [topic for topic in reusable_query if topic.id in topics]
+           # content['selected_topics'] = [topic for topic in reusable_query if topic.id in topics]
+        new_pca(parties, topics)
 
-    new_pca(parties,topics)
-
+        return HttpResponse()
+    else:
     # FOR THE CONCURRENCY
     # You want to find the 'freshest' which you have not responded to
     # either by timestamp and keeping a record of what you responded to
     # or by having an extra field where you record the answer to requests
-    """
-    all_pca = Hit.objects.filter(url__startswith='/msp/pca')
-    session = request.session.session_key
-    if 'HTTP_X_FORWARDED_FOR' in request.META:
-        ip_adds = request.META['HTTP_X_FORWARDED_FOR'].split(",")
-        ip = ip_adds[0]
-    else:
-        ip = request.META['REMOTE_ADDR']
-    content['sessioninfo'] = [ip, session, now()]
-    """
-    return render_to_response('msp/pca.html', content, context)
+        new_pca(parties, topics)
+        return render_to_response('msp/pca.html', content, context)
 
 
 def msps(request):

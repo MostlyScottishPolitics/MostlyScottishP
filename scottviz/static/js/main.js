@@ -62,4 +62,4 @@ jQuery('ul.nav li.dropdown').hover(function() {
 });
 $(function () {
   $('[data-toggle="tooltip"]').tooltip()
-})
+});
