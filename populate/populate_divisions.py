@@ -5,7 +5,7 @@ __author__ = '2168879m'
 
 import os
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "scottviz.settings")
-from models import *
+from msp.models import *
 from data import *
 from dateutil import parser
 from xml.dom import minidom
@@ -138,9 +138,12 @@ def populate_divisions_from(files_location,startdate,enddate):
                 absent_votes(division)
 
 
-if __name__ == '__main__':
+def main():
     Division.objects.all().delete()
     Vote.objects.all().delete()
     print "_deleted_old_divisions_and_votes_"
     populate_divisions_from(divisions_location, startdate, enddate)
     print "_read_new_divisions_and_votes_"
+
+if __name__ == '__main__':
+    main()

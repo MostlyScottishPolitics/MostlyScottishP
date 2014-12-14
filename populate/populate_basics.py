@@ -1,3 +1,5 @@
+from scottviz import settings
+
 __author__ = '2168879m'
 """
 This file is the default populator for the tables (yes, I did say populator!!). Takes between 0.5 and 1.5 h.
@@ -34,7 +36,7 @@ def delete_data():
 
 
 def populate_constituency():
-    with open('../scottviz/static/test_data/districts.csv') as f:
+    with open(settings.STATIC_PATH + '/test_data/districts.csv') as f:
         next(f)
         for line in f:
             line = line.split(',')
@@ -53,7 +55,7 @@ def populate_constituency():
 
 
 def populate_current_msps():
-    with open('../scraper/msp_scraper/msps.csv', mode='r') as infile:
+    with open(settings.PROJECT_PATH + '/scraper/msp_scraper/msps.csv', mode='r') as infile:
         reader = csv.reader(infile)
         i = 0
         for row in reader:
@@ -115,8 +117,7 @@ def msp_jobs():
         i+=1
         j = Job(job_foreignid=i,name=job[2],msp=MSP.objects.get(firstname=job[0], lastname=job[1]),job_startdate=job[3],job_enddate=job[4])
         j.save()
-
-if __name__ == '__main__':
+def main():
     delete_data()
     populate_constituency()
     print "_constituency_"
@@ -137,3 +138,7 @@ if __name__ == '__main__':
     os.system('updatedb.py')
     print "_analytics_done_"
     print "_done_"
+
+if __name__ == '__main__':
+    main()
+

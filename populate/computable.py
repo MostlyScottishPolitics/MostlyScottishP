@@ -9,22 +9,24 @@ All static data comes from data.py, please put any such data there.
 """
 
 import os
+
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "scottviz.settings")
 from msp.models import *
 from decimal import *
-from data import number_of_msps, independent_parties, topics_divisions, topic_extracter_name, topic_extracter_location, topics, party_links_colours
+from data import number_of_msps, independent_parties, topics_divisions, topic_extracter_name, topic_extracter_location, \
+    topics, party_links_colours
 import importlib
 from django.core.files import File
 
 # the definitions here can be changed to get other statistics
 
 def get_lama_her_csv():
-    with open(settings.STATIC_PATH+'/csv/map_data.csv','w') as f:
+    with open(settings.STATIC_PATH + '/csv/map_data.csv', 'w') as f:
         myFile = File(f)
         header = 'Region,id'
         parties = Party.objects.all().order_by('id')
         for party in parties:
-            header += ','+party.name
+            header += ',' + party.name
         print header
         myFile.write(header)
 
@@ -35,8 +37,8 @@ def get_lama_her_csv():
             for party in parties:
                 constituencies = Constituency.objects.filter(parent=region)
                 result = len([msp for msp in MSP.objects.filter(party=party) if msp.constituency in constituencies])
-                myFile.write(','+str(result))
-                
+                myFile.write(',' + str(result))
+
 
 def compute_division_turnout():
     """
@@ -52,8 +54,9 @@ def compute_division_turnout():
     # turnout for each division
     for division in divisions:
         absentVotes = Vote.objects.filter(division=division, vote=Vote.ABSENT)
-        division.turnout = Decimal(number_of_msps - len(absentVotes)) * 100 /Decimal(number_of_msps)
+        division.turnout = Decimal(number_of_msps - len(absentVotes)) * 100 / Decimal(number_of_msps)
         division.save()
+
 
 def compute_msp_turnout():
     """
@@ -83,7 +86,7 @@ def compute_division_rebels():
 
     # rebels for each division
     for division in divisions:
-        division.rebels = len(Vote.objects.filter(division = division, rebellious = True))
+        division.rebels = len(Vote.objects.filter(division=division, rebellious=True))
         division.save()
 
 
@@ -99,15 +102,17 @@ def compute_msp_rebellions():
     for msp in msps:
         # if msp.presence already computed :
         if msp.presence and alldivisions:
-            msp.rebellions = 10000 * Decimal(len(Vote.objects.filter(msp=msp, rebellious=True)))/(msp.presence * alldivisions)
+            msp.rebellions = 10000 * Decimal(len(Vote.objects.filter(msp=msp, rebellious=True))) / (
+                msp.presence * alldivisions)
             msp.save()
 
-        # otherwise, comment the previous 2 lines and uncomment the next 4 lines:
-        #
-        # votes_present = len(divisions) - len(Vote.objects.filter(msp=msp, vote=Vote.ABSENT))
-        # if votes_present > 0 :
-        #   msp.rebellions = Decimal(len(Vote.objects.filter(msp=msp, rebellious=True))) * 100 / Decimal(votes_present)
-        # msp.save()
+            # otherwise, comment the previous 2 lines and uncomment the next 4 lines:
+            #
+            # votes_present = len(divisions) - len(Vote.objects.filter(msp=msp, vote=Vote.ABSENT))
+            # if votes_present > 0 :
+            # msp.rebellions = Decimal(len(Vote.objects.filter(msp=msp, rebellious=True))) * 100 / Decimal(votes_present)
+            # msp.save()
+
 
 def independent_party_rebellious_votes(parties):
     """
@@ -125,14 +130,15 @@ def independent_party_rebellious_votes(parties):
             vote.save()
 
             # alternative code that seems of greater complexity, maybe test for time?
-    # for each vote for each msp for each independent party
-    # for party in parties:
-    #   party_msps = MSP.objects.filter(party = party)
-    #   for msp in party_msps:
-    #       votes = Vote.objects.all(msp = msp)
-    #       for vote in votes:
-    #           vote.rebellious = False
-    #           vote.save()
+            # for each vote for each msp for each independent party
+            # for party in parties:
+            # party_msps = MSP.objects.filter(party = party)
+            #   for msp in party_msps:
+            #       votes = Vote.objects.all(msp = msp)
+            #       for vote in votes:
+            #           vote.rebellious = False
+            #           vote.save()
+
 
 # do not change, helper function
 def put(votes_list, party_vote, rebellious):
@@ -148,6 +154,7 @@ def put(votes_list, party_vote, rebellious):
         vote.rebellious = rebellious
         vote.save()
 
+
 def not_independent_party_rebellious_votes(parties):
     """
     For all given parties (assumed not independent), for all divisions, gets the majoritary party vote
@@ -160,8 +167,10 @@ def not_independent_party_rebellious_votes(parties):
     # Check if a vote for msps in not independent parties is rebellious
     for party in parties:
         for division in divisions:
-            expressed_votes_from_party = len([vote for vote in Vote.objects.filter(division=division).exclude(vote=Vote.ABSENT) if vote.msp.party == party])
-            threshold = (expressed_votes_from_party + 1)/2
+            expressed_votes_from_party = len(
+                [vote for vote in Vote.objects.filter(division=division).exclude(vote=Vote.ABSENT) if
+                 vote.msp.party == party])
+            threshold = (expressed_votes_from_party + 1) / 2
             # get all the votes for this division
             division_votes = Vote.objects.filter(division=division)
             # split the votes by vote
@@ -171,26 +180,27 @@ def not_independent_party_rebellious_votes(parties):
             votes_absent = [vote for vote in division_votes.filter(vote=Vote.ABSENT) if vote.msp.party == party]
             # decide a party vote if threshold reached
             # and put the results in
-            if len(votes_yes)>threshold:
+            if len(votes_yes) > threshold:
                 put(votes_yes, Vote.YES, False)
                 put(votes_no, Vote.YES, True)
                 put(votes_abstain, Vote.YES, True)
-                put(votes_absent,Vote.YES,False)
-            elif len(votes_no)>threshold:
+                put(votes_absent, Vote.YES, False)
+            elif len(votes_no) > threshold:
                 put(votes_yes, Vote.NO, True)
                 put(votes_no, Vote.NO, False)
                 put(votes_abstain, Vote.NO, True)
-                put(votes_absent,Vote.NO,False)
-            elif len(votes_abstain)>threshold:
+                put(votes_absent, Vote.NO, False)
+            elif len(votes_abstain) > threshold:
                 put(votes_yes, Vote.ABSTAIN, True)
                 put(votes_no, Vote.ABSTAIN, True)
                 put(votes_abstain, Vote.ABSTAIN, False)
-                put(votes_absent,Vote.ABSTAIN,False)
+                put(votes_absent, Vote.ABSTAIN, False)
             else:
                 put(votes_yes, Vote.ABSENT, False)
                 put(votes_no, Vote.ABSENT, False)
                 put(votes_abstain, Vote.ABSENT, False)
-                put(votes_absent,Vote.ABSENT,False)
+                put(votes_absent, Vote.ABSENT, False)
+
 
 def compute_rebellious_votes():
     """
@@ -242,15 +252,16 @@ def compute_parents_for_divisions():
         if not division.motion:
             ammend_length = 1 + len(division.motionid.split('.')[-1:])
             parent = Division.objects.filter(motionid__exact=division.motionid[:-ammend_length])
-            if len(parent)>1:
-                print 'We found a duplicate entry for this motion: '+parent[0].motionid
+            if len(parent) > 1:
+                print 'We found a duplicate entry for this motion: ' + parent[0].motionid
                 print 'More info:'
                 for p in parent:
-                    print p.motionid+' with id '+str(p.id)+' on date '+str(p.date)
+                    print p.motionid + ' with id ' + str(p.id) + ' on date ' + str(p.date)
             else:
                 for p in parent:
                     division.parent = p
                 division.save()
+
 
 def get_parents_topic(division):
     """
@@ -273,7 +284,7 @@ def compute_topics():
     :return: populates topic field in Division table
     """
 
-    extracter = importlib.import_module(topic_extracter_name,topic_extracter_location)
+    extracter = importlib.import_module(topic_extracter_name, topic_extracter_location)
 
     # extract all topics as good as possible
     for division in topics_divisions:
@@ -292,7 +303,6 @@ def compute_topics():
             division.save()
 
 
-
 def see_diferences_with_new_topic_extractor():
     """
     Function to test a new topic extractor by comparison.
@@ -302,7 +312,7 @@ def see_diferences_with_new_topic_extractor():
     You need to change the extracter_name and extracter_location in data to your own.
     :return: differences between the topics in db and new topics
     """
-    extracter = importlib.import_module(topic_extracter_name,topic_extracter_location)
+    extracter = importlib.import_module(topic_extracter_name, topic_extracter_location)
 
     # extract all topics as good as possible
     for division in topics_divisions:
@@ -311,10 +321,11 @@ def see_diferences_with_new_topic_extractor():
         else:
             topic = extracter.get_topic_from_text(division.motiontopic)
         if (division.topic != topic) and (not division.parent):
-            if topic==None:
-                print str(division.id)+' '+division.motionid+' '+division.topic+'  '
+            if topic == None:
+                print str(division.id) + ' ' + division.motionid + ' ' + division.topic + '  '
             else:
-                print str(division.id)+' '+division.motionid+' '+division.topic+'  '+topic
+                print str(division.id) + ' ' + division.motionid + ' ' + division.topic + '  ' + topic
+
 
 def populate_topics():
     """
@@ -325,7 +336,7 @@ def populate_topics():
     """
     Topic.objects.all().delete()
 
-    for topic,description in topics.items():
+    for topic, description in topics.items():
         t = Topic(name=topic, description=description)
         t.save()
 
@@ -336,8 +347,7 @@ def populate_data_parties():
     :return: populates link and description fields in Party table
     """
 
-
-    for party,(link,description,description_link,colour) in party_links_colours.items():
+    for party, (link, description, description_link, colour) in party_links_colours.items():
         p = Party.objects.get(name=party)
         p.link = link
         p.description = description.decode('latin1')
@@ -360,12 +370,18 @@ def populate_analytics():
         TWOPLACES = Decimal(10) ** -2
         for party in parties:
             a = Analytics(division=division, party=party)
-            expressed_votes = len([vote for vote in Vote.objects.filter(division=division).exclude(vote=Vote.ABSENT) if vote.msp.party == party])
+            expressed_votes = len([vote for vote in Vote.objects.filter(division=division).exclude(vote=Vote.ABSENT) if
+                                   vote.msp.party == party])
             if expressed_votes > 0:
-                a.party_for = Decimal(100 * len([vote for vote in Vote.objects.filter(division=division, vote=Vote.YES) if vote.msp.party == party]) / Decimal(expressed_votes)).quantize(TWOPLACES)
-                a.party_against = Decimal(100 * len([vote for vote in Vote.objects.filter(division=division, vote=Vote.NO) if vote.msp.party == party]) / Decimal(expressed_votes)).quantize(TWOPLACES)
+                a.party_for = Decimal(100 * len(
+                    [vote for vote in Vote.objects.filter(division=division, vote=Vote.YES) if
+                     vote.msp.party == party]) / Decimal(expressed_votes)).quantize(TWOPLACES)
+                a.party_against = Decimal(100 * len(
+                    [vote for vote in Vote.objects.filter(division=division, vote=Vote.NO) if
+                     vote.msp.party == party]) / Decimal(expressed_votes)).quantize(TWOPLACES)
             else:
                 a.party_for = 0
                 a.party_against = 0
-            a.party_turnout = Decimal((100 * expressed_votes) / Decimal(len(MSP.objects.filter(party=party)))).quantize(TWOPLACES)
+            a.party_turnout = Decimal((100 * expressed_votes) / Decimal(len(MSP.objects.filter(party=party)))).quantize(
+                TWOPLACES)
             a.save()

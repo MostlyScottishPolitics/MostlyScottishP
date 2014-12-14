@@ -1,8 +1,7 @@
 __author__ = '2168879m'
 
 from computable import *
-
-if __name__ == '__main__':
+def main():
     """
     makes the calls to compute analytics
     comment out anything that you don't need/want executed (but populate_basics calls this, not the individual functions)
@@ -46,3 +45,7 @@ if __name__ == '__main__':
     print "_analytics_"
 
     print "_done_"
+
+
+if __name__ == '__main__':
+    main()
