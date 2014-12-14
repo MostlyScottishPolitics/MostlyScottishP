@@ -10,7 +10,6 @@ class Command(NoArgsCommand):
     def handle_noargs(self, **options):
         try:
             populate_basics.main()
-            populate_divisions.main()
 
         except DatabaseError:
             try:

@@ -1,5 +1,4 @@
 from populate import updatedb
-from scottviz import settings
 
 __author__ = '2168879m'
 """
