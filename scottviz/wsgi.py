@@ -27,6 +27,7 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "scottviz.settings")
 # setting points here.
 file_dir = os.path.realpath(os.path.dirname(__file__))
 sys.path.insert(0, os.path.normpath(os.path.join(file_dir, '..')))
+sys.path.insert(0, os.path.normpath(os.path.join(file_dir)))
 
 from django.core.wsgi import get_wsgi_application
 application = get_wsgi_application()
