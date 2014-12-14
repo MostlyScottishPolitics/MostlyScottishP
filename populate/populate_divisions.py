@@ -5,7 +5,7 @@ __author__ = '2168879m'
 
 import os
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "scottviz.settings")
-from msp.models import *
+from models import *
 from data import *
 from dateutil import parser
 from xml.dom import minidom

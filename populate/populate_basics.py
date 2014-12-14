@@ -20,7 +20,6 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "scottviz.settings")
 from msp.models import *
 from data import *
 from dateutil import parser
-from scottviz import settings
 from populate_divisions import populate_divisions_from
 
 

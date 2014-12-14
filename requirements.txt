@@ -1,8 +1,10 @@
 Django==1.5.4
+MDP --allow-unverified MDP
 South==1.0.1
 argparse==1.2.2
 dj-database-url==0.3.0
 dj-static==0.0.6
+gunicorn==19.1.1
 numpy==1.9.1
 pbr==0.10.2
 psycopg2==2.5.4
@@ -10,4 +12,5 @@ requests==2.5.0
 six==1.8.0
 static3==0.5.1
 stevedore==1.1.0
+whitenoise==1.0.6
 wsgiref==0.1.2
