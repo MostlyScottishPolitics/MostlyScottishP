@@ -28,16 +28,14 @@ def absent_votes(division):
     # if an msp did not have a vote read, he/she was absent
 
     # get votes read until now
-    votes_read = Vote.objects.filter(division=division)
+    votes_read = Vote.objects.filter(division=str(division))
     # get msps that didn't vote
     absentMSPs = MSP.objects.all()
     for vote in votes_read:
-        absentMSPs = absentMSPs.exclude(foreignid=vote.msp.foreignid)
-        print absentMSPs
+        absentMSPs = absentMSPs.exclude(foreignid=int(vote.msp.foreignid))
     # those msps had an absent vote
     for msp in absentMSPs:
-        v = Vote(msp=msp, division=division, vote=Vote.ABSENT)
-        print v
+        v = Vote(msp=msp, division=str(division), vote=Vote.ABSENT)
         v.save()
 
 
