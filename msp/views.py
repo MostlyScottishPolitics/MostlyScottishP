@@ -98,7 +98,7 @@ def home(request):
     }
     content["divisions"] = Division.objects.order_by('-date')[:10]
 
-    return render_to_response('msp/index.html', content, context)
+    return render_to_response('index.html', content, context)
 
 
 def map(request):
@@ -109,7 +109,7 @@ def map(request):
     """
     context = RequestContext(request)
     content['activesite'] = navbar['map']
-    return render_to_response('msp/map.html', content, context)
+    return render_to_response('map.html', content, context)
 
 
 def pca(request):
@@ -145,7 +145,7 @@ def pca(request):
         votes = get_votes_for_scatter(parties,topics)
         scores = run_pca(votes)
         write_scatter(scores,parties)
-        return render_to_response('msp/pca.html', content, context)
+        return render_to_response('pca.html', content, context)
 
 
 def msps(request):
@@ -158,7 +158,7 @@ def msps(request):
     content['activesite'] = navbar['msps']
     content['msps'] = MSP.objects.order_by('lastname', 'firstname')
     content['count'] = MSP.objects.count()
-    return render_to_response('msp/msps.html', content, context)
+    return render_to_response('msps.html', content, context)
 
 
 def msp(request, mspID):
@@ -189,7 +189,7 @@ def msp(request, mspID):
     content['party_abstain'] = rebellious.filter( party_vote=Vote.ABSTAIN)
     content['party_absent'] = rebellious.filter(party_vote=Vote.ABSENT)
     content['attendance'] = Vote.objects.filter(msp=this_msp).exclude(vote=Vote.ABSENT).order_by('division')
-    return render_to_response('msp/msp.html', content, context)
+    return render_to_response('msp.html', content, context)
 
 
 def party(request, partyID):
@@ -208,7 +208,7 @@ def party(request, partyID):
     }
     content['party'] = this_party
     content['partymsps'] = MSP.objects.filter(party=this_party).order_by('lastname','firstname')
-    return render_to_response('msp/party.html', content, context)
+    return render_to_response('party.html', content, context)
 
 
 def regions(request):
@@ -224,7 +224,7 @@ def regions(request):
     content['region'] = const[0]
     content['constituencies'] = Constituency.objects.exclude(parent=None).order_by('name')
     content['msps'] = MSP.objects.order_by('lastname', 'firstname')
-    return render_to_response('msp/regions.html', content, context)
+    return render_to_response('regions.html', content, context)
 
 
 def constituency(request, constituencyID):
@@ -252,7 +252,7 @@ def constituency(request, constituencyID):
     content['constituency_msps'] = constituency_msps
     content['parent_msps'] = parent_msps
     content['constituencies'] = kids
-    return render_to_response('msp/constituency.html', content, context)
+    return render_to_response('constituency.html', content, context)
 
 
 def divisions(request):
@@ -265,7 +265,7 @@ def divisions(request):
     content['activesite'] = navbar['divisions']
     content['divisions'] = Division.objects.order_by('-date')
     content['count'] = Division.objects.count()
-    return render_to_response('msp/divisions.html', content, context)
+    return render_to_response('divisions.html', content, context)
 
 
 def division(request, divisionID):
@@ -289,7 +289,7 @@ def division(request, divisionID):
     content['analytics'] = Analytics.objects.filter(division=this_division).order_by('party')
     q = Division.objects.filter(motionid__startswith=this_division.motionid.split('.')[0])
     content['related'] = q.exclude(motionid__exact=this_division.motionid).order_by('motionid')
-    return render_to_response('msp/division.html', content, context)
+    return render_to_response('division.html', content, context)
 
 
 def topics(request):
@@ -305,7 +305,7 @@ def topics(request):
         divisions = Division.objects.filter(topic=topic.id).order_by('-date')
         results.append([topic, len(divisions), divisions])
     content['topics'] = results
-    return render_to_response('msp/topics.html', content, context)
+    return render_to_response('topics.html', content, context)
 
 
 def aboutus(request):
@@ -316,7 +316,7 @@ def aboutus(request):
     """
     context = RequestContext(request)
     content['activesite'] = about['aboutus']
-    return render_to_response('msp/aboutus.html', content, context)
+    return render_to_response('aboutus.html', content, context)
 
 
 def aboutsp(request):
@@ -327,7 +327,7 @@ def aboutsp(request):
     """
     context = RequestContext(request)
     content['activesite'] = about['aboutsp']
-    return render_to_response('msp/aboutsp.html', content, context)
+    return render_to_response('aboutsp.html', content, context)
 
 
 def search_results(request):
@@ -363,7 +363,7 @@ def search_results(request):
             entry_query = model_search.get_query(query, ['name', ])
             content['parties'] = Party.objects.filter(entry_query)
 
-    return render_to_response('msp/search_results.html', content, context)
+    return render_to_response('search_results.html', content, context)
 
 
 def export_csv(request, thing):
