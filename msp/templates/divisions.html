@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% if divisions %}
+<a class="btn btn-default back" href="{% url 'export_csv' 'divisions' %}"><i class="glyphicon glyphicon-download"></i> Export to Csv</a>
+    <div class="table-responsive">
+        <table class="table table-hover sortable">
+             <caption>A 'division' is parliamentary terminology for a 'vote'. Here you can see the {{count}} divisions in the Scottish parliament. <br><br></caption>
+            <thead>
+            <tr>
+                <th>Division</th>
+                <th>Date</th>
+                <th width="50%">Topic</th>
+                <th>Result</th>
+                <th>Turnout</th>
+                <th>Rebels</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            {% for division in divisions %}
+                {% if division.result == '1' %}
+                <tr class="bg-success">
+                    <td><a href="{% url 'division' division.id %}">{{division.motionid}}</a></td>
+                    <td sorttable_customkey="{{division.id}}">{{division.date}}</td>
+                    <td>{{division.topic|capfirst}}</td>
+                    <td>Carried</td>
+                    <td>{{division.turnout}}% </td>
+                    <td>{{division.rebels}}</td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td><a href="{% url 'division' division.id %}">{{division.motionid}}</a></td>
+                    <td sorttable_customkey="{{division.id}}">{{division.date}}</td>
+                    <td>{{division.topic|capfirst}}</td>
+                    <td>Defeated</td>
+                    <td>{{division.turnout}}% </td>
+                    <td>{{division.rebels}}</td>
+                </tr>
+                {% endif %}
+
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endif %}
+{% endblock %}

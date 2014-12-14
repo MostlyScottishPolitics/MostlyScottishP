@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% if postcode %}
+<div class="container">
+    {% if 'ERROR' in postcode %}
+    <h3>{{postcode.values.0}}</h3>
+
+    {% else %}
+    <p class="lead">You are represented by:</p>
+
+    <div class="container container-xs-height">
+        <div class="row row-xs-height">
+
+            {% for region, msps in postcode.items %}
+            <div class="col-xs-3 col-xs-height col-top">
+                <div class="item">
+                    <div class="content">
+                        <h4> {{region}}</h4>
+                        {% for msp in msps %}
+                        <div class="item">
+                            <div class="content">
+                                <h5><p><a href="{% url 'msp' msp.foreignid %}">{{msp}}</a></p></h5>
+                            </div>
+                        </div>
+
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            {% endfor %}
+        </div>
+
+        {% endif %}
+
+    </div>
+</div>
+{% endif %}
+
+<!--MSPS -->
+{% if msps %}
+<div class="container-fluid" id="mspResults">
+
+<p class="lead"> MSPs: </p>
+
+{% for msp in msps %}
+    <div class="results" id="{{msp.id}}">
+        <p class="lead"><a href="{% url 'msp' msp.foreignid %}">{{msp}}</a></p>
+        Represents {{msp.constituency}}<br>
+        Member of {{msp.party.name}}<br>
+</div>
+{% endfor %}
+    </div>
+{% endif %}
+
+<!--Regions -->
+{% if regions %}
+<div class="container-fluid" id="regionResults">
+
+<p class="lead"> Regions: </p>
+
+{% for region in regions %}
+    <div class="results" id="{{region.id}}">
+    <p><a href="{% url 'constituency' region.id %}">{{region.name}}</a></p></div>
+    {% endfor %}
+</div>
+{% endif %}
+
+<!--Parties -->
+{% if parties %}
+<div class="container-fluid" id="partyResults">
+<p class="lead"> Parties: </p>
+
+{% for party in parties %}
+    <div class="results" id="{{party.id}}">
+    <p><a href="{% url 'party' party.id %}">{{party.name}}</a></p></div>
+{% endfor %}
+    </div>
+{% endif %}
+
+<!--Divisions -->
+{% if divisions %}
+<div class="container-fluid" id="motionResults">
+<p class="lead"> Divisions: </p>
+{% for division in divisions %}
+    <div class="results" id="{{division.motionid}}">
+    <p class="lead"><a href="{% url 'division' division.id %}">{{division.motionid}}</a></p>
+       Motion about: {{division.topic}}<br>
+        {% if division.result == '1' %}
+      Motion carried<br>
+        {% else %}
+        Motion defeated<br>
+        {% endif %}
+        Voted on:{{division.date}} by {{division.turnout}}% of MSPs
+    </div>
+{% endfor %}
+    </div>
+{% endif %}
+
+{% endblock %}

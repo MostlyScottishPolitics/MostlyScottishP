@@ -1,0 +1,257 @@
+{% extends "base.html" %}
+
+{% block content %}
+<a class="btn btn-default back" href="{% url 'divisions' %}"><i class="glyphicon glyphicon-circle-arrow-left"></i>All Divisions</a>
+<div class="panel panel-default">
+    <div class="panel-heading">About {{division.motionid}}</div>
+    <div class="panel-body">
+<div id="divinfo">
+        <p><b> Topic: </b>{{division.topic}} </p>
+
+ <!-- proposer not in the db yet -->
+ <!--       <p>Proposed by: <a href="/msp/msp/{{msp.foreignid}}">{{division.msp.firstname}} {{division.msp.lastname}}</a></p> -->
+
+       {% if division.motiontext != 'n/a' %}
+            <p><b> Description:</b> {{division.motiontext}}</p>
+       {% else %}
+            {% if division.parent and division.parent.motiontext != 'n/a' %}
+                <p><b> Description of motion <i>{{division.parent.motionid}}</i> :</b> {{division.parent.motiontext}}</p>
+            {% else %}
+                <p><b> Description:</b> {{division.motiontext}}; Look for related divisions</p>
+                <p><b> Some related text:</b> {{division.motiontopic|capfirst}}</p>
+            {% endif %}
+       {% endif %}
+
+
+        <p>See on <b>Scottish Parliament website</b>:  {{division.link}}
+        <p> <b> Result:</b>
+         {% if division.result == '1'%}
+                   Carried
+                {% else %}
+                    Defeated
+         {% endif %} </p>
+        <p><b>Turnout: </b>{{division.turnout}}%</p>
+        <p><b>Date: </b>{{division.date}}</p>
+
+</p>
+    </div>
+    </div>
+
+
+</div>
+<ul class="nav nav-tabs">
+  <li role="presentation" class="active" id="rebels"><a href="#rsc" >Rebels</a></li>
+  <li role="presentation" id="votes"><a href="#vot" >Votes</a></li>
+  <li role="presentation" id="byparty"><a href="#bpc" >Votes by Party</a></li>
+  <li role="presentation" id="related"><a href="#relc" >Related divisions</a></li>
+</ul>
+
+<div id="rsc">
+{% if rebels %}
+    <div class="table-responsive">
+        <table class="table table-hover sortable">
+             <caption> <br> A 'rebellion' is when an MSP votes differently than his party . Here you can see the 'rebels' that voted differently for this division. <br><br> </caption>
+
+            <thead>
+            <tr>
+                <th>MSP</th>
+                <th>Party</th>
+                <th>Party Vote</th>
+                <th>MSP Vote</th>
+                <th>Result</th>
+                <th>Turnout</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            {% for rebel in rebels %}
+
+                {% if rebel.division.result == '1' %}
+                    <tr class="bg-success">
+                        <td><a href="{% url 'msp' rebel.msp.foreignid %}">{{rebel.msp}}</a></td>
+                        <td>{{rebel.msp.party}}</td>
+                        {% if rebel.party_vote == '1' %}
+                            <td>For</td>
+                        {% elif rebel.party_vote == '2' %}
+                            <td>Against</td>
+                        {% elif rebel.party_vote == '3' %}
+                            <td>Abstain</td>
+                        {% elif rebel.party_vote == '4'%}
+                            <td>Absent</td>
+                        {% else %}
+                            <td>NA</td>
+                        {% endif %}
+                        {% if rebel.vote == '1' %}
+                            <td>For</td>
+                        {% elif rebel.vote == '2' %}
+                            <td>Against</td>
+                        {% elif rebel.vote == '3'%}
+                            <td>Abstain</td>
+                        {% elif rebel.vote == '4'%}
+                            <td>Absent</td>
+                        {% else %}
+                            <td>NA</td>
+                        {% endif %}
+                        <td>Carried</td>
+                        <td>{{rebel.division.turnout}}% </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td><a href="{% url 'msp' rebel.msp.foreignid %}">{{rebel.msp}}</a></td>
+                        <td>{{rebel.msp.party}}</td>
+                        {% if rebel.party_vote == '1' %}
+                            <td>For</td>
+                        {% elif rebel.party_vote == '2' %}
+                            <td>Against</td>
+                        {% elif rebel.party_vote == '3' %}
+                            <td>Abstain</td>
+                        {% elif rebel.party_vote == '4'%}
+                            <td>Absent</td>
+                        {% else %}
+                            <td>NA</td>
+                        {% endif %}
+                        {% if rebel.vote == '1' %}
+                            <td>For</td>
+                        {% elif rebel.vote == '2' %}
+                            <td>Against</td>
+                        {% elif rebel.vote == '3'%}
+                            <td>Abstain</td>
+                        {% elif rebel.vote == '4'%}
+                            <td>Absent</td>
+                        {% else %}
+                            <td>NA</td>
+                        {% endif %}
+                        <td>Defeated</td>
+                        <td>{{rebel.division.turnout}}% </td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <div class="well">
+    <p class="lead">Nothing to see here</p></div>
+{% endif %}
+</div>
+
+<div id="vot">
+{% if votes %}
+    <div class="table-responsive">
+        <table class="table table-hover sortable">
+             <caption> <br> All the votes for this division <br><br> </caption>
+
+            <thead>
+            <tr>
+                <th>MSP</th>
+                <th>Party</th>
+                <th>MSP Vote</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            {% for vote in votes %}
+                    <tr>
+                        <td sorttable_customkey="{{vote.msp.lastname}}"><a href="{% url 'msp' vote.msp.foreignid %}">{{vote.msp}}</a></td>
+                        <td><a href="{% url 'party' vote.msp.party.id %}">{{vote.msp.party}}</a></td>
+                        {% if vote.vote == '1' %}
+                            <td>For</td>
+                        {% elif vote.vote == '2' %}
+                            <td>Against</td>
+                        {% elif vote.vote == '3' %}
+                            <td>Abstain</td>
+                        {% elif vote.vote == '4' %}
+                            <td>Absent</td>
+                        {% else %}
+                            <td>NA</td>
+                        {% endif %}
+                    </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <div class="well">
+    <p class="lead">Nothing to see here</p></div>
+{% endif %}
+</div>
+
+<div id="bpc">
+{% if analytics %}
+    <div class="table-responsive">
+        <table class="table table-striped table-hover">
+             <caption> <br> For and Against percentages are computed for present MSPs. (out of the turnout) <br><br> </caption>
+            <thead>
+            <tr>
+                <th>Party</th>
+                <th>For</th>
+                <th>Against</th>
+                <th>Turnout</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            {% for result in analytics %}
+                <tr>
+                    <td><a href="{% url 'party' result.party.id %}">{{result.party}}</a></td>
+                    <td>{{result.party_for}}%</td>
+                    <td>{{result.party_against}}%</td>
+                    <td>{{result.party_turnout}}%</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% else %}
+    <div class="well">
+    <p class="lead">Nothing to see here</p></div>
+{% endif %}
+</div>
+
+<div id="relc">
+    {% if related %}
+    <div class="table-responsive">
+        <table class="table table-striped table-hover sortable">
+            <thead>
+            <tr>
+                <th>Division</th>
+                <th>Date</th>
+                <th>Topic</th>
+                <th>Result</th>
+                <th>Turnout</th>
+                <th>Rebels</th>
+            </tr>
+            </thead>
+
+            <tbody>
+
+            {% for division in related %}
+            <tr>
+                <td><a href="{% url 'division' division.id %}">{{division}}</a></td>
+                <td>{{division.date}}</td>
+                <td>{{division.topic}}</td>
+                {% if division.result == '1'%}
+                    <td><p> Carried </p></td>
+                {% else %}
+                    <td><p> Defeated </p></td>
+                {% endif %}
+                <td>{{division.turnout}}</td>
+                {% if division.rebels %}
+                    <td>{{division.rebels}}</td>
+                {% else %}
+                    <td>{{division.rebels}}</td>
+                {% endif %}
+            </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+</div>
+        {% else %}
+    <div class="well">
+    <p class="lead">Nothing to see here</p></div>
+    {% endif %}
+    </div>
+
+<a class="btn btn-default back" href="{% url 'divisions' %}"><i class="glyphicon glyphicon-circle-arrow-left"></i>All Divisions</a>
+{% endblock %}

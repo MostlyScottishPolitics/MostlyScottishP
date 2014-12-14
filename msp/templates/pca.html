@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% load staticfiles %}
+<script src="{% static 'js/visualisation/scatter.js' %}"></script>
+
+<!--<form class="navbar-form" role="search" method="GET" action="{% url 'search_results' %}"> -->
+<div class="container-fluid">
+        <p>Select some parties and topics to get an idea on how parties voted on the matter. Click Submit to
+        generate new visualisation based on your options and resent to reset the plot to it's initial state.
+        </p>
+
+    <br>
+</div>
+  <div class="container-fluid" id = "plot"> </div>
+
+
+<div class="container-fluid">
+    <form action = "" method="POST" id="post-form">
+        {% csrf_token %}
+           <div class="container container-xs-height" id="post-text">
+                    <div class="row row-xs-height">
+
+
+                        <div class="col-xs-6 col-xs-height col-top">
+                                <div class="form-group">
+                                    <h4> Parties </h4>
+                                    <div class="checkbox">
+
+                                                {% for p in parties %}
+                                                    <input type="checkbox" name="party" id="{{p.id}}" value={{p.id}}> {{p.name}}
+                                                    <br>
+                                                {% endfor %}
+                                        </div>
+                                </div>
+                        </div>
+
+                        <div class="col-xs-6 col-xs-height col-top">
+                                <div class="form-group">
+                                    <h4> Topics </h4>
+                                    <div class="checkbox">
+
+                                            {% for t in topics %}
+                                                <input type="checkbox" name="topic" id="{{t.id}}" value={{t.id}}> {{t.name}}
+                                                <br>
+                                            {% endfor %}
+                                        </div>
+                                </div>
+                        </div>
+
+                    </div>
+
+                 <input type="submit" value="Submit" class="btn btn-default" id="submitForm">
+
+</div>
+            </form>
+            <button class="btn btn-default" onclick="reset('OutputMatrix.csv')" id="reset">Reset</button>
+
+        </div>
+    </div>
+
+<link href="{% static 'css/scatter.css' %}" rel="stylesheet">
+
+<script src="{% static 'js/visualisation/scatter.js' %}"></script>
+<script>
+    scatter("OutputMatrix.csv");
+</script>
+<br>
+    </div>
+{% endblock %}
+
