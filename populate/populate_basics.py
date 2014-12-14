@@ -58,6 +58,7 @@ def populate_current_msps():
     with open(settings.PROJECT_PATH + '/scraper/msp_scraper/msps.csv', mode='r') as infile:
         reader = csv.reader(infile)
         i = 0
+        print "in msp"
         for row in reader:
             i += 1
             row = row[0].split(';')
@@ -75,6 +76,7 @@ def populate_former_msps():
     Takes static data from data.py (unfortunately, nowhere to find this data up-to-date consistently)
     :return: Populates the MSP table with instances of MSPs that are not in the Parliament at this time
     """
+    print "in former msp"
     for (constituency,party,msp) in former_or_new_msps:
         m = msp
         m.constituency = Constituency.objects.get(name=constituency)
