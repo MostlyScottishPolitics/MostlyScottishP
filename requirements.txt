@@ -14,7 +14,7 @@ bdist-mpkg==0.5.0
 billiard==3.3.0.19
 bonjour-py==0.3
 celery==3.1.17
-dj-database-url==0.3.0
+dj-database-url>=0.2.0
 dj-static==0.0.6
 django-configurations==0.8
 django-postgrespool==0.3.0
