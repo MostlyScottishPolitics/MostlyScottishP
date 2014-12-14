@@ -93,7 +93,7 @@ d3.json("/static/json/scotland-topojson-file.json",function(err,load){
         .style("opacity", 0.6)
         .style("stroke", "#fff")
         .on("click", function(d){
-        location.href='/msp/constituency/'+ids[gssCode[d.properties.gss]]+'/';})
+        location.href='/constituency/'+ids[gssCode[d.properties.gss]]+'/';})
       	.append("title")
         .text(function(d){
         var str = gssCode[d.properties.gss];
