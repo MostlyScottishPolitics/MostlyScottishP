@@ -30,8 +30,9 @@ def run_pca(votes):
 
     #Deletes every all-zero row in the input matrix (this is necessary for the filters to work correctly)
     matrix = matrix[~numpy.all(matrix == 0, axis=1)]
-
-    numpy.savetxt(settings.STATIC_PATH + "/csv/InputMatrix.csv", matrix, fmt="%s", delimiter=",")
+    
+    #Uncomment to see matrix being sent to MDP
+    #numpy.savetxt(settings.STATIC_PATH + "/csv/InputMatrix.csv", matrix, fmt="%s", delimiter=",")
 
 
     #PCA magic happens here using MDP
