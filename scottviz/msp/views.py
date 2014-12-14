@@ -131,7 +131,7 @@ def pca(request):
         if query.getlist('topic'):
             topics = query.getlist('topic')
             content['selected_topics'] = [topic for topic in reusable_query if topic.id in topics]
-        relevant_votes = new_pca(parties, topics)
+        new_pca(parties, topics)
 
         return HttpResponse()
     else:

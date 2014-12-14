@@ -26,8 +26,7 @@ def createQuery(cr, query, filter, parties, topics):
     if query == "votes":
         #No Filter
         if filter == 0:
-            output = "SELECT msp.foreignid, div.id, vote.vote FROM msp_msp AS msp, msp_division AS div, " \
-                     "msp_vote AS vote WHERE msp.id = vote.msp_id AND div.id= vote.division_id ORDER BY msp.foreignid"
+            output = "SELECT vote.msp_id, vote.division_id, vote.vote FROM msp_vote AS vote ORDER BY msp_id"
            # output = Vote.objects.all()
 
             return output
@@ -90,16 +89,19 @@ def handleArguments(parties, topics):
 #Fills in values of 2D null matrix, with each entry being a vote (X=divisions, Y=MSPs)
 def selectVotes(cr, matrix, parties, topics):
     result = cr.execute(createQuery(cr, "votes", filter, parties, topics))
-    vote = cr.fetchall()
+    votes = cr.fetchall()
     count = -1
 
-    for rows in vote:
-        count += 1
-        msp_entry = map(int, vote[count])[0]
-        division_entry = map(int, vote[count])[1]
-        vote_entry = map(int, vote[count])[2]
+    shift_msps = int(votes[0][0])
+
+    shift_division = int(votes[0][1])
+
+    for vote in votes:
+        msp_entry = int(vote[0])
+        division_entry = int(vote[1])
+        vote_entry = int(vote[2])
         try:
-            matrix[msp_entry-1][division_entry-1] = vote_entry
+            matrix[msp_entry-shift_msps][division_entry-shift_division] = vote_entry
         except:
             print "ERROR!!"
             print "MSP Entry: " + str(msp_entry)
@@ -109,15 +111,9 @@ def selectVotes(cr, matrix, parties, topics):
 
 # not in use
 def get_matrix(matrix):
-    votes = [int(vote.vote) for vote in Vote.objects.all()]
-    msps = [vote.msp for vote in Vote.objects.all()]
-    divisions = [vote.division for vote in Vote.objects.all()]
-    print votes[0]
-    print divisions[0]
-    print msps[0]
-    print "stuff"
+    votes = Vote.objects.all()
     for vote in votes:
-        matrix[vote.msp.id-1][vote.division.id-1] = vote.vote
+        matrix[vote.msp.foreignid-1][vote.division.id-1] = vote.vote
     print "at least this is done"
     return matrix
 
@@ -145,9 +141,8 @@ def new_pca(parties, topics):
     #Create null matrix (to be replaced with value wherever an msp voted on a division)
     matrix = numpy.zeros(shape=(maxMSP_int, maxDivision_int))
 
-    print "now here"
-
     matrix = selectVotes(cr, matrix, parties, topics)
+   # matrix = get_matrix(matrix)
 
     #Deletes every all-zero row in the input matrix (this is necessary for the filters to work correctly)
     matrix = matrix[~numpy.all(matrix == 0, axis=1)]
@@ -164,7 +159,7 @@ def new_pca(parties, topics):
 
 
     #Append name of party and MSP names(as a string) to each row of output text
-    msps = MSP.objects.all().order_by('foreignid')
+    msps = MSP.objects.all().order_by('id')
     count = -1
     path = os.path.dirname(os.path.abspath(__file__)) + outputLocation
     firstLine = 0
