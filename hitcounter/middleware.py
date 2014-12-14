@@ -1,8 +1,5 @@
-from django.contrib.contenttypes.models import ContentType
-from django.db.models import F
-
 __author__ = 'laura'
-from models import Hit
+from hitcounter.models import Hit
 
 
 class HitCountMiddleware(object):

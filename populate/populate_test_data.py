@@ -5,8 +5,9 @@ Not in use
 import csv
 import os
 import datetime
-from scottviz.msp.models import *
-from scottviz.scottviz.settings import STATIC_PATH
+
+from msp.models import *
+from scottviz.settings import STATIC_PATH
 
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "msp.settings")

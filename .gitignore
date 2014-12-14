@@ -1,6 +1,6 @@
 .DS_Store
 
-scottviz/scottviz/settings.py
+scottviz/settings.py
 
 ;;extensions to ignore
 *.log

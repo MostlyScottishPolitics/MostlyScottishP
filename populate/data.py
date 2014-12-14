@@ -7,9 +7,10 @@ I strongly encourage you to put any other such information here to make it:
     - accessible by other functions
 """
 
-import os
 from dateutil import parser
-from scottviz.msp.models import MSP,Division
+
+from msp.models import MSP,Division
+
 
 # topics for divisions
 topics = {

@@ -1,6 +1,8 @@
-import numpy
 import fileinput
 import os
+
+import numpy
+
 __author__ = '2168879m'
 
 

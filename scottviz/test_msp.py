@@ -1,6 +1,7 @@
 __author__ = 'laura'
 
 from django.test import TestCase
+
 from msp.models import *
 
 

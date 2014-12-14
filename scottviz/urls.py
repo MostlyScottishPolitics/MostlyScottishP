@@ -1,9 +1,17 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import patterns, include, url
 
-import views
-
+# Uncomment the next two lines to enable the admin:
+from django.contrib import admin
+admin.autodiscover()
+from msp import views
 
 urlpatterns = patterns('',
+                       # Examples:
+                       # url(r'^$', 'scottviz.views.home', name='home'),
+                       # url(r'^scottviz/', include('scottviz.foo.urls')),
+
+                       # Uncomment the admin/doc line below to enable admin documentation:
+                       url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
                        url(r'^$', views.home, name='home'),
                        url(r'^msps/', views.msps, name='msps'),
                        url(r'^msp/(?P<mspID>\w+)/$', views.msp, name='msp'),
@@ -21,4 +29,6 @@ urlpatterns = patterns('',
                        url(r'^topics/', views.topics, name='topics'),
 
 
+                       # Uncomment the next line to enable the admin:
+                       url(r'^admin/', include(admin.site.urls)),
 )

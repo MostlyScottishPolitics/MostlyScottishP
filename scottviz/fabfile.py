@@ -1,6 +1,7 @@
 __author__ = 'laura'
 from fabric.api import local
 from fabric.context_managers import lcd
+
 from scottviz.settings import PROJECT_PATH
 
 

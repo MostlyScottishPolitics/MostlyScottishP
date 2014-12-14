@@ -5,11 +5,10 @@ __author__ = '2168879m'
 
 import os
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "scottviz.scottviz.settings")
-from scottviz.msp.models import *
+from msp.models import *
 from data import *
 from dateutil import parser
 from xml.dom import minidom
-from string import replace, upper
 
 
 def get_files(d):
