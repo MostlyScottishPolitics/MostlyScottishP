@@ -6,7 +6,7 @@ import csv
 import os
 import datetime
 
-from msp.models import *
+from ..msp.models import *
 from scottviz.settings import STATIC_PATH
 
 
