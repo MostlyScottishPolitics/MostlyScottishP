@@ -1,3 +1,4 @@
+from populate import updatedb
 from scottviz import settings
 
 __author__ = '2168879m'
@@ -135,7 +136,7 @@ def main():
     populate_divisions_from(divisions_location, startdate, enddate)
     print "_read_divisions_and_votes_"
     # updates analytics; can be run to overwrite only for some from uptadedb
-    os.system('updatedb.py')
+    updatedb.main()
     print "_analytics_done_"
     print "_done_"
 
