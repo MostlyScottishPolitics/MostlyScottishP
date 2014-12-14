@@ -5,7 +5,7 @@ import fileinput
 import os
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "scottviz.settings")
-from scottviz import settings
+from msp import settings
 from msp.models import MSP, Division, Party, Vote
 import numpy
 import psycopg2 as pq
@@ -34,31 +34,31 @@ def createQuery(cr, query, filter, parties, topics):
         elif filter == 1:
             isFirst = 1
             count = 0
-            output = "SELECT msp.foreignid, div.id, vote.vote FROM msp_msp AS msp, msp_division AS div," \
-                     " msp_vote AS vote WHERE msp.id = vote.msp_id AND div.id= vote.division_id "
+            output = "SELECT vote.msp_id, vote.division_id, vote.vote FROM msp_vote AS vote, msp_msp AS msp " 
+            #output = "SELECT msp.foreignid, div.id, vote.vote FROM msp_msp AS msp, msp_division AS div," \
+            #         " msp_vote AS vote WHERE msp.id = vote.msp_id AND div.id= vote.division_id "
             while count < len(parties):
                 count += 1
                 getDistinctParties(cr, parties[count])
                 if isFirst == 1:
-                    output = output + "AND (msp.party_id = " + parties[count]
+                    output = output + "WHERE (msp.party_id = " + parties[count]
                     isFirst = 0
                 else:
                     output = output + " OR msp.party_id = " + parties[count]
-            output = output + ") ORDER BY msp.foreignid"
+            output = output + ") ORDER BY vote.msp_id"
         #Topic Filter
         elif filter == 2:
             isFirst = 1
             count = -1
-            output = "SELECT msp.foreignid, div.id, vote.vote FROM msp_msp AS msp, msp_division AS div," \
-                     " msp_vote AS vote WHERE msp.id = vote.msp_id AND div.id= vote.division_id "
+            output = "SELECT vote.msp_id, vote.division_id, vote.vote FROM msp_vote AS vote, msp_division AS div " 
             while count < len(topics) - 1:
                 count = count + 1
                 if isFirst == 1:
-                    output = output + "AND (div.topic_id = " + topics[count]
+                    output = output + "WHERE (div.topic_id = " + topics[count]
                     isFirst = 0
                 else:
                     output = output + " OR div.topic_id = " + topics[count]
-            output = output + ") ORDER BY msp.foreignid"
+            output = output + ") ORDER BY vote.msp_id"
     return output
 
 
