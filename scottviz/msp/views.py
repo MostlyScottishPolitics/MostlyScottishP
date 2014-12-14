@@ -14,9 +14,9 @@ from models import *
 
 from search import postcode_search, model_search
 from hitcounter.models import Hit
-from scatter.new_pca import  new_pca
 from scatter.get_votes_for_scatter import  get_votes_for_scatter
 from scatter.write_scatter import  write_scatter
+from scatter.run_pca import run_pca
 import  os
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "scottviz.settings")
 
@@ -132,10 +132,9 @@ def pca(request):
             parties = query.getlist('party')
         if query.getlist('topic'):
             topics = query.getlist('topic')
-            content['selected_topics'] = [topic for topic in reusable_query if topic.id in topics]
         votes = get_votes_for_scatter(parties,topics)
-        scores = pca(votes)
-        write_scatter(scores)
+        scores = run_pca(votes)
+        write_scatter(scores,parties)
 
         return HttpResponse()
     else:
@@ -144,8 +143,8 @@ def pca(request):
     # either by timestamp and keeping a record of what you responded to
     # or by having an extra field where you record the answer to requests
         votes = get_votes_for_scatter(parties,topics)
-        scores = pca(votes)
-        write_scatter(scores)
+        scores = run_pca(votes)
+        write_scatter(scores,parties)
         return render_to_response('msp/pca.html', content, context)
 
 

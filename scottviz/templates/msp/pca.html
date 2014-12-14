@@ -49,20 +49,6 @@
                                 </div>
                         </div>
 
-                        {% if selected_topics %}
-
-                        <div class="col-xs-4 col-xs-height col-top">
-                                <div class="form-group">
-                                    <h4> You have selected topics: </h4>
-                                    <div class="checkbox">
-                                            {% for t in selected_topics %}
-                                                <input type="checkbox" name="topic" value={{t.id}}> {{t.name}}
-                                                <br>
-                                            {% endfor %}
-                                        </div>
-                                </div>
-                        </div>
-                        {% endif %}
                     </div>
 
                  <input type="submit" value="Submit" class="btn btn-default" id="submitForm">

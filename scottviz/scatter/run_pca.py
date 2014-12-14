@@ -1,12 +1,14 @@
+import os
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "scottviz.settings")
 from scottviz import settings
 import numpy
+import mdp
 from msp.models import MSP, Division
 
 __author__ = '2168879m'
 
 
-def pca(votes):
+def run_pca(votes):
     # votes has 3 columns:
     # msp, division, vote
 
@@ -35,3 +37,5 @@ def pca(votes):
     #PCA magic happens here using MDP
     imdp = mdp.nodes.PCANode(output_dim=2)
     output = imdp(matrix)
+
+    return output

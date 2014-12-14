@@ -9,7 +9,7 @@ from scottviz import settings
 outputLocation = settings.STATIC_PATH + '/csv/OutputMatrix.csv'
 from msp.models import MSP
 
-def write_scatter(scores):
+def write_scatter(scores, parties):
 
     numpy.savetxt(outputLocation, scores, fmt="%s", delimiter=",")
     msps = MSP.objects.all().order_by('id')
@@ -22,7 +22,7 @@ def write_scatter(scores):
         if firstLine == 0:
             print 'X,Y,Party,MSP Name'
             firstLine = 1;
-        else:
+        elif (parties == []) or (str(msps[count].party.id) in parties):
             try:
                 print '{0}{1}'.format(line.rstrip('\n'), (',' + str(msps[count].party) + ',' + str(msps[count])))
             except:
