@@ -13,3 +13,4 @@ static3==0.5.1
 stevedore==1.1.0
 whitenoise==1.0.6
 wsgiref==0.1.2
+-e git://github.com/mdp-toolkit/mdp-toolkit#egg=MDP
