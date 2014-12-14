@@ -14,7 +14,7 @@ from models import *
 
 from search import postcode_search, model_search
 from hitcounter.models import Hit
-from pca.new_pca import  new_pca
+from scatter.new_pca import  new_pca
 import  os
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "scottviz.settings")
 
@@ -130,8 +130,8 @@ def pca(request):
             parties = query.getlist('party')
         if query.getlist('topic'):
             topics = query.getlist('topic')
-           # content['selected_topics'] = [topic for topic in reusable_query if topic.id in topics]
-        new_pca(parties, topics)
+            content['selected_topics'] = [topic for topic in reusable_query if topic.id in topics]
+        relevant_votes = new_pca(parties, topics)
 
         return HttpResponse()
     else:

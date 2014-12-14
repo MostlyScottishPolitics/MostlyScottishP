@@ -37,7 +37,7 @@ def pagehits_url(path):
 @register.simple_tag(takes_context=True)
 def hitinfo(context):
     """
-    help for pca?
+    help for scatter?
     :param context:
     :return:
     """
