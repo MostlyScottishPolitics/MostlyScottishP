@@ -4,7 +4,7 @@ __author__ = '2168879m'
 # should probably be followed up by updating the db with the computable statistics
 
 import os
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "scottviz.scottviz.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "scottviz.settings")
 from msp.models import *
 from data import *
 from dateutil import parser

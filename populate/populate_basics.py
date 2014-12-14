@@ -16,10 +16,11 @@ You can change this file, but it manages important, sensible data, so I discoura
 import csv
 import os
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "scottviz.scottviz.settings")
-from scottviz.msp.models import *
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "scottviz.settings")
+from msp.models import *
 from data import *
 from dateutil import parser
+from scottviz import settings
 from populate_divisions import populate_divisions_from
 
 

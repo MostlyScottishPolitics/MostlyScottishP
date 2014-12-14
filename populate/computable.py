@@ -9,7 +9,7 @@ All static data comes from data.py, please put any such data there.
 """
 
 import os
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "scottviz.scottviz.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "scottviz.settings")
 from msp.models import *
 from decimal import *
 from data import number_of_msps, independent_parties, topics_divisions, topic_extracter_name, topic_extracter_location, topics, party_links_colours
