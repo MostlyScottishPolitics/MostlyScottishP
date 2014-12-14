@@ -5,25 +5,19 @@ var scatter = function (csvFile) {
 	var padding = 20;
 	var border = 1;
 	var bordercolor = "black";
-
 	var dataset = [];//Hold the data loaded from csv file
-
 	//setting a color for each party
-	var colors = [["Scottish Conservative and Unionist","#5ABFF4"],
-			["Scottish Labour","#EB2743"],
-			["Scottish Liberal Democrats","#FF6936"],
-			["Scottish National Party","#F6DC60"],
-			["Scottish Green Party","#31C48E"],
-			["Independent","#986561"],
-			["No Party Affiliation", "#475070"]]
-			;
+	var colors_array = [];
+	//colors dictionary
+	var colors = {};
 
 			//Create SVG element
 			var svg = d3.select("#plot")
 						.append("svg")
 						.attr("width", w)
 						.attr("height", h);
-						
+
+			//Create border for the svg element
 			var borderPath = svg.append("rect")
        			.attr("x", 0)
        			.attr("y", 0)
@@ -33,13 +27,12 @@ var scatter = function (csvFile) {
        			.style("fill", "none")
        			.style("stroke-width", border);
 
-		var generateVisualization = function(){
 			// add the tooltip area to the webpage
 			var tooltip = d3.select(".plot").append("div")
     		.attr("class", "tooltip")
    		 	.style("opacity", 0);
 
-
+		var generateVisualization = function(){
 			//Create scaling functions
 				
 			// X scaling functions
@@ -69,20 +62,7 @@ var scatter = function (csvFile) {
 			   })
 			   .attr("r", 8)
 			   .style("fill", function(d){
-			   	if(d[2] == "Scottish Conservative and Unionist Party")
-			   		return "#5ABFF4";
-			   	if(d[2] == "Scottish Labour")
-			   		return "#EB2743";
-			   	if(d[2] == "Scottish Liberal Democrats")
-			   		return "#FF6936";
-			   	if(d[2] == "Scottish National Party")
-			   		return "#F6DC60";
-			   	if(d[2] == "Scottish Green Party")
-					return "#31C48E";
-				if(d[2] == "Independent")
-					return "#986561";
-				if(d[2] == "No Party Affiliation")
-					return "#475070";			   
+				return colors[d[2]];
 			   })
 			   .style("opacity", .5)
 			   .on("mouseover", function(d) {
@@ -91,9 +71,9 @@ var scatter = function (csvFile) {
                .style("left", (d3.event.pageX + 5) + "px")
                .style("top", (d3.event.pageY - 5) + "px")
                .style("opacity", .9);
-         		tooltip.text(d[3]);
+				tooltip.text(d[3]);
                })
-			    .on("mouseout", function(d) {
+				.on("mouseout", function(d) {
           		tooltip.transition()
                .duration(500)
                .style("opacity", 0);
@@ -101,7 +81,7 @@ var scatter = function (csvFile) {
 
 			//Create legend
 				var legend = svg.selectAll(".legend")
-      			.data(colors)
+      			.data(colors_array)
     			.enter().append("g")
       			.attr("class", "legend")
       			.attr("transform", function(d, i) { return "translate(0," + (i+1) * 20 + ")"; });
@@ -132,7 +112,15 @@ var scatter = function (csvFile) {
 			};
 
 
-			//Load the data from the csv file
+			//Load the data from the csv files
+			d3.csv("/static/csv/parties_colors.csv", function(error, d) {
+  				colors_array = d.map(function(d) { return [d["Party"], d["Color"]];
+  				});
+				for(var i = 0; i < colors_array.length; i++){
+					colors[colors_array[i][0]] = colors_array[i][1];
+				}
+  				});
+
 			d3.csv("/static/csv/"+csvFile+"", function(error, d) {
   				dataset = d.map(function(d) { return [ +d["X"], +d["Y"], d["Party"], d["MSP Name"]]; 
   				});
