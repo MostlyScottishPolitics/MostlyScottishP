@@ -1,6 +1,8 @@
 # Django settings for scottviz project.
 import os
 import django
+import dj_database_url
+
 
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
@@ -36,16 +38,16 @@ DATABASES = {
         }
     }
 }
-import dj_database_url
-DATABASES['default'] =  dj_database_url.config()
 
-# Enable Connection Pooling
-DATABASES['default']['ENGINE'] = 'django_postgrespool'
+
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
 ALLOWED_HOSTS = ['*']
+DATABASES['default'] = dj_database_url.config()
 
+# Enable Connection Pooling
+DATABASES['default']['ENGINE'] = 'django_postgrespool'
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
