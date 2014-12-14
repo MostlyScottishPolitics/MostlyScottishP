@@ -1,5 +1,4 @@
 Django==1.5.4
-MDP --allow-unverified MDP
 South==1.0.1
 argparse==1.2.2
 dj-database-url==0.3.0
