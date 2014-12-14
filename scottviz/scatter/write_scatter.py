@@ -8,11 +8,18 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "scottviz.settings")
 from scottviz import settings
 outputLocation = settings.STATIC_PATH + '/csv/OutputMatrix.csv'
 from msp.models import MSP
+from django.db.models import Q
 
 def write_scatter(scores, parties):
 
     numpy.savetxt(outputLocation, scores, fmt="%s", delimiter=",")
     msps = MSP.objects.all().order_by('id')
+
+    #Filter MSPs to list depending on the parties to display (needed for anything w/ Party Filters)
+    if parties != []:
+        query = reduce(lambda q,value: q|Q(party=str(value)), parties, Q())
+        msps = msps.filter(query)
+
     count = -1
     path = os.path.dirname(os.path.abspath(__file__)) + outputLocation
     firstLine = 0
