@@ -1,6 +1,5 @@
 # Django settings for scottviz project.
 import os
-import django
 import dj_database_url
 
 
@@ -25,20 +24,10 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'flowerpower',  # Or path to database file if using sqlite3.
-        # The following settings are not used with sqlite3:
-        'USER': 'scott',
-        'PASSWORD': '',
-        'HOST': '127.0.0.1',  # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-        'PORT': '5432',  # Set to empty string for default.
-        'OPTIONS': {
-        'autocommit': True,
-        }
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
 
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
@@ -147,7 +136,7 @@ TEMPLATE_DIRS = (
 )
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
-INSTALLED_APPS = [
+INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -155,6 +144,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'south'
     'hitcounter',
     'msp',
     'search',
@@ -163,10 +153,7 @@ INSTALLED_APPS = [
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
-]
-
-if django.VERSION < (1, 7):
-    INSTALLED_APPS.append('south')
+)
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
 
