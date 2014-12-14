@@ -33,9 +33,11 @@ def absent_votes(division):
     absentMSPs = MSP.objects.all()
     for vote in votes_read:
         absentMSPs = absentMSPs.exclude(foreignid=vote.msp.foreignid)
+        print absentMSPs
     # those msps had an absent vote
     for msp in absentMSPs:
         v = Vote(msp=msp, division=division, vote=Vote.ABSENT)
+        print v
         v.save()
 
 
@@ -82,7 +84,7 @@ def populate_divisions_from(files_location,startdate,enddate):
     files = get_files(files_location)
 
     for f in files:
-
+        print file
         # get date
         doc = minidom.parse(f)
         date = doc.getElementsByTagName("date")[0].firstChild.data
