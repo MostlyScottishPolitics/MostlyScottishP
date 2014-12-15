@@ -13,6 +13,7 @@ from models import *
 from search import postcode_search, model_search
 from scatter.get_votes_for_scatter import get_votes_for_scatter
 from scatter.write_scatter import write_scatter
+from scatter.get_data_scatter import get_data_scatter
 from scatter.run_pca import run_pca
 
 
@@ -107,7 +108,7 @@ def map(request):
     content['activesite'] = navbar['map']
     return render_to_response('map.html', content, context)
 
-@cache_page(60 * 15)
+
 def pca(request):
     """
     PCA view
@@ -131,7 +132,7 @@ def pca(request):
         votes = get_votes_for_scatter(parties,topics)
         scores = run_pca(votes)
         write_scatter(scores)
-
+        content['data'] = get_data_scatter(scores)
         return HttpResponse()
     else:
     # FOR THE CONCURRENCY
@@ -141,6 +142,7 @@ def pca(request):
         votes = get_votes_for_scatter(parties,topics)
         scores = run_pca(votes)
         write_scatter(scores)
+        content['data'] = get_data_scatter(scores)
         return render_to_response('pca.html', content, context)
 
 
