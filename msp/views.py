@@ -1,24 +1,20 @@
+import os
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "scottviz.settings")
 from collections import OrderedDict
 import csv
-import importlib
-from django.core.serializers import json
 
 from django.template import RequestContext
 from django.shortcuts import render_to_response
 from django.http import HttpResponse
-from django.utils.timezone import now
-from django.views.decorators.csrf import csrf_protect
-from django.views.decorators.http import require_POST
+from django.views.decorators.cache import cache_page
 
 from models import *
 
 from search import postcode_search, model_search
-from hitcounter.models import Hit
-from scatter.get_votes_for_scatter import  get_votes_for_scatter
-from scatter.write_scatter import  write_scatter
+from scatter.get_votes_for_scatter import get_votes_for_scatter
+from scatter.write_scatter import write_scatter
 from scatter.run_pca import run_pca
-import  os
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "scottviz.settings")
+
 
 
 
@@ -100,7 +96,7 @@ def home(request):
 
     return render_to_response('index.html', content, context)
 
-
+@cache_page(60 * 15)
 def map(request):
     """
     map view
@@ -111,7 +107,7 @@ def map(request):
     content['activesite'] = navbar['map']
     return render_to_response('map.html', content, context)
 
-
+@cache_page(60 * 15)
 def pca(request):
     """
     PCA view
@@ -254,7 +250,7 @@ def constituency(request, constituencyID):
     content['constituencies'] = kids
     return render_to_response('constituency.html', content, context)
 
-
+@cache_page(60 * 15)
 def divisions(request):
     """
 
