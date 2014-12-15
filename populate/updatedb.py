@@ -12,11 +12,11 @@ def main():
     get_lama_her_csv()
     print "_lama_got_her_csv_"
 
-    get_parties_colors_csv()
-    print "_get_parties_colors_csv_"
-
     populate_data_parties()
     print "_parties_info_"
+
+    get_parties_colors_csv()
+    print "_get_parties_colors_csv_"
 
     compute_rebellious_votes()
     print "_rebelious_votes_"
