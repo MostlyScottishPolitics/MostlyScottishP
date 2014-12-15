@@ -79,7 +79,7 @@ def populate_former_msps():
     print "in former msp"
     for (constituency,party,msp) in former_or_new_msps:
         m = msp
-        print msp
+        print "dead msp", msp
         m.constituency = Constituency.objects.get(name=constituency)
         m.party = Party.objects.get(name=party)
         m.save()
