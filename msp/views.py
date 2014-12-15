@@ -159,6 +159,7 @@ def msps(request):
     return render_to_response('msps.html', content, context)
 
 
+@cache_page(60 * 15)
 def msp(request, mspID):
     """
     view for a particular msp -- gets specific msp info from db, plus attendance and rebellions
@@ -176,7 +177,7 @@ def msp(request, mspID):
     content['msp'] = this_msp
     content['msp'].votecount = Vote.objects.filter(msp=this_msp).count()
     content['jobs'] = Job.objects.filter(msp=this_msp)
-    rebellious = Vote.objects.filter(msp=this_msp, rebellious=True)
+    rebellious = Vote.objects.filter(msp=this_msp, rebellious=True).select_related('vote')
     content['rebellions'] = rebellious
     content['for'] = rebellious.filter(vote=Vote.YES)
     content['against'] = rebellious.filter(vote=Vote.NO)
@@ -252,6 +253,7 @@ def constituency(request, constituencyID):
     content['constituencies'] = kids
     return render_to_response('constituency.html', content, context)
 
+
 @cache_page(60 * 15)
 def divisions(request):
     """
@@ -290,7 +292,7 @@ def division(request, divisionID):
     content['related'] = q.exclude(motionid__exact=this_division.motionid).order_by('motionid')
     return render_to_response('division.html', content, context)
 
-
+@cache_page(60 * 15)
 def topics(request):
     """
     :param request:
@@ -381,11 +383,14 @@ def export_csv(request, thing):
         writer = csv.writer(response)
         writer.writerow(["Motion id", "Parent", "Date", "Proposed by", "Topic", "Description", "Result", "Link"])
         for div in divs:
-            writer.writerow([div.motionid, div.parent, div.date, None, div.topic, div.motiontext, div.result, div.link])
+            writer.writerow([div.motionid, div.parent, div.date, None, div.motiontopic, div.motiontext, div.result, div.link])
     elif thing == "msps":
         msps = MSP.objects.order_by('lastname')
         writer = csv.writer(response)
-        writer.writerow(["Name", "Party", "Constituency"])
+        writer.writerow(["Name", "Status", "MSP From", "MSP Until", "Party", "Party Member From", "Party Member Until",
+                         "Constituency", "Presence", "Rebellions"])
         for msp in msps:
-            writer.writerow([msp.__unicode__(), msp.party, msp.constituency])
+            writer.writerow([msp.__unicode__(), msp.status, msp.member_startdate, msp.member_enddate, msp.party,
+                             msp.party_startdate, msp.party_enddate, msp.constituency, msp.presence, msp.rebellions])
     return response
+
