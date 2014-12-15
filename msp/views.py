@@ -341,7 +341,7 @@ def search_results(request):
     query = request.GET['q']
     content['activesite'] = {
         'id': 'search',
-        'title': '',
+        'title': 'Search',
         'desc': 'Results for: ' + query,
     }
     content['postcode'] = {}
@@ -357,7 +357,7 @@ def search_results(request):
         else:
             entry_query = model_search.get_query(query, ['firstname', 'lastname', ])
             content['msps'] = MSP.objects.filter(entry_query)
-            entry_query = model_search.get_query(query, ['motionid', 'motiontopic', 'motiontext', ])
+            entry_query = model_search.get_query(query, ['motionid', 'motiontopic', 'motiontext', 'job', ])
             content['divisions'] = Division.objects.filter(entry_query)
             entry_query = model_search.get_query(query, ['name', ])
             content['regions'] = Constituency.objects.filter(entry_query)
@@ -390,7 +390,8 @@ def export_csv(request, thing):
         writer.writerow(["Name", "Status", "MSP From", "MSP Until", "Party", "Party Member From", "Party Member Until",
                          "Constituency", "Presence", "Rebellions"])
         for msp in msps:
-            writer.writerow([msp.__unicode__(), msp.status, msp.member_startdate, msp.member_enddate, msp.party,
-                             msp.party_startdate, msp.party_enddate, msp.constituency, msp.presence, msp.rebellions])
+            writer.writerow([msp.__unicode__(), 'Active' if msp.status is 1 else 'Inactive', msp.member_startdate,
+                             msp.member_enddate, msp.party, msp.party_startdate, msp.party_enddate, msp.constituency,
+                             msp.presence, msp.rebellions])
     return response
 

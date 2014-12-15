@@ -98,4 +98,10 @@
     </div>
 {% endif %}
 
+{% if !parties and !divisions and !regios and !msps and !postcode %}
+<div class="container-fluid" id="noResults">
+    <p class="lead"> Your query returned no results </p>
+{% endfor %}
+    </div>
+
 {% endblock %}
