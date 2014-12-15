@@ -264,6 +264,7 @@ def divisions(request):
     return render_to_response('divisions.html', content, context)
 
 
+@cache_page(60 * 15)
 def division(request, divisionID):
     """
 

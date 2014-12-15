@@ -18,6 +18,8 @@ def pagehits(context):
         return hits
     except Hit.DoesNotExist:
         return 0
+    except KeyError:
+        return 0
 
 
 @register.simple_tag
