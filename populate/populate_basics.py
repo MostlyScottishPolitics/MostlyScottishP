@@ -1,3 +1,4 @@
+import time
 from populate import updatedb
 
 __author__ = '2168879m'
@@ -58,7 +59,6 @@ def populate_current_msps():
     with open(settings.PROJECT_PATH + '/scraper/msp_scraper/msps.csv', mode='r') as infile:
         reader = csv.reader(infile)
         i = 0
-        print "in msp"
         for row in reader:
             i += 1
             row = row[0].split(';')
@@ -79,6 +79,7 @@ def populate_former_msps():
     print "in former msp"
     for (constituency,party,msp) in former_or_new_msps:
         m = msp
+        print msp
         m.constituency = Constituency.objects.get(name=constituency)
         m.party = Party.objects.get(name=party)
         m.save()
@@ -132,6 +133,7 @@ def main():
     msp_photos()
     print "_photos_for_all_msps_"
     msp_jobs()
+    time.sleep(60)
     print "_all_jobs_"
     # reads new scraped data; can be run to overwrite from populate_divisions
     populate_divisions_from(divisions_location, startdate, enddate)

@@ -26,7 +26,6 @@ def absent_votes(division):
     :return:
     """
     # if an msp did not have a vote read, he/she was absent
-    print "in absent votes"
     # get votes read until now
     votes_read = Vote.objects.filter(division=division)
     # get msps that didn't vote
@@ -48,7 +47,6 @@ def get_votes(parsing_law,division,type,result):
     :param result: the type of vote to be saved in the db: "YES", "NO", "ABSENT"
     :return:
     """
-    print "get votes"
     if len(parsing_law.getElementsByTagName(type)):
         msps = parsing_law.getElementsByTagName(type)[0].getElementsByTagName("msp")
         for msp in msps:
@@ -63,11 +61,10 @@ def get_votes(parsing_law,division,type,result):
                 if lastname == 'GIBson':
                     lastname =  'Gibson'
                 if lastname != 'Copy':
-                    msp = MSP.objects.get(lastname=str(lastname), firstname=str(firstname))
+                    msp = MSP.objects.get(firstname=firstname, lastname=lastname)
                     print lastname, firstname
-                    if msp is not None:
-                        v = Vote(msp=msp, division=division, vote=result)
-                        v.save()
+                    v = Vote(msp=msp, division=division, vote=result)
+                    v.save()
 
 def populate_divisions_from(files_location,startdate,enddate):
     """
@@ -85,7 +82,6 @@ def populate_divisions_from(files_location,startdate,enddate):
     files = get_files(files_location)
 
     for f in files:
-        print f
         # get date
         doc = minidom.parse(f)
         date = doc.getElementsByTagName("date")[0].firstChild.data
