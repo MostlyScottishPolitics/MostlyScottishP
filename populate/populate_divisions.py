@@ -93,7 +93,7 @@ def populate_divisions_from(files_location,startdate,enddate):
         dt = parser.parse(date).date()
         st = parser.parse(startdate).date()
         ed = parser.parse(enddate).date()
-
+        currentsession = False
         # startdate reached
         if dt > st:
             currentsession = True
@@ -101,7 +101,7 @@ def populate_divisions_from(files_location,startdate,enddate):
         # enddate reached
         if dt > ed:
             currentsession = False
-
+        print currentsession, f
         if currentsession:
             laws = doc.getElementsByTagName("law")
             # parse each law
