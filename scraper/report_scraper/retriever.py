@@ -40,7 +40,7 @@ def import_processed_urls(url_file):
             else:
                 return json_data
     except IOError, e:
-        scraper.log("Can't open file.")
+        scraper.log("Can't open file. Creating it...")
         dict_url = dict()
         return dict_url
 
