@@ -101,7 +101,6 @@ def populate_divisions_from(files_location,startdate,enddate):
         # enddate reached
         if dt > ed:
             currentsession = False
-        print st, ed, dt, currentsession
 
         if currentsession:
             laws = doc.getElementsByTagName("law")
