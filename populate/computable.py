@@ -39,6 +39,15 @@ def get_lama_her_csv():
                 result = len([msp for msp in MSP.objects.filter(party=party) if msp.constituency in constituencies])
                 myFile.write(',' + str(result))
 
+def get_parties_colors_csv():
+    with open(settings.STATIC_PATH+'/csv/parties_colors.csv','w') as f:
+        myFile = File(f)
+        header = 'Party,Color'
+        myFile.write(header)
+        parties = Party.objects.all().order_by('id')
+        for party in parties:
+            myFile.write('\n' + str(party.name))
+            myFile.write(',' + str(party.colour))
 
 def compute_division_turnout():
     """
