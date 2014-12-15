@@ -84,7 +84,7 @@ def populate_divisions_from(files_location,startdate,enddate):
         # get date
         doc = minidom.parse(f)
         date = doc.getElementsByTagName("date")[0].firstChild.data
-        dt = parser.parse(date).date()
+        dt = parser.parse(date)
 
         # startdate reached
         if date >= startdate:
