@@ -17,6 +17,10 @@ def run_pca(votes):
     len_divisions = Division.objects.count()
     matrix = numpy.zeros(shape=(len_msps,len_divisions))
 
+    # get a list of the msps selected, in the exact same order as they are entered in the matrix
+    # safer than order by's
+    msp_list = []
+
     # matrix rows from 0 to len_msps-1, but msps id from x to x+len_msps-1
     # so, normalize that shift
     # same for divisions
@@ -27,6 +31,8 @@ def run_pca(votes):
         division_entry = int(vote[1])
         vote_entry = int(vote[2])
         matrix[msp_entry-shift_msps][division_entry-shift_division] = vote_entry
+        if not msp_entry in msp_list:
+            msp_list += [msp_entry]
 
     #Deletes every all-zero row in the input matrix (this is necessary for the filters to work correctly)
     matrix = matrix[~numpy.all(matrix == 0, axis=1)]
@@ -37,6 +43,10 @@ def run_pca(votes):
 
     #PCA magic happens here using MDP
     imdp = mdp.nodes.PCANode(output_dim=2)
-    output = imdp(matrix)
+    scores = imdp(matrix)
 
-    return output
+    scores_pairings = []
+    for i in range(len(msp_list)):
+        scores_pairings += [[msp_list[i], scores[i]]]
+
+    return scores_pairings

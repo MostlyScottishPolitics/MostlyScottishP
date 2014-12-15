@@ -130,7 +130,7 @@ def pca(request):
             topics = query.getlist('topic')
         votes = get_votes_for_scatter(parties,topics)
         scores = run_pca(votes)
-        write_scatter(scores,parties)
+        write_scatter(scores)
 
         return HttpResponse()
     else:
@@ -140,7 +140,7 @@ def pca(request):
     # or by having an extra field where you record the answer to requests
         votes = get_votes_for_scatter(parties,topics)
         scores = run_pca(votes)
-        write_scatter(scores,parties)
+        write_scatter(scores)
         return render_to_response('pca.html', content, context)
 
 
