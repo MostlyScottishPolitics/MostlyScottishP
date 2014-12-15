@@ -8,7 +8,7 @@
 <!--<form class="navbar-form" role="search" method="GET" action="{% url 'search_results' %}"> -->
 <div class="container-fluid">
         <p>Select some parties and topics to get an idea on how parties voted on the matter. Click Submit to
-        generate new visualisation based on your options and reset to reset the plot to it's initial state.
+        generate new visualisation based on your options and reset to reset the plot to its initial state.
         </p>
 
     <br>
@@ -25,6 +25,7 @@
 
                         <div class="col-xs-6 col-xs-height col-top">
                                 <div class="form-group">
+                                    {% if parties %}
                                     <h4> Parties </h4>
                                     <div class="checkbox">
 
@@ -33,11 +34,13 @@
                                                     <br>
                                                 {% endfor %}
                                         </div>
+                                    {% endif %}
                                 </div>
                         </div>
 
                         <div class="col-xs-6 col-xs-height col-top">
                                 <div class="form-group">
+                                    {% if topics %}
                                     <h4> Topics </h4>
                                     <div class="checkbox">
 
@@ -46,6 +49,7 @@
                                                 <br>
                                             {% endfor %}
                                         </div>
+                                    {% endif %}
                                 </div>
                         </div>
 

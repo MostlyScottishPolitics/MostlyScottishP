@@ -87,11 +87,11 @@ def populate_divisions_from(files_location,startdate,enddate):
         dt = parser.parse(date).date()
 
         # startdate reached
-        if date == startdate:
+        if date >= startdate:
             currentsession = True
 
         # enddate reached
-        if date == enddate:
+        if date <= enddate:
             currentsession = False
 
         if currentsession:
