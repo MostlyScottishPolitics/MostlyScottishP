@@ -3,7 +3,7 @@ from django.db import models
 from django.utils.translation import ugettext as _
 
 # Set the minimum time between two hits in minutes
-TIME_BETWEEN_HITS = 60
+TIME_BETWEEN_HITS = 24 * 60
 
 
 class Hit(models.Model):

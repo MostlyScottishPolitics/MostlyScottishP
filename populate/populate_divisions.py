@@ -1,3 +1,7 @@
+from datetime import timedelta
+from time import mktime
+from django.utils.timezone import utc
+
 __author__ = '2168879m'
 
 # run to repopulate divisions and vote
@@ -84,15 +88,21 @@ def populate_divisions_from(files_location,startdate,enddate):
         # get date
         doc = minidom.parse(f)
         date = doc.getElementsByTagName("date")[0].firstChild.data
-        dt = parser.parse(date)
+        dt = parser.parse(date).date()
+        st = parser.parse(startdate).date()
+        ed = parser.parse(enddate).date()
+        #mktime(utc.localize(st).utctimetuple())
+        #mktime(utc.localize(ed).utctimetuple())
+        #mktime(utc.localize(dt).utctimetuple())
 
         # startdate reached
-        if date >= startdate:
+        if dt > st:
             currentsession = True
 
         # enddate reached
-        if date <= enddate:
+        if dt > ed:
             currentsession = False
+        print st, ed, dt, currentsession
 
         if currentsession:
             laws = doc.getElementsByTagName("law")
