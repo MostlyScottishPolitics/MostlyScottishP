@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
+{% load hitcounts %}
 <html>
 <head>
     <!--meta, title -->
@@ -129,6 +130,7 @@
       <li><a href="{% url 'aboutsp' %}">About the Scottish Parliament</a></li>
 
     </ul>
+     <p>This page has been viewed: {% pagehits %}</p>
   </div>
 </footer>
 <!-- Placed at the end of the document so the pages load faster -->

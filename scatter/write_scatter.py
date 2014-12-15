@@ -18,19 +18,19 @@ def write_scatter(scores, parties):
     msps = MSP.objects.all().order_by('id')
 
     #Filter MSPs to list depending on the parties to display (needed for anything w/ Party Filters)
-    if parties != []:
-        query = reduce(lambda q,value: q|Q(party=str(value)), parties, Q())
-        msps = msps.filter(query)
+    #if parties != []:
+     #   query = reduce(lambda q,value: q|Q(party=str(value)), parties, Q())
+     #   msps = msps.filter(query)
 
     count = -1
-    path = os.path.dirname(os.path.abspath(__file__)) + outputLocation
-    firstLine = 0
+  #  path = os.path.dirname(os.path.abspath(__file__)) + outputLocation
+    firstLine = True
     for line in fileinput.input(outputLocation, inplace=1):
         count += 1
         #If first line of csv add header, else append party name
-        if firstLine == 0:
+        if firstLine :
             print 'X,Y,Party,MSP Name'
-            firstLine = 1;
+            firstLine = False;
         elif (parties == []) or (str(msps[count].party.id) in parties):
             try:
                 print '{0}{1}'.format(line.rstrip('\n'), (',' + str(msps[count].party) + ',' + str(msps[count])))
