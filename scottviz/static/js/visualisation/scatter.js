@@ -28,7 +28,7 @@ var scatter = function (csvFile) {
        			.style("stroke-width", border);
 
 			// add the tooltip area to the webpage
-			var tooltip = d3.select(".plot").append("div")
+			var tooltip = d3.select("#plot").append("div")
     		.attr("class", "tooltip")
    		 	.style("opacity", 0);
 
@@ -65,7 +65,7 @@ var scatter = function (csvFile) {
 				return colors[d[2]];
 			   })
 			   .style("opacity", .5)
-			   .on("mouseover", function(d) {
+			   .on("click", function(d) {
           		tooltip.transition()
                .duration(200)
                .style("left", (d3.event.pageX + 5) + "px")
