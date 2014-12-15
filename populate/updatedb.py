@@ -9,7 +9,7 @@ def main():
     you can add your own functions here (but I would recommend to do it in computable.py)  and put the calls here.
     """
 
-    get_lama_her_csv()
+    get_map_csv()
     print "_lama_got_her_csv_"
 
     populate_data_parties()
