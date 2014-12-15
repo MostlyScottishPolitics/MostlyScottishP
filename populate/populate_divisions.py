@@ -64,8 +64,10 @@ def get_votes(parsing_law,division,type,result):
                     lastname =  'Gibson'
                 if lastname != 'Copy':
                     msp = MSP.objects.get(lastname=str(lastname), firstname=str(firstname))
-                    v = Vote(msp=msp, division=division, vote=result)
-                    v.save()
+                    print lastname, firstname
+                    if msp is not None:
+                        v = Vote(msp=msp, division=division, vote=result)
+                        v.save()
 
 def populate_divisions_from(files_location,startdate,enddate):
     """
