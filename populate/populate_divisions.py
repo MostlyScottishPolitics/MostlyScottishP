@@ -65,6 +65,8 @@ def get_votes(parsing_law,division,type,result):
                 if lastname == 'GIBson':
                     lastname =  'Gibson'
                 if lastname != 'Copy':
+                    print firstname, lastname, "Stuck here"
+                    print MSP.objects.get(firstname=firstname, lastname=lastname)
                     msp = MSP.objects.get(firstname=firstname, lastname=lastname)
                     v = Vote(msp=msp, division=division, vote=result)
                     v.save()
@@ -91,9 +93,6 @@ def populate_divisions_from(files_location,startdate,enddate):
         dt = parser.parse(date).date()
         st = parser.parse(startdate).date()
         ed = parser.parse(enddate).date()
-        #mktime(utc.localize(st).utctimetuple())
-        #mktime(utc.localize(ed).utctimetuple())
-        #mktime(utc.localize(dt).utctimetuple())
 
         # startdate reached
         if dt > st:

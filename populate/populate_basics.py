@@ -79,7 +79,6 @@ def populate_former_msps():
     print "in former msp"
     for (constituency,party,msp) in former_or_new_msps:
         m = msp
-        print "dead msp", msp
         m.constituency = Constituency.objects.get(name=constituency)
         m.party = Party.objects.get(name=party)
         m.save()
@@ -133,13 +132,11 @@ def main():
     msp_photos()
     print "_photos_for_all_msps_"
     msp_jobs()
-    time.sleep(60)
     print "_all_jobs_"
     # reads new scraped data; can be run to overwrite from populate_divisions
     populate_divisions_from(divisions_location, startdate, enddate)
     print "_read_divisions_and_votes_"
     # updates analytics; can be run to overwrite only for some from uptadedb
-    updatedb.main()
     print "_analytics_done_"
     print "_done_"
 
