@@ -150,7 +150,7 @@ function getCookie(name) {
 }
 var csrftoken = getCookie('csrftoken');
 
-$('#submitForm').click(function() {
+$('#submitForm').click(function(event) {
 	event.preventDefault();
     var str = $('#post-form').serialize();
     $('#paramsSent').html(str);
