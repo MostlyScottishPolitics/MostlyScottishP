@@ -8,6 +8,7 @@ __author__ = '2168879m'
 # should probably be followed up by updating the db with the computable statistics
 
 import os
+
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "scottviz.settings")
 from msp.models import *
 from data import *
@@ -22,6 +23,7 @@ def get_files(d):
     :return: list of paths for files
     """
     return [os.path.join(d, f) for f in os.listdir(d) if os.path.isfile(os.path.join(d, f))]
+
 
 def absent_votes(division):
     """
@@ -42,7 +44,7 @@ def absent_votes(division):
         v.save()
 
 
-def get_votes(parsing_law,division,type,result):
+def get_votes(parsing_law, division, type, result):
     """
     Populates the vote table with result vote, for all votes of some type, from parsing_law, for division
     :param parsing_law : a minidom element from the scraped file
@@ -61,17 +63,16 @@ def get_votes(parsing_law,division,type,result):
                 lastname = str(lastname.data)
                 # check for recorded errors with scraper
                 if lastname == 'Mackenzie':
-                    lastname =  'MacKenzie'
+                    lastname = 'MacKenzie'
                 if lastname == 'GIBson':
-                    lastname =  'Gibson'
+                    lastname = 'Gibson'
                 if lastname != 'Copy':
-                    print firstname, lastname, "Stuck here"
-                    print MSP.objects.get(firstname=firstname, lastname=lastname)
                     msp = MSP.objects.get(firstname=firstname, lastname=lastname)
                     v = Vote(msp=msp, division=division, vote=result)
                     v.save()
 
-def populate_divisions_from(files_location,startdate,enddate):
+
+def populate_divisions_from(files_location, startdate, enddate):
     """
     reads all files within an interval from a location
     :param files_location : path to the folder where the scraped files are at
@@ -94,14 +95,10 @@ def populate_divisions_from(files_location,startdate,enddate):
         st = parser.parse(startdate).date()
         ed = parser.parse(enddate).date()
         currentsession = False
-        # startdate reached
-        if dt > st:
+        # date between startdate and enddate
+        if st <= dt <= ed:
             currentsession = True
 
-        # enddate reached
-        if dt > ed:
-            currentsession = False
-        print currentsession, f
         if currentsession:
             laws = doc.getElementsByTagName("law")
             # parse each law
@@ -109,23 +106,28 @@ def populate_divisions_from(files_location,startdate,enddate):
 
                 motion = False
                 motiontype = law.getElementsByTagName("type")
-                if motiontype!=[]:
+                if motiontype != []:
                     if motiontype[0].firstChild.data == "motion":
                         motion = True
 
                 motionid = law.getElementsByTagName("id")[0].firstChild.data
 
-                motiontopic = law.getElementsByTagName("topic")[0].firstChild.data.encode('latin1','backslashreplace').replace("\\u2019","\'").replace("\\u2014","-").replace("\u201d","\"").replace("\u201c","\"")
+                motiontopic = law.getElementsByTagName("topic")[0].firstChild.data.encode('latin1',
+                                                                                          'backslashreplace').replace(
+                    "\\u2019", "\'").replace("\\u2014", "-").replace("\u201d", "\"").replace("\u201c", "\"")
 
                 text_raw = law.getElementsByTagName("text")
-                if text_raw == [] :
-                    text='n/a'
+                if text_raw == []:
+                    text = 'n/a'
                 else:
-                    text = text_raw[0].firstChild.data.encode('latin1','backslashreplace').replace("\\u2019","\'").replace("\\u2014","-").replace("\u201d","\"").replace("\u201c","\"")
+                    text = text_raw[0].firstChild.data.encode('latin1', 'backslashreplace').replace("\\u2019",
+                                                                                                    "\'").replace(
+                        "\\u2014", "-").replace("\u201d", "\"").replace("\u201c", "\"")
 
 
                 # parsed most info for division
-                division = Division(parent=None, motion=motion, motionid=motionid, motiontext=text.decode('latin1'), motiontopic=motiontopic.decode('latin1'), date=dt)
+                division = Division(parent=None, motion=motion, motionid=motionid, motiontext=text.decode('latin1'),
+                                    motiontopic=motiontopic.decode('latin1'), date=dt)
 
                 # get result for this division
                 yup = law.getElementsByTagName("agreed")[0].firstChild
@@ -150,6 +152,7 @@ def main():
     print "_deleted_old_divisions_and_votes_"
     populate_divisions_from(divisions_location, startdate, enddate)
     print "_read_new_divisions_and_votes_"
+
 
 if __name__ == '__main__':
     main()
