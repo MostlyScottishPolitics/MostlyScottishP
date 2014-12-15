@@ -20,7 +20,7 @@ from django.core.files import File
 
 # the definitions here can be changed to get other statistics
 
-def get_lama_her_csv():
+def get_map_csv():
     with open(settings.STATIC_PATH + '/csv/map_data.csv', 'w') as f:
         myFile = File(f)
         header = 'Region,id'
