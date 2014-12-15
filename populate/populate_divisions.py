@@ -62,7 +62,6 @@ def get_votes(parsing_law,division,type,result):
                     lastname =  'Gibson'
                 if lastname != 'Copy':
                     msp = MSP.objects.get(firstname=firstname, lastname=lastname)
-                    print lastname, firstname
                     v = Vote(msp=msp, division=division, vote=result)
                     v.save()
 
