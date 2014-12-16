@@ -132,7 +132,8 @@ def pca(request):
         votes = get_votes_for_scatter(parties,topics)
         scores = run_pca(votes)
         content['scatter_data'] = mark_safe(get_data_scatter(scores))
-        return HttpResponse()
+        return render_to_response('pca.html', content, context)
+
     else:
     # FOR THE CONCURRENCY
     # You want to find the 'freshest' which you have not responded to

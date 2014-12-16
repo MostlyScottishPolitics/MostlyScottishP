@@ -13,7 +13,7 @@ class Hit(models.Model):
     time = models.DateTimeField(auto_now_add=True, editable=False)
     ipAddress = models.IPAddressField(null=True)
     session = models.CharField(max_length=40, null=True)
-    url = models.CharField(_('URL'), max_length=2000)
+    url = models.CharField(max_length=2000)
 
     def save(self, *args, **kwargs):
         # save only if the required amount of time has passed since last visit
@@ -28,4 +28,25 @@ class Hit(models.Model):
         else:
             super(Hit, self).save(*args, **kwargs)
 
+
+#class HitCount(models.Model):
+#    """
+#    hit model
+#    """
+#    url = models.CharField(max_length=2000)
+#    count = models.PositiveIntegerField(_('Hits'), default=0)
+#
+#    def save(self, *args, **kwargs):
+#        # save only if the required amount of time has passed since last visit
+#        if self.id:
+#            hits = Hit.objects.filter(ipAddress=self.ipAddress)
+#            hits = hits.filter(url=self.url)
+#            hits = hits.filter(session=self.session)
+#            hits = hits.filter(time__gt=self.time - timedelta(minutes=int(TIME_BETWEEN_HITS)))
+#            if len(hits) == 0:
+#                super(HitCount, self).save(*args, **kwargs)
+#            else:
+#                hits.delete()
+#        else:
+#            super(HitCount, self).save(*args, **kwargs)
 

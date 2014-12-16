@@ -148,21 +148,29 @@ function getCookie(name) {
 }
 var csrftoken = getCookie('csrftoken');
 
-var submit = function(param) {
-	event.preventDefault();
-    var str = $('#post-form').serialize();
-    $('#paramsSent').html(str);
+/*$('#submitForm').onclick(function(param) {
+	//preventDefault();
+    //var str = $('#post-form').serialize();
+    //$('#paramsSent').html(str);
     console.log(str);
-    $.post('',
-          str,
+	reset(param);
+
+});*/
+/*
+$('#submitForm').submit(function(e) {
+    $.post('/pca/',
+          $(this).serialize(),
           function(data){
-			  	reset(param);
+			  reset(param);
 
           });
- };
+		event.preventDefault();
+
+ });
 //Reset the visualization to its original state
 
-var resetButton = function(param) {
+var submitForm = function(){
+	event.preventDefault();
     $.get('',
           function(data){
 
@@ -192,5 +200,17 @@ var resetButton = function(param) {
             console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
         }
     });
- };
+}*/
+var resetButton = function(param) {
+	event.preventDefault();
+    $.get('',
+          function(data){
+
+			$('input[name=party]').attr('checked', false);
+			$('input[name=topic]').attr('checked', false);
+			  	reset(param);
+
+          });
+
+ }
 
