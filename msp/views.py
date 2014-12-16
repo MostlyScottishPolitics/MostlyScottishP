@@ -36,16 +36,16 @@ navbar = (
         'desc': 'List of all votes in the Parliament'
     }),
 
-    ('map', {
-        'id': 'map',
-        'title': 'Map',
-        'desc': 'Interactive map of scottish regions',
-    }),
-
     ('topics', {
         'id': 'topics',
         'title': 'Topics',
         'desc': 'Browse topics and divisions related to them'
+    }),
+
+    ('map', {
+        'id': 'map',
+        'title': 'Map',
+        'desc': 'Interactive map of scottish regions',
     })
 )
 
@@ -90,8 +90,8 @@ def home(request):
     context = RequestContext(request)
     content['activesite'] = {
         'id': 'home',
-        'title': 'Welcome to Mostly Scottish Politics(MSP)',
-        'desc': "Browse motions, regions, MSPs, see how they vote, and don't forget to have a go at our interactive visualisations and map ",
+        'title': 'Welcome to Mostly Scottish Politics (MSP)',
+        'desc': "Browse motions, regions, Members of the Scottish Parliament (MSPs), see how they vote, and don't forget to have a go at our interactive visualisations and map ",
     }
     content["divisions"] = Division.objects.order_by('-date')[:10]
 
