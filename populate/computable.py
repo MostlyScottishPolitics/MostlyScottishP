@@ -133,7 +133,7 @@ def independent_party_rebellious_votes(parties):
     """
 
     # MSPs for independent cannot make rebellious votes
-    votes = Vote.objects.all()
+    votes = Vote.objects.all().select_related('msp')
     for vote in votes:
         if vote.msp.party in parties:
             vote.rebellious = False
@@ -178,16 +178,20 @@ def not_independent_party_rebellious_votes(parties):
     for party in parties:
         for division in divisions:
             expressed_votes_from_party = len(
-                [vote for vote in Vote.objects.filter(division=division).exclude(vote=Vote.ABSENT) if
-                 vote.msp.party == party])
+                [vote for vote in Vote.objects.filter(division=division).exclude(vote=Vote.ABSENT).select_related('msp')
+                 if vote.msp.party == party])
             threshold = (expressed_votes_from_party + 1) / 2
             # get all the votes for this division
             division_votes = Vote.objects.filter(division=division)
             # split the votes by vote
-            votes_yes = [vote for vote in division_votes.filter(vote=Vote.YES) if vote.msp.party == party]
-            votes_no = [vote for vote in division_votes.filter(vote=Vote.NO) if vote.msp.party == party]
-            votes_abstain = [vote for vote in division_votes.filter(vote=Vote.ABSTAIN) if vote.msp.party == party]
-            votes_absent = [vote for vote in division_votes.filter(vote=Vote.ABSENT) if vote.msp.party == party]
+            votes_yes = [vote for vote in division_votes.filter(vote=Vote.YES).select_related('msp')
+                         if vote.msp.party == party]
+            votes_no = [vote for vote in division_votes.filter(vote=Vote.NO).select_related('msp')
+                        if vote.msp.party == party]
+            votes_abstain = [vote for vote in division_votes.filter(vote=Vote.ABSTAIN).select_related('msp')
+                             if vote.msp.party == party]
+            votes_absent = [vote for vote in division_votes.filter(vote=Vote.ABSENT).select_related('msp')
+                            if vote.msp.party == party]
             # decide a party vote if threshold reached
             # and put the results in
             if len(votes_yes) > threshold:
@@ -373,8 +377,8 @@ def populate_analytics():
     """
     Analytics.objects.all().delete()
 
-    parties = Party.objects.all().exclude(name__startswith='No Party').order_by('name')
-    divisions = Division.objects.all()
+    parties = Party.objects.all().exclude(name__startswith='No Party').order_by('name').select_related('division')
+    divisions = Division.objects.all().select_related('party')
 
     for division in divisions:
         TWOPLACES = Decimal(10) ** -2
@@ -384,10 +388,10 @@ def populate_analytics():
                                    vote.msp.party == party])
             if expressed_votes > 0:
                 a.party_for = Decimal(100 * len(
-                    [vote for vote in Vote.objects.filter(division=division, vote=Vote.YES) if
+                    [vote for vote in Vote.objects.filter(division=division, vote=Vote.YES).select_related('msp') if
                      vote.msp.party == party]) / Decimal(expressed_votes)).quantize(TWOPLACES)
                 a.party_against = Decimal(100 * len(
-                    [vote for vote in Vote.objects.filter(division=division, vote=Vote.NO) if
+                    [vote for vote in Vote.objects.filter(division=division, vote=Vote.NO).select_related('msp') if
                      vote.msp.party == party]) / Decimal(expressed_votes)).quantize(TWOPLACES)
             else:
                 a.party_for = 0
