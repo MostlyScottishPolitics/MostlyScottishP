@@ -327,6 +327,7 @@ def aboutsp(request):
     """
     context = RequestContext(request)
     content['activesite'] = about['aboutsp']
+    content['len_topics'] = Topic.objects.count()-1
     return render_to_response('aboutsp.html', content, context)
 
 

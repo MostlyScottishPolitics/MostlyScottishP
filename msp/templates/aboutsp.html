@@ -12,7 +12,7 @@ There are (usually) 129 <b>Members of the Scottish Parliament</b>, reffered to, 
         href="{% url 'msps' %}">MSPs</a>.
 Out of the 129 members, 73 represent individual geographical constituencies and
 56 are elected as 7 for each of the 8. Each person in Scotland is therefore represented
-by 8: 1 for his constituency and 7 for his region. To find the MSPs that represents you, enter your full postcode in
+by 8: 1 for his constituency and 7 for his region. To find the MSPs that represent you, enter your full postcode in
 the search bar at the top right corner.
 <br><br>
 
@@ -30,9 +30,13 @@ The MSPs vote, several times a week, on devolved <b>matters</b>. At the moment t
     <li>many aspects of transport</li>
 </ul>
 
-We have extracted 12 topics for the motions voted by MSPs, based arround these matters. However, the topics can be subject to change.
+{% if len_topics > 0 %}
+    We translated these into {{len_topics}} topics that you can browse under <a href={% url 'topics' %}>Topics</a>. <br> <br>
+{% endif %}
 
-<br><br>
+The Presiding Officer is an MSP, but does not vote.
+<br>
+<br>
 *information gathered from the <a href="http://www.scottish.parliament.uk/">Scottish Parliament website</a> and the <a
         href="http://en.wikipedia.org/wiki/Scottish_Parliament">Wikipedia page on SP</a>.
 
