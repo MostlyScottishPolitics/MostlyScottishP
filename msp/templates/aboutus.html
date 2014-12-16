@@ -6,50 +6,87 @@ We are <b>5 MSc Computing Science </b> students at the <b> University of Glasgow
 <br>
 
 We have put much work and love into this project and while none of us happen to be Scottish born,
-we do hope this will be useful for the Scottish people.
+we do hope this will be useful to the Scottish people.
 <br> <br>
 
 <div class="panel panel-default">
-    <div class="panel-heading"> Disclaimer </div>
+    <div class="panel-heading"> Our goals </div>
     <div class="panel-body">
-        This is not a final product. It is rather a framework with some (extended) functionality. <br>
-        If you are interested to extend the website more, please contact us or download the project from github (see link at the bottom)
-    </div>
-</div>
-
-<div class="panel panel-default">
-    <div class="panel-heading"> What can you do? </div>
-    <div class="panel-body">
-We realise that we cannot provide all the visualisations users might want.
-Therefore, we have designed the system such that it is easy for you to add your own algorithm for scatter plotting and it will render the data visually.
-All it needs is 2-dimensional data! <br> <br>
-We know that the format in which the Scottish Parliament makes the divisions available can change (it did, and none of the other similar sites managed to cope with it).
-We have therefore isolated the script that reads the scraped files from which it gathers info regarding divisions.
-If the data changes, the scraper changes slightly and the populating script can change as well. <br> <br>
-But you don't need to be waiting for change. You can try to get the analytics more fine tuned.
-As far as we know, most of the information processed is correct. However, there are some assumptions and some information we are not taking full advantage off. (both for textual and scatter display)
-Some MSPs have passed away, resigned or only came in after some time to replace another.<br><br>
-        At the moment we are not taking into account such MSPs as special in any way for computing analytics.
-        As a consequence, there weren't allways exactly 129 MSP members (for example, now there are 128). This could slightly affect rebellion and attendance rates.
-        Also, assuming and MSP was absent for many votes, it distances him from his party. It means that the scatter is not relevant for these MSPs.
-        They would most likely be outliers, even if they were loyal, non-rebellious <br><br>
-
-        At the moment we are not processing the dates for divisions to see trends for attendance through the week, year and even entire Parliament session.
-        (we would expect the MSPs to be present more towards the beginning and the end, so as to make a good impression on electors). <br>
-        Analogous, we could look for trends in rebellions acrros topics, the year or the Parliament session.
-        (we would expect MSPs to be less rebelious towards the beginning and the end, to get support from their party) <br><br>
-
-        The topics chosen and the wheigtings associated for the topic extractor are based more on our personal experience and critical evaluation.
-        There is little to no basis for why it was done this way and not another. But hey, most times it wokrs! <br>
-        We do encourage you to better the topic extracter or even replace it with your own.
-    </div>
-</div>
-
-Our goals:
-<br>
 <ul>
     <li>We aim to update the data weekly</li>
     <li>We will provide some visualisations</li>
     <li>We will provide a framework for users to integrate their own algorithms</li>
 </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading"> Disclaimer </div>
+    <div class="panel-body">
+        This is not a final product. It is rather a framework with some (extended) functionality.
+        <br>
+        If you are interested to extend this website more please
+        <a href="mailto:MostlyScottishPolitics@gmail.com">contact us</a>.
+        You can also get the code at <a href="https://github.com/TeamCompSci/Spviz-app">GitHub</a>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading"> What extensions/changes we have in mind? </div>
+    <div class="panel-body">
+    <p align="justify" title="add scatter visualisations">
+    We realise that we cannot provide all the visualisations users might want.
+    Therefore, we have designed the system such that it is easy for you to add your own algorithm for scatter plotting
+    and it will render the data visually. All it needs is 2-dimensional data! </p>
+    <p align="justify" title="fix retriever if SP side changes">
+    We know that the format in which the Scottish Parliament makes the divisions available can change
+    (it did before, and none of the other similar sites managed to cope with it effectively).
+    We have therefore isolated the script that retrieves pages, the one that reads those and
+    the one that populates the database from each other and from the rest of the system
+    (read about <a href="http://en.wikipedia.org/wiki/Modular_programming">modular programming</a>).
+    If anything changes at the Scottish Parliament side, some/all of the scripts mentioned earlier will need to change.
+    </p>
+    <p align="justify" title="fine tune topic extractor">
+        The topics chosen for divisions and the weightings associated,
+            are based more on our personal experience and critical evaluation.
+        There is little to no basis for why it was done this way and not another. But hey, most times it works!
+        That said, it could be bettered.
+    </p>
+    <p align="justify" title="extend to more parliament sessions">
+    At the moment we are only processing the current Parliamentary Session.
+        We have put in place some means of extending it to several.
+    For that we need:
+        <ul>
+        <li>different retrievers and scrapers</li>
+        <li>slightly change the database schema </li>
+        <li>slightly change populating calls</li>
+        <li>add filter by session for analytics if sessions dealt with separately</li>
+        </ul>
+    </p>
+    <p align="justify" title="fine tune analytics">
+    As far as we know, most of the information is processed correctly.
+    However, there are some assumptions and some information we are not taking full advantage off.
+    You could therefore try to fine tune analytics.
+    </p>
+    <ul>
+    <li><p align="justify">
+    At the moment, we are not treating differently MSPs that were members for a shorter time
+        (reasons: deceased, resigned, joined to replace). <br>
+    The Presiding Officer, who cannot actually vote is not treat differently either
+        (assumption: absent for all divisions).<br>
+    As a consequence, there weren't always exactly 129 MSP members.
+        For example, now there are 128, one of which is the Presiding Officer. <br>
+    This could slightly affect rebellion, attendance rates and the scatter plot.
+    </p></li>
+    <li><p align="justify">
+        At the moment we are not processing the dates for divisions to see trends for attendance through the week,
+        year and even entire Parliament session.
+        We would expect at least some MSPs to be present more towards the beginning and the end, so as to make a good impression on electors. <br>
+        Analogous, we could look for trends in rebellions across topics, the year or the Parliament session.
+        We would expect at least some MSPs to be less rebellious towards the beginning and the end, to get support from their party.
+    </p></li>
+    </ul>
+    </div>
+</div>
+
 {% endblock %}
