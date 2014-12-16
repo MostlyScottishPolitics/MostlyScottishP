@@ -152,10 +152,11 @@ $('#submitForm').click(function(event) {
 	event.preventDefault();
     var str = $('#post-form').serialize();
     $('#paramsSent').html(str);
-
+    console.log(str);
     $.post('',
           str,
           function(data){
+              alert("wtf mate?");
 			  	reset("OutputMatrix.csv");
 
           });
