@@ -179,8 +179,12 @@ def process_html(filename, id_file):
     root = ET.Element("root")
 
     # Read the file into an array
-    with codecs.open(filename, 'r', 'utf-8') as file_input:
-        content = file_input.readlines()
+    try:
+        with codecs.open(filename, 'r', 'utf-8') as file_input:
+            content = file_input.readlines()
+    except EnvironmentError:
+        log("Can't open file, skipping it.")
+        return
 
     # Process the file
     for line in content:
