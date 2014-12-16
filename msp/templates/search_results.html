@@ -97,11 +97,26 @@
 {% endfor %}
     </div>
 {% endif %}
+{% if jobs %}
+<div class="container-fluid" id="jobResults">
 
-{% if !parties and !divisions and !regios and !msps and !postcode %}
+<p class="lead"> Positions: </p>
+
+{% for job in jobs %}
+    <div class="results" id="{{job.id}}">
+        <p class="lead"><a href="{% url 'msp' msp.foreignid %}">{{job.msp}}</a></p>
+        Job: {{job.name}}<br>
+        Start date {{job.job_startdate }}<br>
+        End date {{job.job_enddate}}<br>
+
+</div>
+{% endfor %}
+    </div>
+{% endif %}
+{% if not parties and not divisions and not regios and not msps and not postcode and not jobs %}
 <div class="container-fluid" id="noResults">
     <p class="lead"> Your query returned no results </p>
-{% endfor %}
+{% endif %}
     </div>
 
 {% endblock %}

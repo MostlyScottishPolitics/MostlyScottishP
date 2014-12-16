@@ -357,11 +357,13 @@ def search_results(request):
         else:
             entry_query = model_search.get_query(query, ['firstname', 'lastname', ])
             content['msps'] = MSP.objects.filter(entry_query)
-            entry_query = model_search.get_query(query, ['motionid', 'motiontopic', 'motiontext', 'job', ])
+            entry_query = model_search.get_query(query, ['name', ])
+            content['jobs'] = Job.objects.filter(entry_query)
+            entry_query = model_search.get_query(query, ['motionid', 'motiontopic', 'motiontext', ])
             content['divisions'] = Division.objects.filter(entry_query)
             entry_query = model_search.get_query(query, ['name', ])
             content['regions'] = Constituency.objects.filter(entry_query)
-            entry_query = model_search.get_query(query, ['name', ])
+            entry_query = model_search.get_query(query, ['name', 'description', 'link', ])
             content['parties'] = Party.objects.filter(entry_query)
 
     return render_to_response('search_results.html', content, context)

@@ -20,6 +20,7 @@ from django.core.files import File
 
 # the definitions here can be changed to get other statistics
 
+
 def get_map_csv():
     with open(settings.STATIC_PATH + '/csv/map_data.csv', 'w') as f:
         myFile = File(f)
@@ -27,7 +28,6 @@ def get_map_csv():
         parties = Party.objects.all().order_by('id')
         for party in parties:
             header += ',' + party.name
-        print header
         myFile.write(header)
 
         regions = Constituency.objects.filter(parent=None)
@@ -38,6 +38,7 @@ def get_map_csv():
                 constituencies = Constituency.objects.filter(parent=region)
                 result = len([msp for msp in MSP.objects.filter(party=party) if msp.constituency in constituencies])
                 myFile.write(',' + str(result))
+
 
 def get_parties_colors_csv():
     with open(settings.STATIC_PATH+'/csv/parties_colors.csv','w') as f:

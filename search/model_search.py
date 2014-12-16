@@ -7,8 +7,8 @@ from django.db.models import Q
 
 def normalize_query(query_string,
                     findterms=re.compile(r'"([^"]+)"|(\S+)').findall,
-                    normspace=re.compile(r'\s{2,}').sub):
-    return [normspace(' ', (t[0] or t[1]).strip()) for t in findterms(query_string)]
+                    norm=re.compile(r'\s{2,}').sub):
+    return [norm(' ', (t[0] or t[1]).strip()) for t in findterms(query_string)]
 
 
 def get_query(query_string, search_fields):
@@ -17,7 +17,6 @@ def get_query(query_string, search_fields):
     for term in terms:
         or_query = None
         for field_name in search_fields:
-            print field_name
             q = Q(**{"%s__icontains" % field_name: term})
             if or_query is None:
                 or_query = q

@@ -12,6 +12,7 @@ class Topic(models.Model):
     def __unicode__(self):
         return self.name
 
+
 class Party(models.Model):
     """
     represents party
@@ -150,6 +151,7 @@ class Vote(models.Model):
 
     def __unicode__(self):
         return self.vote
+
 
 class Analytics(models.Model):
     """
