@@ -1,3 +1,5 @@
+from datetime import datetime
+
 __author__ = '2168879m'
 
 from computable import *
@@ -8,10 +10,7 @@ def main():
     change any function def in computable.py or any static data in data.py to get other statistics
     you can add your own functions here (but I would recommend to do it in computable.py)  and put the calls here.
     """
-
-    get_map_csv()
-    print "_map_csv_"
-
+    dt = datetime.now()
     populate_data_parties()
     print "_parties_info_"
 
@@ -47,7 +46,8 @@ def main():
 
     populate_analytics()
     print "_analytics_"
-
+    ed = datetime.now()
+    print dt - ed
     print "_done_"
 
 
