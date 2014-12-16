@@ -124,14 +124,13 @@ var scatter = function (dataList) {
   				});
 
 }
-
-var reset = function(dataList) {
+/*
+var reset = function() {
 	$('#plot').empty();
-	scatter(dataList)
+	scatter();
 };
 
-/*// get me the cookie
-
+// get me the cookie
 function getCookie(name) {
     var cookieValue = null;
     if (document.cookie && document.cookie != '') {
@@ -160,9 +159,9 @@ $('#submitForm').click(function(event) {
 			  	reset("OutputMatrix.csv");
 
           });
- });
+ });*/
 //Reset the visualization to its original state
-
+/*
 $('#reset').click(function() {
 	event.preventDefault();
     $.get('',
@@ -170,7 +169,7 @@ $('#reset').click(function() {
 
 			$('input[name=party]').attr('checked', false);
 			$('input[name=topic]').attr('checked', false);
-			  	reset("OutputMatrix.csv");
+			  	reset();
 
           });
 	$.ajax({
