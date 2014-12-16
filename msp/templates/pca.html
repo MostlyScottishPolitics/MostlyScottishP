@@ -59,7 +59,7 @@
 
 </div>
             </form>
-            <button class="btn btn-default" onclick="reset('OutputMatrix.csv')" id="reset">Reset</button>
+            <button class="btn btn-default" onclick="reset({{data}})" id="reset">Reset</button>
 
         </div>
     </div>
@@ -68,7 +68,7 @@
 
 <script src="{% static 'js/visualisation/scatter.js' %}"></script>
 <script>
-    scatter("OutputMatrix.csv");
+    scatter({{data}});
 </script>
 <br>
     </div>

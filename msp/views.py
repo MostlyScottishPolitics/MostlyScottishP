@@ -16,7 +16,7 @@ from scatter.write_scatter import write_scatter
 from scatter.get_data_scatter import get_data_scatter
 from scatter.run_pca import run_pca
 
-
+from django.utils.safestring import mark_safe
 
 
 
@@ -132,7 +132,7 @@ def pca(request):
         votes = get_votes_for_scatter(parties,topics)
         scores = run_pca(votes)
         write_scatter(scores)
-        content['data'] = get_data_scatter(scores)
+        content['data'] = mark_safe(get_data_scatter(scores))
         return HttpResponse()
     else:
     # FOR THE CONCURRENCY

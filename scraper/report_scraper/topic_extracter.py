@@ -45,6 +45,7 @@ word_scores = {
 'scotland'      : {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 1, 9: 0, 10: 0, 11: 0, 12: 0},
 'independence'  : {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 3, 9: 0, 10: 0, 11: 0, 12: 0},
 'independent'   : {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 3, 9: 0, 10: 0, 11: 0, 12: 0},
+'trident'   : {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 3, 9: 0, 10: 0, 11: 0, 12: 0},
 'referendum'    : {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 3, 9: 0, 10: 0, 11: 0, 12: 0},
 'international' : {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 3, 9: 0, 10: 0, 11: 0, 12: 0},
 'war'           : {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 3, 9: 0, 10: 0, 11: 0, 12: 0},
@@ -163,11 +164,13 @@ word_scores = {
 'drink'         : {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 1, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0}
 }
 
+# Return the topic with the highest score
 # Assign a score to each topic
 # Each time a keyword is encountered, points are awarded for a certain topic
+# List of words from the most common and discriminant ones in the texts of the laws, plus a couple special cases
 # Weighting based on me
 # Yeah, I know...
-def topic_score(array):
+def highest_topic(array):
     scores = [0,0,0,0,0,0,0,0,0,0,0,0,0]  # one for each topic, list indices correspond to dict keys
 
     for received_word in array:
@@ -185,8 +188,8 @@ def topic_score(array):
 # Process :
 #   -get the text
 #   -break it into tokens
-#   -remove stop words?
-#   -stemming?
+#   -remove stop words
+#   -stemming is done by only looking for the root inside the word (doesn't work everytime, but works with our word list)
 #   -try to match the more common words to a topic
 #   -if that fails, returns "unknown" topic?
 def get_topic_from_text(text):
@@ -211,10 +214,7 @@ def get_topic_from_text(text):
             stop_array = [s.strip('\n') for s in stop_array]
     except IOError, e:
         error_open_stopfile = True
-
-#    if error_open_stopfile:
-#        print("Can't open stopfile.txt")
-
+    # Remove token that are present in the stopword list
     cleaned_token_array = [x for x in token_array if x not in stop_array]
 
-    return topic_score(cleaned_token_array)
+    return highest_topic(cleaned_token_array)
