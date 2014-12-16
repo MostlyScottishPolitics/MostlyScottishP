@@ -66,7 +66,7 @@ about = (
 scatter = {'pca': {
     'id': 'pca',
     'title': 'PCA',
-    'desc': 'PCA visualisation of MSPs based on their votes',
+    'desc': 'Principle Component Analysis(PCA) displays voting patterns for parties across a variety of topics, presenting differences in MSP`s votes as increased distance between the points',
 }
 }
 about = OrderedDict(about)
