@@ -383,17 +383,31 @@ def export_csv(request, thing):
     if thing == "divisions":
         divs = Division.objects.order_by('-date')
         writer = csv.writer(response)
-        writer.writerow(["Motion id", "Parent", "Date", "Proposed by", "Topic", "Description", "Result", "Link"])
+        writer.writerow(["Motion id", "Parent", "Date", "Proposed by", "Topic", "Description extracted topic", "Description", "Result", "Link"])
         for div in divs:
-            writer.writerow([div.motionid, div.parent, div.date, None, div.motiontopic, div.motiontext, div.result, div.link])
+            newmotiontext = div.motiontext.encode('latin1','backslashreplace').\
+                replace("\\u2019", "\'").replace("\\u2014", "-").replace("\u201d", "\"").replace("\u201c", "\"")
+            newmotiontopic = div.motiontopic.encode('latin1','backslashreplace').\
+                replace("\\u2019", "\'").replace("\\u2014", "-").replace("\u201d", "\"").replace("\u201c", "\"")
+            if div.result == '1':
+                result = 'Carried'
+            else:
+                result = 'Defeated'
+            writer.writerow([div.motionid, div.parent, div.date, None, div.topic, newmotiontopic, newmotiontext, result, None])
     elif thing == "msps":
         msps = MSP.objects.order_by('lastname')
         writer = csv.writer(response)
         writer.writerow(["Name", "Status", "MSP From", "MSP Until", "Party", "Party Member From", "Party Member Until",
                          "Constituency", "Presence", "Rebellions"])
         for msp in msps:
-            writer.writerow([msp.__unicode__(), 'Active' if msp.status is 1 else 'Inactive', msp.member_startdate,
-                             msp.member_enddate, msp.party, msp.party_startdate, msp.party_enddate, msp.constituency,
+            if msp.status == '1':
+                result = 'Active'
+            elif msp.status == '3':
+                result = 'Deceased'
+            else:
+                result = 'Resigned'
+            writer.writerow([msp.__unicode__(), result, msp.member_startdate, msp.member_enddate,
+                             msp.party, msp.party_startdate, msp.party_enddate, msp.constituency,
                              msp.presence, msp.rebellions])
     return response
 
