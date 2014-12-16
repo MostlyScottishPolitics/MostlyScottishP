@@ -10,7 +10,7 @@ def main():
     """
 
     get_map_csv()
-    print "_lama_got_her_csv_"
+    print "_map_csv_"
 
     populate_data_parties()
     print "_parties_info_"
