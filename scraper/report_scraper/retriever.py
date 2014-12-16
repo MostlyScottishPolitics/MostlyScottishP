@@ -63,16 +63,21 @@ def get_latest_id():
     req = urllib2.Request(url)
     response = urllib2.urlopen(req)
     for line in response:
-        if base_url in line:
+        # Former case, let just keep it in case they change again
+        if "Official Report, Meeting of the Parliament," in line:
             # Keep only the url
-            id_report = re.match(r'^.*"(.*)".*$', line).group(1)
+            f_url = re.match(r'^.*"(.*)".*$', line).group(1)
+            # Get the true URL because they thought it was a good idea to change the URL to a shortened one 2 days before the deadline
+            response = urllib2.urlopen(f_url)
+            f_url = response.url
             # Remove the base url to get only the id
-            id_report = id_report.strip("http://www.scottish.parliament.uk/parliamentarybusiness/28862.aspx?r=")
+            id_report = f_url.replace("http://www.scottish.parliament.uk/parliamentarybusiness/28862.aspx?r=", "")
             # Remove everything after #
             # There's some data like that sometimes
             id_report, sep, tail = id_report.partition('#')
+            scraper.log("Latest id report to scrape is " + id_report + ". Starting retrieving hfml files now.")
             return id_report
-    scraper.log("Latest report id not found.")
+    scraper.log("Latest report id not found. Could not retrieve the reports.")
     return 0
 
 
