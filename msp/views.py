@@ -348,6 +348,7 @@ def search_results(request):
     content['divisions'] = {}
     content['regions'] = {}
     content['parties'] = {}
+    content['jobs'] = {}
 
     if ('q' in request.GET) and request.GET['q'].strip():
         if postcode_search.is_valid(query):
