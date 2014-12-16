@@ -24,15 +24,22 @@ def run_pca(votes):
     # matrix rows from 0 to len_msps-1, but msps id from x to x+len_msps-1
     # so, normalize that shift
     # same for divisions
-    shift_msps = int(votes[0][0])
-    shift_division = int(votes[0][1])
-    for vote in votes:
-        msp_entry = int(vote[0])
-        division_entry = int(vote[1])
-        vote_entry = int(vote[2])
-        matrix[msp_entry-shift_msps][division_entry-shift_division] = vote_entry
-        if not msp_entry in msp_list:
-            msp_list += [msp_entry]
+    if len_msps and len_divisions:
+        shift_msps = int(votes[0][0])
+        shift_division = int(votes[0][1])
+        for vote in votes:
+            msp_entry = int(vote[0])
+            division_entry = int(vote[1])
+            vote_entry = int(vote[2])
+            matrix[msp_entry-shift_msps][division_entry-shift_division] = vote_entry
+            if not msp_entry in msp_list:
+                msp_list += [msp_entry]
+    else:
+        print "ERROR: Your database misses important data"
+        if not len_msps:
+            print " - you do not have msps"
+        if not len_divisions:
+            print " - you do not have divisions"
 
     #Deletes every all-zero row in the input matrix (this is necessary for the filters to work correctly)
     matrix = matrix[~numpy.all(matrix == 0, axis=1)]
@@ -40,10 +47,12 @@ def run_pca(votes):
     #Uncomment to see matrix being sent to MDP
     #numpy.savetxt(settings.STATIC_PATH + "/csv/InputMatrix.csv", matrix, fmt="%s", delimiter=",")
 
-
-    #PCA magic happens here using MDP
-    imdp = mdp.nodes.PCANode(output_dim=2)
-    scores = imdp(matrix)
+    if len(matrix):
+        #PCA magic happens here using MDP
+        imdp = mdp.nodes.PCANode(output_dim=2)
+        scores = imdp(matrix)
+    else:
+        scores = []
 
     scores_pairings = []
     for i in range(len(msp_list)):

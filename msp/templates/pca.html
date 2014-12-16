@@ -7,10 +7,14 @@
 
 <!--<form class="navbar-form" role="search" method="GET" action="{% url 'search_results' %}"> -->
 <div class="container-fluid">
+    {% if scatter_data != '[]' %}
         <p>Select some parties and topics to get an idea on how parties voted on the matter. Click Submit to
         generate new visualisation based on your options and reset to reset the plot to its initial state.
         </p>
-
+    {% else %}
+        <p> There is not sufficient data to generate this at this time
+        </p>
+    {% endif %}
     <br>
 </div>
   <div class="container-fluid" id = "plot"> </div>
@@ -68,7 +72,7 @@
 
 <script src="{% static 'js/visualisation/scatter.js' %}"></script>
 <script>
-    scatter({{data}});
+    scatter({{scatter_data}});
 </script>
 <br>
     </div>
