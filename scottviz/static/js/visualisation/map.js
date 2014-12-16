@@ -1,4 +1,6 @@
 $(function () {
+        $.support.cors = true;
+
 //setting up variables
 var w=960, h=750;
 var pLoad = [];

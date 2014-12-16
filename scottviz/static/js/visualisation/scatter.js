@@ -124,10 +124,10 @@ var scatter = function (dataList) {
   				});
 
 }
-/*
-var reset = function() {
+
+var reset = function(param) {
 	$('#plot').empty();
-	scatter();
+	scatter(param);
 };
 
 // get me the cookie
@@ -148,7 +148,7 @@ function getCookie(name) {
 }
 var csrftoken = getCookie('csrftoken');
 
-$('#submitForm').click(function(event) {
+var submit = function(param) {
 	event.preventDefault();
     var str = $('#post-form').serialize();
     $('#paramsSent').html(str);
@@ -156,21 +156,19 @@ $('#submitForm').click(function(event) {
     $.post('',
           str,
           function(data){
-              alert("wtf mate?");
-			  	reset("OutputMatrix.csv");
+			  	reset(param);
 
           });
- });*/
+ };
 //Reset the visualization to its original state
-/*
-$('#reset').click(function() {
-	event.preventDefault();
+
+var resetButton = function(param) {
     $.get('',
           function(data){
 
 			$('input[name=party]').attr('checked', false);
 			$('input[name=topic]').attr('checked', false);
-			  	reset();
+			  	reset(param);
 
           });
 	$.ajax({
@@ -183,7 +181,7 @@ $('#reset').click(function() {
 		success : function(json) {
 			$('input[name=party]').attr('checked', false);
 			$('input[name=topic]').attr('checked', false);
-			reset("OutputMatrix.csv");
+			reset(param);
     		console.log("success"); // another sanity check
 },
 
@@ -194,5 +192,5 @@ $('#reset').click(function() {
             console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
         }
     });
- });
-*/
+ };
+
