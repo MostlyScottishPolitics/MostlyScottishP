@@ -47,9 +47,8 @@ def main():
     populate_analytics()
     print "_analytics_"
     ed = datetime.now()
-    print dt - ed
     print "_done_"
 
-
+    print ed - dt
 if __name__ == '__main__':
     main()

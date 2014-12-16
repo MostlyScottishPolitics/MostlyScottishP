@@ -377,21 +377,21 @@ def populate_analytics():
     """
     Analytics.objects.all().delete()
 
-    parties = Party.objects.all().exclude(name__startswith='No Party').order_by('name').select_related('division')
-    divisions = Division.objects.all().select_related('party')
+    parties = Party.objects.all().exclude(name__startswith='No Party').order_by('name')
+    divisions = Division.objects.all()
 
     for division in divisions:
         TWOPLACES = Decimal(10) ** -2
         for party in parties:
             a = Analytics(division=division, party=party)
-            expressed_votes = len([vote for vote in Vote.objects.filter(division=division).exclude(vote=Vote.ABSENT) if
-                                   vote.msp.party == party])
+            expressed_votes = len([vote for vote in Vote.objects.filter(division=division).exclude(vote=Vote.ABSENT).prefetch_related('msp')
+                                   if vote.msp.party == party])
             if expressed_votes > 0:
                 a.party_for = Decimal(100 * len(
-                    [vote for vote in Vote.objects.filter(division=division, vote=Vote.YES).select_related('msp') if
+                    [vote for vote in Vote.objects.filter(division=division, vote=Vote.YES).prefetch_related('msp') if
                      vote.msp.party == party]) / Decimal(expressed_votes)).quantize(TWOPLACES)
                 a.party_against = Decimal(100 * len(
-                    [vote for vote in Vote.objects.filter(division=division, vote=Vote.NO).select_related('msp') if
+                    [vote for vote in Vote.objects.filter(division=division, vote=Vote.NO).prefetch_related('msp') if
                      vote.msp.party == party]) / Decimal(expressed_votes)).quantize(TWOPLACES)
             else:
                 a.party_for = 0
