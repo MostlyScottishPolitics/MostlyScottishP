@@ -148,37 +148,10 @@ function getCookie(name) {
 }
 var csrftoken = getCookie('csrftoken');
 
-/*$('#submitForm').onclick(function(param) {
-	//preventDefault();
-    //var str = $('#post-form').serialize();
-    //$('#paramsSent').html(str);
-    console.log(str);
-	reset(param);
 
-});*/
 /*
-$('#submitForm').submit(function(e) {
-    $.post('/pca/',
-          $(this).serialize(),
-          function(data){
-			  reset(param);
-
-          });
-		event.preventDefault();
-
- });
-//Reset the visualization to its original state
-
 var submitForm = function(){
 	event.preventDefault();
-    $.get('',
-          function(data){
-
-			$('input[name=party]').attr('checked', false);
-			$('input[name=topic]').attr('checked', false);
-			  	reset(param);
-
-          });
 	$.ajax({
         url : '',
         type : "POST",
@@ -186,21 +159,26 @@ var submitForm = function(){
 			csrfmiddlewaretoken: csrftoken
 		},
 
-		success : function(json) {
-			$('input[name=party]').attr('checked', false);
-			$('input[name=topic]').attr('checked', false);
-			reset(param);
+		success : function(param) {
+			var array = $.parseJSON(param);
+			reset(array);
     		console.log("success"); // another sanity check
 },
 
         // handle a non-successful response
         error : function(xhr,errmsg,err) {
-            $('#results').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: "+errmsg+
+            $('#plot').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: "+errmsg+
                 " <a href='#' class='close'>&times;</a></div>"); // add the error to the dom
             console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
         }
     });
-}*/
+}
+$('#post-form').on('submit', function(event){
+    event.preventDefault();
+    console.log("form submitted!")  // sanity check
+    submitForm();
+});*/
+
 var resetButton = function(param) {
 	event.preventDefault();
     $.get('',

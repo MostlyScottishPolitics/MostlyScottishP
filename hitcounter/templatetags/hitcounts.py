@@ -23,29 +23,15 @@ def pagehits(context):
 
 
 @register.simple_tag
-def pagehits_url(path):
+def pagehits_url(url):
     """
     hits by url
-    :param path:
+    :param url:
     :return:
     """
     try:
-        hits = Hit.objects.filter(url=path).count()
+        hits = Hit.objects.filter(url=url).count()
         return hits
     except Hit.DoesNotExist:
         return 0
 
-
-@register.simple_tag(takes_context=True)
-def hitinfo(context):
-    """
-    help for scatter?
-    :param context:
-    :return:
-    """
-    try:
-        request = context['request']
-        hits = Hit.objects.filter(url=request.path)
-        return hits
-    except Hit.DoesNotExist:
-        return None
