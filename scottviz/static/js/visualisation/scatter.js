@@ -1,11 +1,11 @@
-var scatter = function (csvFile) {
+var scatter = function (dataList) {
 //setting up variables
 	var w = 800;
 	var h = 400;
 	var padding = 20;
 	var border = 1;
 	var bordercolor = "black";
-	var dataset = [];//Hold the data loaded from csv file
+	var dataset = dataList;//Hold the data loaded from csv file
 	//setting a color for each party
 	var colors_array = [];
 	//colors dictionary
@@ -33,6 +33,7 @@ var scatter = function (csvFile) {
    		 	.style("opacity", 0);
 
 		var generateVisualization = function(){
+			console.log("HERE!!!!!!!!");
 			//Create scaling functions
 				
 			// X scaling functions
@@ -119,20 +120,17 @@ var scatter = function (csvFile) {
 				for(var i = 0; i < colors_array.length; i++){
 					colors[colors_array[i][0]] = colors_array[i][1];
 				}
+				generateVisualization();
   				});
-
-			d3.csv("/static/csv/"+csvFile+"", function(error, d) {
-  				dataset = d.map(function(d) { return [ +d["X"], +d["Y"], d["Party"], d["MSP Name"]]; 
-  				});
-  				generateVisualization();});
 
 }
 
-var reset = function(csvFile) {
+var reset = function(dataList) {
 	$('#plot').empty();
-	scatter(csvFile)
+	scatter(dataList)
 };
 // get me the cookie
+/*
 function getCookie(name) {
     var cookieValue = null;
     if (document.cookie && document.cookie != '') {
@@ -196,3 +194,4 @@ $('#reset').click(function() {
         }
     });
  });
+*/
