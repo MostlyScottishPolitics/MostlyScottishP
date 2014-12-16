@@ -360,8 +360,12 @@ def search_results(request):
             content['msps'] = MSP.objects.filter(entry_query)
             entry_query = model_search.get_query(query, ['name', ])
             content['jobs'] = Job.objects.filter(entry_query)
+            entry_query = model_search.get_query(query, ['name', ])
+            topics = Topic.objects.filter(entry_query)
+            divs = [Division.objects.filter(topic=topic) for topic in topics]
             entry_query = model_search.get_query(query, ['motionid', 'motiontopic', 'motiontext', ])
-            content['divisions'] = Division.objects.filter(entry_query)
+            divs += [Division.objects.filter(entry_query)]
+            content['items'] = divs
             entry_query = model_search.get_query(query, ['name', ])
             content['regions'] = Constituency.objects.filter(entry_query)
             entry_query = model_search.get_query(query, ['name', 'description', 'link', ])

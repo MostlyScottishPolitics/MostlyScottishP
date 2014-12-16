@@ -80,9 +80,10 @@
 {% endif %}
 
 <!--Divisions -->
-{% if divisions %}
+{% if items %}
 <div class="container-fluid" id="motionResults">
 <p class="lead"> Divisions: </p>
+    {% for divisions in items %}
 {% for division in divisions %}
     <div class="results" id="{{division.motionid}}">
     <p class="lead"><a href="{% url 'division' division.id %}">{{division.motionid}}</a></p>
@@ -95,6 +96,8 @@
         Voted on:{{division.date}} by {{division.turnout}}% of MSPs
     </div>
 {% endfor %}
+    {% endfor %}
+
     </div>
 {% endif %}
 {% if jobs %}
@@ -113,7 +116,7 @@
 {% endfor %}
     </div>
 {% endif %}
-{% if not parties and not divisions and not regios and not msps and not postcode and not jobs %}
+{% if not parties and not items and not regios and not msps and not postcode and not jobs %}
 <div class="container-fluid" id="noResults">
     <p class="lead"> Your query returned no results </p>
 {% endif %}
