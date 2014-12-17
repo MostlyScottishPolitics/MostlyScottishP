@@ -256,7 +256,7 @@ def constituency(request, constituencyID):
 @cache_page(60 * 15)
 def divisions(request):
     """
-
+    divisions view with caching
     :param request:
     :return:
     """
@@ -270,7 +270,8 @@ def divisions(request):
 @cache_page(60 * 15)
 def division(request, divisionID):
     """
-
+    division view with caching
+    query the database for division related info
     :param request:
     :param divisionID:
     :return:
@@ -294,6 +295,7 @@ def division(request, divisionID):
 @cache_page(60 * 15)
 def topics(request):
     """
+    topics view with caching
     :param request:
     :return:
     """
@@ -310,7 +312,7 @@ def topics(request):
 
 def aboutus(request):
     """
-
+    view for about us
     :param request:
     :return:
     """
@@ -321,7 +323,7 @@ def aboutus(request):
 
 def aboutsp(request):
     """
-
+    view for about the Scottish Parliament
     :param request:
     :return:
     """
@@ -352,11 +354,13 @@ def search_results(request):
     content['jobs'] = {}
 
     if ('q' in request.GET) and request.GET['q'].strip():
+        # check if query is postcode
         if postcode_search.is_valid(query):
             results = postcode_search.get_msps(query)
             content['postcode'] = results
+            # search specific columns of the models for the query string
         else:
-            entry_query = model_search.get_query(query, ['firstname', 'lastname', ])
+            entry_query = model_search.get_query(query, ['firstname', 'lastname', ]) #columns to be searched for
             content['msps'] = MSP.objects.filter(entry_query)
             entry_query = model_search.get_query(query, ['name', ])
             content['jobs'] = Job.objects.filter(entry_query)
@@ -384,12 +388,13 @@ def export_csv(request, thing):
     thing.strip()
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename="' + thing + '".csv"'
-
+    # if request comes from divisions page return divisins
     if thing == "divisions":
         divs = Division.objects.order_by('-date')
         writer = csv.writer(response)
         writer.writerow(["Motion id", "Parent", "Date", "Proposed by", "Topic", "Description extracted topic", "Description", "Result", "Link"])
         for div in divs:
+            # replace any unicode characters
             newmotiontext = div.motiontext.encode('latin1','backslashreplace').\
                 replace("\\u2019", "\'").replace("\\u2014", "-").replace("\u201d", "\"").replace("\u201c", "\"")
             newmotiontopic = div.motiontopic.encode('latin1','backslashreplace').\
@@ -399,6 +404,7 @@ def export_csv(request, thing):
             else:
                 result = 'Defeated'
             writer.writerow([div.motionid, div.parent, div.date, None, div.topic, newmotiontopic, newmotiontext, result, None])
+    #if request comes from msps page return msps
     elif thing == "msps":
         msps = MSP.objects.order_by('lastname')
         writer = csv.writer(response)

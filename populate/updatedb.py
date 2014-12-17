@@ -11,13 +11,13 @@ def main():
     you can add your own functions here (but I would recommend to do it in computable.py)  and put the calls here.
     """
     dt = datetime.now()
-    #populate_data_parties()
+    populate_data_parties()
     print "_parties_info_"
 
-    #get_parties_colors_csv()
+    get_parties_colors_csv()
     print "_get_parties_colors_csv_"
 
-    #compute_rebellious_votes()
+    compute_rebellious_votes()
     print "_rebelious_votes_"
 
     compute_division_turnout()

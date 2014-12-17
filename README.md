@@ -15,12 +15,25 @@ within machine learning, as well as the graphical experience required in renderi
 the results. If desired, the project could be extended to incorporate textual
 analysis of the matters being voted on.
 --------------------------------------------------------------------------------
+To see the latest version go to https://mostlyscottishpolitics.herokuapp.com
 
-Running locally:
+To run the project locally:
 
-in the SPviz-app directory run:
-
-* pyhton manage.py runserver
+* install requirements:
+$ pip install -r requirements.txt
+* scrape the data(will take around an hour the first time it's run)
+$ pyhton manage.py scrape
+* create a postgres database and add the details in scottviz/settings.py
+* to create tables from the models run
+$ pyhton manage.py syncdb
+* populate the database with data from the scraper
+$ pyhton manage.py populate_db
+* to later on update the database with new data from the scraper 
+$ pyhton manage.py update_db
+* to collect the static input to be rendered run
+$ python manage.py collectstatic
+* and lastly to start the web app:
+$ pyhton manage.py runserver
 
 then open a browser and enter the following URL:
 

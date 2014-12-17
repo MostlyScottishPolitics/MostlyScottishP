@@ -133,7 +133,7 @@ def independent_party_rebellious_votes(parties):
     """
 
     # MSPs for independent cannot make rebellious votes
-    votes = Vote.objects.all().select_related('msp')
+    votes = Vote.objects.all().prefetch_related('msp')
     for vote in votes:
         if vote.msp.party in parties:
             vote.rebellious = False
@@ -178,19 +178,19 @@ def not_independent_party_rebellious_votes(parties):
     for party in parties:
         for division in divisions:
             expressed_votes_from_party = len(
-                [vote for vote in Vote.objects.filter(division=division).exclude(vote=Vote.ABSENT).select_related('msp')
+                [vote for vote in Vote.objects.filter(division=division).exclude(vote=Vote.ABSENT).prefetch_related('msp')
                  if vote.msp.party == party])
             threshold = (expressed_votes_from_party + 1) / 2
             # get all the votes for this division
             division_votes = Vote.objects.filter(division=division)
             # split the votes by vote
-            votes_yes = [vote for vote in division_votes.filter(vote=Vote.YES).select_related('msp')
+            votes_yes = [vote for vote in division_votes.filter(vote=Vote.YES).prefetch_related('msp')
                          if vote.msp.party == party]
-            votes_no = [vote for vote in division_votes.filter(vote=Vote.NO).select_related('msp')
+            votes_no = [vote for vote in division_votes.filter(vote=Vote.NO).prefetch_related('msp')
                         if vote.msp.party == party]
-            votes_abstain = [vote for vote in division_votes.filter(vote=Vote.ABSTAIN).select_related('msp')
+            votes_abstain = [vote for vote in division_votes.filter(vote=Vote.ABSTAIN).prefetch_related('msp')
                              if vote.msp.party == party]
-            votes_absent = [vote for vote in division_votes.filter(vote=Vote.ABSENT).select_related('msp')
+            votes_absent = [vote for vote in division_votes.filter(vote=Vote.ABSENT).prefetch_related('msp')
                             if vote.msp.party == party]
             # decide a party vote if threshold reached
             # and put the results in

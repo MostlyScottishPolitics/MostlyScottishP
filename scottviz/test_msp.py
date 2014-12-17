@@ -4,8 +4,13 @@ from django.test import TestCase
 
 from msp.models import *
 
+#insert unit tests here
+
 
 class PartyTestCase(TestCase):
+    """
+    test cases for Party
+    """
     def setUp(self):
         Party.objects.create(id=1, name="party")
         Party.objects.create(id=1, name="politics", description="greatest party ofc")
