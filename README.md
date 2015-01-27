@@ -15,7 +15,7 @@ within machine learning, as well as the graphical experience required in renderi
 the results. If desired, the project could be extended to incorporate textual
 analysis of the matters being voted on.
 --------------------------------------------------------------------------------
-To see the latest version go to https://mostlyscottishpolitics.herokuapp.com
+To see the latest version go to http://mostlyscottishpolitics.herokuapp.com
 
 To run the project locally:
 
